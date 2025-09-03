@@ -1,8 +1,7 @@
 ﻿using FarmManager.Model.Model.Base;
 
-namespace FarmManager.Model.Model
+namespace FarmManager.Model.Model;
+
+public class Season : DetailedEntity
 {
-    public class Season : DetailedEntity
-    {
-    }
 }

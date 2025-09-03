@@ -1,9 +1,8 @@
 ﻿using FarmManager.Model.Model.Base;
 
-namespace FarmManager.Model.Model
+namespace FarmManager.Model.Model;
+
+public class Fertilizer : DetailedEntity
 {
-    public class Fertilizer : DetailedEntity
-    {
-        public int Quantity { get; set; }
-    }
+    public int Quantity { get; set; }
 }

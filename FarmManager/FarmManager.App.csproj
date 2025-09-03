@@ -25,9 +25,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\" />
-    <Folder Include="ViewModels\" />
-    <Folder Include="Views\" />
+    <Folder Include="Models\Deposits\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FarmManager.Model\FarmManager.Model.csproj" />
+    <ProjectReference Include="..\FarmManager.Services\FarmManager.Services.csproj" />
   </ItemGroup>
 
 </Project>

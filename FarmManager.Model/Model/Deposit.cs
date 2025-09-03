@@ -1,9 +1,7 @@
 ﻿using FarmManager.Model.Model.Base;
 
-namespace FarmManager.Model.Model
+namespace FarmManager.Model.Model;
+public class Deposit : DetailedEntity
 {
-    public class Deposit : DetailedEntity
-    {
-        public string? PhoneNumber { get; set; }
-    }
+    public string? PhoneNumber { get; set; }
 }

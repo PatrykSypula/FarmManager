@@ -1,11 +1,10 @@
 ﻿using FarmManager.Model.Model.Base;
 
-namespace FarmManager.Model.Model
+namespace FarmManager.Model.Model;
+
+public class Buy : DetailedEntity
 {
-    public class Buy : DetailedEntity
-    {
-        public double Price { get; set; }
-        public int Quantity { get; set; }
-        public Vendor Vendor { get; set; } = null!;
-    }
+    public double Price { get; set; }
+    public int Quantity { get; set; }
+    public Vendor Vendor { get; set; } = null!;
 }

@@ -1,9 +1,8 @@
 ﻿using FarmManager.Model.Model.Base;
 
-namespace FarmManager.Model.Model
+namespace FarmManager.Model.Model;
+
+public class Plant : DetailedEntity
 {
-    public class Plant : DetailedEntity
-    {
-        public Variety Variety { get; set; } = null!;
-    }
+    public Variety Variety { get; set; } = null!;
 }
