@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Input;
 using FarmManager.App.Helpers;
+using FluentValidation.Results;
 
 namespace FarmManager.App.Views;
 
@@ -11,6 +12,13 @@ public partial class CustomMessageBoxOk : Window
         InitializeComponent();
         DataContext = this;
         Message = message;
+    }
+
+    public CustomMessageBoxOk(ValidationResult result)
+    {
+        InitializeComponent();
+        DataContext = this;
+        Message = string.Join("\n", result.Errors.Select(e => e.ErrorMessage));
     }
 
     private string message;

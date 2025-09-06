@@ -69,8 +69,7 @@ public class AddDepositViewModel(IDepositService depositService) : ViewModelBase
         var result = validator.Validate(Model.Deposit);
         if (!result.IsValid)
         {
-            var errorMessages = string.Join("\n", result.Errors.Select(e => e.ErrorMessage));
-            new CustomMessageBoxOk(errorMessages).ShowDialog();
+            new CustomMessageBoxOk(result).ShowDialog();
         }
         else
         {
