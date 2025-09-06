@@ -29,7 +29,6 @@ namespace FarmManager.Model.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<bool>("IsActive")
@@ -65,7 +64,9 @@ namespace FarmManager.Model.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("Description")
-                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Email")
                         .HasColumnType("text");
 
                     b.Property<bool>("IsActive")
@@ -93,7 +94,6 @@ namespace FarmManager.Model.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<bool>("IsActive")
@@ -117,8 +117,11 @@ namespace FarmManager.Model.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<double>("BaseRent")
+                    b.Property<double?>("BaseRent")
                         .HasColumnType("double precision");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("text");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
@@ -180,7 +183,6 @@ namespace FarmManager.Model.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<bool>("IsActive")
@@ -233,7 +235,6 @@ namespace FarmManager.Model.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<bool>("IsActive")
@@ -263,7 +264,6 @@ namespace FarmManager.Model.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<bool>("IsActive")
@@ -356,7 +356,6 @@ namespace FarmManager.Model.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<bool>("IsActive")
@@ -371,7 +370,7 @@ namespace FarmManager.Model.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Varietys");
+                    b.ToTable("Varietis");
                 });
 
             modelBuilder.Entity("FarmManager.Model.Model.Vendor", b =>
@@ -381,7 +380,9 @@ namespace FarmManager.Model.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("Description")
-                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Email")
                         .HasColumnType("text");
 
                     b.Property<bool>("IsActive")
@@ -392,6 +393,9 @@ namespace FarmManager.Model.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("PhoneNumber")
                         .HasColumnType("text");
 
                     b.HasKey("Id");

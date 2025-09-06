@@ -2,7 +2,7 @@
 using System.Windows.Input;
 using FarmManager.App.Helpers;
 
-namespace LearningApplication.Views;
+namespace FarmManager.App.Views;
 
 public partial class CustomMessageBoxOk : Window
 {

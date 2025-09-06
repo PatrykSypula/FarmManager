@@ -5,7 +5,7 @@ using FarmManager.Model.UnitOfWork;
 
 namespace FarmManager.Services.Interfaces;
 
-public class DepositService(FarmManagerContext context, IUnitOfWork unitOfWork) : IDepositService
+public class DepositService(IFarmManagerContext context, IUnitOfWork unitOfWork) : IDepositService
 {
     public async Task AddDeposit(Deposit deposit)
     {

@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace LearningApplication.Views;
+namespace FarmManager.App.Views;
 
 public partial class CustomMessageBoxYesNo : Window
 {

@@ -2,9 +2,11 @@
 
 namespace FarmManager.Model.Model;
 
-public class Buy : DetailedEntity
+public class Buy : BaseEntity, IDescribable
 {
     public double Price { get; set; }
     public int Quantity { get; set; }
-    public Vendor Vendor { get; set; } = null!;
+    public Vendor Vendor { get; set; } = new Vendor();
+    public string Name { get; set; } = string.Empty;
+    public string? Description { get; set; }
 }

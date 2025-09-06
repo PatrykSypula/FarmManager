@@ -6,16 +6,16 @@ namespace FarmManager.App.ViewModels;
 
 public class MainWindowViewModel : ViewModelBase
 {
-    private MainWindowModel mainWindowModel = new MainWindowModel();
+    private MainWindowModel model = new MainWindowModel();
     public string Title
     {
         get
         {
-            return mainWindowModel.Title;
+            return model.Title;
         }
         set
         {
-            mainWindowModel.Title = value;
+            model.Title = value;
             OnPropertyChanged();
         }
     }

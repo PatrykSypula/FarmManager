@@ -2,6 +2,8 @@
 
 namespace FarmManager.Model.Model;
 
-public class Disease : DetailedEntity
+public class Disease : BaseEntity, IDescribable
 {
+    public string Name { get; set; } = string.Empty;
+    public string? Description { get; set; }
 }

@@ -2,7 +2,9 @@
 
 namespace FarmManager.Model.Model;
 
-public class Plant : DetailedEntity
+public class Plant : BaseEntity, IDescribable
 {
-    public Variety Variety { get; set; } = null!;
+    public Variety Variety { get; set; } = new Variety();
+    public string Name { get; set; } = string.Empty;
+    public string? Description { get; set; }
 }

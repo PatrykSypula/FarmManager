@@ -1,4 +1,5 @@
 ﻿using FarmManager.Model.Model;
+using FarmManager.Model.Model.Base;
 using Microsoft.EntityFrameworkCore;
 
 namespace FarmManager.Model.DatabaseContext;
@@ -16,7 +17,7 @@ public class FarmManagerContext(DbContextOptions<FarmManagerContext> options) : 
     public DbSet<Season> Seasons { get; set; }
     public DbSet<Sell> Sells { get; set; }
     public DbSet<Spraying> Sprayings { get; set; }
-    public DbSet<Variety> Varietys { get; set; }
+    public DbSet<Variety> Varietis { get; set; }
     public DbSet<Vendor> Vendors { get; set; }
     public DbSet<WorkDay> WorkDays { get; set; }
     public DbSet<WorkDayCollecting> WorkDayCollecting { get; set; }
@@ -26,5 +27,6 @@ public class FarmManagerContext(DbContextOptions<FarmManagerContext> options) : 
     {
         base.OnModelCreating(modelBuilder);
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(FarmManagerContext).Assembly);
+        modelBuilder.ApplyQueryFilter<BaseEntity>(e => !e.IsDeleted);
     }
 }

@@ -2,5 +2,5 @@
 
 public class MainWindowModel
 {
-    public string Title = "Farm Manager";
+    public string Title = "RolnikPRO";
 }
