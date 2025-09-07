@@ -33,8 +33,9 @@
                         <TextBlock Margin="20" FontWeight="Medium" TextWrapping="Wrap" Text="{Binding Message}" MaxWidth="500" FontSize="20" Background="Transparent" Foreground="Black" />
                     </Border>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                        <Button Width="120" Height="40" Margin="0,0,10,10" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="Tak" materialDesign:ButtonAssist.CornerRadius="10" FontSize="20" BorderThickness="0" Foreground="{DynamicResource MaterialDesignBody}" Click="ButtonYesClick" />
-                        <Button Width="120" Height="40" Margin="0,0,20,10" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="Nie" materialDesign:ButtonAssist.CornerRadius="10" FontSize="20" BorderThickness="0" Foreground="{DynamicResource MaterialDesignBody}" Click="ButtonNoClick" Background="#FFFF5454" BorderBrush="#FFFF5454"/>
+                        <Button Width="120" Height="40" Margin="0,0,10,10" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="Nie" materialDesign:ButtonAssist.CornerRadius="10" FontSize="20" BorderThickness="0" Foreground="{DynamicResource MaterialDesignBody}" Click="ButtonNoClick" Background="#FFFF5454" BorderBrush="#FFFF5454"/>
+                        <Button Width="120" Height="40" Margin="0,0,20,10" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="Tak" materialDesign:ButtonAssist.CornerRadius="10" FontSize="20" BorderThickness="0" Foreground="{DynamicResource MaterialDesignBody}" Click="ButtonYesClick" />
+                        
                     </StackPanel>
                 </StackPanel>
             </Grid>

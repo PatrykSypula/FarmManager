@@ -10,11 +10,11 @@ public class DepositService(IFarmManagerContext context, IUnitOfWork unitOfWork)
 {
     public async Task<ICollection<Deposit>> GetAll()
     {
-        return await context.Deposits.ToListAsync();
+        return await context.Deposits.AsNoTracking().ToListAsync();
     }
     public async Task<Deposit> Get(Guid guid)
     {
-        return await context.Deposits.Where(d => d.Id == guid).FirstOrDefaultAsync()
+        return await context.Deposits.AsNoTracking().Where(d => d.Id == guid).FirstOrDefaultAsync()
             ?? throw new NotFoundException("Nie mozna znaleźć depozytu.");
     }
     public async Task Add(Deposit deposit)

@@ -89,8 +89,12 @@ public class DepositEditViewModel(IDepositService depositService) : BaseViewMode
     public RelayCommand Delete => new RelayCommand(async execute => await DeleteDepositAsync());
     private async Task DeleteDepositAsync()
     {
-        await depositService.Delete(Model.Deposit.Id);
-        RequestClose?.Invoke(Model.Deposit);
+        var result = new CustomMessageBoxYesNo("Czy na pewno chcesz usunąć ten depozyt?").ShowDialog();
+        if (result == true)
+        {
+            await depositService.Delete(Model.Deposit.Id);
+            RequestClose?.Invoke(Model.Deposit);
+        }
     }
 
     public RelayCommand Update => new RelayCommand(async execute => await UpdateDepositAsync());
