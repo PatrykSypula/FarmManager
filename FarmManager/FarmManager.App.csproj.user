@@ -7,7 +7,10 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="Views\Deposits\AddDepositWindow.xaml.cs">
+    <Compile Update="Views\Deposits\DepositAddWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Deposits\DepositEditWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Deposits\DepositsWindow.xaml.cs">

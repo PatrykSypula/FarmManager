@@ -4,7 +4,7 @@ using FarmManager.App.Views.Deposits;
 
 namespace FarmManager.App.ViewModels;
 
-public class MainWindowViewModel : ViewModelBase
+public class MainWindowViewModel : BaseViewModel
 {
     private MainWindowModel model = new MainWindowModel();
     public string Title
@@ -23,6 +23,6 @@ public class MainWindowViewModel : ViewModelBase
 
     private void OpenAddDepositWindow()
     {
-        new AddDepositWindow().ShowDialog();
+        new DepositsWindow().ShowDialog();
     }
 }

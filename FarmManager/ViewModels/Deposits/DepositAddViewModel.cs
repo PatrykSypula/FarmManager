@@ -1,17 +1,16 @@
 ﻿using FarmManager.App.Helpers;
 using FarmManager.App.Models.Deposits;
 using FarmManager.App.Views;
-using FarmManager.App.Views.Deposits;
 using FarmManager.Model.Model;
 using FarmManager.Services.Interfaces;
 using FarmManager.Services.Validators;
 
 namespace FarmManager.App.ViewModels.Deposits;
 
-public class AddDepositViewModel(IDepositService depositService) : ViewModelBase
+public class DepositAddViewModel(IDepositService depositService) : BaseViewModel
 {
-    public event Action RequestClose;
-    public AddDepositModel Model = new AddDepositModel();
+    public event Action<Deposit>? RequestClose;
+    public DepositAddModel Model = new DepositAddModel();
     public string Name
     {
         get
@@ -61,9 +60,9 @@ public class AddDepositViewModel(IDepositService depositService) : ViewModelBase
             OnPropertyChanged();
         }
     }
-    public RelayCommand CreateDeposit => new RelayCommand(execute => CreateDepositService());
+    public RelayCommand Add => new RelayCommand(async execute => await AddDepositAsync());
 
-    private async void CreateDepositService()
+    private async Task AddDepositAsync()
     {
         DepositValidator validator = new DepositValidator();
         var result = validator.Validate(Model.Deposit);
@@ -73,8 +72,9 @@ public class AddDepositViewModel(IDepositService depositService) : ViewModelBase
         }
         else
         {
-            await depositService.AddDeposit(Model.Deposit);
-            RequestClose?.Invoke();
+            await depositService.Add(Model.Deposit);
+            RequestClose?.Invoke(Model.Deposit);
+            
         }
     }
 }

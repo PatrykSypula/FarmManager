@@ -4,7 +4,9 @@ namespace FarmManager.Services.Interfaces;
 
 public interface IDepositService
 {
-    Task AddDeposit(Deposit deposit);
-    Task EditDeposit(Deposit deposit);
-    Task DeleteDeposit(Guid depositId);
+    Task<ICollection<Deposit>> GetAll();
+    Task<Deposit> Get(Guid guid);
+    Task Add(Deposit deposit);
+    Task Update(Deposit deposit);
+    Task Delete(Guid depositId);
 }

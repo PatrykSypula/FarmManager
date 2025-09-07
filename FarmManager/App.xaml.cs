@@ -23,11 +23,15 @@ public partial class MyApp : Application
             {
                 //Windows
                 services.AddSingleton<MainWindow>();
-                services.AddTransient<AddDepositWindow>();
+                services.AddTransient<DepositsWindow>();
+                services.AddTransient<DepositAddWindow>();
+                services.AddTransient<DepositEditWindow>();
 
                 //ViewModels
                 services.AddTransient<MainWindowViewModel>();
-                services.AddTransient<AddDepositViewModel>();
+                services.AddTransient<DepositsViewModel>();
+                services.AddTransient<DepositAddViewModel>();
+                services.AddTransient<DepositEditViewModel>();
 
 
                 // Database
@@ -41,7 +45,7 @@ public partial class MyApp : Application
 
                 //ServiceProdivers
                 ServiceProvider = services.BuildServiceProvider();
-                ServiceProvider.GetRequiredService<AddDepositViewModel>();
+                ServiceProvider.GetRequiredService<DepositAddViewModel>();
 
             })
             .Build();

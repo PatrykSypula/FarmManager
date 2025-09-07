@@ -2,7 +2,7 @@
 
 namespace FarmManager.App.Models.Deposits;
 
-public class AddDepositModel
+public class DepositAddModel
 {
     public Deposit Deposit { get; set; } = new Deposit();
 }

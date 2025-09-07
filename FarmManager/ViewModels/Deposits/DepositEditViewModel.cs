@@ -1,0 +1,111 @@
+﻿using FarmManager.App.Helpers;
+using FarmManager.App.Models.Deposits;
+using FarmManager.App.Views;
+using FarmManager.Model.Model;
+using FarmManager.Services.Interfaces;
+using FarmManager.Services.Validators;
+
+namespace FarmManager.App.ViewModels.Deposits;
+
+public class DepositEditViewModel(IDepositService depositService) : BaseViewModel
+{
+    public event Action<Deposit>? RequestClose;
+    public DepositEditModel Model = new DepositEditModel();
+
+    public string Name
+    {
+        get
+        {
+            return Model.Deposit.Name;
+        }
+        set
+        {
+            Model.Deposit.Name = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public string PhoneNumber
+    {
+        get
+        {
+            return Model.Deposit.PhoneNumber;
+        }
+        set
+        {
+            Model.Deposit.PhoneNumber = value;
+            OnPropertyChanged();
+        }
+    }
+    public string Email
+    {
+        get
+        {
+            return Model.Deposit.Email;
+        }
+        set
+        {
+            Model.Deposit.Email = value;
+            OnPropertyChanged();
+        }
+    }
+    public string Description
+    {
+        get
+        {
+            return Model.Deposit.Description;
+        }
+        set
+        {
+            Model.Deposit.Description = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public bool IsActive
+    {
+        get
+        {
+            return Model.Deposit.IsActive;
+        }
+        set
+        {
+            Model.Deposit.IsActive = value;
+            OnPropertyChanged();
+        }
+    }
+
+
+    public async Task InitializeAsync(Guid id)
+    {
+        Model.Deposit = await depositService.Get(id);
+        OnPropertyChanged(nameof(Name));
+        OnPropertyChanged(nameof(PhoneNumber));
+        OnPropertyChanged(nameof(Email));
+        OnPropertyChanged(nameof(Description));
+        OnPropertyChanged(nameof(IsActive));
+    }
+
+    public RelayCommand Delete => new RelayCommand(async execute => await DeleteDepositAsync());
+    private async Task DeleteDepositAsync()
+    {
+        await depositService.Delete(Model.Deposit.Id);
+        RequestClose?.Invoke(Model.Deposit);
+    }
+
+    public RelayCommand Update => new RelayCommand(async execute => await UpdateDepositAsync());
+    private async Task UpdateDepositAsync()
+    {
+        DepositValidator validator = new DepositValidator();
+        var result = validator.Validate(Model.Deposit);
+        if (!result.IsValid)
+        {
+            new CustomMessageBoxOk(result).ShowDialog();
+        }
+        else
+        {
+            await depositService.Update(Model.Deposit);
+            RequestClose?.Invoke(Model.Deposit);
+        }
+    }
+}

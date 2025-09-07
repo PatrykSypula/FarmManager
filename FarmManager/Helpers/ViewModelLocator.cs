@@ -5,6 +5,10 @@ namespace FarmManager.App.Helpers;
 
 public class ViewModelLocator
 {
-    public AddDepositViewModel AddDepositViewModel =>
-        MyApp.ServiceProvider.GetRequiredService<AddDepositViewModel>();
+    public DepositsViewModel DepositsViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<DepositsViewModel>();
+    public DepositAddViewModel DepositAddViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<DepositAddViewModel>();
+    public DepositEditViewModel DepositEditViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<DepositEditViewModel>();
 }

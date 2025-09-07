@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace FarmManager.App.Helpers;
 
-public class ViewModelBase : INotifyPropertyChanged
+public class BaseViewModel : INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler? PropertyChanged;
     protected void OnPropertyChanged([CallerMemberName] string? propertyName = null)
