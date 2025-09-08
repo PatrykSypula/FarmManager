@@ -1,6 +1,7 @@
 ﻿using FarmManager.App.Helpers;
 using FarmManager.App.Models;
 using FarmManager.App.Views.Deposits;
+using FarmManager.App.Views.Diseases;
 
 namespace FarmManager.App.ViewModels;
 
@@ -19,10 +20,17 @@ public class MainWindowViewModel : BaseViewModel
             OnPropertyChanged();
         }
     }
-    public RelayCommand Deposits => new RelayCommand(execute => OpenAddDepositWindow());
+    public RelayCommand Deposits => new RelayCommand(execute => OpenDepositsWindow());
 
-    private void OpenAddDepositWindow()
+    private void OpenDepositsWindow()
     {
         new DepositsWindow().ShowDialog();
+    }
+
+    public RelayCommand Diseases => new RelayCommand(execute => OpenDiseasesWindow());
+
+    private void OpenDiseasesWindow()
+    {
+        new DiseasesWindow().ShowDialog();
     }
 }

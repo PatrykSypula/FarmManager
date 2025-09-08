@@ -2,9 +2,10 @@
 using FarmManager.Model.Exceptions;
 using FarmManager.Model.Model;
 using FarmManager.Model.UnitOfWork;
+using FarmManager.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace FarmManager.Services.Interfaces;
+namespace FarmManager.Services.Services;
 
 public class DepositService(IFarmManagerContext context, IUnitOfWork unitOfWork) : IDepositService
 {
@@ -23,14 +24,7 @@ public class DepositService(IFarmManagerContext context, IUnitOfWork unitOfWork)
         await unitOfWork.SaveChangesAsync();
     }
 
-    public Task Delete(int id)
-    {
-        var deposit = context.Deposits.FirstOrDefault(d => d.Id == id) ??
-            throw new NotFoundException("Nie mozna znaleźć depozytu.");
-        deposit.IsDeleted = true;
-        return unitOfWork.SaveChangesAsync();
-    }
-    public Task Update(Deposit deposit)
+    public async Task Update(Deposit deposit)
     {
         var existingDeposit = context.Deposits.FirstOrDefault(d => d.Id == deposit.Id) ??
             throw new NotFoundException("Nie mozna znaleźć depozytu.");
@@ -39,6 +33,13 @@ public class DepositService(IFarmManagerContext context, IUnitOfWork unitOfWork)
         existingDeposit.Email = deposit.Email;
         existingDeposit.Description = deposit.Description;
         existingDeposit.IsActive = deposit.IsActive;
-        return unitOfWork.SaveChangesAsync();
+        await unitOfWork.SaveChangesAsync();
+    }
+    public async Task Delete(int id)
+    {
+        var deposit = context.Deposits.FirstOrDefault(d => d.Id == id) ??
+            throw new NotFoundException("Nie mozna znaleźć depozytu.");
+        deposit.IsDeleted = true;
+        await unitOfWork.SaveChangesAsync();
     }
 }

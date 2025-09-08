@@ -1,10 +1,13 @@
 ﻿using System.Windows;
 using FarmManager.App.ViewModels;
 using FarmManager.App.ViewModels.Deposits;
+using FarmManager.App.ViewModels.Diseases;
 using FarmManager.App.Views.Deposits;
+using FarmManager.App.Views.Diseases;
 using FarmManager.Model.DatabaseContext;
 using FarmManager.Model.UnitOfWork;
 using FarmManager.Services.Interfaces;
+using FarmManager.Services.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -23,16 +26,30 @@ public partial class MyApp : Application
             {
                 //Windows
                 services.AddSingleton<MainWindow>();
+
+                //Deposits
                 services.AddTransient<DepositsWindow>();
                 services.AddTransient<DepositAddWindow>();
                 services.AddTransient<DepositEditWindow>();
 
+                //Diseases
+                services.AddTransient<DiseasesWindow>();
+                services.AddTransient<DiseaseAddWindow>();
+                services.AddTransient<DiseaseEditWindow>();
+
+
                 //ViewModels
                 services.AddTransient<MainWindowViewModel>();
+
+                //Deposits
                 services.AddTransient<DepositsViewModel>();
                 services.AddTransient<DepositAddViewModel>();
                 services.AddTransient<DepositEditViewModel>();
 
+                //Diseases
+                services.AddTransient<DiseasesViewModel>();
+                services.AddTransient<DiseaseAddViewModel>();
+                services.AddTransient<DiseaseEditViewModel>();
 
                 // Database
                 services.AddDbContext<FarmManagerContext>(options =>
@@ -42,6 +59,7 @@ public partial class MyApp : Application
                 services.AddScoped<IFarmManagerContext>(provider => provider.GetRequiredService<FarmManagerContext>());
                 services.AddScoped<IUnitOfWork, UnitOfWork>();
                 services.AddScoped<IDepositService, DepositService>();
+                services.AddScoped<IDiseaseService, DiseaseService>();
 
                 //ServiceProdivers
                 ServiceProvider = services.BuildServiceProvider();

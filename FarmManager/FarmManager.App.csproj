@@ -30,4 +30,16 @@
     <ProjectReference Include="..\FarmManager.Services\FarmManager.Services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Views\Diseases\DiseaseAddWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Diseases\DiseaseEditWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Diseases\DiseasesWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
 </Project>
