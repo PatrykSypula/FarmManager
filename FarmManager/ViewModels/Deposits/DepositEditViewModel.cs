@@ -76,7 +76,7 @@ public class DepositEditViewModel(IDepositService depositService) : BaseViewMode
     }
 
 
-    public async Task InitializeAsync(Guid id)
+    public async Task InitializeAsync(int id)
     {
         Model.Deposit = await depositService.Get(id);
         OnPropertyChanged(nameof(Name));
@@ -101,6 +101,9 @@ public class DepositEditViewModel(IDepositService depositService) : BaseViewMode
     private async Task UpdateDepositAsync()
     {
         DepositValidator validator = new DepositValidator();
+        Model.Deposit.PhoneNumber = string.IsNullOrEmpty(Model.Deposit.PhoneNumber) ? null : Model.Deposit.PhoneNumber;
+        Model.Deposit.Email = string.IsNullOrEmpty(Model.Deposit.Email) ? null : Model.Deposit.Email;
+        Model.Deposit.Description = string.IsNullOrEmpty(Model.Deposit.Description) ? null : Model.Deposit.Description;
         var result = validator.Validate(Model.Deposit);
         if (!result.IsValid)
         {

@@ -65,6 +65,9 @@ public class DepositAddViewModel(IDepositService depositService) : BaseViewModel
     private async Task AddDepositAsync()
     {
         DepositValidator validator = new DepositValidator();
+        Model.Deposit.PhoneNumber = string.IsNullOrEmpty(Model.Deposit.PhoneNumber) ? null : Model.Deposit.PhoneNumber;
+        Model.Deposit.Email = string.IsNullOrEmpty(Model.Deposit.Email) ? null : Model.Deposit.Email;
+        Model.Deposit.Description = string.IsNullOrEmpty(Model.Deposit.Description) ? null : Model.Deposit.Description;
         var result = validator.Validate(Model.Deposit);
         if (!result.IsValid)
         {

@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FarmManager.Model.Migrations
 {
     [DbContext(typeof(FarmManagerContext))]
-    [Migration("20250906183724_init")]
+    [Migration("20250908154119_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -27,9 +27,11 @@ namespace FarmManager.Model.Migrations
 
             modelBuilder.Entity("FarmManager.Model.Model.Buy", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Description")
                         .HasColumnType("text");
@@ -50,8 +52,8 @@ namespace FarmManager.Model.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("integer");
 
-                    b.Property<Guid>("VendorId")
-                        .HasColumnType("uuid");
+                    b.Property<int>("VendorId")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -62,9 +64,11 @@ namespace FarmManager.Model.Migrations
 
             modelBuilder.Entity("FarmManager.Model.Model.Deposit", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Description")
                         .HasColumnType("text");
@@ -92,9 +96,11 @@ namespace FarmManager.Model.Migrations
 
             modelBuilder.Entity("FarmManager.Model.Model.Disease", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Description")
                         .HasColumnType("text");
@@ -116,9 +122,11 @@ namespace FarmManager.Model.Migrations
 
             modelBuilder.Entity("FarmManager.Model.Model.Employee", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<double?>("BaseRent")
                         .HasColumnType("double precision");
@@ -156,12 +164,14 @@ namespace FarmManager.Model.Migrations
 
             modelBuilder.Entity("FarmManager.Model.Model.EmployeeCost", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("integer");
 
-                    b.Property<Guid>("EmployeeId")
-                        .HasColumnType("uuid");
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("integer");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("boolean");
@@ -181,9 +191,11 @@ namespace FarmManager.Model.Migrations
 
             modelBuilder.Entity("FarmManager.Model.Model.Fertilizer", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Description")
                         .HasColumnType("text");
@@ -208,9 +220,11 @@ namespace FarmManager.Model.Migrations
 
             modelBuilder.Entity("FarmManager.Model.Model.Harvest", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("boolean");
@@ -218,8 +232,8 @@ namespace FarmManager.Model.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
-                    b.Property<Guid>("PlantId")
-                        .HasColumnType("uuid");
+                    b.Property<int>("PlantId")
+                        .HasColumnType("integer");
 
                     b.Property<double>("Quantity")
                         .HasColumnType("double precision");
@@ -233,9 +247,11 @@ namespace FarmManager.Model.Migrations
 
             modelBuilder.Entity("FarmManager.Model.Model.Plant", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Description")
                         .HasColumnType("text");
@@ -250,8 +266,8 @@ namespace FarmManager.Model.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<Guid>("VarietyId")
-                        .HasColumnType("uuid");
+                    b.Property<int>("VarietyId")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -262,9 +278,11 @@ namespace FarmManager.Model.Migrations
 
             modelBuilder.Entity("FarmManager.Model.Model.Season", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Description")
                         .HasColumnType("text");
@@ -286,15 +304,17 @@ namespace FarmManager.Model.Migrations
 
             modelBuilder.Entity("FarmManager.Model.Model.Sell", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("integer");
 
-                    b.Property<Guid>("DepositId")
-                        .HasColumnType("uuid");
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<Guid>("HarvestId")
-                        .HasColumnType("uuid");
+                    b.Property<int>("DepositId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("HarvestId")
+                        .HasColumnType("integer");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("boolean");
@@ -319,12 +339,14 @@ namespace FarmManager.Model.Migrations
 
             modelBuilder.Entity("FarmManager.Model.Model.Spraying", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("integer");
 
-                    b.Property<Guid>("FertilizerId")
-                        .HasColumnType("uuid");
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("FertilizerId")
+                        .HasColumnType("integer");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("boolean");
@@ -332,14 +354,14 @@ namespace FarmManager.Model.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
-                    b.Property<Guid>("PlantId")
-                        .HasColumnType("uuid");
+                    b.Property<int>("PlantId")
+                        .HasColumnType("integer");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("integer");
 
-                    b.Property<Guid?>("WorkDayId")
-                        .HasColumnType("uuid");
+                    b.Property<int?>("WorkDayId")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -354,9 +376,11 @@ namespace FarmManager.Model.Migrations
 
             modelBuilder.Entity("FarmManager.Model.Model.Variety", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Description")
                         .HasColumnType("text");
@@ -378,9 +402,11 @@ namespace FarmManager.Model.Migrations
 
             modelBuilder.Entity("FarmManager.Model.Model.Vendor", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Description")
                         .HasColumnType("text");
@@ -408,9 +434,11 @@ namespace FarmManager.Model.Migrations
 
             modelBuilder.Entity("FarmManager.Model.Model.WorkDay", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<DateOnly>("Date")
                         .HasColumnType("date");
@@ -428,12 +456,14 @@ namespace FarmManager.Model.Migrations
 
             modelBuilder.Entity("FarmManager.Model.Model.WorkDayCollecting", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("integer");
 
-                    b.Property<Guid>("EmployeeId")
-                        .HasColumnType("uuid");
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("integer");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("boolean");
@@ -447,8 +477,8 @@ namespace FarmManager.Model.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("integer");
 
-                    b.Property<Guid?>("WorkDayId")
-                        .HasColumnType("uuid");
+                    b.Property<int?>("WorkDayId")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -461,12 +491,14 @@ namespace FarmManager.Model.Migrations
 
             modelBuilder.Entity("FarmManager.Model.Model.WorkDayHourly", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("integer");
 
-                    b.Property<Guid>("EmployeeId")
-                        .HasColumnType("uuid");
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("integer");
 
                     b.Property<double>("Hours")
                         .HasColumnType("double precision");
@@ -477,8 +509,8 @@ namespace FarmManager.Model.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
-                    b.Property<Guid?>("WorkDayId")
-                        .HasColumnType("uuid");
+                    b.Property<int?>("WorkDayId")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 

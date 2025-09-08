@@ -12,9 +12,9 @@ public class DepositService(IFarmManagerContext context, IUnitOfWork unitOfWork)
     {
         return await context.Deposits.AsNoTracking().ToListAsync();
     }
-    public async Task<Deposit> Get(Guid guid)
+    public async Task<Deposit> Get(int id)
     {
-        return await context.Deposits.AsNoTracking().Where(d => d.Id == guid).FirstOrDefaultAsync()
+        return await context.Deposits.AsNoTracking().Where(d => d.Id == id).FirstOrDefaultAsync()
             ?? throw new NotFoundException("Nie mozna znaleźć depozytu.");
     }
     public async Task Add(Deposit deposit)
@@ -23,9 +23,9 @@ public class DepositService(IFarmManagerContext context, IUnitOfWork unitOfWork)
         await unitOfWork.SaveChangesAsync();
     }
 
-    public Task Delete(Guid depositId)
+    public Task Delete(int id)
     {
-        var deposit = context.Deposits.FirstOrDefault(d => d.Id == depositId) ??
+        var deposit = context.Deposits.FirstOrDefault(d => d.Id == id) ??
             throw new NotFoundException("Nie mozna znaleźć depozytu.");
         deposit.IsDeleted = true;
         return unitOfWork.SaveChangesAsync();
@@ -35,8 +35,10 @@ public class DepositService(IFarmManagerContext context, IUnitOfWork unitOfWork)
         var existingDeposit = context.Deposits.FirstOrDefault(d => d.Id == deposit.Id) ??
             throw new NotFoundException("Nie mozna znaleźć depozytu.");
         existingDeposit.Name = deposit.Name;
-        existingDeposit.Description = deposit.Description;
         existingDeposit.PhoneNumber = deposit.PhoneNumber;
+        existingDeposit.Email = deposit.Email;
+        existingDeposit.Description = deposit.Description;
+        existingDeposit.IsActive = deposit.IsActive;
         return unitOfWork.SaveChangesAsync();
     }
 }
