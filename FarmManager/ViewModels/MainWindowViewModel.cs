@@ -19,7 +19,7 @@ public class MainWindowViewModel : BaseViewModel
             OnPropertyChanged();
         }
     }
-    public RelayCommand AddDeposit => new RelayCommand(execute => OpenAddDepositWindow());
+    public RelayCommand Deposits => new RelayCommand(execute => OpenAddDepositWindow());
 
     private void OpenAddDepositWindow()
     {

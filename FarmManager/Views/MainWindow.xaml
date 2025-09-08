@@ -16,11 +16,12 @@
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
         ResizeMode="NoResize"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        DataContext="{Binding MainWindowViewModel, Source={StaticResource Locator}}">
     <Grid>
         <Menu>
-            <MenuItem Header="Sprzedawcy" FontSize="20">
-                <MenuItem Header="Dodaj sprzedawcę" Command="{Binding AddDeposit}" FontSize="20" />
+            <MenuItem Header="Podstawowe" FontSize="20">
+                <MenuItem Header="Depozyty" Command="{Binding Deposits}" FontSize="20" />
             </MenuItem>
         </Menu>
         <!--Buttons are used for better visual aspect-->
