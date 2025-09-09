@@ -16,27 +16,27 @@ public class DiseaseService(IFarmManagerContext context, IUnitOfWork unitOfWork)
     public async Task<Disease> Get(int id)
     {
         return await context.Diseases.AsNoTracking().Where(d => d.Id == id).FirstOrDefaultAsync()
-            ?? throw new NotFoundException("Nie mozna choroby.");
+            ?? throw new NotFoundException("Nie mozna znaleźć choroby.");
     }
-    public async Task Add(Disease disease)
+    public async Task Add(Disease entity)
     {
-        await context.Diseases.AddAsync(disease);
+        await context.Diseases.AddAsync(entity);
         await unitOfWork.SaveChangesAsync();
     }
-    public async Task Update(Disease disease)
+    public async Task Update(Disease entity)
     {
-        var existingDisease = context.Diseases.FirstOrDefault(d => d.Id == disease.Id) ??
+        var existingEntity = context.Diseases.FirstOrDefault(d => d.Id == entity.Id) ??
             throw new NotFoundException("Nie mozna znaleźć choroby");
-        existingDisease.Name = disease.Name;
-        existingDisease.Description = disease.Description;
-        existingDisease.IsActive = disease.IsActive;
+        existingEntity.Name = entity.Name;
+        existingEntity.Description = entity.Description;
+        existingEntity.IsActive = entity.IsActive;
         await unitOfWork.SaveChangesAsync();
     }
     public async Task Delete(int id)
     {
-        var disease = context.Diseases.FirstOrDefault(d => d.Id == id) ??
+        var entity = context.Diseases.FirstOrDefault(d => d.Id == id) ??
             throw new NotFoundException("Nie mozna znaleźć choroby");
-        disease.IsDeleted = true;
+        entity.IsDeleted = true;
         await unitOfWork.SaveChangesAsync();
     }
 

@@ -2,6 +2,7 @@
 using FarmManager.App.Models;
 using FarmManager.App.Views.Deposits;
 using FarmManager.App.Views.Diseases;
+using FarmManager.App.Views.Employees;
 
 namespace FarmManager.App.ViewModels;
 
@@ -32,5 +33,11 @@ public class MainWindowViewModel : BaseViewModel
     private void OpenDiseasesWindow()
     {
         new DiseasesWindow().ShowDialog();
+    }
+    public RelayCommand Employees => new RelayCommand(execute => OpenEmployeesWindow());
+
+    private void OpenEmployeesWindow()
+    {
+        new EmployeesWindow().ShowDialog();
     }
 }

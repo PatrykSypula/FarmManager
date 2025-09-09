@@ -15,8 +15,9 @@ public class DepositValidator : AbstractValidator<Deposit>
         RuleFor(d => d.PhoneNumber)
             .Matches(@"^\+?[1-9]\d{1,14}$").WithMessage("Numer telefonu nie jest poprawny")
             .When(d => !string.IsNullOrEmpty(d.PhoneNumber));
-        RuleFor(d => d.Email)
-            .EmailAddress().WithMessage("Adres email nie jest poprawny")
-            .When(d => !string.IsNullOrEmpty(d.Email));
+        RuleFor(e => e.Email)
+            .EmailAddress().When(e => !string.IsNullOrEmpty(e.Email))
+            .WithMessage("Nieprawidłowy format adresu email.")
+            .MaximumLength(50).WithMessage("Adres email nie może przekraczać 50 znaków.");
     }
 }

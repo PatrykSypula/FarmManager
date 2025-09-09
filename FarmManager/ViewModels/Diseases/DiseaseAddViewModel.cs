@@ -11,6 +11,8 @@ public class DiseaseAddViewModel(IDiseaseService diseaseService) : BaseViewModel
 {
     public event Action<Disease>? RequestClose;
     public DiseaseAddModel Model = new DiseaseAddModel();
+
+    #region Properties
     public string Name
     {
         get
@@ -23,7 +25,7 @@ public class DiseaseAddViewModel(IDiseaseService diseaseService) : BaseViewModel
             OnPropertyChanged();
         }
     }
-    public string Description
+    public string? Description
     {
         get
         {
@@ -34,7 +36,9 @@ public class DiseaseAddViewModel(IDiseaseService diseaseService) : BaseViewModel
             Model.Disease.Description = value;
             OnPropertyChanged();
         }
-    }
+    } 
+    #endregion
+
     public RelayCommand Add => new RelayCommand(async execute => await AddDiseaseAsync());
 
     private async Task AddDiseaseAsync()

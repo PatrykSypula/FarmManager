@@ -2,8 +2,10 @@
 using FarmManager.App.ViewModels;
 using FarmManager.App.ViewModels.Deposits;
 using FarmManager.App.ViewModels.Diseases;
+using FarmManager.App.ViewModels.Employees;
 using FarmManager.App.Views.Deposits;
 using FarmManager.App.Views.Diseases;
+using FarmManager.App.Views.Employees;
 using FarmManager.Model.DatabaseContext;
 using FarmManager.Model.UnitOfWork;
 using FarmManager.Services.Interfaces;
@@ -24,7 +26,8 @@ public partial class MyApp : Application
         AppHost = Host.CreateDefaultBuilder()
             .ConfigureServices((context, services) =>
             {
-                //Windows
+
+                #region Windows
                 services.AddSingleton<MainWindow>();
 
                 //Deposits
@@ -37,8 +40,14 @@ public partial class MyApp : Application
                 services.AddTransient<DiseaseAddWindow>();
                 services.AddTransient<DiseaseEditWindow>();
 
+                //Employees
+                services.AddTransient<EmployeesWindow>();
+                services.AddTransient<EmployeeAddWindow>();
+                services.AddTransient<EmployeeEditWindow>();
+                #endregion
 
-                //ViewModels
+
+                #region ViewModels
                 services.AddTransient<MainWindowViewModel>();
 
                 //Deposits
@@ -51,6 +60,12 @@ public partial class MyApp : Application
                 services.AddTransient<DiseaseAddViewModel>();
                 services.AddTransient<DiseaseEditViewModel>();
 
+                //Employees
+                services.AddTransient<EmployeesViewModel>();
+                services.AddTransient<EmployeeAddViewModel>();
+                services.AddTransient<EmployeeEditViewModel>();
+                #endregion
+
                 // Database
                 services.AddDbContext<FarmManagerContext>(options =>
                     options.UseNpgsql("Host=localhost;Port=5433;Database=FarmManager;Username=postgres;Password=admin"));
@@ -60,6 +75,7 @@ public partial class MyApp : Application
                 services.AddScoped<IUnitOfWork, UnitOfWork>();
                 services.AddScoped<IDepositService, DepositService>();
                 services.AddScoped<IDiseaseService, DiseaseService>();
+                services.AddScoped<IEmployeeService, EmployeeService>();
 
                 //ServiceProdivers
                 ServiceProvider = services.BuildServiceProvider();

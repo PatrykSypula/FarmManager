@@ -12,6 +12,7 @@ public class DepositEditViewModel(IDepositService depositService) : BaseViewMode
     public event Action<Deposit>? RequestClose;
     public DepositEditModel Model = new DepositEditModel();
 
+    #region Properties
     public string Name
     {
         get
@@ -25,7 +26,7 @@ public class DepositEditViewModel(IDepositService depositService) : BaseViewMode
         }
     }
 
-    public string PhoneNumber
+    public string? PhoneNumber
     {
         get
         {
@@ -37,7 +38,7 @@ public class DepositEditViewModel(IDepositService depositService) : BaseViewMode
             OnPropertyChanged();
         }
     }
-    public string Email
+    public string? Email
     {
         get
         {
@@ -49,7 +50,7 @@ public class DepositEditViewModel(IDepositService depositService) : BaseViewMode
             OnPropertyChanged();
         }
     }
-    public string Description
+    public string? Description
     {
         get
         {
@@ -73,7 +74,8 @@ public class DepositEditViewModel(IDepositService depositService) : BaseViewMode
             Model.Deposit.IsActive = value;
             OnPropertyChanged();
         }
-    }
+    } 
+    #endregion
 
 
     public async Task InitializeAsync(int id)
@@ -93,6 +95,7 @@ public class DepositEditViewModel(IDepositService depositService) : BaseViewMode
         if (result == true)
         {
             await depositService.Delete(Model.Deposit.Id);
+            Model.Deposit.IsDeleted = true;
             RequestClose?.Invoke(Model.Deposit);
         }
     }

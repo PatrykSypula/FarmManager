@@ -12,6 +12,7 @@ public class DiseaseEditViewModel(IDiseaseService diseaseService) : BaseViewMode
     public event Action<Disease>? RequestClose;
     public DiseaseEditModel Model = new DiseaseEditModel();
 
+    #region Properties
     public string Name
     {
         get
@@ -24,7 +25,7 @@ public class DiseaseEditViewModel(IDiseaseService diseaseService) : BaseViewMode
             OnPropertyChanged();
         }
     }
-    public string Description
+    public string? Description
     {
         get
         {
@@ -48,7 +49,8 @@ public class DiseaseEditViewModel(IDiseaseService diseaseService) : BaseViewMode
             Model.Disease.IsActive = value;
             OnPropertyChanged();
         }
-    }
+    } 
+    #endregion
 
 
     public async Task InitializeAsync(int id)
@@ -66,6 +68,7 @@ public class DiseaseEditViewModel(IDiseaseService diseaseService) : BaseViewMode
         if (result == true)
         {
             await diseaseService.Delete(Model.Disease.Id);
+            Model.Disease.IsDeleted = false;
             RequestClose?.Invoke(Model.Disease);
         }
     }

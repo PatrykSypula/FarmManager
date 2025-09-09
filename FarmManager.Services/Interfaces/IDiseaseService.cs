@@ -6,7 +6,7 @@ public interface IDiseaseService
 {
     Task<ICollection<Disease>> GetAll();
     Task<Disease> Get(int id);
-    Task Add(Disease disease);
-    Task Update(Disease disease);
+    Task Add(Disease entity);
+    Task Update(Disease entity);
     Task Delete(int id);
 }

@@ -23,6 +23,7 @@
             <MenuItem Header="Podstawowe" FontSize="20">
                 <MenuItem Header="Depozyty" Command="{Binding Deposits}" FontSize="20" />
                 <MenuItem Header="Choroby" Command="{Binding Diseases}" FontSize="20" />
+                <MenuItem Header="Pracownicy" Command="{Binding Employees}" FontSize="20" />
             </MenuItem>
         </Menu>
         <!--Buttons are used for better visual aspect-->

@@ -18,28 +18,28 @@ public class DepositService(IFarmManagerContext context, IUnitOfWork unitOfWork)
         return await context.Deposits.AsNoTracking().Where(d => d.Id == id).FirstOrDefaultAsync()
             ?? throw new NotFoundException("Nie mozna znaleźć depozytu.");
     }
-    public async Task Add(Deposit deposit)
+    public async Task Add(Deposit entity)
     {
-        await context.Deposits.AddAsync(deposit);
+        await context.Deposits.AddAsync(entity);
         await unitOfWork.SaveChangesAsync();
     }
 
-    public async Task Update(Deposit deposit)
+    public async Task Update(Deposit entity)
     {
-        var existingDeposit = context.Deposits.FirstOrDefault(d => d.Id == deposit.Id) ??
+        var existingEntity = context.Deposits.FirstOrDefault(d => d.Id == entity.Id) ??
             throw new NotFoundException("Nie mozna znaleźć depozytu.");
-        existingDeposit.Name = deposit.Name;
-        existingDeposit.PhoneNumber = deposit.PhoneNumber;
-        existingDeposit.Email = deposit.Email;
-        existingDeposit.Description = deposit.Description;
-        existingDeposit.IsActive = deposit.IsActive;
+        existingEntity.Name = entity.Name;
+        existingEntity.PhoneNumber = entity.PhoneNumber;
+        existingEntity.Email = entity.Email;
+        existingEntity.Description = entity.Description;
+        existingEntity.IsActive = entity.IsActive;
         await unitOfWork.SaveChangesAsync();
     }
     public async Task Delete(int id)
     {
-        var deposit = context.Deposits.FirstOrDefault(d => d.Id == id) ??
+        var entity = context.Deposits.FirstOrDefault(d => d.Id == id) ??
             throw new NotFoundException("Nie mozna znaleźć depozytu.");
-        deposit.IsDeleted = true;
+        entity.IsDeleted = true;
         await unitOfWork.SaveChangesAsync();
     }
 }

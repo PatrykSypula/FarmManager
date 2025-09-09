@@ -11,6 +11,8 @@ public class DepositAddViewModel(IDepositService depositService) : BaseViewModel
 {
     public event Action<Deposit>? RequestClose;
     public DepositAddModel Model = new DepositAddModel();
+
+    #region Properties
     public string Name
     {
         get
@@ -24,7 +26,7 @@ public class DepositAddViewModel(IDepositService depositService) : BaseViewModel
         }
     }
 
-    public string PhoneNumber
+    public string? PhoneNumber
     {
         get
         {
@@ -36,7 +38,7 @@ public class DepositAddViewModel(IDepositService depositService) : BaseViewModel
             OnPropertyChanged();
         }
     }
-    public string Email
+    public string? Email
     {
         get
         {
@@ -48,7 +50,7 @@ public class DepositAddViewModel(IDepositService depositService) : BaseViewModel
             OnPropertyChanged();
         }
     }
-    public string Description
+    public string? Description
     {
         get
         {
@@ -59,7 +61,9 @@ public class DepositAddViewModel(IDepositService depositService) : BaseViewModel
             Model.Deposit.Description = value;
             OnPropertyChanged();
         }
-    }
+    } 
+    #endregion
+
     public RelayCommand Add => new RelayCommand(async execute => await AddDepositAsync());
 
     private async Task AddDepositAsync()
