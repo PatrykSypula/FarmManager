@@ -3,6 +3,7 @@ using FarmManager.App.Models;
 using FarmManager.App.Views.Deposits;
 using FarmManager.App.Views.Diseases;
 using FarmManager.App.Views.Employees;
+using FarmManager.App.Views.Fertilizers;
 
 namespace FarmManager.App.ViewModels;
 
@@ -22,22 +23,26 @@ public class MainWindowViewModel : BaseViewModel
         }
     }
     public RelayCommand Deposits => new RelayCommand(execute => OpenDepositsWindow());
-
     private void OpenDepositsWindow()
     {
         new DepositsWindow().ShowDialog();
     }
 
     public RelayCommand Diseases => new RelayCommand(execute => OpenDiseasesWindow());
-
     private void OpenDiseasesWindow()
     {
         new DiseasesWindow().ShowDialog();
     }
-    public RelayCommand Employees => new RelayCommand(execute => OpenEmployeesWindow());
 
+    public RelayCommand Employees => new RelayCommand(execute => OpenEmployeesWindow());
     private void OpenEmployeesWindow()
     {
         new EmployeesWindow().ShowDialog();
+    }
+
+    public RelayCommand Fertilizers => new RelayCommand(execute => OpenFertilizersWindow());
+    private void OpenFertilizersWindow()
+    {
+        new FertilizersWindow().ShowDialog();
     }
 }

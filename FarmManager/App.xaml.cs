@@ -3,9 +3,11 @@ using FarmManager.App.ViewModels;
 using FarmManager.App.ViewModels.Deposits;
 using FarmManager.App.ViewModels.Diseases;
 using FarmManager.App.ViewModels.Employees;
+using FarmManager.App.ViewModels.Fertilizers;
 using FarmManager.App.Views.Deposits;
 using FarmManager.App.Views.Diseases;
 using FarmManager.App.Views.Employees;
+using FarmManager.App.Views.Fertilizers;
 using FarmManager.Model.DatabaseContext;
 using FarmManager.Model.UnitOfWork;
 using FarmManager.Services.Interfaces;
@@ -44,6 +46,11 @@ public partial class MyApp : Application
                 services.AddTransient<EmployeesWindow>();
                 services.AddTransient<EmployeeAddWindow>();
                 services.AddTransient<EmployeeEditWindow>();
+
+                //Fertilizers
+                services.AddTransient<FertilizersWindow>();
+                services.AddTransient<FertilizerAddWindow>();
+                services.AddTransient<FertilizerEditWindow>();
                 #endregion
 
 
@@ -64,6 +71,11 @@ public partial class MyApp : Application
                 services.AddTransient<EmployeesViewModel>();
                 services.AddTransient<EmployeeAddViewModel>();
                 services.AddTransient<EmployeeEditViewModel>();
+
+                //Fertilizers
+                services.AddTransient<FertilizersViewModel>();
+                services.AddTransient<FertilizerAddViewModel>();
+                services.AddTransient<FertilizerEditViewModel>();
                 #endregion
 
                 // Database
@@ -76,6 +88,7 @@ public partial class MyApp : Application
                 services.AddScoped<IDepositService, DepositService>();
                 services.AddScoped<IDiseaseService, DiseaseService>();
                 services.AddScoped<IEmployeeService, EmployeeService>();
+                services.AddScoped<IFertilizerService, FertilizerService>();
 
                 //ServiceProdivers
                 ServiceProvider = services.BuildServiceProvider();

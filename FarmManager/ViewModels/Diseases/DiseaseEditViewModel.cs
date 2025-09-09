@@ -68,7 +68,7 @@ public class DiseaseEditViewModel(IDiseaseService diseaseService) : BaseViewMode
         if (result == true)
         {
             await diseaseService.Delete(Model.Disease.Id);
-            Model.Disease.IsDeleted = false;
+            Model.Disease.IsDeleted = true;
             RequestClose?.Invoke(Model.Disease);
         }
     }
