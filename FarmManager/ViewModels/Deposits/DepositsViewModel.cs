@@ -40,7 +40,7 @@ public class DepositsViewModel(IDepositService depositService) : BaseViewModel
 
     #endregion
 
-    public RelayCommand CreateDeposit => new RelayCommand(execute => OpenDepositAddWindow());
+    public RelayCommand Create => new RelayCommand(execute => OpenDepositAddWindow());
     private void OpenDepositAddWindow()
     {
         var window = new DepositAddWindow();
@@ -51,7 +51,7 @@ public class DepositsViewModel(IDepositService depositService) : BaseViewModel
         }
     }
 
-    public RelayCommand EditDeposit => new RelayCommand(execute => OpenDepositEditWindow());
+    public RelayCommand Edit => new RelayCommand(execute => OpenDepositEditWindow());
     private void OpenDepositEditWindow()
     {
         var window = new DepositEditWindow(SelectedItem.Id);

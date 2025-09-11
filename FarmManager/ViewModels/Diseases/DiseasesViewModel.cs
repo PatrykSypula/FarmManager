@@ -40,7 +40,7 @@ public class DiseasesViewModel(IDiseaseService diseaseService) : BaseViewModel
 
     #endregion
 
-    public RelayCommand CreateDisease => new RelayCommand(execute => OpenDiseaseAddWindow());
+    public RelayCommand Create => new RelayCommand(execute => OpenDiseaseAddWindow());
     private void OpenDiseaseAddWindow()
     {
         var window = new DiseaseAddWindow();
@@ -51,7 +51,7 @@ public class DiseasesViewModel(IDiseaseService diseaseService) : BaseViewModel
         }
     }
 
-    public RelayCommand EditDisease => new RelayCommand(execute => OpenDiseaseEditWindow());
+    public RelayCommand Edit => new RelayCommand(execute => OpenDiseaseEditWindow());
     private void OpenDiseaseEditWindow()
     {
         var window = new DiseaseEditWindow(SelectedItem.Id);

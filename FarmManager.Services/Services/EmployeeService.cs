@@ -11,7 +11,11 @@ public class EmployeeService(IFarmManagerContext context, IUnitOfWork unitOfWork
 {
     public async Task<ICollection<Employee>> GetAll()
     {
-        return await context.Employees.AsNoTracking().ToListAsync();
+        return await context.Employees
+            .OrderByDescending(e => e.IsActive)
+            .ThenBy(e => e.Id)
+            .AsNoTracking()
+            .ToListAsync();
     }
     public async Task<Employee> Get(int id)
     {

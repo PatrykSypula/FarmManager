@@ -25,7 +25,7 @@ namespace FarmManager;
 public partial class MyApp : Application
 {
     public static IHost? AppHost { get; private set; }
-    //public static ServiceProvider ServiceProvider { get; private set; }
+    public static ServiceProvider ServiceProvider { get; private set; }
     public MyApp()
     {
 
@@ -37,6 +37,8 @@ public partial class MyApp : Application
                     options.UseNpgsql("Host=localhost;Port=5433;Database=FarmManager;Username=postgres;Password=admin"));
 
                 #region Windows
+
+                // Main Window
                 services.AddSingleton<MainWindow>();
 
                 //Deposits
@@ -68,10 +70,13 @@ public partial class MyApp : Application
                 services.AddTransient<VendorsWindow>();
                 services.AddTransient<VendorAddWindow>();
                 services.AddTransient<VendorEditWindow>();
+
                 #endregion
 
 
                 #region ViewModels
+
+                // Main Window
                 services.AddTransient<MainWindowViewModel>();
 
                 //Deposits
@@ -103,11 +108,11 @@ public partial class MyApp : Application
                 services.AddTransient<VendorsViewModel>();
                 services.AddTransient<VendorAddViewModel>();
                 services.AddTransient<VendorEditViewModel>();
+
                 #endregion
 
-
-
                 #region Services
+
                 // Services
                 services.AddScoped<IFarmManagerContext>(provider => provider.GetRequiredService<FarmManagerContext>());
                 services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -116,12 +121,12 @@ public partial class MyApp : Application
                 services.AddScoped<IEmployeeService, EmployeeService>();
                 services.AddScoped<IFertilizerService, FertilizerService>();
                 services.AddScoped<IVarietyService, VarietyService>();
-                services.AddScoped<IVendorService, VendorService>(); 
-                #endregion
+                services.AddScoped<IVendorService, VendorService>();
 
-                //ServiceProdivers
-                //ServiceProvider = services.BuildServiceProvider();
-                //ServiceProvider.GetRequiredService<DepositAddViewModel>();
+                //Service Prodivers
+                ServiceProvider = services.BuildServiceProvider();
+
+                #endregion
 
             })
             .Build();

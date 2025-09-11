@@ -1,27 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using System.Windows;
+using FarmManager.App.ViewModels.Vendors;
+using FarmManager.Model.Model;
 
-namespace FarmManager.App.Views.Vendors
+namespace FarmManager.App.Views.Vendors;
+
+public partial class VendorAddWindow : Window
 {
-    /// <summary>
-    /// Interaction logic for VendorAddWindow.xaml
-    /// </summary>
-    public partial class VendorAddWindow : Window
+    public Vendor? Vendor { get; private set; }
+    public VendorAddWindow()
     {
-        public VendorAddWindow()
+        InitializeComponent();
+        if (DataContext is VendorAddViewModel vm)
         {
-            InitializeComponent();
+            vm.RequestClose += vendor =>
+            {
+                Vendor = vendor;
+                DialogResult = true;
+            };
         }
     }
 }

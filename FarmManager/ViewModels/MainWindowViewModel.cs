@@ -5,6 +5,7 @@ using FarmManager.App.Views.Diseases;
 using FarmManager.App.Views.Employees;
 using FarmManager.App.Views.Fertilizers;
 using FarmManager.App.Views.Varieties;
+using FarmManager.App.Views.Vendors;
 
 namespace FarmManager.App.ViewModels;
 
@@ -51,5 +52,11 @@ public class MainWindowViewModel : BaseViewModel
     private void OpenVarietiesWindow()
     {
         new VarietiesWindow().ShowDialog();
+    }
+
+    public RelayCommand Vendors => new RelayCommand(execute => OpenVendorsWindow());
+    private void OpenVendorsWindow()
+    {
+        new VendorsWindow().ShowDialog();
     }
 }

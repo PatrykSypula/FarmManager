@@ -1,27 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using System.Windows;
+using FarmManager.App.ViewModels.Vendors;
 
-namespace FarmManager.App.Views.Vendors
+namespace FarmManager.App.Views.Vendors;
+
+public partial class VendorsWindow : Window
 {
-    /// <summary>
-    /// Interaction logic for VendorsWindow.xaml
-    /// </summary>
-    public partial class VendorsWindow : Window
+    public VendorsWindow()
     {
-        public VendorsWindow()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+        Loaded += async (_, __) => await ((VendorsViewModel)DataContext).InitializeAsync();
     }
 }

@@ -1,27 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using System.Windows;
+using FarmManager.App.ViewModels.Vendors;
+using FarmManager.Model.Model;
 
-namespace FarmManager.App.Views.Vendors
+namespace FarmManager.App.Views.Vendors;
+
+public partial class VendorEditWindow : Window
 {
-    /// <summary>
-    /// Interaction logic for VendorEditWindow.xaml
-    /// </summary>
-    public partial class VendorEditWindow : Window
+    public Vendor? Vendor { get; private set; }
+    public VendorEditWindow(int id)
     {
-        public VendorEditWindow()
+        InitializeComponent();
+        Loaded += async (_, __) => await ((VendorEditViewModel)DataContext).InitializeAsync(id);
+        if (DataContext is VendorEditViewModel vm)
         {
-            InitializeComponent();
+            vm.RequestClose += vendor =>
+            {
+                Vendor = vendor;
+                DialogResult = true;
+            };
         }
     }
 }

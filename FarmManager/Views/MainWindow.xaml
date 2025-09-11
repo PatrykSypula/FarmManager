@@ -26,6 +26,7 @@
                 <MenuItem Header="Pracownicy" Command="{Binding Employees}" FontSize="20" />
                 <MenuItem Header="Nawozy" Command="{Binding Fertilizers}" FontSize="20" />
                 <MenuItem Header="Odmiany" Command="{Binding Varieties}" FontSize="20" />
+                <MenuItem Header="Sprzedawcy" Command="{Binding Vendors}" FontSize="20" />
             </MenuItem>
         </Menu>
         <!--Buttons are used for better visual aspect-->

@@ -11,7 +11,11 @@ public class DepositService(IFarmManagerContext context, IUnitOfWork unitOfWork)
 {
     public async Task<ICollection<Deposit>> GetAll()
     {
-        return await context.Deposits.AsNoTracking().ToListAsync();
+        return await context.Deposits
+            .OrderByDescending(d => d.IsActive)
+            .ThenBy(d => d.Id)
+            .AsNoTracking()
+            .ToListAsync();
     }
     public async Task<Deposit> Get(int id)
     {

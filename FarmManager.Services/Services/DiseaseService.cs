@@ -11,7 +11,11 @@ public class DiseaseService(IFarmManagerContext context, IUnitOfWork unitOfWork)
 {
     public async Task<ICollection<Disease>> GetAll()
     {
-        return await context.Diseases.AsNoTracking().ToListAsync();
+        return await context.Diseases
+            .OrderByDescending(d => d.IsActive)
+            .ThenBy(d => d.Id)
+            .AsNoTracking()
+            .ToListAsync();
     }
     public async Task<Disease> Get(int id)
     {

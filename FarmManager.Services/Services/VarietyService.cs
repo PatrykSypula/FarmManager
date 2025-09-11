@@ -11,7 +11,11 @@ public class VarietyService(IFarmManagerContext context, IUnitOfWork unitOfWork)
 {
     public async Task<ICollection<Variety>> GetAll()
     {
-        return await context.Varieties.AsNoTracking().ToListAsync();
+        return await context.Varieties
+            .OrderByDescending(v => v.IsActive)
+            .ThenBy(v => v.Id)
+            .AsNoTracking()
+            .ToListAsync();
     }
     public async Task<Variety> Get(int id)
     {

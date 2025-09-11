@@ -11,7 +11,11 @@ public class VendorService(IFarmManagerContext context, IUnitOfWork unitOfWork) 
 {
     public async Task<ICollection<Vendor>> GetAll()
     {
-        return await context.Vendors.AsNoTracking().ToListAsync();
+        return await context.Vendors
+            .OrderByDescending(v => v.IsActive)
+            .ThenBy(v => v.Id)
+            .AsNoTracking()
+            .ToListAsync();
     }
     public async Task<Vendor> Get(int id)
     {

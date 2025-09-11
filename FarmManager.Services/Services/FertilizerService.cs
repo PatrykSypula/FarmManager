@@ -11,7 +11,11 @@ public class FertilizerService(IFarmManagerContext context, IUnitOfWork unitOfWo
 {
     public async Task<ICollection<Fertilizer>> GetAll()
     {
-        return await context.Fertilizers.AsNoTracking().ToListAsync();
+        return await context.Fertilizers
+            .OrderByDescending(f => f.IsActive)
+            .ThenBy(f => f.Id)
+            .AsNoTracking()
+            .ToListAsync();
     }
     public async Task<Fertilizer> Get(int id)
     {
