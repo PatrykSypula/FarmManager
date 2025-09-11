@@ -9,8 +9,11 @@ namespace FarmManager.App.ViewModels.Deposits;
 
 public class DepositAddViewModel(IDepositService depositService) : BaseViewModel
 {
+    #region Properties
+
     public event Action<Deposit>? RequestClose;
     public DepositAddModel Model = new DepositAddModel();
+
     public string Name
     {
         get
@@ -24,7 +27,7 @@ public class DepositAddViewModel(IDepositService depositService) : BaseViewModel
         }
     }
 
-    public string PhoneNumber
+    public string? PhoneNumber
     {
         get
         {
@@ -36,7 +39,7 @@ public class DepositAddViewModel(IDepositService depositService) : BaseViewModel
             OnPropertyChanged();
         }
     }
-    public string Email
+    public string? Email
     {
         get
         {
@@ -48,7 +51,7 @@ public class DepositAddViewModel(IDepositService depositService) : BaseViewModel
             OnPropertyChanged();
         }
     }
-    public string Description
+    public string? Description
     {
         get
         {
@@ -60,11 +63,17 @@ public class DepositAddViewModel(IDepositService depositService) : BaseViewModel
             OnPropertyChanged();
         }
     }
+
+    #endregion
+
     public RelayCommand Add => new RelayCommand(async execute => await AddDepositAsync());
 
     private async Task AddDepositAsync()
     {
         DepositValidator validator = new DepositValidator();
+        Model.Deposit.PhoneNumber = string.IsNullOrEmpty(Model.Deposit.PhoneNumber) ? null : Model.Deposit.PhoneNumber;
+        Model.Deposit.Email = string.IsNullOrEmpty(Model.Deposit.Email) ? null : Model.Deposit.Email;
+        Model.Deposit.Description = string.IsNullOrEmpty(Model.Deposit.Description) ? null : Model.Deposit.Description;
         var result = validator.Validate(Model.Deposit);
         if (!result.IsValid)
         {

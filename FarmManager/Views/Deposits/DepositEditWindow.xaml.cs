@@ -7,7 +7,7 @@ namespace FarmManager.App.Views.Deposits;
 public partial class DepositEditWindow : Window
 {
     public Deposit? Deposit { get; private set; }
-    public DepositEditWindow(Guid id)
+    public DepositEditWindow(int id)
     {
         InitializeComponent();
         Loaded += async (_, __) => await ((DepositEditViewModel)DataContext).InitializeAsync(id);

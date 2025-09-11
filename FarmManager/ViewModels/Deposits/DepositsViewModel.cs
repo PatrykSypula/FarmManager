@@ -9,6 +9,8 @@ namespace FarmManager.App.ViewModels.Deposits;
 
 public class DepositsViewModel(IDepositService depositService) : BaseViewModel
 {
+    #region Properties
+
     public DepositsModel Model = new DepositsModel();
 
     public ObservableCollection<Deposit> Deposits
@@ -21,6 +23,11 @@ public class DepositsViewModel(IDepositService depositService) : BaseViewModel
         }
     }
 
+    public async Task InitializeAsync()
+    {
+        Deposits = new ObservableCollection<Deposit>(await depositService.GetAll());
+    }
+
     public Deposit SelectedItem
     {
         get { return Model.SelectedItem; }
@@ -31,13 +38,9 @@ public class DepositsViewModel(IDepositService depositService) : BaseViewModel
         }
     }
 
-    public async Task InitializeAsync()
-    {
-        Deposits  = new ObservableCollection<Deposit>(await depositService.GetAll());
-    }
+    #endregion
 
-
-    public RelayCommand CreateDeposit => new RelayCommand(execute => OpenDepositAddWindow());
+    public RelayCommand Create => new RelayCommand(execute => OpenDepositAddWindow());
     private void OpenDepositAddWindow()
     {
         var window = new DepositAddWindow();
@@ -48,7 +51,7 @@ public class DepositsViewModel(IDepositService depositService) : BaseViewModel
         }
     }
 
-    public RelayCommand EditDeposit => new RelayCommand(execute => OpenDepositEditWindow());
+    public RelayCommand Edit => new RelayCommand(execute => OpenDepositEditWindow());
     private void OpenDepositEditWindow()
     {
         var window = new DepositEditWindow(SelectedItem.Id);

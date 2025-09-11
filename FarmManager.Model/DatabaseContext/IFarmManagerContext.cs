@@ -16,7 +16,7 @@ public interface IFarmManagerContext
     public DbSet<Season> Seasons { get; set; }
     public DbSet<Sell> Sells { get; set; }
     public DbSet<Spraying> Sprayings { get; set; }
-    public DbSet<Variety> Varietis { get; set; }
+    public DbSet<Variety> Varieties { get; set; }
     public DbSet<Vendor> Vendors { get; set; }
     public DbSet<WorkDay> WorkDays { get; set; }
     public DbSet<WorkDayCollecting> WorkDayCollecting { get; set; }

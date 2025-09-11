@@ -2,7 +2,8 @@
 
 public abstract class BaseEntity
 {
-    public Guid Id { get; set; } = Guid.NewGuid();
+    public int Id { get; set; }
     public bool IsDeleted { get; set; } = false;
     public bool IsActive { get; set; } = true;
+    public DateTime Created { get; set; } = DateTime.UtcNow;
 }

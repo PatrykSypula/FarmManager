@@ -1,6 +1,11 @@
 ﻿using FarmManager.App.Helpers;
 using FarmManager.App.Models;
 using FarmManager.App.Views.Deposits;
+using FarmManager.App.Views.Diseases;
+using FarmManager.App.Views.Employees;
+using FarmManager.App.Views.Fertilizers;
+using FarmManager.App.Views.Varieties;
+using FarmManager.App.Views.Vendors;
 
 namespace FarmManager.App.ViewModels;
 
@@ -19,10 +24,39 @@ public class MainWindowViewModel : BaseViewModel
             OnPropertyChanged();
         }
     }
-    public RelayCommand AddDeposit => new RelayCommand(execute => OpenAddDepositWindow());
-
-    private void OpenAddDepositWindow()
+    public RelayCommand Deposits => new RelayCommand(execute => OpenDepositsWindow());
+    private void OpenDepositsWindow()
     {
         new DepositsWindow().ShowDialog();
+    }
+
+    public RelayCommand Diseases => new RelayCommand(execute => OpenDiseasesWindow());
+    private void OpenDiseasesWindow()
+    {
+        new DiseasesWindow().ShowDialog();
+    }
+
+    public RelayCommand Employees => new RelayCommand(execute => OpenEmployeesWindow());
+    private void OpenEmployeesWindow()
+    {
+        new EmployeesWindow().ShowDialog();
+    }
+
+    public RelayCommand Fertilizers => new RelayCommand(execute => OpenFertilizersWindow());
+    private void OpenFertilizersWindow()
+    {
+        new FertilizersWindow().ShowDialog();
+    }
+
+    public RelayCommand Varieties => new RelayCommand(execute => OpenVarietiesWindow());
+    private void OpenVarietiesWindow()
+    {
+        new VarietiesWindow().ShowDialog();
+    }
+
+    public RelayCommand Vendors => new RelayCommand(execute => OpenVendorsWindow());
+    private void OpenVendorsWindow()
+    {
+        new VendorsWindow().ShowDialog();
     }
 }

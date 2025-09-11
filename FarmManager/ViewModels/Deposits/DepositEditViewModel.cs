@@ -9,6 +9,8 @@ namespace FarmManager.App.ViewModels.Deposits;
 
 public class DepositEditViewModel(IDepositService depositService) : BaseViewModel
 {
+    #region Properties
+
     public event Action<Deposit>? RequestClose;
     public DepositEditModel Model = new DepositEditModel();
 
@@ -25,7 +27,7 @@ public class DepositEditViewModel(IDepositService depositService) : BaseViewMode
         }
     }
 
-    public string PhoneNumber
+    public string? PhoneNumber
     {
         get
         {
@@ -37,7 +39,7 @@ public class DepositEditViewModel(IDepositService depositService) : BaseViewMode
             OnPropertyChanged();
         }
     }
-    public string Email
+    public string? Email
     {
         get
         {
@@ -49,7 +51,7 @@ public class DepositEditViewModel(IDepositService depositService) : BaseViewMode
             OnPropertyChanged();
         }
     }
-    public string Description
+    public string? Description
     {
         get
         {
@@ -74,9 +76,7 @@ public class DepositEditViewModel(IDepositService depositService) : BaseViewMode
             OnPropertyChanged();
         }
     }
-
-
-    public async Task InitializeAsync(Guid id)
+    public async Task InitializeAsync(int id)
     {
         Model.Deposit = await depositService.Get(id);
         OnPropertyChanged(nameof(Name));
@@ -86,6 +86,8 @@ public class DepositEditViewModel(IDepositService depositService) : BaseViewMode
         OnPropertyChanged(nameof(IsActive));
     }
 
+    #endregion
+
     public RelayCommand Delete => new RelayCommand(async execute => await DeleteDepositAsync());
     private async Task DeleteDepositAsync()
     {
@@ -93,6 +95,7 @@ public class DepositEditViewModel(IDepositService depositService) : BaseViewMode
         if (result == true)
         {
             await depositService.Delete(Model.Deposit.Id);
+            Model.Deposit.IsDeleted = true;
             RequestClose?.Invoke(Model.Deposit);
         }
     }
@@ -101,6 +104,9 @@ public class DepositEditViewModel(IDepositService depositService) : BaseViewMode
     private async Task UpdateDepositAsync()
     {
         DepositValidator validator = new DepositValidator();
+        Model.Deposit.PhoneNumber = string.IsNullOrEmpty(Model.Deposit.PhoneNumber) ? null : Model.Deposit.PhoneNumber;
+        Model.Deposit.Email = string.IsNullOrEmpty(Model.Deposit.Email) ? null : Model.Deposit.Email;
+        Model.Deposit.Description = string.IsNullOrEmpty(Model.Deposit.Description) ? null : Model.Deposit.Description;
         var result = validator.Validate(Model.Deposit);
         if (!result.IsValid)
         {
