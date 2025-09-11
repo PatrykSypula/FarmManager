@@ -1,0 +1,45 @@
+﻿using FarmManager.Model.DatabaseContext;
+using FarmManager.Model.Exceptions;
+using FarmManager.Model.Model;
+using FarmManager.Model.UnitOfWork;
+using FarmManager.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
+
+namespace FarmManager.Services.Services;
+
+public class VendorService(IFarmManagerContext context, IUnitOfWork unitOfWork) : IVendorService
+{
+    public async Task<ICollection<Vendor>> GetAll()
+    {
+        return await context.Vendors.AsNoTracking().ToListAsync();
+    }
+    public async Task<Vendor> Get(int id)
+    {
+        return await context.Vendors.AsNoTracking().Where(d => d.Id == id).FirstOrDefaultAsync()
+            ?? throw new NotFoundException("Nie mozna znaleźć sprzedawcy.");
+    }
+    public async Task Add(Vendor entity)
+    {
+        await context.Vendors.AddAsync(entity);
+        await unitOfWork.SaveChangesAsync();
+    }
+
+    public async Task Update(Vendor entity)
+    {
+        var existingEntity = context.Vendors.FirstOrDefault(d => d.Id == entity.Id) ??
+            throw new NotFoundException("Nie mozna znaleźć sprzedawcy.");
+        existingEntity.Name = entity.Name;
+        existingEntity.PhoneNumber = entity.PhoneNumber;
+        existingEntity.Email = entity.Email;
+        existingEntity.Description = entity.Description;
+        existingEntity.IsActive = entity.IsActive;
+        await unitOfWork.SaveChangesAsync();
+    }
+    public async Task Delete(int id)
+    {
+        var entity = context.Vendors.FirstOrDefault(d => d.Id == id) ??
+            throw new NotFoundException("Nie mozna znaleźć sprzedawcy.");
+        entity.IsDeleted = true;
+        await unitOfWork.SaveChangesAsync();
+    }
+}

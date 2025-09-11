@@ -9,6 +9,8 @@ namespace FarmManager.App.ViewModels.Employees;
 
 public class EmployeesViewModel(IEmployeeService employeeService) : BaseViewModel
 {
+    #region Properties
+
     public EmployeesModel Model = new EmployeesModel();
 
     public ObservableCollection<Employee> Employees
@@ -21,6 +23,11 @@ public class EmployeesViewModel(IEmployeeService employeeService) : BaseViewMode
         }
     }
 
+    public async Task InitializeAsync()
+    {
+        Employees = new ObservableCollection<Employee>(await employeeService.GetAll());
+    }
+
     public Employee SelectedItem
     {
         get { return Model.SelectedItem; }
@@ -31,11 +38,7 @@ public class EmployeesViewModel(IEmployeeService employeeService) : BaseViewMode
         }
     }
 
-    public async Task InitializeAsync()
-    {
-        Employees = new ObservableCollection<Employee>(await employeeService.GetAll());
-    }
-
+    #endregion
 
     public RelayCommand Create => new RelayCommand(execute => OpenEmployeeAddWindow());
     private void OpenEmployeeAddWindow()

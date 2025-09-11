@@ -9,10 +9,11 @@ namespace FarmManager.App.ViewModels.Diseases;
 
 public class DiseaseEditViewModel(IDiseaseService diseaseService) : BaseViewModel
 {
+    #region Properties
+
     public event Action<Disease>? RequestClose;
     public DiseaseEditModel Model = new DiseaseEditModel();
 
-    #region Properties
     public string Name
     {
         get
@@ -49,9 +50,7 @@ public class DiseaseEditViewModel(IDiseaseService diseaseService) : BaseViewMode
             Model.Disease.IsActive = value;
             OnPropertyChanged();
         }
-    } 
-    #endregion
-
+    }
 
     public async Task InitializeAsync(int id)
     {
@@ -60,6 +59,8 @@ public class DiseaseEditViewModel(IDiseaseService diseaseService) : BaseViewMode
         OnPropertyChanged(nameof(Description));
         OnPropertyChanged(nameof(IsActive));
     }
+
+    #endregion
 
     public RelayCommand Delete => new RelayCommand(async execute => await DeleteDiseaseAsync());
     private async Task DeleteDiseaseAsync()

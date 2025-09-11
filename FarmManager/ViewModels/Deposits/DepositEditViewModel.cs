@@ -9,10 +9,11 @@ namespace FarmManager.App.ViewModels.Deposits;
 
 public class DepositEditViewModel(IDepositService depositService) : BaseViewModel
 {
+    #region Properties
+
     public event Action<Deposit>? RequestClose;
     public DepositEditModel Model = new DepositEditModel();
 
-    #region Properties
     public string Name
     {
         get
@@ -74,10 +75,7 @@ public class DepositEditViewModel(IDepositService depositService) : BaseViewMode
             Model.Deposit.IsActive = value;
             OnPropertyChanged();
         }
-    } 
-    #endregion
-
-
+    }
     public async Task InitializeAsync(int id)
     {
         Model.Deposit = await depositService.Get(id);
@@ -87,6 +85,8 @@ public class DepositEditViewModel(IDepositService depositService) : BaseViewMode
         OnPropertyChanged(nameof(Description));
         OnPropertyChanged(nameof(IsActive));
     }
+
+    #endregion
 
     public RelayCommand Delete => new RelayCommand(async execute => await DeleteDepositAsync());
     private async Task DeleteDepositAsync()

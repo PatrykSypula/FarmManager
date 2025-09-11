@@ -9,6 +9,8 @@ namespace FarmManager.App.ViewModels.Varieties;
 
 public class VarietiesViewModel(IVarietyService varietyService) : BaseViewModel
 {
+    #region Properties
+
     public VarietiesModel Model = new VarietiesModel();
 
     public ObservableCollection<Variety> Varieties
@@ -21,6 +23,11 @@ public class VarietiesViewModel(IVarietyService varietyService) : BaseViewModel
         }
     }
 
+    public async Task InitializeAsync()
+    {
+        Varieties = new ObservableCollection<Variety>(await varietyService.GetAll());
+    }
+
     public Variety SelectedItem
     {
         get { return Model.SelectedItem; }
@@ -31,11 +38,7 @@ public class VarietiesViewModel(IVarietyService varietyService) : BaseViewModel
         }
     }
 
-    public async Task InitializeAsync()
-    {
-        Varieties = new ObservableCollection<Variety>(await varietyService.GetAll());
-    }
-
+    #endregion
 
     public RelayCommand Create => new RelayCommand(execute => OpenVarietyAddWindow());
     private void OpenVarietyAddWindow()

@@ -10,10 +10,11 @@ namespace FarmManager.App.ViewModels.Fertilizers;
 
 public class FertilizerEditViewModel(IFertilizerService fertilizerService) : BaseViewModel
 {
+    #region Properties
+
     public event Action<Fertilizer>? RequestClose;
     public FertilizerEditModel Model = new FertilizerEditModel();
 
-    #region Properties
     public string Name
     {
         get
@@ -64,8 +65,6 @@ public class FertilizerEditViewModel(IFertilizerService fertilizerService) : Bas
             OnPropertyChanged();
         }
     }
-    #endregion
-
 
     public async Task InitializeAsync(int id)
     {
@@ -74,6 +73,8 @@ public class FertilizerEditViewModel(IFertilizerService fertilizerService) : Bas
         OnPropertyChanged(nameof(Description));
         OnPropertyChanged(nameof(IsActive));
     }
+
+    #endregion
 
     public RelayCommand Delete => new RelayCommand(async execute => await DeleteFertilizerAsync());
     private async Task DeleteFertilizerAsync()

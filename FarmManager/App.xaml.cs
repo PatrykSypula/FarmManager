@@ -5,11 +5,13 @@ using FarmManager.App.ViewModels.Diseases;
 using FarmManager.App.ViewModels.Employees;
 using FarmManager.App.ViewModels.Fertilizers;
 using FarmManager.App.ViewModels.Varieties;
+using FarmManager.App.ViewModels.Vendors;
 using FarmManager.App.Views.Deposits;
 using FarmManager.App.Views.Diseases;
 using FarmManager.App.Views.Employees;
 using FarmManager.App.Views.Fertilizers;
 using FarmManager.App.Views.Varieties;
+using FarmManager.App.Views.Vendors;
 using FarmManager.Model.DatabaseContext;
 using FarmManager.Model.UnitOfWork;
 using FarmManager.Services.Interfaces;
@@ -23,13 +25,16 @@ namespace FarmManager;
 public partial class MyApp : Application
 {
     public static IHost? AppHost { get; private set; }
-    public static ServiceProvider ServiceProvider { get; private set; }
+    //public static ServiceProvider ServiceProvider { get; private set; }
     public MyApp()
     {
 
         AppHost = Host.CreateDefaultBuilder()
             .ConfigureServices((context, services) =>
             {
+                // Database
+                services.AddDbContext<FarmManagerContext>(options =>
+                    options.UseNpgsql("Host=localhost;Port=5433;Database=FarmManager;Username=postgres;Password=admin"));
 
                 #region Windows
                 services.AddSingleton<MainWindow>();
@@ -58,6 +63,11 @@ public partial class MyApp : Application
                 services.AddTransient<VarietiesWindow>();
                 services.AddTransient<VarietyAddWindow>();
                 services.AddTransient<VarietyEditWindow>();
+
+                //Vendors
+                services.AddTransient<VendorsWindow>();
+                services.AddTransient<VendorAddWindow>();
+                services.AddTransient<VendorEditWindow>();
                 #endregion
 
 
@@ -88,12 +98,16 @@ public partial class MyApp : Application
                 services.AddTransient<VarietiesViewModel>();
                 services.AddTransient<VarietyAddViewModel>();
                 services.AddTransient<VarietyEditViewModel>();
+
+                //Vendors
+                services.AddTransient<VendorsViewModel>();
+                services.AddTransient<VendorAddViewModel>();
+                services.AddTransient<VendorEditViewModel>();
                 #endregion
 
-                // Database
-                services.AddDbContext<FarmManagerContext>(options =>
-                    options.UseNpgsql("Host=localhost;Port=5433;Database=FarmManager;Username=postgres;Password=admin"));
 
+
+                #region Services
                 // Services
                 services.AddScoped<IFarmManagerContext>(provider => provider.GetRequiredService<FarmManagerContext>());
                 services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -102,9 +116,11 @@ public partial class MyApp : Application
                 services.AddScoped<IEmployeeService, EmployeeService>();
                 services.AddScoped<IFertilizerService, FertilizerService>();
                 services.AddScoped<IVarietyService, VarietyService>();
+                services.AddScoped<IVendorService, VendorService>(); 
+                #endregion
 
                 //ServiceProdivers
-                ServiceProvider = services.BuildServiceProvider();
+                //ServiceProvider = services.BuildServiceProvider();
                 //ServiceProvider.GetRequiredService<DepositAddViewModel>();
 
             })

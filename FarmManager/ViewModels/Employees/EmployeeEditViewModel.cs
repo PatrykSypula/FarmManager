@@ -9,10 +9,11 @@ namespace FarmManager.App.ViewModels.Employees;
 
 public class EmployeeEditViewModel(IEmployeeService employeeService) : BaseViewModel
 {
+    #region Properties
+
     public event Action<Employee>? RequestClose;
     public EmployeeEditModel Model = new EmployeeEditModel();
 
-    #region Properties
     public string FirstName
     {
         get
@@ -116,7 +117,6 @@ public class EmployeeEditViewModel(IEmployeeService employeeService) : BaseViewM
             OnPropertyChanged();
         }
     }
-    #endregion
 
     public async Task InitializeAsync(int id)
     {
@@ -130,6 +130,8 @@ public class EmployeeEditViewModel(IEmployeeService employeeService) : BaseViewM
         OnPropertyChanged(nameof(Email));
         OnPropertyChanged(nameof(IsActive));
     }
+
+    #endregion
 
     public RelayCommand Delete => new RelayCommand(async execute => await DeleteEmployeeAsync());
     private async Task DeleteEmployeeAsync()

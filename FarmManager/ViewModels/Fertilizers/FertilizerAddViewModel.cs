@@ -9,10 +9,11 @@ namespace FarmManager.App.ViewModels.Fertilizers;
 
 public class FertilizerAddViewModel(IFertilizerService fertilizerService) : BaseViewModel
 {
+    #region Properties
+
     public event Action<Fertilizer>? RequestClose;
     public FertilizerAddModel Model = new FertilizerAddModel();
 
-    #region Properties
     public string Name
     {
         get
@@ -37,6 +38,7 @@ public class FertilizerAddViewModel(IFertilizerService fertilizerService) : Base
             OnPropertyChanged();
         }
     }
+
     #endregion
 
     public RelayCommand Add => new RelayCommand(async execute => await AddFertilizerAsync());

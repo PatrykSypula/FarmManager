@@ -9,10 +9,11 @@ namespace FarmManager.App.ViewModels.Varieties;
 
 public class VarietyAddViewModel(IVarietyService varietyService) : BaseViewModel
 {
+    #region Properties
+
     public event Action<Variety>? RequestClose;
     public VarietyAddModel Model = new VarietyAddModel();
 
-    #region Properties
     public string Name
     {
         get
@@ -37,6 +38,7 @@ public class VarietyAddViewModel(IVarietyService varietyService) : BaseViewModel
             OnPropertyChanged();
         }
     }
+
     #endregion
 
     public RelayCommand Add => new RelayCommand(async execute => await AddVarietyAsync());

@@ -9,10 +9,11 @@ namespace FarmManager.App.ViewModels.Varieties;
 
 public class VarietyEditViewModel(IVarietyService varietyService) : BaseViewModel
 {
+    #region Properties
+
     public event Action<Variety>? RequestClose;
     public VarietyEditModel Model = new VarietyEditModel();
 
-    #region Properties
     public string Name
     {
         get
@@ -50,8 +51,6 @@ public class VarietyEditViewModel(IVarietyService varietyService) : BaseViewMode
             OnPropertyChanged();
         }
     }
-    #endregion
-
 
     public async Task InitializeAsync(int id)
     {
@@ -60,6 +59,8 @@ public class VarietyEditViewModel(IVarietyService varietyService) : BaseViewMode
         OnPropertyChanged(nameof(Description));
         OnPropertyChanged(nameof(IsActive));
     }
+
+    #endregion
 
     public RelayCommand Delete => new RelayCommand(async execute => await DeleteVarietyAsync());
     private async Task DeleteVarietyAsync()

@@ -9,6 +9,8 @@ namespace FarmManager.App.ViewModels.Diseases;
 
 public class DiseasesViewModel(IDiseaseService diseaseService) : BaseViewModel
 {
+    #region Properties
+
     public DiseasesModel Model = new DiseasesModel();
 
     public ObservableCollection<Disease> Diseases
@@ -21,6 +23,11 @@ public class DiseasesViewModel(IDiseaseService diseaseService) : BaseViewModel
         }
     }
 
+    public async Task InitializeAsync()
+    {
+        Diseases = new ObservableCollection<Disease>(await diseaseService.GetAll());
+    }
+
     public Disease SelectedItem
     {
         get { return Model.SelectedItem; }
@@ -31,11 +38,7 @@ public class DiseasesViewModel(IDiseaseService diseaseService) : BaseViewModel
         }
     }
 
-    public async Task InitializeAsync()
-    {
-        Diseases = new ObservableCollection<Disease>(await diseaseService.GetAll());
-    }
-
+    #endregion
 
     public RelayCommand CreateDisease => new RelayCommand(execute => OpenDiseaseAddWindow());
     private void OpenDiseaseAddWindow()

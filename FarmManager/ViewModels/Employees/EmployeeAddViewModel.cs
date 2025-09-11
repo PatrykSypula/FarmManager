@@ -9,10 +9,11 @@ namespace FarmManager.App.ViewModels.Employees;
 
 public class EmployeeAddViewModel(IEmployeeService employeeService) : BaseViewModel
 {
+    #region Properties
+
     public event Action<Employee>? RequestClose;
     public EmployeeAddModel Model = new EmployeeAddModel();
 
-    #region Properties
     public string FirstName
     {
         get
@@ -115,7 +116,8 @@ public class EmployeeAddViewModel(IEmployeeService employeeService) : BaseViewMo
             Model.Employee.IsActive = value;
             OnPropertyChanged();
         }
-    } 
+    }
+
     #endregion
 
     public RelayCommand Add => new RelayCommand(async execute => await AddEmployeeAsync());

@@ -10,6 +10,8 @@ namespace FarmManager.App.ViewModels.Fertilizers;
 
 public class FertilizersViewModel(IFertilizerService fertilizerService) : BaseViewModel
 {
+    #region Properties
+
     public FertilizersModel Model = new FertilizersModel();
 
     public ObservableCollection<Fertilizer> Fertilizers
@@ -22,6 +24,11 @@ public class FertilizersViewModel(IFertilizerService fertilizerService) : BaseVi
         }
     }
 
+    public async Task InitializeAsync()
+    {
+        Fertilizers = new ObservableCollection<Fertilizer>(await fertilizerService.GetAll());
+    }
+
     public Fertilizer SelectedItem
     {
         get { return Model.SelectedItem; }
@@ -32,11 +39,7 @@ public class FertilizersViewModel(IFertilizerService fertilizerService) : BaseVi
         }
     }
 
-    public async Task InitializeAsync()
-    {
-        Fertilizers = new ObservableCollection<Fertilizer>(await fertilizerService.GetAll());
-    }
-
+    #endregion
 
     public RelayCommand Create => new RelayCommand(execute => OpenFertilizerAddWindow());
     private void OpenFertilizerAddWindow()
