@@ -4,10 +4,12 @@ using FarmManager.App.ViewModels.Deposits;
 using FarmManager.App.ViewModels.Diseases;
 using FarmManager.App.ViewModels.Employees;
 using FarmManager.App.ViewModels.Fertilizers;
+using FarmManager.App.ViewModels.Varieties;
 using FarmManager.App.Views.Deposits;
 using FarmManager.App.Views.Diseases;
 using FarmManager.App.Views.Employees;
 using FarmManager.App.Views.Fertilizers;
+using FarmManager.App.Views.Varieties;
 using FarmManager.Model.DatabaseContext;
 using FarmManager.Model.UnitOfWork;
 using FarmManager.Services.Interfaces;
@@ -51,6 +53,11 @@ public partial class MyApp : Application
                 services.AddTransient<FertilizersWindow>();
                 services.AddTransient<FertilizerAddWindow>();
                 services.AddTransient<FertilizerEditWindow>();
+
+                //Varieties
+                services.AddTransient<VarietiesWindow>();
+                services.AddTransient<VarietyAddWindow>();
+                services.AddTransient<VarietyEditWindow>();
                 #endregion
 
 
@@ -76,6 +83,11 @@ public partial class MyApp : Application
                 services.AddTransient<FertilizersViewModel>();
                 services.AddTransient<FertilizerAddViewModel>();
                 services.AddTransient<FertilizerEditViewModel>();
+
+                //Varieties
+                services.AddTransient<VarietiesViewModel>();
+                services.AddTransient<VarietyAddViewModel>();
+                services.AddTransient<VarietyEditViewModel>();
                 #endregion
 
                 // Database
@@ -89,10 +101,11 @@ public partial class MyApp : Application
                 services.AddScoped<IDiseaseService, DiseaseService>();
                 services.AddScoped<IEmployeeService, EmployeeService>();
                 services.AddScoped<IFertilizerService, FertilizerService>();
+                services.AddScoped<IVarietyService, VarietyService>();
 
                 //ServiceProdivers
                 ServiceProvider = services.BuildServiceProvider();
-                ServiceProvider.GetRequiredService<DepositAddViewModel>();
+                //ServiceProvider.GetRequiredService<DepositAddViewModel>();
 
             })
             .Build();

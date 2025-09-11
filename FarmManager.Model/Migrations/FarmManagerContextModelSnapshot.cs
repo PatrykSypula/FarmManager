@@ -316,6 +316,9 @@ namespace FarmManager.Model.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("timestamp with time zone");
+
                     b.Property<bool>("IsActive")
                         .HasColumnType("boolean");
 
@@ -326,7 +329,15 @@ namespace FarmManager.Model.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<int>("PlantId")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("timestamp with time zone");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("PlantId");
 
                     b.ToTable("Seasons");
                 });
@@ -435,7 +446,7 @@ namespace FarmManager.Model.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Varietis");
+                    b.ToTable("Varieties");
                 });
 
             modelBuilder.Entity("FarmManager.Model.Model.Vendor", b =>
@@ -623,6 +634,17 @@ namespace FarmManager.Model.Migrations
                     b.Navigation("Variety");
                 });
 
+            modelBuilder.Entity("FarmManager.Model.Model.Season", b =>
+                {
+                    b.HasOne("FarmManager.Model.Model.Plant", "Plant")
+                        .WithMany()
+                        .HasForeignKey("PlantId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Plant");
+                });
+
             modelBuilder.Entity("FarmManager.Model.Model.Sell", b =>
                 {
                     b.HasOne("FarmManager.Model.Model.Deposit", "Deposit")
@@ -631,7 +653,7 @@ namespace FarmManager.Model.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("FarmManager.Model.Model.WorkDay", "Harvest")
+                    b.HasOne("FarmManager.Model.Model.Harvest", "Harvest")
                         .WithMany()
                         .HasForeignKey("HarvestId")
                         .OnDelete(DeleteBehavior.Cascade)

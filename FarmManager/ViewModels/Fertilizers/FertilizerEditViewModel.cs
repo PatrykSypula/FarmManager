@@ -65,7 +65,7 @@ public class FertilizerEditViewModel(IFertilizerService fertilizerService) : Bas
     public RelayCommand Delete => new RelayCommand(async execute => await DeleteFertilizerAsync());
     private async Task DeleteFertilizerAsync()
     {
-        var result = new CustomMessageBoxYesNo("Czy na pewno chcesz usunąć tę chorobę?").ShowDialog();
+        var result = new CustomMessageBoxYesNo("Czy na pewno chcesz usunąć ten nawóz?").ShowDialog();
         if (result == true)
         {
             await fertilizerService.Delete(Model.Fertilizer.Id);

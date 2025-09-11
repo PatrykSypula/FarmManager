@@ -1,12 +1,12 @@
-﻿<Window x:Class="FarmManager.App.Views.Fertilizers.FertilizerEditWindow"
+﻿<Window x:Class="FarmManager.App.Views.Varieties.VarietyAddWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:FarmManager.App.Views.Fertilizers"
-        xmlns:app="clr-namespace:FarmManager.App.Helpers"
+        xmlns:local="clr-namespace:FarmManager.App.Views.Varieties"
+                xmlns:app="clr-namespace:FarmManager.App.Helpers"
         mc:Ignorable="d"
-        Title="Edycja nawozu" Height="560" Width="775"
+        Title="Dodawanie odmiany" Height="470" Width="775"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
@@ -17,9 +17,9 @@
         FontFamily="{DynamicResource MaterialDesignFont}"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
-        DataContext="{Binding FertilizerEditViewModel, Source={StaticResource Locator}}">
+        DataContext="{Binding VarietyAddViewModel, Source={StaticResource Locator}}">
     <Grid>
-        <Button Margin="30,30,0,0" Width="Auto" Height="40" Content="Nazwa nawozu" IsEnabled="False" VerticalAlignment="Top" Opacity="1" Background="White" HorizontalAlignment="Left" BorderThickness="2" materialDesign:ButtonAssist.CornerRadius="10" FontSize="20" Foreground="Black"/>
+        <Button Margin="30,30,0,0" Width="Auto" Height="40" Content="Nazwa odmiany" IsEnabled="False" VerticalAlignment="Top" Opacity="1" Background="White" HorizontalAlignment="Left" BorderThickness="2" materialDesign:ButtonAssist.CornerRadius="10" FontSize="20" Foreground="Black"/>
         <Button Margin="30,80,0,0" Width="700" Height="60" IsEnabled="False" VerticalAlignment="Top" Opacity="1" Grid.RowSpan="3" Background="White" HorizontalAlignment="Left" BorderThickness="2" materialDesign:ButtonAssist.CornerRadius="10" FontSize="30" Foreground="Black"/>
         <TextBox Margin="40,80,0,0" Width="680" Height="60" Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontWeight="Medium" app:SelectAllOnFocus.Enable="True" MaxLength="50" TextWrapping="Wrap" VerticalAlignment="Top" Grid.RowSpan="3" Background="Transparent" HorizontalAlignment="Left" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" BorderThickness="0" FontSize="30" Foreground="Black"/>
 
@@ -27,11 +27,6 @@
         <Button Margin="30,200,0,0" Width="700" Height="120" IsEnabled="False" VerticalAlignment="Top" Opacity="1" Grid.RowSpan="3" Background="White" HorizontalAlignment="Left" BorderThickness="2" materialDesign:ButtonAssist.CornerRadius="10" FontSize="30" Foreground="Black"/>
         <TextBox Margin="40,200,0,0" Width="680" Height="120" Text="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontWeight="Medium" app:SelectAllOnFocus.Enable="True" MaxLength="100" TextWrapping="Wrap" VerticalAlignment="Top" Grid.RowSpan="3" Background="Transparent" HorizontalAlignment="Left" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" BorderThickness="0" FontSize="30" Foreground="Black"/>
 
-        <Button Margin="30,330,0,0" Width="Auto" Height="40" Content="Aktywność" IsEnabled="False" VerticalAlignment="Top" Opacity="1" Background="White" HorizontalAlignment="Left" BorderThickness="2" materialDesign:ButtonAssist.CornerRadius="10" FontSize="20" Foreground="Black"/>
-        <ToggleButton Margin="30,380,0,0" Height="40" Width="80" IsChecked="{Binding IsActive, Mode=TwoWay}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-
-        <Button Margin="30,0,0,30" Width="180" Height="60" Content="Usuń" Command="{Binding Delete}" Background="#FFFF5454" BorderBrush="#FFFF5454" Focusable="False" VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.Row="4" IsDefault="True" materialDesign:ButtonAssist.CornerRadius="10" FontSize="20" Foreground="{DynamicResource MaterialDesignBody}"/>
-        <Button Margin="0,0,30,30" Width="180" Height="60" Content="Zapisz" Command="{Binding Update}" Focusable="False" VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Row="4" IsDefault="True" materialDesign:ButtonAssist.CornerRadius="10" FontSize="20" Foreground="{DynamicResource MaterialDesignBody}"/>
+        <Button Margin="0,0,30,30" Width="180" Height="60" Content="Dodaj" Command="{Binding Add}" Focusable="False" VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Row="4" IsDefault="True" materialDesign:ButtonAssist.CornerRadius="10" FontSize="20" Foreground="{DynamicResource MaterialDesignBody}"/>
     </Grid>
 </Window>
-
