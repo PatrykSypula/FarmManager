@@ -39,6 +39,19 @@ public class FertilizerEditViewModel(IFertilizerService fertilizerService) : Bas
         }
     }
 
+    public double Quantity
+    {
+        get
+        {
+            return Model.Fertilizer.Quantity;
+        }
+        set
+        {
+            Model.Fertilizer.Quantity = value;
+            OnPropertyChanged();
+        }
+    }
+
     public bool IsActive
     {
         get
