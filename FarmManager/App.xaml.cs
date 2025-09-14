@@ -4,12 +4,14 @@ using FarmManager.App.ViewModels.Deposits;
 using FarmManager.App.ViewModels.Diseases;
 using FarmManager.App.ViewModels.Employees;
 using FarmManager.App.ViewModels.Fertilizers;
+using FarmManager.App.ViewModels.Plants;
 using FarmManager.App.ViewModels.Varieties;
 using FarmManager.App.ViewModels.Vendors;
 using FarmManager.App.Views.Deposits;
 using FarmManager.App.Views.Diseases;
 using FarmManager.App.Views.Employees;
 using FarmManager.App.Views.Fertilizers;
+using FarmManager.App.Views.Plants;
 using FarmManager.App.Views.Varieties;
 using FarmManager.App.Views.Vendors;
 using FarmManager.Model.DatabaseContext;
@@ -71,6 +73,12 @@ public partial class MyApp : Application
                 services.AddTransient<VendorAddWindow>();
                 services.AddTransient<VendorEditWindow>();
 
+                //Plants
+                services.AddTransient<PlantsWindow>();
+                services.AddTransient<PlantAddWindow>();
+                services.AddTransient<PlantEditWindow>();
+                services.AddTransient<PlantChooseVarietyWindow>();
+
                 #endregion
 
 
@@ -109,6 +117,12 @@ public partial class MyApp : Application
                 services.AddTransient<VendorAddViewModel>();
                 services.AddTransient<VendorEditViewModel>();
 
+                //Plants
+                services.AddTransient<PlantsViewModel>();
+                services.AddTransient<PlantAddViewModel>();
+                services.AddTransient<PlantEditViewModel>();
+                services.AddTransient<PlantChooseVarietyViewModel>();
+
                 #endregion
 
                 #region Services
@@ -122,8 +136,9 @@ public partial class MyApp : Application
                 services.AddScoped<IFertilizerService, FertilizerService>();
                 services.AddScoped<IVarietyService, VarietyService>();
                 services.AddScoped<IVendorService, VendorService>();
+                services.AddScoped<IPlantService, PlantService>();
 
-                //Service Prodivers
+                //Service Prodiver
                 ServiceProvider = services.BuildServiceProvider();
 
                 #endregion

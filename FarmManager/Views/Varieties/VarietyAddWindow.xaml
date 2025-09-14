@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FarmManager.App.Views.Varieties"
-                xmlns:app="clr-namespace:FarmManager.App.Helpers"
+        xmlns:app="clr-namespace:FarmManager.App.Helpers"
         mc:Ignorable="d"
         Title="Dodawanie odmiany" Height="470" Width="775"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"

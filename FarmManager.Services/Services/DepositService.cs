@@ -9,9 +9,15 @@ namespace FarmManager.Services.Services;
 
 public class DepositService(IFarmManagerContext context, IUnitOfWork unitOfWork) : IDepositService
 {
-    public async Task<ICollection<Deposit>> GetAll()
+    public async Task<ICollection<Deposit>> GetAll(bool activeOnly = true)
     {
-        return await context.Deposits
+        IQueryable<Deposit> query = context.Deposits.AsQueryable();
+        if (activeOnly)
+        {
+            query = query.Where(d => d.IsActive);    
+        }
+
+        return await query
             .OrderByDescending(d => d.IsActive)
             .ThenBy(d => d.Id)
             .AsNoTracking()

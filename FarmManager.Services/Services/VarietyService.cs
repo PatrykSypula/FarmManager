@@ -9,11 +9,17 @@ namespace FarmManager.Services.Services;
 
 public class VarietyService(IFarmManagerContext context, IUnitOfWork unitOfWork) : IVarietyService
 {
-    public async Task<ICollection<Variety>> GetAll()
+    public async Task<ICollection<Variety>> GetAll(bool activeOnly = true)
     {
-        return await context.Varieties
-            .OrderByDescending(v => v.IsActive)
-            .ThenBy(v => v.Id)
+        IQueryable<Variety> query = context.Varieties.AsQueryable();
+        if (activeOnly)
+        {
+            query = query.Where(d => d.IsActive);
+        }
+
+        return await query
+            .OrderByDescending(d => d.IsActive)
+            .ThenBy(d => d.Id)
             .AsNoTracking()
             .ToListAsync();
     }

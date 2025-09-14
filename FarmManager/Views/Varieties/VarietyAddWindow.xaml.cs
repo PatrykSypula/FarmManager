@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows;
+﻿using System.Windows;
 using FarmManager.App.ViewModels.Varieties;
 using FarmManager.Model.Model;
 

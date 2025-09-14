@@ -4,6 +4,6 @@ namespace FarmManager.Model.Model;
 
 public class Harvest : BaseEntity
 {
-    public Plant Plant { get; set; } = new Plant();
+    public Plant Plant { get; set; } = null!;
     public double Quantity { get; set; }
 }

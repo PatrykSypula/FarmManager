@@ -4,7 +4,7 @@ namespace FarmManager.Model.Model;
 
 public class Spraying : BaseEntity
 {
-    public Plant Plant { get; set; } = new Plant();
-    public Fertilizer Fertilizer { get; set; } = new Fertilizer();
+    public Plant Plant { get; set; } = null!;
+    public Fertilizer Fertilizer { get; set; } = null!;
     public int Quantity { get; set; }
 }

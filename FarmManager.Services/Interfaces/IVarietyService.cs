@@ -4,7 +4,7 @@ namespace FarmManager.Services.Interfaces;
 
 public interface IVarietyService
 {
-    Task<ICollection<Variety>> GetAll();
+    Task<ICollection<Variety>> GetAll(bool activeOnly = true);
     Task<Variety> Get(int id);
     Task Add(Variety entity);
     Task Update(Variety entity);

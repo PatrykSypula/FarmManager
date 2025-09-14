@@ -9,11 +9,17 @@ namespace FarmManager.Services.Services;
 
 public class EmployeeService(IFarmManagerContext context, IUnitOfWork unitOfWork) : IEmployeeService
 {
-    public async Task<ICollection<Employee>> GetAll()
+    public async Task<ICollection<Employee>> GetAll(bool activeOnly = true)
     {
-        return await context.Employees
-            .OrderByDescending(e => e.IsActive)
-            .ThenBy(e => e.Id)
+        IQueryable<Employee> query = context.Employees.AsQueryable();
+        if (activeOnly)
+        {
+            query = query.Where(d => d.IsActive);
+        }
+
+        return await query
+            .OrderByDescending(d => d.IsActive)
+            .ThenBy(d => d.Id)
             .AsNoTracking()
             .ToListAsync();
     }

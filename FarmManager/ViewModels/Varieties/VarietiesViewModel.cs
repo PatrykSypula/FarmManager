@@ -25,7 +25,7 @@ public class VarietiesViewModel(IVarietyService varietyService) : BaseViewModel
 
     public async Task InitializeAsync()
     {
-        Varieties = new ObservableCollection<Variety>(await varietyService.GetAll());
+        Varieties = new ObservableCollection<Variety>(await varietyService.GetAll(false));
     }
 
     public Variety SelectedItem

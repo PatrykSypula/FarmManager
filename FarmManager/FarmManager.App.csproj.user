@@ -34,6 +34,18 @@
     <Compile Update="Views\Fertilizers\FertilizersWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\Plants\PlantAddWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Plants\PlantChooseVarietyWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Plants\PlantEditWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Plants\PlantsWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Varieties\VarietiesWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

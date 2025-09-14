@@ -4,6 +4,7 @@ using FarmManager.App.Views.Deposits;
 using FarmManager.App.Views.Diseases;
 using FarmManager.App.Views.Employees;
 using FarmManager.App.Views.Fertilizers;
+using FarmManager.App.Views.Plants;
 using FarmManager.App.Views.Varieties;
 using FarmManager.App.Views.Vendors;
 
@@ -58,5 +59,11 @@ public class MainWindowViewModel : BaseViewModel
     private void OpenVendorsWindow()
     {
         new VendorsWindow().ShowDialog();
+    }
+
+    public RelayCommand Plants => new RelayCommand(execute => OpenPlantsWindow());
+    private void OpenPlantsWindow()
+    {
+        new PlantsWindow().ShowDialog();
     }
 }

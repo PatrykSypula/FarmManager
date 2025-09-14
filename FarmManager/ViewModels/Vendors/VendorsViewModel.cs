@@ -27,7 +27,7 @@ public class VendorsViewModel(IVendorService vendorService) : BaseViewModel
 
     public async Task InitializeAsync()
     {
-        Vendors = new ObservableCollection<Vendor>(await vendorService.GetAll());
+        Vendors = new ObservableCollection<Vendor>(await vendorService.GetAll(false));
     }
 
     public Vendor SelectedItem

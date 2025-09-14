@@ -25,7 +25,7 @@ public class DepositsViewModel(IDepositService depositService) : BaseViewModel
 
     public async Task InitializeAsync()
     {
-        Deposits = new ObservableCollection<Deposit>(await depositService.GetAll());
+        Deposits = new ObservableCollection<Deposit>(await depositService.GetAll(false));
     }
 
     public Deposit SelectedItem

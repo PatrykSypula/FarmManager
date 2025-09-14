@@ -9,11 +9,17 @@ namespace FarmManager.Services.Services;
 
 public class FertilizerService(IFarmManagerContext context, IUnitOfWork unitOfWork) : IFertilizerService
 {
-    public async Task<ICollection<Fertilizer>> GetAll()
+    public async Task<ICollection<Fertilizer>> GetAll(bool activeOnly = true)
     {
-        return await context.Fertilizers
-            .OrderByDescending(f => f.IsActive)
-            .ThenBy(f => f.Id)
+        IQueryable<Fertilizer> query = context.Fertilizers.AsQueryable();
+        if (activeOnly)
+        {
+            query = query.Where(d => d.IsActive);
+        }
+
+        return await query
+            .OrderByDescending(d => d.IsActive)
+            .ThenBy(d => d.Id)
             .AsNoTracking()
             .ToListAsync();
     }

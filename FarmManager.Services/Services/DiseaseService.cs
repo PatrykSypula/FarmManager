@@ -9,9 +9,15 @@ namespace FarmManager.Services.Services;
 
 public class DiseaseService(IFarmManagerContext context, IUnitOfWork unitOfWork) : IDiseaseService
 {
-    public async Task<ICollection<Disease>> GetAll()
+    public async Task<ICollection<Disease>> GetAll(bool activeOnly = true)
     {
-        return await context.Diseases
+        IQueryable<Disease> query = context.Diseases.AsQueryable();
+        if (activeOnly)
+        {
+            query = query.Where(d => d.IsActive);
+        }
+
+        return await query
             .OrderByDescending(d => d.IsActive)
             .ThenBy(d => d.Id)
             .AsNoTracking()

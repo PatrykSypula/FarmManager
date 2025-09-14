@@ -3,6 +3,7 @@ using FarmManager.App.ViewModels.Deposits;
 using FarmManager.App.ViewModels.Diseases;
 using FarmManager.App.ViewModels.Employees;
 using FarmManager.App.ViewModels.Fertilizers;
+using FarmManager.App.ViewModels.Plants;
 using FarmManager.App.ViewModels.Varieties;
 using FarmManager.App.ViewModels.Vendors;
 using Microsoft.Extensions.DependencyInjection;
@@ -62,4 +63,13 @@ public class ViewModelLocator
     public VendorEditViewModel VendorEditViewModel =>
         MyApp.ServiceProvider.GetRequiredService<VendorEditViewModel>();
 
+    // Plants
+    public PlantsViewModel PlantsViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<PlantsViewModel>();
+    public PlantAddViewModel PlantAddViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<PlantAddViewModel>();
+    public PlantEditViewModel PlantEditViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<PlantEditViewModel>();
+    public PlantChooseVarietyViewModel PlantChooseVarietyViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<PlantChooseVarietyViewModel>();
 }

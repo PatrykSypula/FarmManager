@@ -9,11 +9,17 @@ namespace FarmManager.Services.Services;
 
 public class VendorService(IFarmManagerContext context, IUnitOfWork unitOfWork) : IVendorService
 {
-    public async Task<ICollection<Vendor>> GetAll()
+    public async Task<ICollection<Vendor>> GetAll(bool activeOnly = true)
     {
-        return await context.Vendors
-            .OrderByDescending(v => v.IsActive)
-            .ThenBy(v => v.Id)
+        IQueryable<Vendor> query = context.Vendors.AsQueryable();
+        if (activeOnly)
+        {
+            query = query.Where(d => d.IsActive);
+        }
+
+        return await query
+            .OrderByDescending(d => d.IsActive)
+            .ThenBy(d => d.Id)
             .AsNoTracking()
             .ToListAsync();
     }

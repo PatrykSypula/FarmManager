@@ -25,7 +25,7 @@ public class DiseasesViewModel(IDiseaseService diseaseService) : BaseViewModel
 
     public async Task InitializeAsync()
     {
-        Diseases = new ObservableCollection<Disease>(await diseaseService.GetAll());
+        Diseases = new ObservableCollection<Disease>(await diseaseService.GetAll(false));
     }
 
     public Disease SelectedItem

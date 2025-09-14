@@ -25,7 +25,7 @@ public class EmployeesViewModel(IEmployeeService employeeService) : BaseViewMode
 
     public async Task InitializeAsync()
     {
-        Employees = new ObservableCollection<Employee>(await employeeService.GetAll());
+        Employees = new ObservableCollection<Employee>(await employeeService.GetAll(false));
     }
 
     public Employee SelectedItem

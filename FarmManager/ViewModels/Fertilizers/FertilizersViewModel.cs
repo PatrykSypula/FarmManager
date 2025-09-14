@@ -26,7 +26,7 @@ public class FertilizersViewModel(IFertilizerService fertilizerService) : BaseVi
 
     public async Task InitializeAsync()
     {
-        Fertilizers = new ObservableCollection<Fertilizer>(await fertilizerService.GetAll());
+        Fertilizers = new ObservableCollection<Fertilizer>(await fertilizerService.GetAll(false));
     }
 
     public Fertilizer SelectedItem
