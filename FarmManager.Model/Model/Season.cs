@@ -6,8 +6,8 @@ public class Season : BaseEntity, IDescribable
 {
     public string Name { get; set; } = string.Empty;
     public string? Description { get; set; }
-    public DateTime StartDate { get; set; }
-    public DateTime EndDate { get; set; }
+    public DateTimeOffset StartDate { get; set; }
+    public DateTimeOffset EndDate { get; set; }
     public int PlantId { get; set; }
     public Plant Plant { get; set; } = null!;
 }

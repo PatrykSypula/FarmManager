@@ -17,7 +17,7 @@ public class SeasonValidator : AbstractValidator<Season>
         RuleFor(s => s.EndDate)
             .NotEmpty().WithMessage("Należy wybrać datę zakończenia.")
             .GreaterThan(s => s.StartDate).WithMessage("Data zakończenia musi być późniejsza niż data rozpoczęcia.");
-        RuleFor(s => s.Plant)
+        RuleFor(s => s.PlantId)
             .NotNull().WithMessage("Należy wybrać roślinę.");
     }
 }

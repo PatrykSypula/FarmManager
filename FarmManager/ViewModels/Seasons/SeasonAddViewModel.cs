@@ -31,11 +31,11 @@ public class SeasonAddViewModel(ISeasonService seasonService) : BaseViewModel
     }
     public string? Plant
     {
-        get { return Model.Season.Plant?.Name; }
+        get { return Model.Plant?.Name; }
         set
         {
-            if (Model.Season.Plant != null)
-                Model.Season.Plant.Name = value ?? string.Empty;
+            if (Model.Plant != null)
+                Model.Plant.Name = value ?? string.Empty;
             OnPropertyChanged();
         }
     }
@@ -51,7 +51,7 @@ public class SeasonAddViewModel(ISeasonService seasonService) : BaseViewModel
             OnPropertyChanged();
         }
     }
-    public DateTime StartDate
+    public DateTimeOffset StartDate
     {
         get
         {
@@ -59,11 +59,11 @@ public class SeasonAddViewModel(ISeasonService seasonService) : BaseViewModel
         }
         set
         {
-            Model.Season.StartDate = DateTime.SpecifyKind(value.Date, DateTimeKind.Utc);
+            Model.Season.StartDate = value;
             OnPropertyChanged();
         }
     }
-    public DateTime EndDate
+    public DateTimeOffset EndDate
     {
         get
         {
@@ -71,14 +71,14 @@ public class SeasonAddViewModel(ISeasonService seasonService) : BaseViewModel
         }
         set
         {
-            Model.Season.EndDate = DateTime.SpecifyKind(value.Date.AddDays(1).AddTicks(-1), DateTimeKind.Utc);
+            Model.Season.EndDate = value.AddDays(1).AddTicks(-1);
             OnPropertyChanged();
         }
     }
     public async Task InitializeAsync()
     {
-        Model.Season.StartDate = DateTime.SpecifyKind(DateTime.UtcNow.Date, DateTimeKind.Utc);
-        Model.Season.EndDate = DateTime.SpecifyKind(DateTime.UtcNow.Date.AddDays(1).AddTicks(-1), DateTimeKind.Utc);
+        Model.Season.StartDate = DateTimeOffset.UtcNow;
+        Model.Season.EndDate = DateTimeOffset.UtcNow;
 
         OnPropertyChanged(nameof(StartDate));
         OnPropertyChanged(nameof(EndDate));
@@ -111,7 +111,8 @@ public class SeasonAddViewModel(ISeasonService seasonService) : BaseViewModel
         var window = new SeasonChoosePlantWindow();
         if (window.ShowDialog() == true && window.Plant != null)
         {
-            Model.Season.Plant = window.Plant;
+            Model.Plant = window.Plant;
+            Model.Season.PlantId = window.Plant.Id;
             OnPropertyChanged(nameof(Plant));
         }
     }

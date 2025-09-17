@@ -29,11 +29,11 @@ public class PlantAddViewModel(IPlantService plantServive) : BaseViewModel
     }
     public string? Variety
     {
-        get { return Model.Plant.Variety?.Name; }
+        get { return Model.Variety?.Name; }
         set
         {
-            if (Model.Plant.Variety != null)
-                Model.Plant.Variety.Name = value ?? string.Empty;
+            if (Model.Variety != null)
+                Model.Variety.Name = value ?? string.Empty;
             OnPropertyChanged();
         }
     }
@@ -77,7 +77,8 @@ public class PlantAddViewModel(IPlantService plantServive) : BaseViewModel
         var window = new PlantChooseVarietyWindow();
         if (window.ShowDialog() == true && window.Variety != null)
         {
-            Model.Plant.Variety = window.Variety;
+            Model.Variety = window.Variety;
+            Model.Plant.VarietyId = window.Variety.Id;
             OnPropertyChanged(nameof(Variety));
         }
     }
