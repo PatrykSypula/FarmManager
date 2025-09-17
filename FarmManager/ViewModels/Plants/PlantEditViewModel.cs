@@ -8,7 +8,7 @@ using FarmManager.Services.Interfaces;
 
 namespace FarmManager.App.ViewModels.Plants;
 
-public class PlantEditViewModel(IPlantService plantServive) : BaseViewModel
+public class PlantEditViewModel(IPlantService plantServive, IVarietyService varietyService) : BaseViewModel
 {
     #region Properties
 
@@ -65,7 +65,7 @@ public class PlantEditViewModel(IPlantService plantServive) : BaseViewModel
     public async Task InitializeAsync(int id)
     {
         Model.Plant = await plantServive.Get(id);
-        Model.Variety = Model.Plant.Variety;
+        Model.Variety = await varietyService.Get(Model.Plant.VarietyId);
         OnPropertyChanged(nameof(Name));
         OnPropertyChanged(nameof(Variety));
         OnPropertyChanged(nameof(Description));

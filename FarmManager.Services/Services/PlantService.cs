@@ -24,7 +24,7 @@ public class PlantService(IFarmManagerContext context, IUnitOfWork unitOfWork) :
     }
     public async Task<Plant> Get(int id)
     {
-        return await context.Plants.Include(p => p.Variety).AsNoTracking().Where(d => d.Id == id).FirstOrDefaultAsync()
+        return await context.Plants.AsNoTracking().Where(d => d.Id == id).FirstOrDefaultAsync()
             ?? throw new NotFoundException("Nie mozna znaleźć rośliny.");
     }
     public async Task Add(Plant entity)
@@ -39,7 +39,7 @@ public class PlantService(IFarmManagerContext context, IUnitOfWork unitOfWork) :
             throw new NotFoundException("Nie mozna znaleźć rośliny.");
         existingEntity.Name = entity.Name;
         existingEntity.Description = entity.Description;
-        existingEntity.VarietyId = entity.Variety.Id;
+        existingEntity.VarietyId = entity.VarietyId;
         existingEntity.IsActive = entity.IsActive;
         await unitOfWork.SaveChangesAsync();
     }

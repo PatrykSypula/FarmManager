@@ -25,7 +25,7 @@ public class SeasonService(IFarmManagerContext context, IUnitOfWork unitOfWork) 
     }
     public async Task<Season> Get(int id)
     {
-        return await context.Seasons.Include(p => p.Plant).AsNoTracking().Where(d => d.Id == id).FirstOrDefaultAsync()
+        return await context.Seasons.AsNoTracking().Where(d => d.Id == id).FirstOrDefaultAsync()
             ?? throw new NotFoundException("Nie mozna znaleźć sezonu.");
     }
     public async Task Add(Season entity)
@@ -42,7 +42,7 @@ public class SeasonService(IFarmManagerContext context, IUnitOfWork unitOfWork) 
         existingEntity.Description = entity.Description;
         existingEntity.StartDate = entity.StartDate;
         existingEntity.EndDate = entity.EndDate;
-        existingEntity.PlantId = entity.Plant.Id;
+        existingEntity.PlantId = entity.PlantId;
         existingEntity.IsActive = entity.IsActive;
         await unitOfWork.SaveChangesAsync();
     }

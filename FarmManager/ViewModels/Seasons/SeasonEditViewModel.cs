@@ -8,7 +8,7 @@ using FarmManager.Services.Interfaces;
 
 namespace FarmManager.App.ViewModels.Seasons;
 
-public class SeasonEditViewModel(ISeasonService seasonService) : BaseViewModel
+public class SeasonEditViewModel(ISeasonService seasonService, IPlantService plantService) : BaseViewModel
 {
     #region Properties
 
@@ -89,7 +89,7 @@ public class SeasonEditViewModel(ISeasonService seasonService) : BaseViewModel
     public async Task InitializeAsync(int id)
     {
         Model.Season = await seasonService.Get(id);
-        Model.Plant = Model.Season.Plant;
+        Model.Plant = await plantService.Get(Model.Season.PlantId);
         OnPropertyChanged(nameof(Name));
         OnPropertyChanged(nameof(Plant));
         OnPropertyChanged(nameof(StartDate));
