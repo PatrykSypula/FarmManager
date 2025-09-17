@@ -5,6 +5,7 @@ using FarmManager.App.ViewModels.Diseases;
 using FarmManager.App.ViewModels.Employees;
 using FarmManager.App.ViewModels.Fertilizers;
 using FarmManager.App.ViewModels.Plants;
+using FarmManager.App.ViewModels.Seasons;
 using FarmManager.App.ViewModels.Varieties;
 using FarmManager.App.ViewModels.Vendors;
 using FarmManager.App.Views.Deposits;
@@ -12,6 +13,7 @@ using FarmManager.App.Views.Diseases;
 using FarmManager.App.Views.Employees;
 using FarmManager.App.Views.Fertilizers;
 using FarmManager.App.Views.Plants;
+using FarmManager.App.Views.Seasons;
 using FarmManager.App.Views.Varieties;
 using FarmManager.App.Views.Vendors;
 using FarmManager.Model.DatabaseContext;
@@ -79,6 +81,12 @@ public partial class MyApp : Application
                 services.AddTransient<PlantEditWindow>();
                 services.AddTransient<PlantChooseVarietyWindow>();
 
+                //Seasons
+                services.AddTransient<SeasonsWindow>();
+                services.AddTransient<SeasonChoosePlantWindow>();
+                services.AddTransient<SeasonAddWindow>();
+                services.AddTransient<SeasonEditWindow>();
+
                 #endregion
 
 
@@ -123,6 +131,12 @@ public partial class MyApp : Application
                 services.AddTransient<PlantEditViewModel>();
                 services.AddTransient<PlantChooseVarietyViewModel>();
 
+                //Seasons
+                services.AddTransient<SeasonsViewModel>();
+                services.AddTransient<SeasonChoosePlantViewModel>();
+                services.AddTransient<SeasonAddViewModel>();
+                services.AddTransient<SeasonEditViewModel>();
+
                 #endregion
 
                 #region Services
@@ -137,6 +151,7 @@ public partial class MyApp : Application
                 services.AddScoped<IVarietyService, VarietyService>();
                 services.AddScoped<IVendorService, VendorService>();
                 services.AddScoped<IPlantService, PlantService>();
+                services.AddScoped<ISeasonService, SeasonService>();
 
                 //Service Prodiver
                 ServiceProvider = services.BuildServiceProvider();

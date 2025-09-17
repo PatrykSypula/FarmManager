@@ -30,7 +30,7 @@ public class VarietyService(IFarmManagerContext context, IUnitOfWork unitOfWork)
     }
     public async Task Add(Variety entity)
     {
-        await context.Varieties.AddAsync(entity);
+        context.Varieties.Update(entity);
         await unitOfWork.SaveChangesAsync();
     }
 

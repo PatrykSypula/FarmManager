@@ -4,6 +4,7 @@ using FarmManager.App.ViewModels.Diseases;
 using FarmManager.App.ViewModels.Employees;
 using FarmManager.App.ViewModels.Fertilizers;
 using FarmManager.App.ViewModels.Plants;
+using FarmManager.App.ViewModels.Seasons;
 using FarmManager.App.ViewModels.Varieties;
 using FarmManager.App.ViewModels.Vendors;
 using Microsoft.Extensions.DependencyInjection;
@@ -72,4 +73,14 @@ public class ViewModelLocator
         MyApp.ServiceProvider.GetRequiredService<PlantEditViewModel>();
     public PlantChooseVarietyViewModel PlantChooseVarietyViewModel =>
         MyApp.ServiceProvider.GetRequiredService<PlantChooseVarietyViewModel>();
+
+    // Seasons
+    public SeasonsViewModel SeasonsViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<SeasonsViewModel>();
+    public SeasonAddViewModel SeasonAddViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<SeasonAddViewModel>();
+    public SeasonEditViewModel SeasonEditViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<SeasonEditViewModel>();
+    public SeasonChoosePlantViewModel SeasonChoosePlantViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<SeasonChoosePlantViewModel>();
 }

@@ -22,6 +22,7 @@
         <Menu>
             <MenuItem Header="Zaawansowane" FontSize="20">
                 <MenuItem Header="Rośliny" Command="{Binding Plants}" FontSize="20" />
+                <MenuItem Header="Sezony" Command="{Binding Seasons}" FontSize="20" />
             </MenuItem>
             <MenuItem Header="Podstawowe" FontSize="20">
                 <MenuItem Header="Depozyty" Command="{Binding Deposits}" FontSize="20" />

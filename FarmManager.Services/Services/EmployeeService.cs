@@ -30,7 +30,7 @@ public class EmployeeService(IFarmManagerContext context, IUnitOfWork unitOfWork
     }
     public async Task Add(Employee entity)
     {
-        await context.Employees.AddAsync(entity);
+        context.Employees.Update(entity);
         await unitOfWork.SaveChangesAsync();
     }
     public async Task Update(Employee entity)

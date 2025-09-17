@@ -8,5 +8,6 @@ public class Season : BaseEntity, IDescribable
     public string? Description { get; set; }
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
+    public int PlantId { get; set; }
     public Plant Plant { get; set; } = null!;
 }

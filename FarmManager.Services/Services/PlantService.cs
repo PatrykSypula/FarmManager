@@ -29,12 +29,7 @@ public class PlantService(IFarmManagerContext context, IUnitOfWork unitOfWork) :
     }
     public async Task Add(Plant entity)
     {
-        if (entity.Variety != null)
-        {
-            context.Varieties.Attach(entity.Variety);
-        }
-
-        await context.Plants.AddAsync(entity);
+        context.Plants.Update(entity);
         await unitOfWork.SaveChangesAsync();
     }
 
@@ -44,7 +39,7 @@ public class PlantService(IFarmManagerContext context, IUnitOfWork unitOfWork) :
             throw new NotFoundException("Nie mozna znaleźć rośliny.");
         existingEntity.Name = entity.Name;
         existingEntity.Description = entity.Description;
-        existingEntity.Variety = entity.Variety;
+        existingEntity.VarietyId = entity.Variety.Id;
         existingEntity.IsActive = entity.IsActive;
         await unitOfWork.SaveChangesAsync();
     }

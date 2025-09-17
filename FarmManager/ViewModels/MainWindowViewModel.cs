@@ -5,6 +5,7 @@ using FarmManager.App.Views.Diseases;
 using FarmManager.App.Views.Employees;
 using FarmManager.App.Views.Fertilizers;
 using FarmManager.App.Views.Plants;
+using FarmManager.App.Views.Seasons;
 using FarmManager.App.Views.Varieties;
 using FarmManager.App.Views.Vendors;
 
@@ -65,5 +66,11 @@ public class MainWindowViewModel : BaseViewModel
     private void OpenPlantsWindow()
     {
         new PlantsWindow().ShowDialog();
+    }
+
+    public RelayCommand Seasons => new RelayCommand(execute => OpenSeasonsWindow());
+    private void OpenSeasonsWindow()
+    {
+        new SeasonsWindow().ShowDialog();
     }
 }

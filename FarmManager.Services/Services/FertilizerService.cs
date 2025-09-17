@@ -30,7 +30,7 @@ public class FertilizerService(IFarmManagerContext context, IUnitOfWork unitOfWo
     }
     public async Task Add(Fertilizer entity)
     {
-        await context.Fertilizers.AddAsync(entity);
+        context.Fertilizers.Update(entity);
         await unitOfWork.SaveChangesAsync();
     }
 

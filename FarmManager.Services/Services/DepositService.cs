@@ -30,7 +30,7 @@ public class DepositService(IFarmManagerContext context, IUnitOfWork unitOfWork)
     }
     public async Task Add(Deposit entity)
     {
-        await context.Deposits.AddAsync(entity);
+        context.Deposits.Update(entity);
         await unitOfWork.SaveChangesAsync();
     }
 

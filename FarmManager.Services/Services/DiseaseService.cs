@@ -30,7 +30,7 @@ public class DiseaseService(IFarmManagerContext context, IUnitOfWork unitOfWork)
     }
     public async Task Add(Disease entity)
     {
-        await context.Diseases.AddAsync(entity);
+        context.Diseases.Update(entity);
         await unitOfWork.SaveChangesAsync();
     }
     public async Task Update(Disease entity)

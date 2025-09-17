@@ -30,7 +30,7 @@ public class VendorService(IFarmManagerContext context, IUnitOfWork unitOfWork) 
     }
     public async Task Add(Vendor entity)
     {
-        await context.Vendors.AddAsync(entity);
+        context.Vendors.Update(entity);
         await unitOfWork.SaveChangesAsync();
     }
 
