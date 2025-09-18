@@ -1,5 +1,6 @@
 ﻿using FarmManager.App.Helpers;
 using FarmManager.App.Models;
+using FarmManager.App.Views.Buys;
 using FarmManager.App.Views.Deposits;
 using FarmManager.App.Views.Diseases;
 using FarmManager.App.Views.Employees;
@@ -72,5 +73,11 @@ public class MainWindowViewModel : BaseViewModel
     private void OpenSeasonsWindow()
     {
         new SeasonsWindow().ShowDialog();
+    }
+
+    public RelayCommand Buys => new RelayCommand(execute => OpenBuysWindow());
+    private void OpenBuysWindow()
+    {
+        new BuysWindow().ShowDialog();
     }
 }

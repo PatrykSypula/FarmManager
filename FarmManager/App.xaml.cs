@@ -1,5 +1,7 @@
 ﻿using System.Windows;
 using FarmManager.App.ViewModels;
+using FarmManager.App.ViewModels.Buys;
+using FarmManager.App.ViewModels.ChooseEntity;
 using FarmManager.App.ViewModels.Deposits;
 using FarmManager.App.ViewModels.Diseases;
 using FarmManager.App.ViewModels.Employees;
@@ -8,6 +10,8 @@ using FarmManager.App.ViewModels.Plants;
 using FarmManager.App.ViewModels.Seasons;
 using FarmManager.App.ViewModels.Varieties;
 using FarmManager.App.ViewModels.Vendors;
+using FarmManager.App.Views.Buys;
+using FarmManager.App.Views.ChooseEntity;
 using FarmManager.App.Views.Deposits;
 using FarmManager.App.Views.Diseases;
 using FarmManager.App.Views.Employees;
@@ -45,6 +49,12 @@ public partial class MyApp : Application
                 // Main Window
                 services.AddSingleton<MainWindow>();
 
+                //Choose Entity
+                services.AddTransient<ChooseVarietyWindow>();
+                services.AddTransient<ChoosePlantWindow>();
+                services.AddTransient<ChooseFertilizerWindow>();
+                services.AddTransient<ChooseVendorWindow>();
+
                 //Deposits
                 services.AddTransient<DepositsWindow>();
                 services.AddTransient<DepositAddWindow>();
@@ -79,13 +89,17 @@ public partial class MyApp : Application
                 services.AddTransient<PlantsWindow>();
                 services.AddTransient<PlantAddWindow>();
                 services.AddTransient<PlantEditWindow>();
-                services.AddTransient<PlantChooseVarietyWindow>();
+                
 
                 //Seasons
                 services.AddTransient<SeasonsWindow>();
-                services.AddTransient<SeasonChoosePlantWindow>();
                 services.AddTransient<SeasonAddWindow>();
                 services.AddTransient<SeasonEditWindow>();
+
+                //Buys
+                services.AddTransient<BuysWindow>();
+                services.AddTransient<BuyAddWindow>();
+                services.AddTransient<BuyEditWindow>();
 
                 #endregion
 
@@ -94,6 +108,12 @@ public partial class MyApp : Application
 
                 // Main Window
                 services.AddTransient<MainWindowViewModel>();
+
+                //Choose Entity
+                services.AddTransient<ChooseFertilizerViewModel>();
+                services.AddTransient<ChooseVendorViewModel>();
+                services.AddTransient<ChoosePlantViewModel>();
+                services.AddTransient<ChooseVarietyViewModel>();
 
                 //Deposits
                 services.AddTransient<DepositsViewModel>();
@@ -129,13 +149,16 @@ public partial class MyApp : Application
                 services.AddTransient<PlantsViewModel>();
                 services.AddTransient<PlantAddViewModel>();
                 services.AddTransient<PlantEditViewModel>();
-                services.AddTransient<PlantChooseVarietyViewModel>();
 
                 //Seasons
                 services.AddTransient<SeasonsViewModel>();
-                services.AddTransient<SeasonChoosePlantViewModel>();
                 services.AddTransient<SeasonAddViewModel>();
                 services.AddTransient<SeasonEditViewModel>();
+
+                //Buys
+                services.AddTransient<BuysViewModel>();
+                services.AddTransient<BuyAddViewModel>();
+                services.AddTransient<BuyEditViewModel>();
 
                 #endregion
 
@@ -152,6 +175,7 @@ public partial class MyApp : Application
                 services.AddScoped<IVendorService, VendorService>();
                 services.AddScoped<IPlantService, PlantService>();
                 services.AddScoped<ISeasonService, SeasonService>();
+                services.AddScoped<IBuyService, BuyService>();
 
                 //Service Prodiver
                 ServiceProvider = services.BuildServiceProvider();

@@ -52,8 +52,11 @@ namespace FarmManager.Model.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("double precision");
 
-                    b.Property<int>("Quantity")
-                        .HasColumnType("integer");
+                    b.Property<double>("Quantity")
+                        .HasColumnType("double precision");
+
+                    b.Property<double>("RemainingQuantity")
+                        .HasColumnType("double precision");
 
                     b.Property<int>("VendorId")
                         .HasColumnType("integer");

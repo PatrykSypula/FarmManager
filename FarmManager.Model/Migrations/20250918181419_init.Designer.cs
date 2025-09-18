@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FarmManager.Model.Migrations
 {
     [DbContext(typeof(FarmManagerContext))]
-    [Migration("20250917154118_init")]
+    [Migration("20250918181419_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -55,8 +55,11 @@ namespace FarmManager.Model.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("double precision");
 
-                    b.Property<int>("Quantity")
-                        .HasColumnType("integer");
+                    b.Property<double>("Quantity")
+                        .HasColumnType("double precision");
+
+                    b.Property<double>("RemainingQuantity")
+                        .HasColumnType("double precision");
 
                     b.Property<int>("VendorId")
                         .HasColumnType("integer");

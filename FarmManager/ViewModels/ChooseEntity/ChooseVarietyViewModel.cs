@@ -1,18 +1,18 @@
 ﻿using System.Collections.ObjectModel;
 using FarmManager.App.Helpers;
-using FarmManager.App.Models.Plants;
+using FarmManager.App.Models.ChooseEntity;
 using FarmManager.Model.Model;
 using FarmManager.Services.Interfaces;
 
-namespace FarmManager.App.ViewModels.Plants;
+namespace FarmManager.App.ViewModels.ChooseEntity;
 
-public class PlantChooseVarietyViewModel(IVarietyService varietyService) : BaseViewModel
+public class ChooseVarietyViewModel(IVarietyService varietyService) : BaseViewModel
 {
     #region Properties
 
     public event Action<Variety>? RequestClose;
 
-    public PlantChooseVarietyModel Model = new PlantChooseVarietyModel();
+    public ChooseVarietyModel Model = new ChooseVarietyModel();
 
     public ObservableCollection<Variety> Varieties
     {

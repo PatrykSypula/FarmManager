@@ -7,6 +7,21 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Views\Buys\BuyAddWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ChooseEntity\ChooseFertilizerWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ChooseEntity\ChooseVendorWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Buys\BuyEditWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Buys\BuysWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Deposits\DepositAddWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -37,7 +52,7 @@
     <Compile Update="Views\Plants\PlantAddWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Plants\PlantChooseVarietyWindow.xaml.cs">
+    <Compile Update="Views\ChooseEntity\ChooseVarietyWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Plants\PlantEditWindow.xaml.cs">
@@ -49,7 +64,7 @@
     <Compile Update="Views\Seasons\SeasonAddWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Seasons\SeasonChoosePlantWindow.xaml.cs">
+    <Compile Update="Views\ChooseEntity\ChoosePlantWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Seasons\SeasonEditWindow.xaml.cs">

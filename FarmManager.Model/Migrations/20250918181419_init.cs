@@ -194,7 +194,8 @@ namespace FarmManager.Model.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Price = table.Column<double>(type: "double precision", nullable: false),
-                    Quantity = table.Column<int>(type: "integer", nullable: false),
+                    Quantity = table.Column<double>(type: "double precision", nullable: false),
+                    RemainingQuantity = table.Column<double>(type: "double precision", nullable: false),
                     VendorId = table.Column<int>(type: "integer", nullable: false),
                     FertilizerId = table.Column<int>(type: "integer", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),

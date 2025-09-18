@@ -2,6 +2,7 @@
 using FarmManager.App.Helpers.Validators;
 using FarmManager.App.Models.Plants;
 using FarmManager.App.Views;
+using FarmManager.App.Views.ChooseEntity;
 using FarmManager.App.Views.Plants;
 using FarmManager.Model.Model;
 using FarmManager.Services.Interfaces;
@@ -74,7 +75,7 @@ public class PlantAddViewModel(IPlantService plantServive) : BaseViewModel
     public RelayCommand OpenVariety => new RelayCommand(execute => OpenSelectVarietyAsync());
     private void OpenSelectVarietyAsync()
     {
-        var window = new PlantChooseVarietyWindow();
+        var window = new ChooseVarietyWindow();
         if (window.ShowDialog() == true && window.Variety != null)
         {
             Model.Variety = window.Variety;

@@ -2,6 +2,7 @@
 using FarmManager.App.Helpers.Validators;
 using FarmManager.App.Models.Seasons;
 using FarmManager.App.Views;
+using FarmManager.App.Views.ChooseEntity;
 using FarmManager.App.Views.Seasons;
 using FarmManager.Model.Model;
 using FarmManager.Services.Interfaces;
@@ -132,7 +133,7 @@ public class SeasonEditViewModel(ISeasonService seasonService, IPlantService pla
     public RelayCommand OpenPlant => new RelayCommand(execute => OpenSelectPlantAsync());
     private void OpenSelectPlantAsync()
     {
-        var window = new SeasonChoosePlantWindow();
+        var window = new ChoosePlantWindow();
         if (window.ShowDialog() == true && window.Plant != null)
         {
             Model.Plant = window.Plant;

@@ -1,4 +1,6 @@
 ﻿using FarmManager.App.ViewModels;
+using FarmManager.App.ViewModels.Buys;
+using FarmManager.App.ViewModels.ChooseEntity;
 using FarmManager.App.ViewModels.Deposits;
 using FarmManager.App.ViewModels.Diseases;
 using FarmManager.App.ViewModels.Employees;
@@ -15,6 +17,16 @@ public class ViewModelLocator
 {
     public MainWindowViewModel MainWindowViewModel =>
         MyApp.ServiceProvider.GetRequiredService<MainWindowViewModel>();
+
+    //Choose Entity
+    public ChooseVarietyViewModel ChooseVarietyViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<ChooseVarietyViewModel>();
+    public ChooseVendorViewModel ChooseVendorViewModel =>
+    MyApp.ServiceProvider.GetRequiredService<ChooseVendorViewModel>();
+    public ChooseFertilizerViewModel ChooseFertilizerViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<ChooseFertilizerViewModel>();
+    public ChoosePlantViewModel ChoosePlantViewModel =>
+    MyApp.ServiceProvider.GetRequiredService<ChoosePlantViewModel>();
 
     // Deposits
     public DepositsViewModel DepositsViewModel =>
@@ -71,8 +83,7 @@ public class ViewModelLocator
         MyApp.ServiceProvider.GetRequiredService<PlantAddViewModel>();
     public PlantEditViewModel PlantEditViewModel =>
         MyApp.ServiceProvider.GetRequiredService<PlantEditViewModel>();
-    public PlantChooseVarietyViewModel PlantChooseVarietyViewModel =>
-        MyApp.ServiceProvider.GetRequiredService<PlantChooseVarietyViewModel>();
+    
 
     // Seasons
     public SeasonsViewModel SeasonsViewModel =>
@@ -81,6 +92,12 @@ public class ViewModelLocator
         MyApp.ServiceProvider.GetRequiredService<SeasonAddViewModel>();
     public SeasonEditViewModel SeasonEditViewModel =>
         MyApp.ServiceProvider.GetRequiredService<SeasonEditViewModel>();
-    public SeasonChoosePlantViewModel SeasonChoosePlantViewModel =>
-        MyApp.ServiceProvider.GetRequiredService<SeasonChoosePlantViewModel>();
+
+    // Buys
+    public BuyAddViewModel BuyAddViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<BuyAddViewModel>();
+    public BuyEditViewModel BuyEditViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<BuyEditViewModel>();
+    public BuysViewModel BuysViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<BuysViewModel>();
 }

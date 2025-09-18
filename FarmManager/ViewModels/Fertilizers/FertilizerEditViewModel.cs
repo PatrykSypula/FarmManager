@@ -71,6 +71,7 @@ public class FertilizerEditViewModel(IFertilizerService fertilizerService) : Bas
         Model.Fertilizer = await fertilizerService.Get(id);
         OnPropertyChanged(nameof(Name));
         OnPropertyChanged(nameof(Description));
+        OnPropertyChanged(nameof(Quantity));
         OnPropertyChanged(nameof(IsActive));
     }
 
