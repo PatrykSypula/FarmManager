@@ -8,6 +8,7 @@ using FarmManager.App.ViewModels.Employees;
 using FarmManager.App.ViewModels.Fertilizers;
 using FarmManager.App.ViewModels.Plants;
 using FarmManager.App.ViewModels.Seasons;
+using FarmManager.App.ViewModels.Sprayings;
 using FarmManager.App.ViewModels.Varieties;
 using FarmManager.App.ViewModels.Vendors;
 using FarmManager.App.Views.Buys;
@@ -18,6 +19,7 @@ using FarmManager.App.Views.Employees;
 using FarmManager.App.Views.Fertilizers;
 using FarmManager.App.Views.Plants;
 using FarmManager.App.Views.Seasons;
+using FarmManager.App.Views.Sprayings;
 using FarmManager.App.Views.Varieties;
 using FarmManager.App.Views.Vendors;
 using FarmManager.Model.DatabaseContext;
@@ -101,6 +103,11 @@ public partial class MyApp : Application
                 services.AddTransient<BuyAddWindow>();
                 services.AddTransient<BuyEditWindow>();
 
+                //Sprayings
+                services.AddTransient<SprayingsWindow>();
+                services.AddTransient<SprayingAddWindow>();
+                services.AddTransient<SprayingEditWindow>();
+
                 #endregion
 
 
@@ -160,6 +167,11 @@ public partial class MyApp : Application
                 services.AddTransient<BuyAddViewModel>();
                 services.AddTransient<BuyEditViewModel>();
 
+                //Sprayings
+                services.AddTransient<SprayingsViewModel>();
+                services.AddTransient<SprayingAddViewModel>();
+                services.AddTransient<SprayingEditViewModel>();
+
                 #endregion
 
                 #region Services
@@ -176,6 +188,7 @@ public partial class MyApp : Application
                 services.AddScoped<IPlantService, PlantService>();
                 services.AddScoped<ISeasonService, SeasonService>();
                 services.AddScoped<IBuyService, BuyService>();
+                services.AddScoped<ISprayingService, SprayingService>();
 
                 //Service Prodiver
                 ServiceProvider = services.BuildServiceProvider();

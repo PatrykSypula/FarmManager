@@ -9,4 +9,6 @@ public interface IBuyService
     Task Add(Buy entity);
     Task Update(Buy entity);
     Task Delete(int id);
+    Task<ICollection<SprayingBuyQuantity>> AdjustRemainingQuantity(double quantityChange, int fertilizerId);
+    Task RevertRemainingQuantity(ICollection<SprayingBuyQuantity> buyQuantities);
 }

@@ -7,6 +7,7 @@ using FarmManager.App.ViewModels.Employees;
 using FarmManager.App.ViewModels.Fertilizers;
 using FarmManager.App.ViewModels.Plants;
 using FarmManager.App.ViewModels.Seasons;
+using FarmManager.App.ViewModels.Sprayings;
 using FarmManager.App.ViewModels.Varieties;
 using FarmManager.App.ViewModels.Vendors;
 using Microsoft.Extensions.DependencyInjection;
@@ -100,4 +101,12 @@ public class ViewModelLocator
         MyApp.ServiceProvider.GetRequiredService<BuyEditViewModel>();
     public BuysViewModel BuysViewModel =>
         MyApp.ServiceProvider.GetRequiredService<BuysViewModel>();
+
+    // Sprayings
+    public SprayingsViewModel SprayingsViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<SprayingsViewModel>();
+    public SprayingAddViewModel SprayingAddViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<SprayingAddViewModel>();
+    public SprayingEditViewModel SprayingEditViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<SprayingEditViewModel>();
 }

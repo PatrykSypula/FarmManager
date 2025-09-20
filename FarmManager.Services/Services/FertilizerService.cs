@@ -51,7 +51,7 @@ public class FertilizerService(IFarmManagerContext context, IUnitOfWork unitOfWo
         await unitOfWork.SaveChangesAsync();
     }
 
-    public async Task AdjustQuantity(int id, double quantity)
+    public async Task AddQuantity(int id, double quantity)
     {
         var entity = context.Fertilizers.FirstOrDefault(d => d.Id == id) ??
             throw new NotFoundException("Nie mozna znaleźć nawozu.");

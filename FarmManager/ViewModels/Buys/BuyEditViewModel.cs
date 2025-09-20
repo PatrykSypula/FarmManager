@@ -97,10 +97,19 @@ public class BuyEditViewModel(IBuyService buyService, IVendorService vendorServi
         var result = new CustomMessageBoxYesNo("Czy na pewno chcesz usunąć ten zakup?").ShowDialog();
         if (result == true)
         {
-            await buyService.Delete(Model.Buy.Id);
-            Model.Buy.IsDeleted = true;
-            await fertilizerService.AdjustQuantity(Model.Fertilizer.Id, -Model.Buy.RemainingQuantity);
-            RequestClose?.Invoke(Model.Buy);
+            BuyDeleteValidator validator = new BuyDeleteValidator();
+            var valid = validator.Validate(Model.Buy);
+            if (!valid.IsValid)
+            {
+                new CustomMessageBoxOk(valid).ShowDialog();
+            }
+            else
+            {
+                await buyService.Delete(Model.Buy.Id);
+                Model.Buy.IsDeleted = true;
+                await fertilizerService.AddQuantity(Model.Fertilizer.Id, -Model.Buy.RemainingQuantity);
+                RequestClose?.Invoke(Model.Buy);
+            }
         }
     }
 

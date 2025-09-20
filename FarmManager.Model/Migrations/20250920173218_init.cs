@@ -337,7 +337,9 @@ namespace FarmManager.Model.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     PlantId = table.Column<int>(type: "integer", nullable: false),
                     FertilizerId = table.Column<int>(type: "integer", nullable: false),
-                    Quantity = table.Column<int>(type: "integer", nullable: false),
+                    Quantity = table.Column<double>(type: "double precision", nullable: false),
+                    Date = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: true),
                     WorkDayId = table.Column<int>(type: "integer", nullable: true),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
                     IsActive = table.Column<bool>(type: "boolean", nullable: false),
@@ -396,6 +398,30 @@ namespace FarmManager.Model.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "SprayingBuyQuantity",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    SprayingId = table.Column<int>(type: "integer", nullable: false),
+                    Buy = table.Column<int>(type: "integer", nullable: false),
+                    Quantity = table.Column<double>(type: "double precision", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
+                    IsActive = table.Column<bool>(type: "boolean", nullable: false),
+                    Created = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SprayingBuyQuantity", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_SprayingBuyQuantity_Sprayings_SprayingId",
+                        column: x => x.SprayingId,
+                        principalTable: "Sprayings",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Buys_FertilizerId",
                 table: "Buys",
@@ -435,6 +461,11 @@ namespace FarmManager.Model.Migrations
                 name: "IX_Sells_HarvestId",
                 table: "Sells",
                 column: "HarvestId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SprayingBuyQuantity_SprayingId",
+                table: "SprayingBuyQuantity",
+                column: "SprayingId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Sprayings_FertilizerId",
@@ -491,7 +522,7 @@ namespace FarmManager.Model.Migrations
                 name: "Sells");
 
             migrationBuilder.DropTable(
-                name: "Sprayings");
+                name: "SprayingBuyQuantity");
 
             migrationBuilder.DropTable(
                 name: "WorkDayCollecting");
@@ -509,16 +540,19 @@ namespace FarmManager.Model.Migrations
                 name: "Harvests");
 
             migrationBuilder.DropTable(
-                name: "Fertilizers");
+                name: "Sprayings");
 
             migrationBuilder.DropTable(
                 name: "Employees");
 
             migrationBuilder.DropTable(
-                name: "WorkDays");
+                name: "Fertilizers");
 
             migrationBuilder.DropTable(
                 name: "Plants");
+
+            migrationBuilder.DropTable(
+                name: "WorkDays");
 
             migrationBuilder.DropTable(
                 name: "Varieties");

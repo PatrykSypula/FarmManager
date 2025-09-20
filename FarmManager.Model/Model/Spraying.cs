@@ -1,4 +1,5 @@
-﻿using FarmManager.Model.Model.Base;
+﻿using System.Net;
+using FarmManager.Model.Model.Base;
 
 namespace FarmManager.Model.Model;
 
@@ -8,5 +9,8 @@ public class Spraying : BaseEntity
     public Plant Plant { get; set; } = null!;
     public int FertilizerId { get; set; }
     public Fertilizer Fertilizer { get; set; } = null!;
-    public int Quantity { get; set; }
+    public double Quantity { get; set; }
+    public DateTimeOffset Date { get; set; } = DateTimeOffset.UtcNow;
+    public string? Description { get; set; }
+    public ICollection<SprayingBuyQuantity> BuyQuantity { get; set; } = [];
 }

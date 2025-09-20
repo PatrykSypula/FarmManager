@@ -73,6 +73,15 @@
     <Compile Update="Views\Seasons\SeasonsWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\Sprayings\SprayingAddWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Sprayings\SprayingEditWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Sprayings\SprayingsWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Varieties\VarietiesWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

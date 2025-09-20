@@ -83,7 +83,7 @@ public class BuyAddViewModel(IBuyService buyService, IFertilizerService fertiliz
         {
             Model.Buy.RemainingQuantity = Model.Buy.Quantity;
             await buyService.Add(Model.Buy);
-            await fertilizerService.AdjustQuantity(Model.Fertilizer.Id, Model.Buy.Quantity);
+            await fertilizerService.AddQuantity(Model.Fertilizer.Id, Model.Buy.Quantity);
             RequestClose?.Invoke(Model.Buy);
         }
     }

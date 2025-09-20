@@ -7,6 +7,7 @@ using FarmManager.App.Views.Employees;
 using FarmManager.App.Views.Fertilizers;
 using FarmManager.App.Views.Plants;
 using FarmManager.App.Views.Seasons;
+using FarmManager.App.Views.Sprayings;
 using FarmManager.App.Views.Varieties;
 using FarmManager.App.Views.Vendors;
 
@@ -79,5 +80,11 @@ public class MainWindowViewModel : BaseViewModel
     private void OpenBuysWindow()
     {
         new BuysWindow().ShowDialog();
+    }
+
+    public RelayCommand Sprayings => new RelayCommand(execute => OpenSprayingsWindow());
+    private void OpenSprayingsWindow()
+    {
+        new SprayingsWindow().ShowDialog();
     }
 }

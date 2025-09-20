@@ -394,6 +394,12 @@ namespace FarmManager.Model.Migrations
                     b.Property<DateTimeOffset>("Created")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<DateTimeOffset>("Date")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
                     b.Property<int>("FertilizerId")
                         .HasColumnType("integer");
 
@@ -406,8 +412,8 @@ namespace FarmManager.Model.Migrations
                     b.Property<int>("PlantId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("Quantity")
-                        .HasColumnType("integer");
+                    b.Property<double>("Quantity")
+                        .HasColumnType("double precision");
 
                     b.Property<int?>("WorkDayId")
                         .HasColumnType("integer");
@@ -421,6 +427,39 @@ namespace FarmManager.Model.Migrations
                     b.HasIndex("WorkDayId");
 
                     b.ToTable("Sprayings");
+                });
+
+            modelBuilder.Entity("FarmManager.Model.Model.SprayingBuyQuantity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Buy")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTimeOffset>("Created")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<double>("Quantity")
+                        .HasColumnType("double precision");
+
+                    b.Property<int>("SprayingId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SprayingId");
+
+                    b.ToTable("SprayingBuyQuantity");
                 });
 
             modelBuilder.Entity("FarmManager.Model.Model.Variety", b =>
@@ -690,6 +729,17 @@ namespace FarmManager.Model.Migrations
                     b.Navigation("Plant");
                 });
 
+            modelBuilder.Entity("FarmManager.Model.Model.SprayingBuyQuantity", b =>
+                {
+                    b.HasOne("FarmManager.Model.Model.Spraying", "Spraying")
+                        .WithMany("BuyQuantity")
+                        .HasForeignKey("SprayingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Spraying");
+                });
+
             modelBuilder.Entity("FarmManager.Model.Model.WorkDayCollecting", b =>
                 {
                     b.HasOne("FarmManager.Model.Model.Employee", "Employee")
@@ -718,6 +768,11 @@ namespace FarmManager.Model.Migrations
                         .HasForeignKey("WorkDayId");
 
                     b.Navigation("Employee");
+                });
+
+            modelBuilder.Entity("FarmManager.Model.Model.Spraying", b =>
+                {
+                    b.Navigation("BuyQuantity");
                 });
 
             modelBuilder.Entity("FarmManager.Model.Model.WorkDay", b =>

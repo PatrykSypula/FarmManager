@@ -54,4 +54,54 @@ public class BuyService(IFarmManagerContext context, IUnitOfWork unitOfWork) : I
         entity.IsDeleted = true;
         await unitOfWork.SaveChangesAsync();
     }
+
+    public async Task<ICollection<SprayingBuyQuantity>> AdjustRemainingQuantity(double quantityChange, int fertilizerId)
+    {
+        var buy = await context.Buys
+            .Where(b => b.IsActive && b.RemainingQuantity > 0 && b.FertilizerId == fertilizerId)
+            .ToListAsync();
+        ICollection<SprayingBuyQuantity> adjustments = [];
+        for (var i = 0; i < buy.Count && quantityChange != 0; i++)
+        {
+            if (quantityChange > 0)
+            {
+                if (buy[i].RemainingQuantity > quantityChange)
+                {
+                    adjustments.Add(new SprayingBuyQuantity()
+                    {
+                        Buy = buy[i].Id,
+                        Quantity = quantityChange
+                    });
+
+                    buy[i].RemainingQuantity -= quantityChange;
+                }
+                else
+                {
+                    adjustments.Add(new SprayingBuyQuantity()
+                    {
+                        Buy = buy[i].Id,
+                        Quantity = buy[i].RemainingQuantity
+                    });
+                    quantityChange -= buy[i].RemainingQuantity;
+                    buy[i].RemainingQuantity = 0;
+                }
+            }
+            else
+            {
+                break;
+            }
+        }
+        await unitOfWork.SaveChangesAsync();
+        return adjustments;
+    }
+    public async Task RevertRemainingQuantity(ICollection<SprayingBuyQuantity> buyQuantities)
+    {
+        foreach (var item in buyQuantities)
+        {
+            var buy = await context.Buys.Where(b => b.Id == item.Buy).FirstOrDefaultAsync()
+                ?? throw new NotFoundException("Nie mozna znaleźć zakupu.");
+            buy.RemainingQuantity += item.Quantity;
+        }
+        await unitOfWork.SaveChangesAsync();
+    }
 }
