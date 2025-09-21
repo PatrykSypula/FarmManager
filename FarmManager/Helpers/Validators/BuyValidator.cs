@@ -14,8 +14,8 @@ public class BuyValidator : AbstractValidator<Buy>
         RuleFor(buy => buy.RemainingQuantity)
             .GreaterThanOrEqualTo(0).WithMessage("Pozostała ilość nie może być mniejsza niż 0.");
         RuleFor(buy => buy.VendorId)
-            .NotNull().WithMessage("Należy wybrać sprzedawcę.");
+            .GreaterThan(0).WithMessage("Należy wybrać sprzedawcę.");
         RuleFor(buy => buy.FertilizerId)
-            .NotNull().WithMessage("Należy wybrać nawóz.");
+            .GreaterThan(0).WithMessage("Należy wybrać nawóz.");
     }
 }

@@ -18,6 +18,6 @@ public class SeasonValidator : AbstractValidator<Season>
             .NotEmpty().WithMessage("Należy wybrać datę zakończenia.")
             .GreaterThan(s => s.StartDate).WithMessage("Data zakończenia musi być późniejsza niż data rozpoczęcia.");
         RuleFor(s => s.PlantId)
-            .NotNull().WithMessage("Należy wybrać roślinę.");
+            .GreaterThan(0).WithMessage("Należy wybrać roślinę.");
     }
 }
