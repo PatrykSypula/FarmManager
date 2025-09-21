@@ -34,7 +34,7 @@ public class BuyService(IFarmManagerContext context, IUnitOfWork unitOfWork) : I
         context.Buys.Update(entity);
         await unitOfWork.SaveChangesAsync();
     }
-
+    //Unused
     public async Task Update(Buy entity)
     {
         var existingEntity = context.Buys.FirstOrDefault(d => d.Id == entity.Id) ??

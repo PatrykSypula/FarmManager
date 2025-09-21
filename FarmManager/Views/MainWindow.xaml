@@ -25,9 +25,10 @@
                 <MenuItem Header="Sezony" Command="{Binding Seasons}" FontSize="20" />
                 <MenuItem Header="Zakupy" Command="{Binding Buys}" FontSize="20" />
                 <MenuItem Header="Pryskania" Command="{Binding Sprayings}" FontSize="20" />
+                <MenuItem Header="Pożyczki pracowników" Command="{Binding EmployeeCosts}" FontSize="20" />
             </MenuItem>
             <MenuItem Header="Podstawowe" FontSize="20">
-                <MenuItem Header="Depozyty" Command="{Binding Deposits}" FontSize="20" />
+                <MenuItem Header="Kupcy" Command="{Binding Deposits}" FontSize="20" />
                 <MenuItem Header="Choroby" Command="{Binding Diseases}" FontSize="20" />
                 <MenuItem Header="Pracownicy" Command="{Binding Employees}" FontSize="20" />
                 <MenuItem Header="Nawozy" Command="{Binding Fertilizers}" FontSize="20" />

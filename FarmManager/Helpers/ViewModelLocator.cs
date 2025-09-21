@@ -3,6 +3,7 @@ using FarmManager.App.ViewModels.Buys;
 using FarmManager.App.ViewModels.ChooseEntity;
 using FarmManager.App.ViewModels.Deposits;
 using FarmManager.App.ViewModels.Diseases;
+using FarmManager.App.ViewModels.EmployeeCosts;
 using FarmManager.App.ViewModels.Employees;
 using FarmManager.App.ViewModels.Fertilizers;
 using FarmManager.App.ViewModels.Plants;
@@ -23,11 +24,13 @@ public class ViewModelLocator
     public ChooseVarietyViewModel ChooseVarietyViewModel =>
         MyApp.ServiceProvider.GetRequiredService<ChooseVarietyViewModel>();
     public ChooseVendorViewModel ChooseVendorViewModel =>
-    MyApp.ServiceProvider.GetRequiredService<ChooseVendorViewModel>();
+        MyApp.ServiceProvider.GetRequiredService<ChooseVendorViewModel>();
     public ChooseFertilizerViewModel ChooseFertilizerViewModel =>
         MyApp.ServiceProvider.GetRequiredService<ChooseFertilizerViewModel>();
     public ChoosePlantViewModel ChoosePlantViewModel =>
-    MyApp.ServiceProvider.GetRequiredService<ChoosePlantViewModel>();
+        MyApp.ServiceProvider.GetRequiredService<ChoosePlantViewModel>();
+    public ChooseEmployeeViewModel ChooseEmployeeViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<ChooseEmployeeViewModel>();
 
     // Deposits
     public DepositsViewModel DepositsViewModel =>
@@ -109,4 +112,12 @@ public class ViewModelLocator
         MyApp.ServiceProvider.GetRequiredService<SprayingAddViewModel>();
     public SprayingEditViewModel SprayingEditViewModel =>
         MyApp.ServiceProvider.GetRequiredService<SprayingEditViewModel>();
+
+    //EmployeeCosts
+    public EmployeeCostsViewModel EmployeeCostsViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<EmployeeCostsViewModel>();
+    public EmployeeCostAddViewModel EmployeeCostAddViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<EmployeeCostAddViewModel>();
+    public EmployeeCostEditViewModel EmployeeCostEditViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<EmployeeCostEditViewModel>();
 }

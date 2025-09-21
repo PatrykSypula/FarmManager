@@ -4,6 +4,7 @@ using FarmManager.App.ViewModels.Buys;
 using FarmManager.App.ViewModels.ChooseEntity;
 using FarmManager.App.ViewModels.Deposits;
 using FarmManager.App.ViewModels.Diseases;
+using FarmManager.App.ViewModels.EmployeeCosts;
 using FarmManager.App.ViewModels.Employees;
 using FarmManager.App.ViewModels.Fertilizers;
 using FarmManager.App.ViewModels.Plants;
@@ -15,6 +16,7 @@ using FarmManager.App.Views.Buys;
 using FarmManager.App.Views.ChooseEntity;
 using FarmManager.App.Views.Deposits;
 using FarmManager.App.Views.Diseases;
+using FarmManager.App.Views.EmployeeCosts;
 using FarmManager.App.Views.Employees;
 using FarmManager.App.Views.Fertilizers;
 using FarmManager.App.Views.Plants;
@@ -56,6 +58,7 @@ public partial class MyApp : Application
                 services.AddTransient<ChoosePlantWindow>();
                 services.AddTransient<ChooseFertilizerWindow>();
                 services.AddTransient<ChooseVendorWindow>();
+                services.AddTransient<ChooseEmployeeWindow>();
 
                 //Deposits
                 services.AddTransient<DepositsWindow>();
@@ -108,6 +111,11 @@ public partial class MyApp : Application
                 services.AddTransient<SprayingAddWindow>();
                 services.AddTransient<SprayingEditWindow>();
 
+                //EmployeeCosts
+                services.AddTransient<EmployeeCostsWindow>();
+                services.AddTransient<EmployeeCostAddWindow>();
+                services.AddTransient<EmployeeCostEditWindow>();
+
                 #endregion
 
 
@@ -121,6 +129,7 @@ public partial class MyApp : Application
                 services.AddTransient<ChooseVendorViewModel>();
                 services.AddTransient<ChoosePlantViewModel>();
                 services.AddTransient<ChooseVarietyViewModel>();
+                services.AddTransient<ChooseEmployeeViewModel>();
 
                 //Deposits
                 services.AddTransient<DepositsViewModel>();
@@ -172,6 +181,12 @@ public partial class MyApp : Application
                 services.AddTransient<SprayingAddViewModel>();
                 services.AddTransient<SprayingEditViewModel>();
 
+                //EmployeeCosts
+                services.AddTransient<EmployeeCostsViewModel>();
+                services.AddTransient<EmployeeCostAddViewModel>();
+                services.AddTransient<EmployeeCostEditViewModel>();
+
+
                 #endregion
 
                 #region Services
@@ -189,6 +204,7 @@ public partial class MyApp : Application
                 services.AddScoped<ISeasonService, SeasonService>();
                 services.AddScoped<IBuyService, BuyService>();
                 services.AddScoped<ISprayingService, SprayingService>();
+                services.AddScoped<IEmployeeCostService, EmployeeCostService>();
 
                 //Service Prodiver
                 ServiceProvider = services.BuildServiceProvider();

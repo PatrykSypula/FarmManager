@@ -3,6 +3,7 @@ using FarmManager.App.Models;
 using FarmManager.App.Views.Buys;
 using FarmManager.App.Views.Deposits;
 using FarmManager.App.Views.Diseases;
+using FarmManager.App.Views.EmployeeCosts;
 using FarmManager.App.Views.Employees;
 using FarmManager.App.Views.Fertilizers;
 using FarmManager.App.Views.Plants;
@@ -86,5 +87,11 @@ public class MainWindowViewModel : BaseViewModel
     private void OpenSprayingsWindow()
     {
         new SprayingsWindow().ShowDialog();
+    }
+
+    public RelayCommand EmployeeCosts => new RelayCommand(execute => OpenEmployeeCostsWindow());
+    private void OpenEmployeeCostsWindow()
+    {
+        new EmployeeCostsWindow().ShowDialog();
     }
 }

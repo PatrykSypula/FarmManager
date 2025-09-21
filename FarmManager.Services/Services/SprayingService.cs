@@ -42,6 +42,8 @@ public class SprayingService(IFarmManagerContext context, IUnitOfWork unitOfWork
         await unitOfWork.SaveChangesAsync();
     }
 
+
+    //Unused
     public async Task Update(Spraying entity)
     {
         var existingEntity = context.Sprayings.FirstOrDefault(d => d.Id == entity.Id) ??
@@ -49,6 +51,7 @@ public class SprayingService(IFarmManagerContext context, IUnitOfWork unitOfWork
         existingEntity.PlantId = entity.PlantId;
         existingEntity.FertilizerId = entity.FertilizerId;
         existingEntity.Quantity = entity.Quantity;
+        existingEntity.Date = entity.Date;
         await unitOfWork.SaveChangesAsync();
     }
     public async Task Delete(int id)

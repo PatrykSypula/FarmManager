@@ -10,6 +10,9 @@
     <Compile Update="Views\Buys\BuyAddWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\ChooseEntity\ChooseEmployeeWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\ChooseEntity\ChooseFertilizerWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -29,6 +32,15 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Deposits\DepositsWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\EmployeeCosts\EmployeeCostAddWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\EmployeeCosts\EmployeeCostEditWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\EmployeeCosts\EmployeeCostsWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Employees\EmployeeAddWindow.xaml.cs">
