@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FarmManager.Services.Services;
 
-public class EmployeeService(IFarmManagerContext context, IUnitOfWork unitOfWork) : IEmployeeService
+public class EmployeeService(IFarmManagerContext context) : IEmployeeService
 {
     public async Task<ICollection<Employee>> GetAll(bool activeOnly = true)
     {
@@ -31,11 +31,10 @@ public class EmployeeService(IFarmManagerContext context, IUnitOfWork unitOfWork
     public async Task Add(Employee entity)
     {
         context.Employees.Update(entity);
-        await unitOfWork.SaveChangesAsync();
     }
     public async Task Update(Employee entity)
     {
-        var existingEntity = context.Employees.FirstOrDefault(d => d.Id == entity.Id) ??
+        var existingEntity = await context.Employees.FirstOrDefaultAsync(d => d.Id == entity.Id) ??
             throw new NotFoundException("Nie mozna znaleźć pracownika");
         existingEntity.FirstName = entity.FirstName;
         existingEntity.LastName = entity.LastName;
@@ -45,14 +44,12 @@ public class EmployeeService(IFarmManagerContext context, IUnitOfWork unitOfWork
         existingEntity.PhoneNumber = entity.PhoneNumber;
         existingEntity.Email = entity.Email;
         existingEntity.IsActive = entity.IsActive;
-        await unitOfWork.SaveChangesAsync();
     }
     public async Task Delete(int id)
     {
-        var entity = context.Employees.FirstOrDefault(d => d.Id == id) ??
+        var entity = await context.Employees.FirstOrDefaultAsync(d => d.Id == id) ??
             throw new NotFoundException("Nie mozna znaleźć pracownika");
         entity.IsDeleted = true;
-        await unitOfWork.SaveChangesAsync();
     }
     
     

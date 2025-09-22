@@ -6,7 +6,7 @@ using FarmManager.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace FarmManager.Services.Services;
-public class PlantService(IFarmManagerContext context, IUnitOfWork unitOfWork) : IPlantService
+public class PlantService(IFarmManagerContext context) : IPlantService
 {
     public async Task<ICollection<Plant>> GetAll(bool activeOnly = true)
     {
@@ -30,24 +30,21 @@ public class PlantService(IFarmManagerContext context, IUnitOfWork unitOfWork) :
     public async Task Add(Plant entity)
     {
         context.Plants.Update(entity);
-        await unitOfWork.SaveChangesAsync();
     }
 
     public async Task Update(Plant entity)
     {
-        var existingEntity = context.Plants.FirstOrDefault(d => d.Id == entity.Id) ??
+        var existingEntity = await context.Plants.FirstOrDefaultAsync(d => d.Id == entity.Id) ??
             throw new NotFoundException("Nie mozna znaleźć rośliny.");
         existingEntity.Name = entity.Name;
         existingEntity.Description = entity.Description;
         existingEntity.VarietyId = entity.VarietyId;
         existingEntity.IsActive = entity.IsActive;
-        await unitOfWork.SaveChangesAsync();
     }
     public async Task Delete(int id)
     {
-        var entity = context.Plants.FirstOrDefault(d => d.Id == id) ??
+        var entity = await context.Plants.FirstOrDefaultAsync(d => d.Id == id) ??
             throw new NotFoundException("Nie mozna znaleźć rośliny.");
         entity.IsDeleted = true;
-        await unitOfWork.SaveChangesAsync();
     }
 }

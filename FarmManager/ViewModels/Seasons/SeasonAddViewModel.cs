@@ -4,11 +4,12 @@ using FarmManager.App.Models.Seasons;
 using FarmManager.App.Views;
 using FarmManager.App.Views.ChooseEntity;
 using FarmManager.Model.Model;
+using FarmManager.Model.UnitOfWork;
 using FarmManager.Services.Interfaces;
 
 namespace FarmManager.App.ViewModels.Seasons;
 
-public class SeasonAddViewModel(ISeasonService seasonService) : BaseViewModel
+public class SeasonAddViewModel(ISeasonService seasonService, IUnitOfWork unitOfWork) : BaseViewModel
 {
     #region Properties
 
@@ -98,6 +99,7 @@ public class SeasonAddViewModel(ISeasonService seasonService) : BaseViewModel
         else
         {
             await seasonService.Add(Model.Season);
+            await unitOfWork.SaveChangesAsync();
             RequestClose?.Invoke(Model.Season);
 
         }

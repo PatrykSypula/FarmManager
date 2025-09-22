@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FarmManager.Services.Services;
 
-public class BuyService(IFarmManagerContext context, IUnitOfWork unitOfWork) : IBuyService
+public class BuyService(IFarmManagerContext context) : IBuyService
 {
     public async Task<ICollection<Buy>> GetAll(bool activeOnly = true)
     {
@@ -32,12 +32,11 @@ public class BuyService(IFarmManagerContext context, IUnitOfWork unitOfWork) : I
     public async Task Add(Buy entity)
     {
         context.Buys.Update(entity);
-        await unitOfWork.SaveChangesAsync();
     }
     //Unused
     public async Task Update(Buy entity)
     {
-        var existingEntity = context.Buys.FirstOrDefault(d => d.Id == entity.Id) ??
+        var existingEntity = await context.Buys.FirstOrDefaultAsync(d => d.Id == entity.Id) ??
             throw new NotFoundException("Nie mozna znaleźć zakupu.");
         existingEntity.Name = entity.Name;
         existingEntity.Description = entity.Description;
@@ -45,14 +44,12 @@ public class BuyService(IFarmManagerContext context, IUnitOfWork unitOfWork) : I
         existingEntity.Quantity = entity.Quantity;
         existingEntity.FertilizerId = entity.FertilizerId;
         existingEntity.VendorId = entity.VendorId;
-        await unitOfWork.SaveChangesAsync();
     }
     public async Task Delete(int id)
     {
-        var entity = context.Buys.FirstOrDefault(d => d.Id == id) ??
+        var entity = await context.Buys.FirstOrDefaultAsync(d => d.Id == id) ??
             throw new NotFoundException("Nie mozna znaleźć zakupu.");
         entity.IsDeleted = true;
-        await unitOfWork.SaveChangesAsync();
     }
 
     public async Task<ICollection<SprayingBuyQuantity>> AdjustRemainingQuantity(double quantityChange, int fertilizerId)
@@ -91,7 +88,6 @@ public class BuyService(IFarmManagerContext context, IUnitOfWork unitOfWork) : I
                 break;
             }
         }
-        await unitOfWork.SaveChangesAsync();
         return adjustments;
     }
     public async Task RevertRemainingQuantity(ICollection<SprayingBuyQuantity> buyQuantities)
@@ -102,6 +98,5 @@ public class BuyService(IFarmManagerContext context, IUnitOfWork unitOfWork) : I
                 ?? throw new NotFoundException("Nie mozna znaleźć zakupu.");
             buy.RemainingQuantity += item.Quantity;
         }
-        await unitOfWork.SaveChangesAsync();
     }
 }

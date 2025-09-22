@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FarmManager.Services.Services;
 
-public class DiseaseService(IFarmManagerContext context, IUnitOfWork unitOfWork) : IDiseaseService
+public class DiseaseService(IFarmManagerContext context) : IDiseaseService
 {
     public async Task<ICollection<Disease>> GetAll(bool activeOnly = true)
     {
@@ -31,25 +31,19 @@ public class DiseaseService(IFarmManagerContext context, IUnitOfWork unitOfWork)
     public async Task Add(Disease entity)
     {
         context.Diseases.Update(entity);
-        await unitOfWork.SaveChangesAsync();
     }
     public async Task Update(Disease entity)
     {
-        var existingEntity = context.Diseases.FirstOrDefault(d => d.Id == entity.Id) ??
+        var existingEntity = await context.Diseases.FirstOrDefaultAsync(d => d.Id == entity.Id) ??
             throw new NotFoundException("Nie mozna znaleźć choroby");
         existingEntity.Name = entity.Name;
         existingEntity.Description = entity.Description;
         existingEntity.IsActive = entity.IsActive;
-        await unitOfWork.SaveChangesAsync();
     }
     public async Task Delete(int id)
     {
-        var entity = context.Diseases.FirstOrDefault(d => d.Id == id) ??
+        var entity = await context.Diseases.FirstOrDefaultAsync(d => d.Id == id) ??
             throw new NotFoundException("Nie mozna znaleźć choroby");
         entity.IsDeleted = true;
-        await unitOfWork.SaveChangesAsync();
     }
-
-
-
 }

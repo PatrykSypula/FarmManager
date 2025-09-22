@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FarmManager.Services.Services;
 
-public class SeasonService(IFarmManagerContext context, IUnitOfWork unitOfWork) : ISeasonService
+public class SeasonService(IFarmManagerContext context) : ISeasonService
 {
     public async Task<ICollection<Season>> GetAll(bool activeOnly = true)
     {
@@ -31,12 +31,11 @@ public class SeasonService(IFarmManagerContext context, IUnitOfWork unitOfWork) 
     public async Task Add(Season entity)
     {
         context.Seasons.Update(entity);
-        await unitOfWork.SaveChangesAsync();
     }
 
     public async Task Update(Season entity)
     {
-        var existingEntity = context.Seasons.FirstOrDefault(d => d.Id == entity.Id) ??
+        var existingEntity = await context.Seasons.FirstOrDefaultAsync(d => d.Id == entity.Id) ??
             throw new NotFoundException("Nie mozna znaleźć sezonu.");
         existingEntity.Name = entity.Name;
         existingEntity.Description = entity.Description;
@@ -44,13 +43,11 @@ public class SeasonService(IFarmManagerContext context, IUnitOfWork unitOfWork) 
         existingEntity.EndDate = entity.EndDate;
         existingEntity.PlantId = entity.PlantId;
         existingEntity.IsActive = entity.IsActive;
-        await unitOfWork.SaveChangesAsync();
     }
     public async Task Delete(int id)
     {
-        var entity = context.Seasons.FirstOrDefault(d => d.Id == id) ??
+        var entity = await context.Seasons.FirstOrDefaultAsync(d => d.Id == id) ??
             throw new NotFoundException("Nie mozna znaleźć sezonu.");
         entity.IsDeleted = true;
-        await unitOfWork.SaveChangesAsync();
     }
 }

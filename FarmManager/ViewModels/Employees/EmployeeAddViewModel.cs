@@ -3,11 +3,12 @@ using FarmManager.App.Helpers.Validators;
 using FarmManager.App.Models.Employees;
 using FarmManager.App.Views;
 using FarmManager.Model.Model;
+using FarmManager.Model.UnitOfWork;
 using FarmManager.Services.Interfaces;
 
 namespace FarmManager.App.ViewModels.Employees;
 
-public class EmployeeAddViewModel(IEmployeeService employeeService) : BaseViewModel
+public class EmployeeAddViewModel(IEmployeeService employeeService, IUnitOfWork unitOfWork) : BaseViewModel
 {
     #region Properties
 
@@ -137,6 +138,7 @@ public class EmployeeAddViewModel(IEmployeeService employeeService) : BaseViewMo
         else
         {
             await employeeService.Add(Model.Employee);
+            await unitOfWork.SaveChangesAsync();
             RequestClose?.Invoke(Model.Employee);
 
         }

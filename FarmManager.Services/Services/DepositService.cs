@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FarmManager.Services.Services;
 
-public class DepositService(IFarmManagerContext context, IUnitOfWork unitOfWork) : IDepositService
+public class DepositService(IFarmManagerContext context) : IDepositService
 {
     public async Task<ICollection<Deposit>> GetAll(bool activeOnly = true)
     {
@@ -31,25 +31,22 @@ public class DepositService(IFarmManagerContext context, IUnitOfWork unitOfWork)
     public async Task Add(Deposit entity)
     {
         context.Deposits.Update(entity);
-        await unitOfWork.SaveChangesAsync();
     }
 
     public async Task Update(Deposit entity)
     {
-        var existingEntity = context.Deposits.FirstOrDefault(d => d.Id == entity.Id) ??
+        var existingEntity = await context.Deposits.FirstOrDefaultAsync(d => d.Id == entity.Id) ??
             throw new NotFoundException("Nie mozna znaleźć depozytu.");
         existingEntity.Name = entity.Name;
         existingEntity.PhoneNumber = entity.PhoneNumber;
         existingEntity.Email = entity.Email;
         existingEntity.Description = entity.Description;
         existingEntity.IsActive = entity.IsActive;
-        await unitOfWork.SaveChangesAsync();
     }
     public async Task Delete(int id)
     {
-        var entity = context.Deposits.FirstOrDefault(d => d.Id == id) ??
+        var entity = await context.Deposits.FirstOrDefaultAsync(d => d.Id == id) ??
             throw new NotFoundException("Nie mozna znaleźć depozytu.");
         entity.IsDeleted = true;
-        await unitOfWork.SaveChangesAsync();
     }
 }

@@ -5,11 +5,12 @@ using FarmManager.App.Views;
 using FarmManager.App.Views.ChooseEntity;
 using FarmManager.App.Views.Plants;
 using FarmManager.Model.Model;
+using FarmManager.Model.UnitOfWork;
 using FarmManager.Services.Interfaces;
 
 namespace FarmManager.App.ViewModels.Plants;
 
-public class PlantAddViewModel(IPlantService plantServive) : BaseViewModel
+public class PlantAddViewModel(IPlantService plantServive, IUnitOfWork unitOfWork) : BaseViewModel
 {
     #region Properties
 
@@ -67,6 +68,7 @@ public class PlantAddViewModel(IPlantService plantServive) : BaseViewModel
         else
         {
             await plantServive.Add(Model.Plant);
+            await unitOfWork.SaveChangesAsync();
             RequestClose?.Invoke(Model.Plant);
 
         }

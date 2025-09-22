@@ -4,11 +4,12 @@ using FarmManager.App.Models.Sprayings;
 using FarmManager.App.Views;
 using FarmManager.App.Views.ChooseEntity;
 using FarmManager.Model.Model;
+using FarmManager.Model.UnitOfWork;
 using FarmManager.Services.Interfaces;
 
 namespace FarmManager.App.ViewModels.Sprayings;
 
-public class SprayingEditViewModel(ISprayingService sprayingService, IFertilizerService fertilizerService, IPlantService plantService, IBuyService buyService) : BaseViewModel
+public class SprayingEditViewModel(ISprayingService sprayingService, IFertilizerService fertilizerService, IPlantService plantService, IBuyService buyService, IUnitOfWork unitOfWork) : BaseViewModel
 {
     #region Properties
 
@@ -100,6 +101,7 @@ public class SprayingEditViewModel(ISprayingService sprayingService, IFertilizer
             await fertilizerService.AddQuantity(Model.Fertilizer.Id, Model.Spraying.Quantity);
             await sprayingService.Delete(Model.Spraying.Id);
             Model.Spraying.IsDeleted = true;
+            await unitOfWork.SaveChangesAsync();
             RequestClose?.Invoke(Model.Spraying);
         }
     }

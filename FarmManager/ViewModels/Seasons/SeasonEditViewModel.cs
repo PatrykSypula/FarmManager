@@ -5,11 +5,12 @@ using FarmManager.App.Views;
 using FarmManager.App.Views.ChooseEntity;
 using FarmManager.App.Views.Seasons;
 using FarmManager.Model.Model;
+using FarmManager.Model.UnitOfWork;
 using FarmManager.Services.Interfaces;
 
 namespace FarmManager.App.ViewModels.Seasons;
 
-public class SeasonEditViewModel(ISeasonService seasonService, IPlantService plantService) : BaseViewModel
+public class SeasonEditViewModel(ISeasonService seasonService, IPlantService plantService, IUnitOfWork unitOfWork) : BaseViewModel
 {
     #region Properties
 
@@ -109,6 +110,7 @@ public class SeasonEditViewModel(ISeasonService seasonService, IPlantService pla
         {
             await seasonService.Delete(Model.Season.Id);
             Model.Season.IsDeleted = true;
+            await unitOfWork.SaveChangesAsync();
             RequestClose?.Invoke(Model.Season);
         }
     }
@@ -126,6 +128,7 @@ public class SeasonEditViewModel(ISeasonService seasonService, IPlantService pla
         else
         {
             await seasonService.Update(Model.Season);
+            await unitOfWork.SaveChangesAsync();
             RequestClose?.Invoke(Model.Season);
         }
     }

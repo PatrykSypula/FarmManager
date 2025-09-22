@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FarmManager.Services.Services;
 
-public class VendorService(IFarmManagerContext context, IUnitOfWork unitOfWork) : IVendorService
+public class VendorService(IFarmManagerContext context) : IVendorService
 {
     public async Task<ICollection<Vendor>> GetAll(bool activeOnly = true)
     {
@@ -31,25 +31,22 @@ public class VendorService(IFarmManagerContext context, IUnitOfWork unitOfWork) 
     public async Task Add(Vendor entity)
     {
         context.Vendors.Update(entity);
-        await unitOfWork.SaveChangesAsync();
     }
 
     public async Task Update(Vendor entity)
     {
-        var existingEntity = context.Vendors.FirstOrDefault(d => d.Id == entity.Id) ??
+        var existingEntity = await context.Vendors.FirstOrDefaultAsync(d => d.Id == entity.Id) ??
             throw new NotFoundException("Nie mozna znaleźć sprzedawcy.");
         existingEntity.Name = entity.Name;
         existingEntity.PhoneNumber = entity.PhoneNumber;
         existingEntity.Email = entity.Email;
         existingEntity.Description = entity.Description;
         existingEntity.IsActive = entity.IsActive;
-        await unitOfWork.SaveChangesAsync();
     }
     public async Task Delete(int id)
     {
-        var entity = context.Vendors.FirstOrDefault(d => d.Id == id) ??
+        var entity = await context.Vendors.FirstOrDefaultAsync(d => d.Id == id) ??
             throw new NotFoundException("Nie mozna znaleźć sprzedawcy.");
         entity.IsDeleted = true;
-        await unitOfWork.SaveChangesAsync();
     }
 }

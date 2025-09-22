@@ -3,11 +3,12 @@ using FarmManager.App.Helpers.Validators;
 using FarmManager.App.Models.Diseases;
 using FarmManager.App.Views;
 using FarmManager.Model.Model;
+using FarmManager.Model.UnitOfWork;
 using FarmManager.Services.Interfaces;
 
 namespace FarmManager.App.ViewModels.Diseases;
 
-public class DiseaseAddViewModel(IDiseaseService diseaseService) : BaseViewModel
+public class DiseaseAddViewModel(IDiseaseService diseaseService, IUnitOfWork unitOfWork) : BaseViewModel
 {
     #region Properties
 
@@ -55,6 +56,7 @@ public class DiseaseAddViewModel(IDiseaseService diseaseService) : BaseViewModel
         else
         {
             await diseaseService.Add(Model.Disease);
+            await unitOfWork.SaveChangesAsync();
             RequestClose?.Invoke(Model.Disease);
 
         }

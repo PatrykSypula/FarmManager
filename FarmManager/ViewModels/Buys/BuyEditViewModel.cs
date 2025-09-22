@@ -4,12 +4,13 @@ using FarmManager.App.Models.Buys;
 using FarmManager.App.Views;
 using FarmManager.App.Views.ChooseEntity;
 using FarmManager.Model.Model;
+using FarmManager.Model.UnitOfWork;
 using FarmManager.Services.Interfaces;
 using FarmManager.Services.Services;
 
 namespace FarmManager.App.ViewModels.Buys;
 
-public class BuyEditViewModel(IBuyService buyService, IVendorService vendorService, IFertilizerService fertilizerService) : BaseViewModel
+public class BuyEditViewModel(IBuyService buyService, IVendorService vendorService, IFertilizerService fertilizerService, IUnitOfWork unitOfWork) : BaseViewModel
 {
     #region Properties
 
@@ -108,6 +109,7 @@ public class BuyEditViewModel(IBuyService buyService, IVendorService vendorServi
                 await buyService.Delete(Model.Buy.Id);
                 Model.Buy.IsDeleted = true;
                 await fertilizerService.AddQuantity(Model.Fertilizer.Id, -Model.Buy.RemainingQuantity);
+                await unitOfWork.SaveChangesAsync();
                 RequestClose?.Invoke(Model.Buy);
             }
         }

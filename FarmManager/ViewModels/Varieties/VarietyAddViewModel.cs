@@ -3,11 +3,12 @@ using FarmManager.App.Helpers.Validators;
 using FarmManager.App.Models.Varieties;
 using FarmManager.App.Views;
 using FarmManager.Model.Model;
+using FarmManager.Model.UnitOfWork;
 using FarmManager.Services.Interfaces;
 
 namespace FarmManager.App.ViewModels.Varieties;
 
-public class VarietyAddViewModel(IVarietyService varietyService) : BaseViewModel
+public class VarietyAddViewModel(IVarietyService varietyService, IUnitOfWork unitOfWork) : BaseViewModel
 {
     #region Properties
 
@@ -55,6 +56,7 @@ public class VarietyAddViewModel(IVarietyService varietyService) : BaseViewModel
         else
         {
             await varietyService.Add(Model.Variety);
+            await unitOfWork.SaveChangesAsync();
             RequestClose?.Invoke(Model.Variety);
 
         }

@@ -3,11 +3,12 @@ using FarmManager.App.Helpers.Validators;
 using FarmManager.App.Models.Employees;
 using FarmManager.App.Views;
 using FarmManager.Model.Model;
+using FarmManager.Model.UnitOfWork;
 using FarmManager.Services.Interfaces;
 
 namespace FarmManager.App.ViewModels.Employees;
 
-public class EmployeeEditViewModel(IEmployeeService employeeService) : BaseViewModel
+public class EmployeeEditViewModel(IEmployeeService employeeService, IUnitOfWork unitOfWork) : BaseViewModel
 {
     #region Properties
 
@@ -141,6 +142,7 @@ public class EmployeeEditViewModel(IEmployeeService employeeService) : BaseViewM
         {
             await employeeService.Delete(Model.Employee.Id);
             Model.Employee.IsDeleted = true;
+            await unitOfWork.SaveChangesAsync();
             RequestClose?.Invoke(Model.Employee);
         }
     }
@@ -161,6 +163,7 @@ public class EmployeeEditViewModel(IEmployeeService employeeService) : BaseViewM
         else
         {
             await employeeService.Update(Model.Employee);
+            await unitOfWork.SaveChangesAsync();
             RequestClose?.Invoke(Model.Employee);
 
         }

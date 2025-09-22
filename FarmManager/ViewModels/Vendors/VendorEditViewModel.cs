@@ -4,12 +4,13 @@ using FarmManager.App.Models.Deposits;
 using FarmManager.App.Models.Vendors;
 using FarmManager.App.Views;
 using FarmManager.Model.Model;
+using FarmManager.Model.UnitOfWork;
 using FarmManager.Services.Interfaces;
 using FarmManager.Services.Validators;
 
 namespace FarmManager.App.ViewModels.Vendors;
 
-public class VendorEditViewModel(IVendorService vendorService) : BaseViewModel
+public class VendorEditViewModel(IVendorService vendorService, IUnitOfWork unitOfWork) : BaseViewModel
 {
     #region Properties
 
@@ -98,6 +99,7 @@ public class VendorEditViewModel(IVendorService vendorService) : BaseViewModel
         {
             await vendorService.Delete(Model.Vendor.Id);
             Model.Vendor.IsDeleted = true;
+            await unitOfWork.SaveChangesAsync();
             RequestClose?.Invoke(Model.Vendor);
         }
     }
@@ -117,6 +119,7 @@ public class VendorEditViewModel(IVendorService vendorService) : BaseViewModel
         else
         {
             await vendorService.Update(Model.Vendor);
+            await unitOfWork.SaveChangesAsync();
             RequestClose?.Invoke(Model.Vendor);
         }
     }

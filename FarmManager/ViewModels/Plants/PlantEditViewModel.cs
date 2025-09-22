@@ -5,11 +5,12 @@ using FarmManager.App.Views;
 using FarmManager.App.Views.ChooseEntity;
 using FarmManager.App.Views.Plants;
 using FarmManager.Model.Model;
+using FarmManager.Model.UnitOfWork;
 using FarmManager.Services.Interfaces;
 
 namespace FarmManager.App.ViewModels.Plants;
 
-public class PlantEditViewModel(IPlantService plantServive, IVarietyService varietyService) : BaseViewModel
+public class PlantEditViewModel(IPlantService plantServive, IVarietyService varietyService, IUnitOfWork unitOfWork) : BaseViewModel
 {
     #region Properties
 
@@ -83,6 +84,7 @@ public class PlantEditViewModel(IPlantService plantServive, IVarietyService vari
         {
             await plantServive.Delete(Model.Plant.Id);
             Model.Plant.IsDeleted = true;
+            await unitOfWork.SaveChangesAsync();
             RequestClose?.Invoke(Model.Plant);
         }
     }
@@ -100,6 +102,7 @@ public class PlantEditViewModel(IPlantService plantServive, IVarietyService vari
         else
         {
             await plantServive.Update(Model.Plant);
+            await unitOfWork.SaveChangesAsync();
             RequestClose?.Invoke(Model.Plant);
         }
     }

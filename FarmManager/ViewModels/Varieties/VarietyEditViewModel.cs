@@ -3,11 +3,12 @@ using FarmManager.App.Helpers.Validators;
 using FarmManager.App.Models.Varieties;
 using FarmManager.App.Views;
 using FarmManager.Model.Model;
+using FarmManager.Model.UnitOfWork;
 using FarmManager.Services.Interfaces;
 
 namespace FarmManager.App.ViewModels.Varieties;
 
-public class VarietyEditViewModel(IVarietyService varietyService) : BaseViewModel
+public class VarietyEditViewModel(IVarietyService varietyService, IUnitOfWork unitOfWork) : BaseViewModel
 {
     #region Properties
 
@@ -70,6 +71,7 @@ public class VarietyEditViewModel(IVarietyService varietyService) : BaseViewMode
         {
             await varietyService.Delete(Model.Variety.Id);
             Model.Variety.IsDeleted = true;
+            await unitOfWork.SaveChangesAsync();
             RequestClose?.Invoke(Model.Variety);
         }
     }
@@ -87,6 +89,7 @@ public class VarietyEditViewModel(IVarietyService varietyService) : BaseViewMode
         else
         {
             await varietyService.Update(Model.Variety);
+            await unitOfWork.SaveChangesAsync();
             RequestClose?.Invoke(Model.Variety);
         }
     }

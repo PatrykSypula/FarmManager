@@ -4,11 +4,12 @@ using FarmManager.App.Models.EmployeeCosts;
 using FarmManager.App.Views;
 using FarmManager.App.Views.ChooseEntity;
 using FarmManager.Model.Model;
+using FarmManager.Model.UnitOfWork;
 using FarmManager.Services.Interfaces;
 
 namespace FarmManager.App.ViewModels.EmployeeCosts;
 
-public class EmployeeCostAddViewModel(IEmployeeCostService employeeCostService) : BaseViewModel
+public class EmployeeCostAddViewModel(IEmployeeCostService employeeCostService, IUnitOfWork unitOfWork) : BaseViewModel
 {
     #region Properties
 
@@ -84,6 +85,7 @@ public class EmployeeCostAddViewModel(IEmployeeCostService employeeCostService) 
         else
         {
             await employeeCostService.Add(Model.EmployeeCost);
+            await unitOfWork.SaveChangesAsync();
             RequestClose?.Invoke(Model.EmployeeCost);
 
         }

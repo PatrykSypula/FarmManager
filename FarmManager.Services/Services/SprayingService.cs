@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FarmManager.Services.Services;
 
-public class SprayingService(IFarmManagerContext context, IUnitOfWork unitOfWork) : ISprayingService
+public class SprayingService(IFarmManagerContext context) : ISprayingService
 {
     public async Task<ICollection<Spraying>> GetAll(bool activeOnly = true)
     {
@@ -39,26 +39,23 @@ public class SprayingService(IFarmManagerContext context, IUnitOfWork unitOfWork
     public async Task Add(Spraying entity)
     {
         context.Sprayings.Update(entity);
-        await unitOfWork.SaveChangesAsync();
     }
 
 
     //Unused
     public async Task Update(Spraying entity)
     {
-        var existingEntity = context.Sprayings.FirstOrDefault(d => d.Id == entity.Id) ??
+        var existingEntity = await context.Sprayings.FirstOrDefaultAsync(d => d.Id == entity.Id) ??
             throw new NotFoundException("Nie mozna znaleźć pryskania.");
         existingEntity.PlantId = entity.PlantId;
         existingEntity.FertilizerId = entity.FertilizerId;
         existingEntity.Quantity = entity.Quantity;
         existingEntity.Date = entity.Date;
-        await unitOfWork.SaveChangesAsync();
     }
     public async Task Delete(int id)
     {
-        var entity = context.Sprayings.FirstOrDefault(d => d.Id == id) ??
+        var entity = await context.Sprayings.FirstOrDefaultAsync(d => d.Id == id) ??
             throw new NotFoundException("Nie mozna znaleźć pryskania.");
         entity.IsDeleted = true;
-        await unitOfWork.SaveChangesAsync();
     }
 }
