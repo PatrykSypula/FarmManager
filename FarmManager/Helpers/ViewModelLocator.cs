@@ -11,6 +11,7 @@ using FarmManager.App.ViewModels.Seasons;
 using FarmManager.App.ViewModels.Sprayings;
 using FarmManager.App.ViewModels.Varieties;
 using FarmManager.App.ViewModels.Vendors;
+using FarmManager.App.ViewModels.Workdays;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace FarmManager.App.Helpers;
@@ -120,4 +121,8 @@ public class ViewModelLocator
         MyApp.ServiceProvider.GetRequiredService<EmployeeCostAddViewModel>();
     public EmployeeCostEditViewModel EmployeeCostEditViewModel =>
         MyApp.ServiceProvider.GetRequiredService<EmployeeCostEditViewModel>();
+
+    //Workdays
+    public WorkdaysViewModel WorkdaysViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<WorkdaysViewModel>();
 }

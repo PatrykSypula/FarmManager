@@ -20,6 +20,9 @@
         DataContext="{Binding MainWindowViewModel, Source={StaticResource Locator}}">
     <Grid>
         <Menu>
+            <MenuItem Header="Praca" FontSize="20">
+                <MenuItem Header="Dni" Command="{Binding Workdays}" FontSize="20" />
+            </MenuItem>
             <MenuItem Header="Zaawansowane" FontSize="20">
                 <MenuItem Header="Rośliny" Command="{Binding Plants}" FontSize="20" />
                 <MenuItem Header="Sezony" Command="{Binding Seasons}" FontSize="20" />

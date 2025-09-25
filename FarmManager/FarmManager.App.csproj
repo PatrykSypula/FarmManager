@@ -42,4 +42,8 @@
     </Compile>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\Workdays\" />
+  </ItemGroup>
+
 </Project>

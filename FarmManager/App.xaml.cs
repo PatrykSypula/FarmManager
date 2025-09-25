@@ -12,6 +12,7 @@ using FarmManager.App.ViewModels.Seasons;
 using FarmManager.App.ViewModels.Sprayings;
 using FarmManager.App.ViewModels.Varieties;
 using FarmManager.App.ViewModels.Vendors;
+using FarmManager.App.ViewModels.Workdays;
 using FarmManager.App.Views.Buys;
 using FarmManager.App.Views.ChooseEntity;
 using FarmManager.App.Views.Deposits;
@@ -24,6 +25,7 @@ using FarmManager.App.Views.Seasons;
 using FarmManager.App.Views.Sprayings;
 using FarmManager.App.Views.Varieties;
 using FarmManager.App.Views.Vendors;
+using FarmManager.App.Views.Workdays;
 using FarmManager.Model.DatabaseContext;
 using FarmManager.Model.UnitOfWork;
 using FarmManager.Services.Interfaces;
@@ -116,6 +118,9 @@ public partial class MyApp : Application
                 services.AddTransient<EmployeeCostAddWindow>();
                 services.AddTransient<EmployeeCostEditWindow>();
 
+                //Workdays
+                services.AddTransient<WorkdaysWindow>();
+
                 #endregion
 
 
@@ -185,6 +190,9 @@ public partial class MyApp : Application
                 services.AddTransient<EmployeeCostsViewModel>();
                 services.AddTransient<EmployeeCostAddViewModel>();
                 services.AddTransient<EmployeeCostEditViewModel>();
+
+                //Workdays
+                services.AddTransient<WorkdaysViewModel>();
 
 
                 #endregion

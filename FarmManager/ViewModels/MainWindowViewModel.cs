@@ -11,6 +11,7 @@ using FarmManager.App.Views.Seasons;
 using FarmManager.App.Views.Sprayings;
 using FarmManager.App.Views.Varieties;
 using FarmManager.App.Views.Vendors;
+using FarmManager.App.Views.Workdays;
 
 namespace FarmManager.App.ViewModels;
 
@@ -93,5 +94,11 @@ public class MainWindowViewModel : BaseViewModel
     private void OpenEmployeeCostsWindow()
     {
         new EmployeeCostsWindow().ShowDialog();
+    }
+
+    public RelayCommand Workdays => new RelayCommand(execute => OpenWorkdaysWindow());
+    private void OpenWorkdaysWindow()
+    {
+        new WorkdaysWindow().ShowDialog();
     }
 }
