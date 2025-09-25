@@ -12,6 +12,8 @@ using FarmManager.App.ViewModels.Sprayings;
 using FarmManager.App.ViewModels.Varieties;
 using FarmManager.App.ViewModels.Vendors;
 using FarmManager.App.ViewModels.Workdays;
+using FarmManager.App.ViewModels.Workdays.WorkdayCollecting;
+using FarmManager.App.ViewModels.Workdays.WorkdayHourly;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace FarmManager.App.Helpers;
@@ -125,4 +127,23 @@ public class ViewModelLocator
     //Workdays
     public WorkdaysViewModel WorkdaysViewModel =>
         MyApp.ServiceProvider.GetRequiredService<WorkdaysViewModel>();
+    public WorkdayViewModel WorkdayViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<WorkdayViewModel>();
+    public EditWorkdayViewModel EditWorkdayViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<EditWorkdayViewModel>();
+    public AddWorkdayViewModel AddWorkdayViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<AddWorkdayViewModel>();
+    public AddWorkdayCollectingAddOneViewModel AddWorkdayCollectingAddOneViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<AddWorkdayCollectingAddOneViewModel>();
+    public AddWorkdayCollectingAddAllViewModel AddWorkdayCollectingAddAllViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<AddWorkdayCollectingAddAllViewModel>();
+    public AddWorkdayCollectingEditViewModel AddWorkdayCollectingEditViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<AddWorkdayCollectingEditViewModel>();
+    public AddWorkdayHourlyAddAllViewModel AddWorkdayHourlyAddAllViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<AddWorkdayHourlyAddAllViewModel>();
+    public AddWorkdayHourlyAddOneViewModel AddWorkdayHourlyAddOneViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<AddWorkdayHourlyAddOneViewModel>();
+    public AddWorkdayHourlyEditViewModel AddWorkdayHourlyEditViewModel =>
+       MyApp.ServiceProvider.GetRequiredService<AddWorkdayHourlyEditViewModel>();
+
 }

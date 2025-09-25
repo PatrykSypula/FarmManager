@@ -14,7 +14,6 @@ public class WorkdaysViewModel : BaseViewModel
 
     public DateTimeOffset SelectedMonth { get; private set; } = DateTimeOffset.UtcNow;
 
-
     public RelayCommand PreviousMonth => new RelayCommand(execute => ChangeMonth(-1));
 
     public RelayCommand NextMonth => new RelayCommand(execute => ChangeMonth(1));

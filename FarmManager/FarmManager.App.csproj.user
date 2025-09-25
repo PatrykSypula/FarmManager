@@ -112,7 +112,34 @@
     <Compile Update="Views\Vendors\VendorsWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\Workdays\AddWorkdayWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Workdays\EditWorkdayWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Workdays\WorkdayCollecting\AddWorkdayCollectingAddAllWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Workdays\WorkdayCollecting\AddWorkdayCollectingAddOneWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Workdays\WorkdayCollecting\AddWorkdayCollectingEditWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Workdays\WorkdayHourly\AddWorkdayHourlyAddAllWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Workdays\WorkdayHourly\AddWorkdayHourlyAddOneWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Workdays\WorkdayHourly\AddWorkdayHourlyEditWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Workdays\WorkdaysWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Workdays\WorkdayWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

@@ -1,4 +1,6 @@
 ﻿using System.Windows;
+using FarmManager.App.Models.Workdays.WorkdayCollecting;
+using FarmManager.App.Models.Workdays.WorkdayHourly;
 using FarmManager.App.ViewModels;
 using FarmManager.App.ViewModels.Buys;
 using FarmManager.App.ViewModels.ChooseEntity;
@@ -13,6 +15,8 @@ using FarmManager.App.ViewModels.Sprayings;
 using FarmManager.App.ViewModels.Varieties;
 using FarmManager.App.ViewModels.Vendors;
 using FarmManager.App.ViewModels.Workdays;
+using FarmManager.App.ViewModels.Workdays.WorkdayCollecting;
+using FarmManager.App.ViewModels.Workdays.WorkdayHourly;
 using FarmManager.App.Views.Buys;
 using FarmManager.App.Views.ChooseEntity;
 using FarmManager.App.Views.Deposits;
@@ -26,6 +30,8 @@ using FarmManager.App.Views.Sprayings;
 using FarmManager.App.Views.Varieties;
 using FarmManager.App.Views.Vendors;
 using FarmManager.App.Views.Workdays;
+using FarmManager.App.Views.Workdays.WorkdayCollecting;
+using FarmManager.App.Views.Workdays.WorkdayHourly;
 using FarmManager.Model.DatabaseContext;
 using FarmManager.Model.UnitOfWork;
 using FarmManager.Services.Interfaces;
@@ -120,6 +126,15 @@ public partial class MyApp : Application
 
                 //Workdays
                 services.AddTransient<WorkdaysWindow>();
+                services.AddTransient<WorkdayWindow>();
+                services.AddTransient<AddWorkdayWindow>();
+                services.AddTransient<EditWorkdayWindow>();
+                services.AddTransient<AddWorkdayCollectingAddOneWindow>();
+                services.AddTransient<AddWorkdayCollectingAddAllWindow>();
+                services.AddTransient<AddWorkdayCollectingEditWindow>();
+                services.AddTransient<AddWorkdayHourlyAddAllWindow>();
+                services.AddTransient<AddWorkdayHourlyAddOneWindow>();
+                services.AddTransient<AddWorkdayHourlyEditWindow>();
 
                 #endregion
 
@@ -193,6 +208,15 @@ public partial class MyApp : Application
 
                 //Workdays
                 services.AddTransient<WorkdaysViewModel>();
+                services.AddTransient<WorkdayViewModel>();
+                services.AddTransient<AddWorkdayViewModel>();
+                services.AddTransient<EditWorkdayViewModel>();
+                services.AddTransient<AddWorkdayCollectingAddOneViewModel>();
+                services.AddTransient<AddWorkdayCollectingAddAllViewModel>();
+                services.AddTransient<AddWorkdayCollectingEditViewModel>();
+                services.AddTransient<AddWorkdayHourlyAddAllViewModel>();
+                services.AddTransient<AddWorkdayHourlyAddOneViewModel>();
+                services.AddTransient<AddWorkdayHourlyEditViewModel>();
 
 
                 #endregion
@@ -213,6 +237,7 @@ public partial class MyApp : Application
                 services.AddScoped<IBuyService, BuyService>();
                 services.AddScoped<ISprayingService, SprayingService>();
                 services.AddScoped<IEmployeeCostService, EmployeeCostService>();
+                services.AddScoped<IWorkdayService, WorkdayService>();
 
                 //Service Prodiver
                 ServiceProvider = services.BuildServiceProvider();
