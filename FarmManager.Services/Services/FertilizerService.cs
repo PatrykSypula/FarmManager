@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FarmManager.Services.Services;
 
-public class FertilizerService(IFarmManagerContext context, IUnitOfWork unitOfWork) : IFertilizerService
+public class FertilizerService(IFarmManagerContext context) : IFertilizerService
 {
     public async Task<ICollection<Fertilizer>> GetAll(bool activeOnly = true)
     {
@@ -30,24 +30,28 @@ public class FertilizerService(IFarmManagerContext context, IUnitOfWork unitOfWo
     }
     public async Task Add(Fertilizer entity)
     {
-        await context.Fertilizers.AddAsync(entity);
-        await unitOfWork.SaveChangesAsync();
+        context.Fertilizers.Update(entity);
     }
 
     public async Task Update(Fertilizer entity)
     {
-        var existingEntity = context.Fertilizers.FirstOrDefault(d => d.Id == entity.Id) ??
+        var existingEntity = await context.Fertilizers.FirstOrDefaultAsync(d => d.Id == entity.Id) ??
             throw new NotFoundException("Nie mozna znaleźć nawozu.");
         existingEntity.Name = entity.Name;
         existingEntity.Description = entity.Description;
         existingEntity.IsActive = entity.IsActive;
-        await unitOfWork.SaveChangesAsync();
     }
     public async Task Delete(int id)
     {
-        var entity = context.Fertilizers.FirstOrDefault(d => d.Id == id) ??
+        var entity = await context.Fertilizers.FirstOrDefaultAsync(d => d.Id == id) ??
             throw new NotFoundException("Nie mozna znaleźć nawozu.");
         entity.IsDeleted = true;
-        await unitOfWork.SaveChangesAsync();
+    }
+
+    public async Task AddQuantity(int id, double quantity)
+    {
+        var entity = await context.Fertilizers.FirstOrDefaultAsync(d => d.Id == id) ??
+            throw new NotFoundException("Nie mozna znaleźć nawozu.");
+        entity.Quantity += quantity;
     }
 }

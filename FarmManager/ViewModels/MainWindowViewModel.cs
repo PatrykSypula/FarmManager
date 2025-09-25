@@ -1,12 +1,17 @@
 ﻿using FarmManager.App.Helpers;
 using FarmManager.App.Models;
+using FarmManager.App.Views.Buys;
 using FarmManager.App.Views.Deposits;
 using FarmManager.App.Views.Diseases;
+using FarmManager.App.Views.EmployeeCosts;
 using FarmManager.App.Views.Employees;
 using FarmManager.App.Views.Fertilizers;
 using FarmManager.App.Views.Plants;
+using FarmManager.App.Views.Seasons;
+using FarmManager.App.Views.Sprayings;
 using FarmManager.App.Views.Varieties;
 using FarmManager.App.Views.Vendors;
+using FarmManager.App.Views.Workdays;
 
 namespace FarmManager.App.ViewModels;
 
@@ -65,5 +70,35 @@ public class MainWindowViewModel : BaseViewModel
     private void OpenPlantsWindow()
     {
         new PlantsWindow().ShowDialog();
+    }
+
+    public RelayCommand Seasons => new RelayCommand(execute => OpenSeasonsWindow());
+    private void OpenSeasonsWindow()
+    {
+        new SeasonsWindow().ShowDialog();
+    }
+
+    public RelayCommand Buys => new RelayCommand(execute => OpenBuysWindow());
+    private void OpenBuysWindow()
+    {
+        new BuysWindow().ShowDialog();
+    }
+
+    public RelayCommand Sprayings => new RelayCommand(execute => OpenSprayingsWindow());
+    private void OpenSprayingsWindow()
+    {
+        new SprayingsWindow().ShowDialog();
+    }
+
+    public RelayCommand EmployeeCosts => new RelayCommand(execute => OpenEmployeeCostsWindow());
+    private void OpenEmployeeCostsWindow()
+    {
+        new EmployeeCostsWindow().ShowDialog();
+    }
+
+    public RelayCommand Workdays => new RelayCommand(execute => OpenWorkdaysWindow());
+    private void OpenWorkdaysWindow()
+    {
+        new WorkdaysWindow().ShowDialog();
     }
 }

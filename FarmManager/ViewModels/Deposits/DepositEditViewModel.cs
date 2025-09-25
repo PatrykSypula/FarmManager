@@ -2,12 +2,13 @@
 using FarmManager.App.Models.Deposits;
 using FarmManager.App.Views;
 using FarmManager.Model.Model;
+using FarmManager.Model.UnitOfWork;
 using FarmManager.Services.Interfaces;
 using FarmManager.Services.Validators;
 
 namespace FarmManager.App.ViewModels.Deposits;
 
-public class DepositEditViewModel(IDepositService depositService) : BaseViewModel
+public class DepositEditViewModel(IDepositService depositService, IUnitOfWork unitOfWork) : BaseViewModel
 {
     #region Properties
 
@@ -96,6 +97,7 @@ public class DepositEditViewModel(IDepositService depositService) : BaseViewMode
         {
             await depositService.Delete(Model.Deposit.Id);
             Model.Deposit.IsDeleted = true;
+            await unitOfWork.SaveChangesAsync();
             RequestClose?.Invoke(Model.Deposit);
         }
     }
@@ -115,6 +117,7 @@ public class DepositEditViewModel(IDepositService depositService) : BaseViewMode
         else
         {
             await depositService.Update(Model.Deposit);
+            await unitOfWork.SaveChangesAsync();
             RequestClose?.Invoke(Model.Deposit);
         }
     }

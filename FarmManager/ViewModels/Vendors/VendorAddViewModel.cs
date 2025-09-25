@@ -3,11 +3,12 @@ using FarmManager.App.Helpers.Validators;
 using FarmManager.App.Models.Vendors;
 using FarmManager.App.Views;
 using FarmManager.Model.Model;
+using FarmManager.Model.UnitOfWork;
 using FarmManager.Services.Interfaces;
 
 namespace FarmManager.App.ViewModels.Vendors;
 
-public class VendorAddViewModel(IVendorService vendorService) : BaseViewModel
+public class VendorAddViewModel(IVendorService vendorService, IUnitOfWork unitOfWork) : BaseViewModel
 {
     #region Properties
 
@@ -82,6 +83,7 @@ public class VendorAddViewModel(IVendorService vendorService) : BaseViewModel
         else
         {
             await vendorService.Add(Model.Vendor);
+            await unitOfWork.SaveChangesAsync();
             RequestClose?.Invoke(Model.Vendor);
 
         }

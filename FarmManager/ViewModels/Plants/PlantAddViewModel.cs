@@ -2,13 +2,15 @@
 using FarmManager.App.Helpers.Validators;
 using FarmManager.App.Models.Plants;
 using FarmManager.App.Views;
+using FarmManager.App.Views.ChooseEntity;
 using FarmManager.App.Views.Plants;
 using FarmManager.Model.Model;
+using FarmManager.Model.UnitOfWork;
 using FarmManager.Services.Interfaces;
 
 namespace FarmManager.App.ViewModels.Plants;
 
-public class PlantAddViewModel(IPlantService plantServive) : BaseViewModel
+public class PlantAddViewModel(IPlantService plantServive, IUnitOfWork unitOfWork) : BaseViewModel
 {
     #region Properties
 
@@ -29,11 +31,11 @@ public class PlantAddViewModel(IPlantService plantServive) : BaseViewModel
     }
     public string? Variety
     {
-        get { return Model.Plant.Variety?.Name; }
+        get { return Model.Variety?.Name; }
         set
         {
-            if (Model.Plant.Variety != null)
-                Model.Plant.Variety.Name = value ?? string.Empty;
+            if (Model.Variety != null)
+                Model.Variety.Name = value ?? string.Empty;
             OnPropertyChanged();
         }
     }
@@ -66,6 +68,7 @@ public class PlantAddViewModel(IPlantService plantServive) : BaseViewModel
         else
         {
             await plantServive.Add(Model.Plant);
+            await unitOfWork.SaveChangesAsync();
             RequestClose?.Invoke(Model.Plant);
 
         }
@@ -74,10 +77,11 @@ public class PlantAddViewModel(IPlantService plantServive) : BaseViewModel
     public RelayCommand OpenVariety => new RelayCommand(execute => OpenSelectVarietyAsync());
     private void OpenSelectVarietyAsync()
     {
-        var window = new PlantChooseVarietyWindow();
+        var window = new ChooseVarietyWindow();
         if (window.ShowDialog() == true && window.Variety != null)
         {
-            Model.Plant.Variety = window.Variety;
+            Model.Variety = window.Variety;
+            Model.Plant.VarietyId = window.Variety.Id;
             OnPropertyChanged(nameof(Variety));
         }
     }

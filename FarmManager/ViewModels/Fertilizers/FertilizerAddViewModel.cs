@@ -3,11 +3,12 @@ using FarmManager.App.Helpers.Validators;
 using FarmManager.App.Models.Fertilizers;
 using FarmManager.App.Views;
 using FarmManager.Model.Model;
+using FarmManager.Model.UnitOfWork;
 using FarmManager.Services.Interfaces;
 
 namespace FarmManager.App.ViewModels.Fertilizers;
 
-public class FertilizerAddViewModel(IFertilizerService fertilizerService) : BaseViewModel
+public class FertilizerAddViewModel(IFertilizerService fertilizerService, IUnitOfWork unitOfWork) : BaseViewModel
 {
     #region Properties
 
@@ -55,6 +56,7 @@ public class FertilizerAddViewModel(IFertilizerService fertilizerService) : Base
         else
         {
             await fertilizerService.Add(Model.Fertilizer);
+            await unitOfWork.SaveChangesAsync();
             RequestClose?.Invoke(Model.Fertilizer);
 
         }

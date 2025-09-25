@@ -3,11 +3,12 @@ using FarmManager.App.Helpers.Validators;
 using FarmManager.App.Models.Diseases;
 using FarmManager.App.Views;
 using FarmManager.Model.Model;
+using FarmManager.Model.UnitOfWork;
 using FarmManager.Services.Interfaces;
 
 namespace FarmManager.App.ViewModels.Diseases;
 
-public class DiseaseEditViewModel(IDiseaseService diseaseService) : BaseViewModel
+public class DiseaseEditViewModel(IDiseaseService diseaseService, IUnitOfWork unitOfWork) : BaseViewModel
 {
     #region Properties
 
@@ -70,6 +71,7 @@ public class DiseaseEditViewModel(IDiseaseService diseaseService) : BaseViewMode
         {
             await diseaseService.Delete(Model.Disease.Id);
             Model.Disease.IsDeleted = true;
+            await unitOfWork.SaveChangesAsync();
             RequestClose?.Invoke(Model.Disease);
         }
     }
@@ -87,6 +89,7 @@ public class DiseaseEditViewModel(IDiseaseService diseaseService) : BaseViewMode
         else
         {
             await diseaseService.Update(Model.Disease);
+            await unitOfWork.SaveChangesAsync();
             RequestClose?.Invoke(Model.Disease);
         }
     }

@@ -7,7 +7,7 @@
         xmlns:vm="clr-namespace:FarmManager.App.ViewModels.Deposits"
         xmlns:app="clr-namespace:FarmManager.App.Helpers"
         mc:Ignorable="d"
-        Title="Wybór depozytu" Height="720" Width="775"
+        Title="Wybór kupca" Height="720" Width="775"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
@@ -37,7 +37,7 @@
                 </Style>
             </DataGrid.RowStyle>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Nazwa" Width="2*" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Nazwa kupca" Width="2*" Binding="{Binding Name}"/>
                 <DataGridTextColumn Header="Numer telefonu" Width="2*" Binding="{Binding PhoneNumber}"/>
                 <DataGridTextColumn Header="Email" Width="3*" Binding="{Binding Email}"/>
             </DataGrid.Columns>

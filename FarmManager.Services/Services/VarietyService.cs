@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FarmManager.Services.Services;
 
-public class VarietyService(IFarmManagerContext context, IUnitOfWork unitOfWork) : IVarietyService
+public class VarietyService(IFarmManagerContext context) : IVarietyService
 {
     public async Task<ICollection<Variety>> GetAll(bool activeOnly = true)
     {
@@ -30,24 +30,21 @@ public class VarietyService(IFarmManagerContext context, IUnitOfWork unitOfWork)
     }
     public async Task Add(Variety entity)
     {
-        await context.Varieties.AddAsync(entity);
-        await unitOfWork.SaveChangesAsync();
+        context.Varieties.Update(entity);
     }
 
     public async Task Update(Variety entity)
     {
-        var existingEntity = context.Varieties.FirstOrDefault(d => d.Id == entity.Id) ??
+        var existingEntity = await context.Varieties.FirstOrDefaultAsync(d => d.Id == entity.Id) ??
             throw new NotFoundException("Nie mozna znaleźć odmiany.");
         existingEntity.Name = entity.Name;
         existingEntity.Description = entity.Description;
         existingEntity.IsActive = entity.IsActive;
-        await unitOfWork.SaveChangesAsync();
     }
     public async Task Delete(int id)
     {
-        var entity = context.Varieties.FirstOrDefault(d => d.Id == id) ??
+        var entity = await context.Varieties.FirstOrDefaultAsync(d => d.Id == id) ??
             throw new NotFoundException("Nie mozna znaleźć odmiany.");
         entity.IsDeleted = true;
-        await unitOfWork.SaveChangesAsync();
     }
 }

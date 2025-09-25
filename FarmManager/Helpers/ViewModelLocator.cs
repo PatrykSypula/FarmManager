@@ -1,11 +1,19 @@
 ﻿using FarmManager.App.ViewModels;
+using FarmManager.App.ViewModels.Buys;
+using FarmManager.App.ViewModels.ChooseEntity;
 using FarmManager.App.ViewModels.Deposits;
 using FarmManager.App.ViewModels.Diseases;
+using FarmManager.App.ViewModels.EmployeeCosts;
 using FarmManager.App.ViewModels.Employees;
 using FarmManager.App.ViewModels.Fertilizers;
 using FarmManager.App.ViewModels.Plants;
+using FarmManager.App.ViewModels.Seasons;
+using FarmManager.App.ViewModels.Sprayings;
 using FarmManager.App.ViewModels.Varieties;
 using FarmManager.App.ViewModels.Vendors;
+using FarmManager.App.ViewModels.Workdays;
+using FarmManager.App.ViewModels.Workdays.WorkdayCollecting;
+using FarmManager.App.ViewModels.Workdays.WorkdayHourly;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace FarmManager.App.Helpers;
@@ -14,6 +22,18 @@ public class ViewModelLocator
 {
     public MainWindowViewModel MainWindowViewModel =>
         MyApp.ServiceProvider.GetRequiredService<MainWindowViewModel>();
+
+    //Choose Entity
+    public ChooseVarietyViewModel ChooseVarietyViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<ChooseVarietyViewModel>();
+    public ChooseVendorViewModel ChooseVendorViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<ChooseVendorViewModel>();
+    public ChooseFertilizerViewModel ChooseFertilizerViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<ChooseFertilizerViewModel>();
+    public ChoosePlantViewModel ChoosePlantViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<ChoosePlantViewModel>();
+    public ChooseEmployeeViewModel ChooseEmployeeViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<ChooseEmployeeViewModel>();
 
     // Deposits
     public DepositsViewModel DepositsViewModel =>
@@ -70,6 +90,60 @@ public class ViewModelLocator
         MyApp.ServiceProvider.GetRequiredService<PlantAddViewModel>();
     public PlantEditViewModel PlantEditViewModel =>
         MyApp.ServiceProvider.GetRequiredService<PlantEditViewModel>();
-    public PlantChooseVarietyViewModel PlantChooseVarietyViewModel =>
-        MyApp.ServiceProvider.GetRequiredService<PlantChooseVarietyViewModel>();
+    
+
+    // Seasons
+    public SeasonsViewModel SeasonsViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<SeasonsViewModel>();
+    public SeasonAddViewModel SeasonAddViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<SeasonAddViewModel>();
+    public SeasonEditViewModel SeasonEditViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<SeasonEditViewModel>();
+
+    // Buys
+    public BuyAddViewModel BuyAddViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<BuyAddViewModel>();
+    public BuyEditViewModel BuyEditViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<BuyEditViewModel>();
+    public BuysViewModel BuysViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<BuysViewModel>();
+
+    // Sprayings
+    public SprayingsViewModel SprayingsViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<SprayingsViewModel>();
+    public SprayingAddViewModel SprayingAddViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<SprayingAddViewModel>();
+    public SprayingEditViewModel SprayingEditViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<SprayingEditViewModel>();
+
+    //EmployeeCosts
+    public EmployeeCostsViewModel EmployeeCostsViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<EmployeeCostsViewModel>();
+    public EmployeeCostAddViewModel EmployeeCostAddViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<EmployeeCostAddViewModel>();
+    public EmployeeCostEditViewModel EmployeeCostEditViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<EmployeeCostEditViewModel>();
+
+    //Workdays
+    public WorkdaysViewModel WorkdaysViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<WorkdaysViewModel>();
+    public WorkdayViewModel WorkdayViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<WorkdayViewModel>();
+    public EditWorkdayViewModel EditWorkdayViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<EditWorkdayViewModel>();
+    public AddWorkdayViewModel AddWorkdayViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<AddWorkdayViewModel>();
+    public AddWorkdayCollectingAddOneViewModel AddWorkdayCollectingAddOneViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<AddWorkdayCollectingAddOneViewModel>();
+    public AddWorkdayCollectingAddAllViewModel AddWorkdayCollectingAddAllViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<AddWorkdayCollectingAddAllViewModel>();
+    public AddWorkdayCollectingEditViewModel AddWorkdayCollectingEditViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<AddWorkdayCollectingEditViewModel>();
+    public AddWorkdayHourlyAddAllViewModel AddWorkdayHourlyAddAllViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<AddWorkdayHourlyAddAllViewModel>();
+    public AddWorkdayHourlyAddOneViewModel AddWorkdayHourlyAddOneViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<AddWorkdayHourlyAddOneViewModel>();
+    public AddWorkdayHourlyEditViewModel AddWorkdayHourlyEditViewModel =>
+       MyApp.ServiceProvider.GetRequiredService<AddWorkdayHourlyEditViewModel>();
+
 }

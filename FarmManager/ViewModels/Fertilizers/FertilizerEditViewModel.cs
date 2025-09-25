@@ -3,12 +3,13 @@ using FarmManager.App.Helpers.Validators;
 using FarmManager.App.Models.Fertilizers;
 using FarmManager.App.Views;
 using FarmManager.Model.Model;
+using FarmManager.Model.UnitOfWork;
 using FarmManager.Services.Interfaces;
 using FarmManager.Services.Services;
 
 namespace FarmManager.App.ViewModels.Fertilizers;
 
-public class FertilizerEditViewModel(IFertilizerService fertilizerService) : BaseViewModel
+public class FertilizerEditViewModel(IFertilizerService fertilizerService, IUnitOfWork unitOfWork) : BaseViewModel
 {
     #region Properties
 
@@ -71,6 +72,7 @@ public class FertilizerEditViewModel(IFertilizerService fertilizerService) : Bas
         Model.Fertilizer = await fertilizerService.Get(id);
         OnPropertyChanged(nameof(Name));
         OnPropertyChanged(nameof(Description));
+        OnPropertyChanged(nameof(Quantity));
         OnPropertyChanged(nameof(IsActive));
     }
 
@@ -84,6 +86,7 @@ public class FertilizerEditViewModel(IFertilizerService fertilizerService) : Bas
         {
             await fertilizerService.Delete(Model.Fertilizer.Id);
             Model.Fertilizer.IsDeleted = true;
+            await unitOfWork.SaveChangesAsync();
             RequestClose?.Invoke(Model.Fertilizer);
         }
     }
@@ -101,6 +104,7 @@ public class FertilizerEditViewModel(IFertilizerService fertilizerService) : Bas
         else
         {
             await fertilizerService.Update(Model.Fertilizer);
+            await unitOfWork.SaveChangesAsync();
             RequestClose?.Invoke(Model.Fertilizer);
         }
     }

@@ -3,6 +3,7 @@ using FarmManager.App.Helpers;
 using FarmManager.App.Models.Varieties;
 using FarmManager.App.Views.Varieties;
 using FarmManager.Model.Model;
+using FarmManager.Model.UnitOfWork;
 using FarmManager.Services.Interfaces;
 
 namespace FarmManager.App.ViewModels.Varieties;
