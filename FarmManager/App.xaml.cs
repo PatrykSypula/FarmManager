@@ -1,6 +1,6 @@
 ﻿using System.Windows;
-using FarmManager.App.Models.Workdays.WorkdayCollecting;
-using FarmManager.App.Models.Workdays.WorkdayHourly;
+using FarmManager.App.Models.Workdays.WorkdaysCollecting;
+using FarmManager.App.Models.Workdays.WorkdaysHourly;
 using FarmManager.App.ViewModels;
 using FarmManager.App.ViewModels.Buys;
 using FarmManager.App.ViewModels.ChooseEntity;
@@ -15,8 +15,8 @@ using FarmManager.App.ViewModels.Sprayings;
 using FarmManager.App.ViewModels.Varieties;
 using FarmManager.App.ViewModels.Vendors;
 using FarmManager.App.ViewModels.Workdays;
-using FarmManager.App.ViewModels.Workdays.WorkdayCollecting;
-using FarmManager.App.ViewModels.Workdays.WorkdayHourly;
+using FarmManager.App.ViewModels.Workdays.WorkdaysCollecting;
+using FarmManager.App.ViewModels.Workdays.WorkdaysHourly;
 using FarmManager.App.Views.Buys;
 using FarmManager.App.Views.ChooseEntity;
 using FarmManager.App.Views.Deposits;
@@ -30,8 +30,8 @@ using FarmManager.App.Views.Sprayings;
 using FarmManager.App.Views.Varieties;
 using FarmManager.App.Views.Vendors;
 using FarmManager.App.Views.Workdays;
-using FarmManager.App.Views.Workdays.WorkdayCollecting;
-using FarmManager.App.Views.Workdays.WorkdayHourly;
+using FarmManager.App.Views.Workdays.WorkdaysCollecting;
+using FarmManager.App.Views.Workdays.WorkdaysHourly;
 using FarmManager.Model.DatabaseContext;
 using FarmManager.Model.UnitOfWork;
 using FarmManager.Services.Interfaces;
@@ -126,15 +126,14 @@ public partial class MyApp : Application
 
                 //Workdays
                 services.AddTransient<WorkdaysWindow>();
-                services.AddTransient<WorkdayWindow>();
-                services.AddTransient<AddWorkdayWindow>();
-                services.AddTransient<EditWorkdayWindow>();
-                services.AddTransient<AddWorkdayCollectingAddOneWindow>();
-                services.AddTransient<AddWorkdayCollectingAddAllWindow>();
-                services.AddTransient<AddWorkdayCollectingEditWindow>();
-                services.AddTransient<AddWorkdayHourlyAddAllWindow>();
-                services.AddTransient<AddWorkdayHourlyAddOneWindow>();
-                services.AddTransient<AddWorkdayHourlyEditWindow>();
+                services.AddTransient<WorkdayAddWindow>();
+                services.AddTransient<WorkdayEditWindow>();
+                services.AddTransient<WorkdayCollectingAddOneWindow>();
+                services.AddTransient<WorkdayCollectingAddAllWindow>();
+                services.AddTransient<WorkdayCollectingEditWindow>();
+                services.AddTransient<WorkdayHourlyAddAllWindow>();
+                services.AddTransient<WorkdayHourlyAddOneWindow>();
+                services.AddTransient<WorkdayHourlyEditWindow>();
 
                 #endregion
 
@@ -208,15 +207,14 @@ public partial class MyApp : Application
 
                 //Workdays
                 services.AddTransient<WorkdaysViewModel>();
-                services.AddTransient<WorkdayViewModel>();
-                services.AddTransient<AddWorkdayViewModel>();
-                services.AddTransient<EditWorkdayViewModel>();
-                services.AddTransient<AddWorkdayCollectingAddOneViewModel>();
-                services.AddTransient<AddWorkdayCollectingAddAllViewModel>();
-                services.AddTransient<AddWorkdayCollectingEditViewModel>();
-                services.AddTransient<AddWorkdayHourlyAddAllViewModel>();
-                services.AddTransient<AddWorkdayHourlyAddOneViewModel>();
-                services.AddTransient<AddWorkdayHourlyEditViewModel>();
+                services.AddTransient<WorkdayAddViewModel>();
+                services.AddTransient<WorkdayEditViewModel>();
+                services.AddTransient<WorkdayCollectingAddOneViewModel>();
+                services.AddTransient<WorkdayCollectingAddAllViewModel>();
+                services.AddTransient<WorkdayCollectingEditViewModel>();
+                services.AddTransient<WorkdayHourlyAddAllViewModel>();
+                services.AddTransient<WorkdayHourlyAddOneViewModel>();
+                services.AddTransient<WorkdayHourlyEditViewModel>();
 
 
                 #endregion

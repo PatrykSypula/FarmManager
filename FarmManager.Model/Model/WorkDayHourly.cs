@@ -2,9 +2,11 @@
 
 namespace FarmManager.Model.Model;
 
-public class WorkDayHourly : BaseEntity
+public class WorkdayHourly : BaseEntity
 {
     public int EmployeeId { get; set; }
     public Employee Employee { get; set; } = null!;
     public double Hours { get; set; }
+    public double Price { get; set; }
+    public double RemainingToPay { get; set; }
 }

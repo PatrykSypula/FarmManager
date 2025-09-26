@@ -112,34 +112,31 @@
     <Compile Update="Views\Vendors\VendorsWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Workdays\AddWorkdayWindow.xaml.cs">
+    <Compile Update="Views\Workdays\WorkdayAddWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Workdays\EditWorkdayWindow.xaml.cs">
+    <Compile Update="Views\Workdays\WorkdayEditWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Workdays\WorkdayCollecting\AddWorkdayCollectingAddAllWindow.xaml.cs">
+    <Compile Update="Views\Workdays\WorkdaysCollecting\WorkdayCollectingAddAllWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Workdays\WorkdayCollecting\AddWorkdayCollectingAddOneWindow.xaml.cs">
+    <Compile Update="Views\Workdays\WorkdaysCollecting\WorkdayCollectingAddOneWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Workdays\WorkdayCollecting\AddWorkdayCollectingEditWindow.xaml.cs">
+    <Compile Update="Views\Workdays\WorkdaysCollecting\WorkdayCollectingEditWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Workdays\WorkdayHourly\AddWorkdayHourlyAddAllWindow.xaml.cs">
+    <Compile Update="Views\Workdays\WorkdaysHourly\WorkdayHourlyAddAllWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Workdays\WorkdayHourly\AddWorkdayHourlyAddOneWindow.xaml.cs">
+    <Compile Update="Views\Workdays\WorkdaysHourly\WorkdayHourlyAddOneWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Workdays\WorkdayHourly\AddWorkdayHourlyEditWindow.xaml.cs">
+    <Compile Update="Views\Workdays\WorkdaysHourly\WorkdayHourlyEditWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Workdays\WorkdaysWindow.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Views\Workdays\WorkdayWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

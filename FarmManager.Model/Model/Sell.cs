@@ -10,4 +10,5 @@ public class Sell : BaseEntity
     public Harvest Harvest { get; set; } = null!;
     public decimal Price { get; set; }
     public int Quantity { get; set; }
+    public ICollection<SellHarvestQuantity> HarvestQuantity { get; set; } = [];
 }
