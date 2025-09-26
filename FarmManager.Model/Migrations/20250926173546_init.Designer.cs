@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FarmManager.Model.Migrations
 {
     [DbContext(typeof(FarmManagerContext))]
-    [Migration("20250926172854_init")]
+    [Migration("20250926173546_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -820,7 +820,7 @@ namespace FarmManager.Model.Migrations
                         .IsRequired();
 
                     b.HasOne("FarmManager.Model.Model.Workday", null)
-                        .WithMany("WorkDayCollectings")
+                        .WithMany("WorkdaysCollecting")
                         .HasForeignKey("WorkdayId");
 
                     b.Navigation("Employee");
@@ -835,7 +835,7 @@ namespace FarmManager.Model.Migrations
                         .IsRequired();
 
                     b.HasOne("FarmManager.Model.Model.Workday", null)
-                        .WithMany("WorkDayHourly")
+                        .WithMany("WorkdaysHourly")
                         .HasForeignKey("WorkdayId");
 
                     b.Navigation("Employee");
@@ -853,9 +853,9 @@ namespace FarmManager.Model.Migrations
 
             modelBuilder.Entity("FarmManager.Model.Model.Workday", b =>
                 {
-                    b.Navigation("WorkDayCollectings");
+                    b.Navigation("WorkdaysCollecting");
 
-                    b.Navigation("WorkDayHourly");
+                    b.Navigation("WorkdaysHourly");
                 });
 #pragma warning restore 612, 618
         }

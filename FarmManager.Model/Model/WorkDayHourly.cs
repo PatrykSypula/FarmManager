@@ -9,4 +9,6 @@ public class WorkdayHourly : BaseEntity
     public double Hours { get; set; }
     public double Price { get; set; }
     public double RemainingToPay { get; set; }
+    public int WorkdayId { get; set; }
+    public Workday Workday { get; set; }
 }
