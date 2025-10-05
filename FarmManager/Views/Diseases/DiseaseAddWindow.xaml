@@ -7,6 +7,7 @@
         xmlns:vm="clr-namespace:FarmManager.App.ViewModels.Diseases"
         xmlns:app="clr-namespace:FarmManager.App.Helpers"
         mc:Ignorable="d"
+        Language="pl-PL"
         Title="Dodawanie choroby" Height="470" Width="775"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"

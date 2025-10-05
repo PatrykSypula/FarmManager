@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FarmManager.App.Views.Workdays"
         mc:Ignorable="d"
+        Language="pl-PL"
         xmlns:app="clr-namespace:FarmManager.App.Helpers"
         Title="Dodawanie sprzedawcy" Height="720" Width="1280"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"

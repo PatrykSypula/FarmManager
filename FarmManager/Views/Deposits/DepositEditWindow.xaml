@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:FarmManager.App.Views.Deposits"
         xmlns:app="clr-namespace:FarmManager.App.Helpers"
         mc:Ignorable="d"
+        Language="pl-PL"
         Title="Edycja kupca" Height="800" Width="775"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"

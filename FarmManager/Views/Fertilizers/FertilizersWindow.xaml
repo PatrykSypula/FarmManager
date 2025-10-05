@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:FarmManager.App.Views.Fertilizers"
         xmlns:app="clr-namespace:FarmManager.App.Helpers"
         mc:Ignorable="d"
+        Language="pl-PL"
         Title="Wybór nawozu" Height="720" Width="500"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"

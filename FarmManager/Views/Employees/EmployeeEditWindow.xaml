@@ -7,6 +7,7 @@
         xmlns:vm="clr-namespace:FarmManager.App.ViewModels.Employees"
         xmlns:app="clr-namespace:FarmManager.App.Helpers"
         mc:Ignorable="d"
+        Language="pl-PL"
         Title="Edycja pracownika" Height="1080" Width="775"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -107,7 +108,7 @@
             BorderThickness="2" materialDesign:ButtonAssist.CornerRadius="10" 
             FontSize="30" Foreground="Black"/>
         <TextBox Margin="40,680,0,0" Width="680" Height="60" 
-            Text="{Binding BaseRent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N2}" 
+            Text="{Binding BaseRent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N2}" app:NumericTextBoxBehaviorHelper.IsNumericOnly="True"
             FontWeight="Medium" app:SelectAllOnFocus.Enable="True" 
             VerticalAlignment="Top" Background="Transparent" HorizontalAlignment="Left" 
             HorizontalContentAlignment="Left" VerticalContentAlignment="Center" 

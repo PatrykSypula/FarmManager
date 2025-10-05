@@ -31,6 +31,13 @@ public class WorkdaysViewModel(IWorkdayService workdayService) : BaseViewModel
     {
         Model.Date = date;
         Workdays = new ObservableCollection<Workday>(await workdayService.GetWorkdays(Model.Date));
+        foreach(var workday in Workdays)
+        {
+            if(workday.WorkdayType == WorkdayType.HarvestCollecting || workday.WorkdayType == WorkdayType.HarvestHourly)
+            {
+                workday.Action = new Model.Model.Action { Name = "Rwanie" };
+            }
+        }
     }
 
     public Workday SelectedItem
@@ -72,8 +79,7 @@ public class WorkdaysViewModel(IWorkdayService workdayService) : BaseViewModel
         var window = new WorkdayHarvestCollectingAddWindow(Model.Date, WorkdayType.HarvestCollecting);
         if (window.ShowDialog() == true && window.Workday != null)
         {
-            var spraying = await workdayService.GetWorkday(window.Workday.Id);
-            Workdays.Add(spraying);
+            Workdays.Add(window.Workday);
             OnPropertyChanged(nameof(Workdays));
         }
     }
@@ -82,8 +88,7 @@ public class WorkdaysViewModel(IWorkdayService workdayService) : BaseViewModel
         var window = new WorkdayHarvestHourlyAddWindow(Model.Date, WorkdayType.HarvestHourly);
         if (window.ShowDialog() == true && window.Workday != null)
         {
-            var spraying = await workdayService.GetWorkday(window.Workday.Id);
-            Workdays.Add(spraying);
+            Workdays.Add(window.Workday);
             OnPropertyChanged(nameof(Workdays));
         }
     }
@@ -92,8 +97,7 @@ public class WorkdaysViewModel(IWorkdayService workdayService) : BaseViewModel
         var window = new WorkdayHourlyWorkAddWindow(Model.Date, WorkdayType.HourlyWork);
         if (window.ShowDialog() == true && window.Workday != null)
         {
-            var spraying = await workdayService.GetWorkday(window.Workday.Id);
-            Workdays.Add(spraying);
+            Workdays.Add(window.Workday);
             OnPropertyChanged(nameof(Workdays));
         }
     }
@@ -101,12 +105,71 @@ public class WorkdaysViewModel(IWorkdayService workdayService) : BaseViewModel
     public RelayCommand Edit => new RelayCommand(execute => OpenWorkdayEditWindow());
     private void OpenWorkdayEditWindow()
     {
-        var window = new WorkdayEditWindow(SelectedItem.Id);
+        switch (SelectedItem.WorkdayType)
+        {
+            case WorkdayType.HarvestCollecting:
+                OpenWorkdayHarvestCollectingEditWindow();
+                break;
+            case WorkdayType.HarvestHourly:
+                OpenWorkdayHarvestHourlyEditWindow();
+                break;
+            case WorkdayType.HourlyWork:
+                OpenWorkdayHourlyWorkEditWindow();
+                break;
+        }
+    }
+    private void OpenWorkdayHarvestCollectingEditWindow()
+    {
+        var window = new WorkdayHarvestCollectingEditWindow(SelectedItem.Id);
         if (window.ShowDialog() == true && window.Workday != null)
         {
             var workday = window.Workday;
             var index = Workdays.ToList().FindIndex(d => d.Id == workday.Id);
 
+            if (index >= 0)
+            {
+                if (workday.IsDeleted)
+                {
+                    Workdays.RemoveAt(index);
+                }
+                else
+                {
+                    Workdays.RemoveAt(index);
+                    Workdays.Insert(index, workday);
+                }
+            }
+            OnPropertyChanged(nameof(Workdays));
+        }
+    }
+    private void OpenWorkdayHarvestHourlyEditWindow()
+    {
+        var window = new WorkdayHarvestHourlyEditWindow(SelectedItem.Id);
+        if (window.ShowDialog() == true && window.Workday != null)
+        {
+            var workday = window.Workday;
+            var index = Workdays.ToList().FindIndex(d => d.Id == workday.Id);
+            if (index >= 0)
+            {
+                if (workday.IsDeleted)
+                {
+                    Workdays.RemoveAt(index);
+                }
+                else
+                {
+                    Workdays.RemoveAt(index);
+                    Workdays.Insert(index, workday);
+                }
+            }
+            OnPropertyChanged(nameof(Workdays));
+        }
+    }
+    private void OpenWorkdayHourlyWorkEditWindow()
+    {
+        var window = new WorkdayHourlyWorkEditWindow(SelectedItem.Id);
+        if (window.ShowDialog() == true && window.Workday != null)
+        {
+            var workday = window.Workday;
+            var index = Workdays.ToList().FindIndex(d => d.Id == workday.Id);
             if (index >= 0)
             {
                 if (workday.IsDeleted)

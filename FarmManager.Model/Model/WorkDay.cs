@@ -15,11 +15,7 @@ public class Workday : BaseEntity
     public ICollection<WorkdayCollecting> WorkdaysCollecting { get; set; } = [];
     public ICollection<WorkdayHourly> WorkdaysHourly { get; set; } = [];
     public WorkdayType WorkdayType { get; set; }
-    public string? Description { get; set; }
-
-    [NotMapped]
-    public string Name => Plant?.Name ?? Action?.Name ?? string.Empty;
-    
+    public string? Description { get; set; }    
 }
 public enum WorkdayType
 {

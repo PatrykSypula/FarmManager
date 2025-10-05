@@ -9,7 +9,9 @@ public class WorkdayHourlyWorkValidator : AbstractValidator<Workday>
     {
         RuleFor(x => x.Date).NotEmpty().WithMessage("Data nie może być pusta.");
         RuleFor(x => x.Description).MaximumLength(100).WithMessage("Opis nie może mieć więcej niż 100 znaków.");
-        RuleFor(x => x.ActionId).GreaterThan(0).WithMessage("Należy wybrać akcję.");
+        RuleFor(x => x.ActionId)
+            .NotNull().WithMessage("Należy wybrać roślinę.")
+            .GreaterThan(0).WithMessage("Należy wybrać akcję.");
         RuleForEach(x => x.WorkdaysHourly)
             .Cascade(CascadeMode.Stop)
             .SetValidator(new WorkdayHourlyValidator());

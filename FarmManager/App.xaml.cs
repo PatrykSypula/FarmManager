@@ -130,7 +130,6 @@ public partial class MyApp : Application
                 services.AddTransient<WorkdaysCalendarWindow>();
                 services.AddTransient<WorkdaysWindow>();
                 services.AddTransient<WorkdayAddWindow>();
-                services.AddTransient<WorkdayEditWindow>();
                 services.AddTransient<WorkdayCollectingAddOneWindow>();
                 services.AddTransient<WorkdayCollectingAddAllWindow>();
                 services.AddTransient<WorkdayCollectingEditWindow>();
@@ -224,7 +223,6 @@ public partial class MyApp : Application
                 services.AddTransient<WorkdaysCalendarViewModel>();
                 services.AddTransient<WorkdaysViewModel>();
                 services.AddTransient<WorkdayAddViewModel>();
-                services.AddTransient<WorkdayEditViewModel>();
                 services.AddTransient<WorkdayCollectingAddOneViewModel>();
                 services.AddTransient<WorkdayCollectingAddAllViewModel>();
                 services.AddTransient<WorkdayCollectingEditViewModel>();

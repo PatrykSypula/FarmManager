@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:FarmManager.App.Views.Workdays"
         xmlns:app="clr-namespace:FarmManager.App.Helpers"
         mc:Ignorable="d"
+        Language="pl-PL"
         Title="Wybór choroby" Height="720" Width="500"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -36,7 +37,8 @@
                 </Style>
             </DataGrid.RowStyle>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Nazwa" Width="*" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Czynność" Width="*" Binding="{Binding Action.Name}"/>
+                <DataGridTextColumn Header="Roślina" Width="*" Binding="{Binding Plant.Name}"/>
             </DataGrid.Columns>
             <DataGrid.InputBindings>
                 <MouseBinding Gesture="LeftDoubleClick" Command="{Binding Edit}"/>

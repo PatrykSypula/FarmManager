@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:FarmManager.App.Views.Vendors"
         xmlns:app="clr-namespace:FarmManager.App.Helpers"
         mc:Ignorable="d"
+        Language="pl-PL"
         Title="Wybór sprzedawcy" Height="720" Width="775"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"

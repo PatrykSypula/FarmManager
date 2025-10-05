@@ -14,6 +14,7 @@ public class WorkdayService(IFarmManagerContext context) : IWorkdayService
         return await context.Workdays
             .Include(w => w.Plant)
             .Include(w => w.Action)
+            .Where(w => w.Date == date)
             .OrderByDescending(d => d.Id)
             .AsNoTracking()
             .ToListAsync();
@@ -21,17 +22,15 @@ public class WorkdayService(IFarmManagerContext context) : IWorkdayService
 
     public async Task<Workday> GetWorkday(int id)
     {
-        return await context.Workdays.AsNoTracking().Where(d => d.Id == id).FirstOrDefaultAsync();
+        return await context.Workdays.Include(x => x.WorkdaysCollecting).Include(x => x.WorkdaysHourly).AsNoTracking().Where(d => d.Id == id).FirstOrDefaultAsync();
     }
-    public async Task<WorkdayCollecting> GetWorkdayCollecting(int Id)
+    public async Task<ICollection<WorkdayCollecting>> GetWorkdaysCollecting(int id)
     {
-        return await context.WorkdayCollecting.AsNoTracking().Where(d => d.Id == Id).FirstOrDefaultAsync()
-            ?? throw new NotFoundException("Nie można znaleźć dnia na wagę.");
+        return await context.WorkdayCollecting.Include(x => x.Employee).AsNoTracking().Where(d => d.WorkdayId == id).ToListAsync();
     }
-    public async Task<WorkdayHourly> GetWorkdayHourly(int id)
+    public async Task<ICollection<WorkdayHourly>> GetWorkdaysHourly(int id)
     {
-        return await context.WorkdayHourly.AsNoTracking().Where(d => d.Id == id).FirstOrDefaultAsync()
-            ?? throw new NotFoundException("Nie można znaleźć dnia na godziny."); ;
+        return await context.WorkdayHourly.Include(x => x.Employee).AsNoTracking().Where(d => d.WorkdayId == id).ToListAsync();
     }
     public async Task Add(Workday entity)
     {
@@ -44,6 +43,8 @@ public class WorkdayService(IFarmManagerContext context) : IWorkdayService
         existingEntity.Description = entity.Description;
         existingEntity.WorkdaysHourly = entity.WorkdaysHourly;
         existingEntity.WorkdaysCollecting = entity.WorkdaysCollecting;
+        existingEntity.ActionId = entity.ActionId;
+        existingEntity.PlantId = entity.PlantId;
 
     }
     public async Task Delete(int id)

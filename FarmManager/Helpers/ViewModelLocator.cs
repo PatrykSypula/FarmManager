@@ -130,8 +130,6 @@ public class ViewModelLocator
         MyApp.ServiceProvider.GetRequiredService<WorkdaysCalendarViewModel>();
     public WorkdaysViewModel WorkdaysViewModel =>
         MyApp.ServiceProvider.GetRequiredService<WorkdaysViewModel>();
-    public WorkdayEditViewModel WorkdayEditViewModel =>
-        MyApp.ServiceProvider.GetRequiredService<WorkdayEditViewModel>();
     public WorkdayAddViewModel WorkdayAddViewModel =>
         MyApp.ServiceProvider.GetRequiredService<WorkdayAddViewModel>();
     public WorkdayCollectingAddOneViewModel WorkdayCollectingAddOneViewModel =>

@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FarmManager.App.Views.EmployeeCosts"
                 xmlns:app="clr-namespace:FarmManager.App.Helpers"
+        Language="pl-PL"
         mc:Ignorable="d"
         Title="Wybór rośliny" Height="720" Width="775"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
