@@ -10,8 +10,8 @@ public class SprayingRegisterValidator : AbstractValidator<Fertilizer>
     {
         _registerQuantity = availableQuantity;
 
-        RuleFor(f => f.Quantity)
-            .GreaterThanOrEqualTo(_registerQuantity)
-            .WithMessage($"Nie ma tyle nawozów w magazynie.");
+        //RuleFor(f => f.Quantity)
+        //    .GreaterThanOrEqualTo(_registerQuantity)
+        //    .WithMessage($"Nie ma tyle nawozów w magazynie.");
     }
 }

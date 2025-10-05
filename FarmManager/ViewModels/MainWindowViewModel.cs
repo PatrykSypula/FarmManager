@@ -1,5 +1,6 @@
 ﻿using FarmManager.App.Helpers;
 using FarmManager.App.Models;
+using FarmManager.App.Views.Actions;
 using FarmManager.App.Views.Buys;
 using FarmManager.App.Views.Deposits;
 using FarmManager.App.Views.Diseases;
@@ -99,6 +100,12 @@ public class MainWindowViewModel : BaseViewModel
     public RelayCommand Workdays => new RelayCommand(execute => OpenWorkdaysWindow());
     private void OpenWorkdaysWindow()
     {
-        new WorkdaysWindow().ShowDialog();
+        new WorkdaysCalendarWindow().ShowDialog();
+    }
+
+    public RelayCommand Actions => new RelayCommand(execute => OpenActionsWindow());
+    private void OpenActionsWindow()
+    {
+        new ActionsWindow().ShowDialog();
     }
 }

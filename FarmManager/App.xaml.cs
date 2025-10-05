@@ -2,6 +2,7 @@
 using FarmManager.App.Models.Workdays.WorkdaysCollecting;
 using FarmManager.App.Models.Workdays.WorkdaysHourly;
 using FarmManager.App.ViewModels;
+using FarmManager.App.ViewModels.Actions;
 using FarmManager.App.ViewModels.Buys;
 using FarmManager.App.ViewModels.ChooseEntity;
 using FarmManager.App.ViewModels.Deposits;
@@ -17,6 +18,7 @@ using FarmManager.App.ViewModels.Vendors;
 using FarmManager.App.ViewModels.Workdays;
 using FarmManager.App.ViewModels.Workdays.WorkdaysCollecting;
 using FarmManager.App.ViewModels.Workdays.WorkdaysHourly;
+using FarmManager.App.Views.Actions;
 using FarmManager.App.Views.Buys;
 using FarmManager.App.Views.ChooseEntity;
 using FarmManager.App.Views.Deposits;
@@ -125,6 +127,7 @@ public partial class MyApp : Application
                 services.AddTransient<EmployeeCostEditWindow>();
 
                 //Workdays
+                services.AddTransient<WorkdaysCalendarWindow>();
                 services.AddTransient<WorkdaysWindow>();
                 services.AddTransient<WorkdayAddWindow>();
                 services.AddTransient<WorkdayEditWindow>();
@@ -134,6 +137,18 @@ public partial class MyApp : Application
                 services.AddTransient<WorkdayHourlyAddAllWindow>();
                 services.AddTransient<WorkdayHourlyAddOneWindow>();
                 services.AddTransient<WorkdayHourlyEditWindow>();
+                services.AddTransient<WorkdaysSelectTypeWindow>();
+                services.AddTransient<WorkdayHarvestCollectingEditWindow>();
+                services.AddTransient<WorkdayHarvestCollectingAddWindow>();
+                services.AddTransient<WorkdayHarvestHourlyEditWindow>();
+                services.AddTransient<WorkdayHarvestHourlyAddWindow>();
+                services.AddTransient<WorkdayHourlyWorkEditWindow>();
+                services.AddTransient<WorkdayHourlyWorkAddWindow>();
+
+                //Actions
+                services.AddTransient<ActionsWindow>();
+                services.AddTransient<ActionAddWindow>();
+                services.AddTransient<ActionEditWindow>();
 
                 #endregion
 
@@ -206,6 +221,7 @@ public partial class MyApp : Application
                 services.AddTransient<EmployeeCostEditViewModel>();
 
                 //Workdays
+                services.AddTransient<WorkdaysCalendarViewModel>();
                 services.AddTransient<WorkdaysViewModel>();
                 services.AddTransient<WorkdayAddViewModel>();
                 services.AddTransient<WorkdayEditViewModel>();
@@ -215,6 +231,18 @@ public partial class MyApp : Application
                 services.AddTransient<WorkdayHourlyAddAllViewModel>();
                 services.AddTransient<WorkdayHourlyAddOneViewModel>();
                 services.AddTransient<WorkdayHourlyEditViewModel>();
+                services.AddTransient<WorkdaysSelectTypeViewModel>();
+                services.AddTransient<WorkdayHarvestCollectingEditViewModel>();
+                services.AddTransient<WorkdayHarvestCollectingAddViewModel>();
+                services.AddTransient<WorkdayHarvestHourlyEditViewModel>();
+                services.AddTransient<WorkdayHarvestHourlyAddViewModel>();
+                services.AddTransient<WorkdayHourlyWorkEditViewModel>();
+                services.AddTransient<WorkdayHourlyWorkAddViewModel>();
+
+                //Actions
+                services.AddTransient<ActionsViewModel>();
+                services.AddTransient<ActionAddViewModel>();
+                services.AddTransient<ActionEditViewModel>();
 
 
                 #endregion
@@ -236,6 +264,8 @@ public partial class MyApp : Application
                 services.AddScoped<ISprayingService, SprayingService>();
                 services.AddScoped<IEmployeeCostService, EmployeeCostService>();
                 services.AddScoped<IWorkdayService, WorkdayService>();
+                services.AddScoped<IHarvestService, HarvestService>();
+                services.AddScoped<IActionService, ActionService>();
 
                 //Service Prodiver
                 ServiceProvider = services.BuildServiceProvider();

@@ -19,7 +19,7 @@ public class EmployeeValidator : AbstractValidator<Employee>
             .GreaterThanOrEqualTo(0).When(e => e.IsRentable)
             .WithMessage("Podstawowa stawka wynajmu musi być większa lub równa zero, jeśli pracownik jest wynajmowany.");
         RuleFor(e => e.PhoneNumber)
-           .Matches(@"^\+?[1-9]\d{1,14}$").WithMessage("Numer telefonu nie jest poprawny")
+           .Matches(@"^\+?[1-9]\d{1,14}$").WithMessage("Numer telefonu nie jest poprawny.")
            .When(e => !string.IsNullOrEmpty(e.PhoneNumber));
         RuleFor(e => e.Email)
             .EmailAddress().When(e => !string.IsNullOrEmpty(e.Email))

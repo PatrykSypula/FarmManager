@@ -1,13 +1,29 @@
-﻿using FarmManager.Model.Model.Base;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using FarmManager.Model.Model.Base;
 
 namespace FarmManager.Model.Model;
 
 public class Workday : BaseEntity
 {
-    public DateTimeOffset Date { get; set; }
+    public DateOnly Date { get; set; }
+    public int? PlantId { get; set; }
+    public Plant? Plant { get; set; }
+    public int? HarvestId { get; set; }
+    public Harvest? Harvest { get; set; }
+    public int? ActionId { get; set; }
+    public Action? Action { get; set; }
     public ICollection<WorkdayCollecting> WorkdaysCollecting { get; set; } = [];
-    public bool IsCollectingPayed { get; set; } = false;
     public ICollection<WorkdayHourly> WorkdaysHourly { get; set; } = [];
-    public bool IsHourlyPayed { get; set; } = false;
+    public WorkdayType WorkdayType { get; set; }
     public string? Description { get; set; }
+
+    [NotMapped]
+    public string Name => Plant?.Name ?? Action?.Name ?? string.Empty;
+    
+}
+public enum WorkdayType
+{
+    HarvestCollecting,
+    HarvestHourly,
+    HourlyWork
 }

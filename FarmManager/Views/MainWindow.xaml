@@ -37,6 +37,7 @@
                 <MenuItem Header="Nawozy" Command="{Binding Fertilizers}" FontSize="20" />
                 <MenuItem Header="Odmiany" Command="{Binding Varieties}" FontSize="20" />
                 <MenuItem Header="Sprzedawcy" Command="{Binding Vendors}" FontSize="20" />
+                <MenuItem Header="Czynności" Command="{Binding Actions}" FontSize="20" />
             </MenuItem>
         </Menu>
         <Button IsEnabled="False" Opacity="1" Content="RolnikPro" Background="White" HorizontalAlignment="Left" Margin="50,100,0,0" VerticalAlignment="Top" BorderThickness="2" materialDesign:ButtonAssist.CornerRadius="10" Width="500" Height="40" FontSize="20" Foreground="Black"/>

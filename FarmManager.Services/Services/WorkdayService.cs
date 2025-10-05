@@ -9,21 +9,17 @@ namespace FarmManager.Services.Services;
 
 public class WorkdayService(IFarmManagerContext context) : IWorkdayService
 {
-    public async Task<ICollection<Workday>> GetAll(bool activeOnly = true)
+    public async Task<ICollection<Workday>> GetWorkdays(DateOnly date)
     {
-        IQueryable<Workday> query = context.Workdays.AsQueryable();
-        if (activeOnly)
-        {
-            query = query.Where(d => d.IsActive);
-        }
-
-        return await query
-            .OrderByDescending(d => d.IsActive)
-            .ThenBy(d => d.Id)
+        return await context.Workdays
+            .Include(w => w.Plant)
+            .Include(w => w.Action)
+            .OrderByDescending(d => d.Id)
             .AsNoTracking()
             .ToListAsync();
     }
-    public async Task<Workday?> GetWorkday(int id)
+
+    public async Task<Workday> GetWorkday(int id)
     {
         return await context.Workdays.AsNoTracking().Where(d => d.Id == id).FirstOrDefaultAsync();
     }
@@ -48,32 +44,6 @@ public class WorkdayService(IFarmManagerContext context) : IWorkdayService
         existingEntity.Description = entity.Description;
         existingEntity.WorkdaysHourly = entity.WorkdaysHourly;
         existingEntity.WorkdaysCollecting = entity.WorkdaysCollecting;
-        double remainingToPay = 0;
-        foreach (var item in existingEntity.WorkdaysHourly)
-        {
-            remainingToPay += item.RemainingToPay;
-        }
-        if (remainingToPay == 0)
-        {
-            existingEntity.IsHourlyPayed = true;
-        }
-        else
-        {
-                       existingEntity.IsHourlyPayed = false;
-        }
-        remainingToPay = 0;
-        foreach (var item in existingEntity.WorkdaysCollecting)
-        {
-            remainingToPay += item.RemainingToPay;
-        }
-        if (remainingToPay == 0)
-        {
-            existingEntity.IsHourlyPayed = true;
-        }
-        else
-        {
-            existingEntity.IsHourlyPayed = false;
-        }
 
     }
     public async Task Delete(int id)

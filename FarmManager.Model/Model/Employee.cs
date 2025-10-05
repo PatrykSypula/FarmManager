@@ -11,6 +11,4 @@ public class Employee : BaseEntity, IContactable
     public double? BaseRent { get; set; }
     public string? PhoneNumber { get; set; }
     public string? Email { get; set; }
-    public double ToPay { get; set; } = 0;
-    public double TotalEarned { get; set; } = 0;
 }

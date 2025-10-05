@@ -1,94 +1,125 @@
-﻿using System.CodeDom.Compiler;
-using System.Collections.ObjectModel;
-using System.Windows.Input;
+﻿using System.Collections.ObjectModel;
 using FarmManager.App.Helpers;
-using FarmManager.App.Views;
+using FarmManager.App.Models.Sprayings;
+using FarmManager.App.Models.Workdays;
+using FarmManager.App.Views.Sprayings;
+using FarmManager.App.Views.Workdays;
+using FarmManager.App.Views.Workdays.WorkdaysCollecting;
+using FarmManager.App.Views.Workdays.WorkdaysHourly;
+using FarmManager.Model.Model;
+using FarmManager.Services.Interfaces;
+using FarmManager.Services.Services;
 
 namespace FarmManager.App.ViewModels.Workdays;
-
-public class WorkdaysViewModel : BaseViewModel
+public class WorkdaysViewModel(IWorkdayService workdayService) : BaseViewModel
 {
-    public ObservableCollection<SchedulerDay> Days { get; } = new();
-    public string CurrentMonthName => char.ToUpper(SelectedMonth.ToString("MMMM yyyy")[0]) + SelectedMonth.ToString("MMMM yyyy").Substring(1);
-    public int Rows { get; private set; } = 6;
+    #region Properties
 
-    public DateTimeOffset SelectedMonth { get; private set; } = DateTimeOffset.UtcNow;
+    public WorkdaysModel Model = new WorkdaysModel();
 
-    public RelayCommand PreviousMonth => new RelayCommand(execute => ChangeMonth(-1));
-
-    public RelayCommand NextMonth => new RelayCommand(execute => ChangeMonth(1));
-
-    public RelayCommand CurrentMonth => new RelayCommand(execute => SetCurrentMonth());
-    private void SetCurrentMonth()
+    public ObservableCollection<Workday> Workdays
     {
-        SelectedMonth = DateTime.Today;
-        BuildCalendar();
-        OnPropertyChanged(nameof(CurrentMonthName));
-    }
-
-    public RelayCommand DayClick => new RelayCommand(execute => DayClickOpenWorkDay(execute));
-    private void DayClickOpenWorkDay(object execute)
-    {
-        if(execute is DateTime date)
+        get { return Model.Workdays; }
+        set
         {
-            new CustomMessageBoxOk(date.ToString("dd.MM.yyyy")).ShowDialog();
+            Model.Workdays = value;
+            OnPropertyChanged();
         }
     }
 
-    public WorkdaysViewModel()
+    public async Task InitializeAsync(DateOnly date)
     {
-        BuildCalendar();
+        Model.Date = date;
+        Workdays = new ObservableCollection<Workday>(await workdayService.GetWorkdays(Model.Date));
     }
 
-    private void ChangeMonth(int delta)
+    public Workday SelectedItem
     {
-        SelectedMonth = SelectedMonth.AddMonths(delta);
-        BuildCalendar();
-        OnPropertyChanged(nameof(CurrentMonthName));
-    }
-
-    private static readonly Random _random = new();
-
-    private void BuildCalendar()
-    {
-        Days.Clear();
-
-        var firstOfMonth = new DateTime(SelectedMonth.Year, SelectedMonth.Month, 1);
-        var daysInMonth = DateTime.DaysInMonth(SelectedMonth.Year, SelectedMonth.Month);
-
-        int offset = ((int)firstOfMonth.DayOfWeek + 6) % 7; // first Monday
-        var startDate = firstOfMonth.AddDays(-offset);
-
-        int totalDays = offset + daysInMonth;
-        Rows = (int)Math.Ceiling(totalDays / 7.0);
-
-        for (int i = 0; i < Rows * 7; i++)
+        get { return Model.SelectedItem; }
+        set
         {
-            var day = startDate.AddDays(i);
-            var events = new List<SchedulerEvent>();
+            Model.SelectedItem = value;
+            OnPropertyChanged();
+        }
+    }
 
-            if (day.Month == SelectedMonth.Month)
+    #endregion
+
+    public RelayCommand Create => new RelayCommand(execute => OpenSelectWorkdayTypeWindow());
+
+    private void OpenSelectWorkdayTypeWindow()
+    {
+        var window = new WorkdaysSelectTypeWindow();
+        if (window.ShowDialog() == true && window.WorkdayType != null)
+        {
+            switch (window.WorkdayType)
             {
-                int numberOfEvents = _random.Next(0, 4); // 0–3 events
-                for (int e = 1; e <= numberOfEvents; e++)
+                case WorkdayType.HarvestCollecting:
+                    OpenHarvestCollectingWindow();
+                    break;
+                case WorkdayType.HarvestHourly:
+                    OpenHarvestHourlyWindow();
+                    break;
+                case WorkdayType.HourlyWork:
+                    OpenHourlyWorkWindow();
+                    break;
+            }
+        }
+    }
+    
+    private async void OpenHarvestCollectingWindow()
+    {
+        var window = new WorkdayHarvestCollectingAddWindow(Model.Date, WorkdayType.HarvestCollecting);
+        if (window.ShowDialog() == true && window.Workday != null)
+        {
+            var spraying = await workdayService.GetWorkday(window.Workday.Id);
+            Workdays.Add(spraying);
+            OnPropertyChanged(nameof(Workdays));
+        }
+    }
+    private async void OpenHarvestHourlyWindow()
+    {
+        var window = new WorkdayHarvestHourlyAddWindow(Model.Date, WorkdayType.HarvestHourly);
+        if (window.ShowDialog() == true && window.Workday != null)
+        {
+            var spraying = await workdayService.GetWorkday(window.Workday.Id);
+            Workdays.Add(spraying);
+            OnPropertyChanged(nameof(Workdays));
+        }
+    }
+    private async void OpenHourlyWorkWindow()
+    {
+        var window = new WorkdayHourlyWorkAddWindow(Model.Date, WorkdayType.HourlyWork);
+        if (window.ShowDialog() == true && window.Workday != null)
+        {
+            var spraying = await workdayService.GetWorkday(window.Workday.Id);
+            Workdays.Add(spraying);
+            OnPropertyChanged(nameof(Workdays));
+        }
+    }
+
+    public RelayCommand Edit => new RelayCommand(execute => OpenWorkdayEditWindow());
+    private void OpenWorkdayEditWindow()
+    {
+        var window = new WorkdayEditWindow(SelectedItem.Id);
+        if (window.ShowDialog() == true && window.Workday != null)
+        {
+            var workday = window.Workday;
+            var index = Workdays.ToList().FindIndex(d => d.Id == workday.Id);
+
+            if (index >= 0)
+            {
+                if (workday.IsDeleted)
                 {
-                    bool isPaid = _random.Next(0, 2) == 1; // random paid/unpaid
-                    events.Add(new SchedulerEvent
-                    {
-                        Text = "Pryskanie",
-                        IsPaid = isPaid
-                    });
+                    Workdays.RemoveAt(index);
+                }
+                else
+                {
+                    Workdays.RemoveAt(index);
+                    Workdays.Insert(index, workday);
                 }
             }
-
-            Days.Add(new SchedulerDay
-            {
-                Date = day,
-                IsCurrentMonth = day.Month == SelectedMonth.Month,
-                Events = events
-            });
+            OnPropertyChanged(nameof(Workdays));
         }
-
-        OnPropertyChanged(nameof(Rows));
     }
 }

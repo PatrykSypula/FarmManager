@@ -1,4 +1,5 @@
 ﻿using FarmManager.App.ViewModels;
+using FarmManager.App.ViewModels.Actions;
 using FarmManager.App.ViewModels.Buys;
 using FarmManager.App.ViewModels.ChooseEntity;
 using FarmManager.App.ViewModels.Deposits;
@@ -125,6 +126,8 @@ public class ViewModelLocator
         MyApp.ServiceProvider.GetRequiredService<EmployeeCostEditViewModel>();
 
     //Workdays
+    public WorkdaysCalendarViewModel WorkdaysCalendarViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<WorkdaysCalendarViewModel>();
     public WorkdaysViewModel WorkdaysViewModel =>
         MyApp.ServiceProvider.GetRequiredService<WorkdaysViewModel>();
     public WorkdayEditViewModel WorkdayEditViewModel =>
@@ -143,5 +146,28 @@ public class ViewModelLocator
         MyApp.ServiceProvider.GetRequiredService<WorkdayHourlyAddOneViewModel>();
     public WorkdayHourlyEditViewModel WorkdayHourlyEditViewModel =>
        MyApp.ServiceProvider.GetRequiredService<WorkdayHourlyEditViewModel>();
+    public WorkdaysSelectTypeViewModel WorkdaysSelectTypeViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<WorkdaysSelectTypeViewModel>();
+    public WorkdayHarvestCollectingAddViewModel WorkdayHarvestCollectingAddViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<WorkdayHarvestCollectingAddViewModel>();
+    public WorkdayHarvestCollectingEditViewModel WorkdayHarvestCollectingEditViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<WorkdayHarvestCollectingEditViewModel>();
+    public WorkdayHarvestHourlyAddViewModel WorkdayHarvestHourlyAddViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<WorkdayHarvestHourlyAddViewModel>();
+    public WorkdayHarvestHourlyEditViewModel WorkdayHarvestHourlyEditViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<WorkdayHarvestHourlyEditViewModel>();
+    public WorkdayHourlyWorkAddViewModel WorkdayHourlyWorkAddViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<WorkdayHourlyWorkAddViewModel>();
+    public WorkdayHourlyWorkEditViewModel WorkdayHourlyWorkEditViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<WorkdayHourlyWorkEditViewModel>();
+
+    //Actions
+    public ActionsViewModel ActionsViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<ActionsViewModel>();
+    public ActionAddViewModel ActionAddViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<ActionAddViewModel>();
+    public ActionEditViewModel ActionEditViewModel => 
+        MyApp.ServiceProvider.GetRequiredService<ActionEditViewModel>();
+
 
 }

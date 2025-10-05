@@ -108,7 +108,7 @@ public class BuyEditViewModel(IBuyService buyService, IVendorService vendorServi
             {
                 await buyService.Delete(Model.Buy.Id);
                 Model.Buy.IsDeleted = true;
-                await fertilizerService.AddQuantity(Model.Fertilizer.Id, -Model.Buy.RemainingQuantity);
+                //await fertilizerService.AddQuantity(Model.Fertilizer.Id, -Model.Buy.RemainingQuantity);
                 await unitOfWork.SaveChangesAsync();
                 RequestClose?.Invoke(Model.Buy);
             }

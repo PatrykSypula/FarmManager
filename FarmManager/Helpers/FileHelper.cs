@@ -4,21 +4,20 @@ namespace FarmManager.App.Helpers;
 
 public static class FileHelper
 {
-    private const string _fileName = "load.txt";
 
-    public static void Write(string id)
+    public static void Write(string filename, string data)
     {
-        File.WriteAllText(_fileName, id);
+        File.WriteAllText(filename, data);
     }
-    public static string Read()
+    public static string Read(string filename)
     {
         try
         {
-            return File.ReadAllText(_fileName);
+            return File.ReadAllText(filename);
         }
         catch
         {
-            return "1";
+            return "";
         }
     }
 }

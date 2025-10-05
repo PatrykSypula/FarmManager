@@ -100,7 +100,7 @@ public class SprayingAddViewModel(ISprayingService sprayingService, IFertilizerS
             else
             {
                 Model.Spraying.BuyQuantity = await buyService.AdjustRemainingQuantity(Model.Spraying.Quantity, Model.Fertilizer.Id);
-                await fertilizerService.AddQuantity(Model.Fertilizer.Id, -Model.Spraying.Quantity);
+                //await fertilizerService.AddQuantity(Model.Fertilizer.Id, -Model.Spraying.Quantity);
                 await sprayingService.Add(Model.Spraying);
                 await unitOfWork.SaveChangesAsync();
                 RequestClose?.Invoke(Model.Spraying);

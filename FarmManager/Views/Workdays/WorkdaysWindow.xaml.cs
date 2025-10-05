@@ -5,9 +5,9 @@ namespace FarmManager.App.Views.Workdays;
 
 public partial class WorkdaysWindow : Window
 {
-    public WorkdaysWindow()
+    public WorkdaysWindow(DateOnly date)
     {
         InitializeComponent();
-        //Loaded += async (_, __) => await ((WorkdaysViewModel)DataContext).InitializeAsync();
+        Loaded += async (_, __) => await ((WorkdaysViewModel)DataContext).InitializeAsync(date);
     }
 }

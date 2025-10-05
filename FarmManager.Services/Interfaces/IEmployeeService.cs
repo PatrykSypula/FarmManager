@@ -9,4 +9,5 @@ public interface IEmployeeService
     Task Add(Employee entity);
     Task Update(Employee entity);
     Task Delete(int id);
+    Task<ICollection<Employee>> GetActiveForWorkday(IEnumerable<int> ids);
 }

@@ -1,10 +1,12 @@
 ﻿using FarmManager.Model.Model;
 using Microsoft.EntityFrameworkCore;
+using Action = FarmManager.Model.Model.Action;
 
 namespace FarmManager.Model.DatabaseContext;
 
 public interface IFarmManagerContext
 {
+    public DbSet<Action> Actions { get; set; }
     public DbSet<Buy> Buys { get; set; }
     public DbSet<Deposit> Deposits { get; set; }
     public DbSet<Disease> Diseases { get; set; }

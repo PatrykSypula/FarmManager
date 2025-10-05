@@ -9,8 +9,8 @@ public class DiseaseValidator : AbstractValidator<Disease>
     {
         RuleFor(d => d.Name)
             .NotEmpty().WithMessage("Nazwa nie może być pusta.")
-            .MaximumLength(50).WithMessage("Nazwa nie moze mieć wiecej niż 50 znaków");
+            .MaximumLength(50).WithMessage("Nazwa nie moze mieć wiecej niż 50 znaków.");
         RuleFor(d => d.Description)
-            .MaximumLength(100).WithMessage("Opis nie może mieć więcej niż 100 znaków");
+            .MaximumLength(100).WithMessage("Opis nie może mieć więcej niż 100 znaków.");
     }
 }

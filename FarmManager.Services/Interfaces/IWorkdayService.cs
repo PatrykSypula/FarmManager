@@ -4,8 +4,8 @@ namespace FarmManager.Services.Interfaces;
 
 public interface IWorkdayService
 {
-    Task<ICollection<Workday>> GetAll(bool activeOnly = true);
-    Task<Workday?> GetWorkday(int id);
+    Task<ICollection<Workday>> GetWorkdays(DateOnly date);
+    Task<Workday> GetWorkday(int id);
     Task<WorkdayCollecting> GetWorkdayCollecting(int id);
     Task<WorkdayHourly> GetWorkdayHourly(int id);
     Task Add(Workday entity);

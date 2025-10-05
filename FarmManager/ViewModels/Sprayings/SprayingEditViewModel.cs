@@ -98,7 +98,7 @@ public class SprayingEditViewModel(ISprayingService sprayingService, IFertilizer
         if (result == true)
         {
             await buyService.RevertRemainingQuantity(Model.Spraying.BuyQuantity);
-            await fertilizerService.AddQuantity(Model.Fertilizer.Id, Model.Spraying.Quantity);
+            //await fertilizerService.AddQuantity(Model.Fertilizer.Id, Model.Spraying.Quantity);
             await sprayingService.Delete(Model.Spraying.Id);
             Model.Spraying.IsDeleted = true;
             await unitOfWork.SaveChangesAsync();

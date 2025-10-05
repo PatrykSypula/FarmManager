@@ -7,6 +7,15 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Views\Actions\ActionAddWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Actions\ActionEditWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Actions\ActionsWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Buys\BuyAddWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -127,6 +136,18 @@
     <Compile Update="Views\Workdays\WorkdaysCollecting\WorkdayCollectingEditWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\Workdays\WorkdaysCollecting\WorkdayHarvestCollectingAddWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Workdays\WorkdaysCollecting\WorkdayHarvestCollectingEditWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Workdays\WorkdaysHourly\WorkdayHarvestHourlyAddWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Workdays\WorkdaysHourly\WorkdayHarvestHourlyEditWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Workdays\WorkdaysHourly\WorkdayHourlyAddAllWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -134,6 +155,18 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Workdays\WorkdaysHourly\WorkdayHourlyEditWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Workdays\WorkdaysCalendarWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Workdays\WorkdaysHourly\WorkdayHourlyWorkAddWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Workdays\WorkdaysHourly\WorkdayHourlyWorkEditWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Workdays\WorkdaysSelectTypeWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Workdays\WorkdaysWindow.xaml.cs">
