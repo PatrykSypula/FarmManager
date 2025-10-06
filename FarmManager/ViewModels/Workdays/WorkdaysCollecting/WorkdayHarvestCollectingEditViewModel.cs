@@ -9,6 +9,7 @@ using FarmManager.Model.Model;
 using FarmManager.Model.UnitOfWork;
 using FarmManager.Services.Interfaces;
 using FarmManager.Services.Services;
+using Microsoft.EntityFrameworkCore;
 
 namespace FarmManager.App.ViewModels.Workdays.WorkdaysCollecting;
 
@@ -194,11 +195,11 @@ public class WorkdayHarvestCollectingEditViewModel(IWorkdayService workdayServic
     public RelayCommand Delete => new RelayCommand(async execute => await DeleteWorkdayAsync());
     private async Task DeleteWorkdayAsync()
     {
-        var result = new CustomMessageBoxYesNo("Czy na pewno chcesz usunąć tą roślinę?").ShowDialog();
+        var result = new CustomMessageBoxYesNo("Czy na pewno chcesz usunąć ten dzień?").ShowDialog();
         if (result == true)
         {
-            await workdayService.Delete(Model.Plant.Id);
             await harvestService.Delete(Model.Harvest.Id);
+            await workdayService.Delete(Model.Workday.Id);
             Model.Workday.IsDeleted = true;
             await unitOfWork.SaveChangesAsync();
             RequestClose?.Invoke(Model.Workday);
@@ -217,13 +218,18 @@ public class WorkdayHarvestCollectingEditViewModel(IWorkdayService workdayServic
         }
         else
         {
+            foreach (var wc in Model.Workday.WorkdaysCollecting)
+            {
+                wc.Employee = null;
+                wc.Workday = null;
+            }
+            Model.Workday.Action = null;
+            Model.Workday.Harvest = null;
+            Model.Workday.Plant = null;
             await harvestService.Update(Model.Harvest);
             await workdayService.Update(Model.Workday);
             await unitOfWork.SaveChangesAsync();
-            Model.Workday.Action = new Model.Model.Action()
-            {
-                Name = "Rwanie",
-            };
+            await workdayService.Detach(Model.Workday);
             Model.Workday.Plant = Model.Plant;
             RequestClose?.Invoke(Model.Workday);
         }

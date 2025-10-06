@@ -19,6 +19,9 @@
     <Compile Update="Views\Buys\BuyAddWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\ChooseEntity\ChooseActionWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\ChooseEntity\ChooseEmployeeWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

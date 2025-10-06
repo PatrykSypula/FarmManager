@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FarmManager.Services.Services;
 
-public class WorkdayService(IFarmManagerContext context) : IWorkdayService
+public class WorkdayService(FarmManagerContext context) : IWorkdayService
 {
     public async Task<ICollection<Workday>> GetWorkdays(DateOnly date)
     {
@@ -35,6 +35,7 @@ public class WorkdayService(IFarmManagerContext context) : IWorkdayService
     public async Task Add(Workday entity)
     {
         context.Workdays.Update(entity);
+        
     }
     public async Task Update(Workday entity)
     {
@@ -52,5 +53,10 @@ public class WorkdayService(IFarmManagerContext context) : IWorkdayService
         var entity = await context.Workdays.FirstOrDefaultAsync(d => d.Id == id) ??
             throw new NotFoundException("Nie mozna znaleźć dnia pracy.");
         entity.IsDeleted = true;
+    }
+
+    public async Task Detach(Workday entity)
+    {
+        context.Entry(entity).State = EntityState.Detached;
     }
 }

@@ -35,7 +35,7 @@ public class WorkdaysViewModel(IWorkdayService workdayService) : BaseViewModel
         {
             if(workday.WorkdayType == WorkdayType.HarvestCollecting || workday.WorkdayType == WorkdayType.HarvestHourly)
             {
-                workday.Action = new Model.Model.Action { Name = "Rwanie" };
+                AddAction(workday);
             }
         }
     }
@@ -79,6 +79,7 @@ public class WorkdaysViewModel(IWorkdayService workdayService) : BaseViewModel
         var window = new WorkdayHarvestCollectingAddWindow(Model.Date, WorkdayType.HarvestCollecting);
         if (window.ShowDialog() == true && window.Workday != null)
         {
+            AddAction(window.Workday);
             Workdays.Add(window.Workday);
             OnPropertyChanged(nameof(Workdays));
         }
@@ -88,6 +89,7 @@ public class WorkdaysViewModel(IWorkdayService workdayService) : BaseViewModel
         var window = new WorkdayHarvestHourlyAddWindow(Model.Date, WorkdayType.HarvestHourly);
         if (window.ShowDialog() == true && window.Workday != null)
         {
+            AddAction(window.Workday);
             Workdays.Add(window.Workday);
             OnPropertyChanged(nameof(Workdays));
         }
@@ -97,6 +99,7 @@ public class WorkdaysViewModel(IWorkdayService workdayService) : BaseViewModel
         var window = new WorkdayHourlyWorkAddWindow(Model.Date, WorkdayType.HourlyWork);
         if (window.ShowDialog() == true && window.Workday != null)
         {
+            AddAction(window.Workday);
             Workdays.Add(window.Workday);
             OnPropertyChanged(nameof(Workdays));
         }
@@ -124,6 +127,7 @@ public class WorkdaysViewModel(IWorkdayService workdayService) : BaseViewModel
         if (window.ShowDialog() == true && window.Workday != null)
         {
             var workday = window.Workday;
+            AddAction(window.Workday);
             var index = Workdays.ToList().FindIndex(d => d.Id == workday.Id);
 
             if (index >= 0)
@@ -147,6 +151,7 @@ public class WorkdaysViewModel(IWorkdayService workdayService) : BaseViewModel
         if (window.ShowDialog() == true && window.Workday != null)
         {
             var workday = window.Workday;
+            AddAction(window.Workday);
             var index = Workdays.ToList().FindIndex(d => d.Id == workday.Id);
             if (index >= 0)
             {
@@ -183,6 +188,13 @@ public class WorkdaysViewModel(IWorkdayService workdayService) : BaseViewModel
                 }
             }
             OnPropertyChanged(nameof(Workdays));
+        }
+    }
+    private void AddAction(Workday workday)
+    {
+        if(workday.Action == null)
+            {
+            workday.Action = new Model.Model.Action { Name = "Rwanie" };
         }
     }
 }

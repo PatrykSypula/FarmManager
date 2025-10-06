@@ -11,4 +11,5 @@ public interface IWorkdayService
     Task Add(Workday entity);
     Task Update(Workday entity);
     Task Delete(int id);
+    Task Detach(Workday entity);
 }

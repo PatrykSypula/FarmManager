@@ -35,6 +35,8 @@ public class ViewModelLocator
         MyApp.ServiceProvider.GetRequiredService<ChoosePlantViewModel>();
     public ChooseEmployeeViewModel ChooseEmployeeViewModel =>
         MyApp.ServiceProvider.GetRequiredService<ChooseEmployeeViewModel>();
+    public ChooseActionViewModel ChooseActionViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<ChooseActionViewModel>();
 
     // Deposits
     public DepositsViewModel DepositsViewModel =>

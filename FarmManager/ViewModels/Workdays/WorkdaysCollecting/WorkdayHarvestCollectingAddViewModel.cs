@@ -194,12 +194,16 @@ public class WorkdayHarvestCollectingAddViewModel(IWorkdayService workdayService
         else
         {
             Model.Workday.Harvest = Model.Harvest;
+            Model.Workday.Action = null;
+            Model.Workday.Plant = null;
+            foreach (var wc in Model.Workday.WorkdaysCollecting)
+            {
+                wc.Employee = null;
+                wc.Workday = null;
+            }
             await workdayService.Add(Model.Workday);
             await unitOfWork.SaveChangesAsync();
-            Model.Workday.Action = new Model.Model.Action()
-            {
-                Name = "Rwanie",
-            };
+            await workdayService.Detach(Model.Workday);
             Model.Workday.Plant = Model.Plant;
             RequestClose?.Invoke(Model.Workday);
         }

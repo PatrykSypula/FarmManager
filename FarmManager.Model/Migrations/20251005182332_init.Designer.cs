@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FarmManager.Model.Migrations
 {
     [DbContext(typeof(FarmManagerContext))]
-    [Migration("20251004182114_fix")]
-    partial class fix
+    [Migration("20251005182332_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,35 @@ namespace FarmManager.Model.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+
+            modelBuilder.Entity("FarmManager.Model.Model.Action", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTimeOffset>("Created")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Actions");
+                });
 
             modelBuilder.Entity("FarmManager.Model.Model.Buy", b =>
                 {
@@ -572,6 +601,9 @@ namespace FarmManager.Model.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("ActionId")
+                        .HasColumnType("integer");
+
                     b.Property<DateTimeOffset>("Created")
                         .HasColumnType("timestamp with time zone");
 
@@ -581,7 +613,7 @@ namespace FarmManager.Model.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
-                    b.Property<int>("HarvestId")
+                    b.Property<int?>("HarvestId")
                         .HasColumnType("integer");
 
                     b.Property<bool>("IsActive")
@@ -590,10 +622,15 @@ namespace FarmManager.Model.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
-                    b.Property<int>("PlantId")
+                    b.Property<int?>("PlantId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("WorkdayType")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ActionId");
 
                     b.HasIndex("HarvestId")
                         .IsUnique();
@@ -799,17 +836,19 @@ namespace FarmManager.Model.Migrations
 
             modelBuilder.Entity("FarmManager.Model.Model.Workday", b =>
                 {
+                    b.HasOne("FarmManager.Model.Model.Action", "Action")
+                        .WithMany()
+                        .HasForeignKey("ActionId");
+
                     b.HasOne("FarmManager.Model.Model.Harvest", "Harvest")
                         .WithOne("Workday")
-                        .HasForeignKey("FarmManager.Model.Model.Workday", "HarvestId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("FarmManager.Model.Model.Workday", "HarvestId");
 
                     b.HasOne("FarmManager.Model.Model.Plant", "Plant")
                         .WithMany()
-                        .HasForeignKey("PlantId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("PlantId");
+
+                    b.Navigation("Action");
 
                     b.Navigation("Harvest");
 
