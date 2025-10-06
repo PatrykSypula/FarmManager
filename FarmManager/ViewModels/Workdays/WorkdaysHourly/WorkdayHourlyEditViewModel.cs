@@ -36,6 +36,7 @@ public class WorkdayHourlyEditViewModel : BaseViewModel
             Model.WorkdayHourly.Hours = value;
 
             OnPropertyChanged();
+            UpdateRemainingToPay();
         }
     }
     public double Price
@@ -46,6 +47,17 @@ public class WorkdayHourlyEditViewModel : BaseViewModel
             Model.WorkdayHourly.Price = value;
 
             OnPropertyChanged();
+            UpdateRemainingToPay();
+        }
+    }
+    public double RemainingToPay
+    {
+        get { return Model.WorkdayHourly.RemainingToPay; }
+        set
+        {
+            Model.WorkdayHourly.RemainingToPay = value;
+
+            OnPropertyChanged();
         }
     }
     public async Task InitializeAsync(WorkdayHourly workdayhourly, ICollection<int> ids)
@@ -53,6 +65,7 @@ public class WorkdayHourlyEditViewModel : BaseViewModel
         Model.WorkdayHourly = workdayhourly;
         Model.Employee = workdayhourly.Employee;
         Model.EmployeeIds = ids;
+        Model.IsEditable = Model.WorkdayHourly.RemainingToPay == Model.WorkdayHourly.Price * Model.WorkdayHourly.Hours;
         OnPropertyChanged(nameof(Employee));
         OnPropertyChanged(nameof(Hours));
         OnPropertyChanged(nameof(Price));
@@ -63,16 +76,23 @@ public class WorkdayHourlyEditViewModel : BaseViewModel
     public RelayCommand Update => new RelayCommand(async execute => await UpdateWorkdayCollectingAsync());
     private async Task UpdateWorkdayCollectingAsync()
     {
-        WorkdayHourlyValidator validator = new WorkdayHourlyValidator();
-        var result = validator.Validate(Model.WorkdayHourly);
-        if (!result.IsValid)
+        if (!Model.IsEditable)
         {
-            new CustomMessageBoxOk(result).ShowDialog();
+            new CustomMessageBoxOk("Nie można edytować pracy która została już zapłacona.").ShowDialog();
         }
         else
         {
-            Model.WorkdayHourly.EmployeeId = Model.Employee.Id;
-            RequestClose?.Invoke(Model.WorkdayHourly);
+            WorkdayHourlyValidator validator = new WorkdayHourlyValidator();
+            var result = validator.Validate(Model.WorkdayHourly);
+            if (!result.IsValid)
+            {
+                new CustomMessageBoxOk(result).ShowDialog();
+            }
+            else
+            {
+                Model.WorkdayHourly.EmployeeId = Model.Employee.Id;
+                RequestClose?.Invoke(Model.WorkdayHourly);
+            }
         }
     }
 
@@ -97,6 +117,14 @@ public class WorkdayHourlyEditViewModel : BaseViewModel
             Model.WorkdayHourly.EmployeeId = window.Employee.Id;
             Model.WorkdayHourly.Employee = window.Employee;
             OnPropertyChanged(nameof(Employee));
+        }
+    }
+    private void UpdateRemainingToPay()
+    {
+        if(Model.IsEditable)
+        {
+            RemainingToPay = Price * Hours;
+            OnPropertyChanged(nameof(RemainingToPay));
         }
     }
 }

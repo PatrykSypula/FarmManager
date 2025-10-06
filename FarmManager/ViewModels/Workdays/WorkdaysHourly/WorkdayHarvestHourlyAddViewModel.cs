@@ -88,6 +88,7 @@ public class WorkdayHarvestHourlyAddViewModel(IWorkdayService workdayService, IU
         {
             foreach (var wc in window.WorkdaysHourly)
             {
+                wc.RemainingToPay = wc.Price * wc.Hours;
                 Model.Workday.WorkdaysHourly.Add(wc);
                 Model.WorkdaysHourly.Add(wc);
             }
@@ -101,6 +102,7 @@ public class WorkdayHarvestHourlyAddViewModel(IWorkdayService workdayService, IU
         var window = new WorkdayHourlyAddOneWindow(Model.Workday.WorkdaysHourly.Select(wc => wc.Employee.Id).ToList());
         if (window.ShowDialog() == true && window.WorkdayHourly != null)
         {
+            window.WorkdayHourly.RemainingToPay = window.WorkdayHourly.Price * window.WorkdayHourly.Hours;
             Model.Workday.WorkdaysHourly.Add(window.WorkdayHourly);
             Model.WorkdaysHourly.Add(window.WorkdayHourly);
             OnPropertyChanged(nameof(WorkdaysHourly));
@@ -114,7 +116,7 @@ public class WorkdayHarvestHourlyAddViewModel(IWorkdayService workdayService, IU
         if (window.ShowDialog() == true && window.WorkdayHourly != null)
         {
             var edited = window.WorkdayHourly;
-
+            edited.RemainingToPay = edited.Price * edited.Hours;
             if (window.WorkdayHourly.IsDeleted)
             {
                 var toRemove1 = Model.Workday.WorkdaysHourly

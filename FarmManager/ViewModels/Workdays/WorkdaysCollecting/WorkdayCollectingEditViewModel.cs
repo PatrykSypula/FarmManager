@@ -36,6 +36,7 @@ public class WorkdayCollectingEditViewModel : BaseViewModel
             Model.WorkdayCollecting.Quantity = value;
 
             OnPropertyChanged();
+            UpdateRemainingToPay();
         }
     }
     public double Price
@@ -46,6 +47,17 @@ public class WorkdayCollectingEditViewModel : BaseViewModel
             Model.WorkdayCollecting.Price = value;
 
             OnPropertyChanged();
+            UpdateRemainingToPay();
+        }
+    }
+    public double RemainingToPay
+    {
+        get { return Model.WorkdayCollecting.RemainingToPay; }
+        set
+        {
+            Model.WorkdayCollecting.RemainingToPay = value;
+
+            OnPropertyChanged();
         }
     }
     public async Task InitializeAsync(WorkdayCollecting workdayCollecting, ICollection<int> ids)
@@ -53,6 +65,7 @@ public class WorkdayCollectingEditViewModel : BaseViewModel
         Model.WorkdayCollecting = workdayCollecting;
         Model.Employee = workdayCollecting.Employee;
         Model.EmployeeIds = ids;
+        Model.IsEditable = Model.WorkdayCollecting.RemainingToPay == Model.WorkdayCollecting.Quantity * Model.WorkdayCollecting.Price;
         OnPropertyChanged(nameof(Employee));
         OnPropertyChanged(nameof(Quantity));
         OnPropertyChanged(nameof(Price));
@@ -63,16 +76,23 @@ public class WorkdayCollectingEditViewModel : BaseViewModel
     public RelayCommand Update => new RelayCommand(async execute => await UpdateWorkdayCollectingAsync());
     private async Task UpdateWorkdayCollectingAsync()
     {
-        WorkdayCollectingValidator validator = new WorkdayCollectingValidator();
-        var result = validator.Validate(Model.WorkdayCollecting);
-        if (!result.IsValid)
+        if (!Model.IsEditable)
         {
-            new CustomMessageBoxOk(result).ShowDialog();
+            new CustomMessageBoxOk("Nie można edytować pracy która została już zapłacona.").ShowDialog();
         }
         else
         {
-            Model.WorkdayCollecting.EmployeeId = Model.Employee.Id;
-            RequestClose?.Invoke(Model.WorkdayCollecting);
+            WorkdayCollectingValidator validator = new WorkdayCollectingValidator();
+            var result = validator.Validate(Model.WorkdayCollecting);
+            if (!result.IsValid)
+            {
+                new CustomMessageBoxOk(result).ShowDialog();
+            }
+            else
+            {
+                Model.WorkdayCollecting.EmployeeId = Model.Employee.Id;
+                RequestClose?.Invoke(Model.WorkdayCollecting);
+            }
         }
     }
 
@@ -97,6 +117,14 @@ public class WorkdayCollectingEditViewModel : BaseViewModel
             Model.WorkdayCollecting.EmployeeId = window.Employee.Id;
             Model.WorkdayCollecting.Employee = window.Employee;
             OnPropertyChanged(nameof(Employee));
+        }
+    }
+    private void UpdateRemainingToPay()
+    {
+        if(Model.IsEditable)
+        {
+            RemainingToPay = Price * Quantity;
+            OnPropertyChanged(nameof(RemainingToPay));
         }
     }
 }

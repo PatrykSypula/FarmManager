@@ -12,4 +12,5 @@ public interface IWorkdayService
     Task Update(Workday entity);
     Task Delete(int id);
     Task Detach(Workday entity);
+    Task<ICollection<Workday>> GetWorkdaysInMonth(int year, int month);
 }

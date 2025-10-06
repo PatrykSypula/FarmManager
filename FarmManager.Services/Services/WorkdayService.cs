@@ -35,7 +35,6 @@ public class WorkdayService(FarmManagerContext context) : IWorkdayService
     public async Task Add(Workday entity)
     {
         context.Workdays.Update(entity);
-        
     }
     public async Task Update(Workday entity)
     {
@@ -59,4 +58,16 @@ public class WorkdayService(FarmManagerContext context) : IWorkdayService
     {
         context.Entry(entity).State = EntityState.Detached;
     }
+    public async Task<ICollection<Workday>> GetWorkdaysInMonth(int year, int month)
+    {
+        return await context.Workdays
+            .Include(w => w.Plant)
+            .Include(w => w.Action)
+            .Include(w => w.WorkdaysCollecting)
+            .Include(w => w.WorkdaysHourly)
+            .Where(w => w.Date.Year == year && w.Date.Month == month)
+            .AsNoTracking()
+            .ToListAsync();
+    }
+
 }

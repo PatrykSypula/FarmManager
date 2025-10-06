@@ -4,6 +4,7 @@ using System.Windows.Input;
 using FarmManager.App.Helpers;
 using FarmManager.App.Views;
 using FarmManager.App.Views.Workdays;
+using FarmManager.Model.Model;
 using FarmManager.Services.Interfaces;
 using FarmManager.Services.Services;
 using Microsoft.Windows.Themes;
@@ -51,48 +52,52 @@ public class WorkdaysCalendarViewModel(IWorkdayService workdayService) : BaseVie
         OnPropertyChanged(nameof(CurrentMonthName));
     }
 
-    private static readonly Random _random = new();
-
-    private void BuildCalendar()
+    private async void BuildCalendar()
     {
         Days.Clear();
+
+        var workdays = await workdayService.GetWorkdaysInMonth(SelectedMonth.Year, SelectedMonth.Month);
 
         var firstOfMonth = new DateTime(SelectedMonth.Year, SelectedMonth.Month, 1);
         var daysInMonth = DateTime.DaysInMonth(SelectedMonth.Year, SelectedMonth.Month);
 
-        int offset = ((int)firstOfMonth.DayOfWeek + 6) % 7; // first Monday
+        int offset = ((int)firstOfMonth.DayOfWeek + 6) % 7; // Monday-first
         var startDate = firstOfMonth.AddDays(-offset);
-
         int totalDays = offset + daysInMonth;
         Rows = (int)Math.Ceiling(totalDays / 7.0);
 
         for (int i = 0; i < Rows * 7; i++)
         {
             var day = startDate.AddDays(i);
-            var events = new List<SchedulerEvent>();
-
-            if (day.Month == SelectedMonth.Month)
-            {
-                int numberOfEvents = _random.Next(0, 4); // 0–3 events
-                for (int e = 1; e <= numberOfEvents; e++)
+            var dayEvents = workdays.Where(w => w.Date == DateOnly.FromDateTime(day))
+                .Select(w => new SchedulerEvent
                 {
-                    bool isPaid = _random.Next(0, 2) == 1; // random paid/unpaid
-                    events.Add(new SchedulerEvent
-                    {
-                        Text = "Pryskanie",
-                        IsPaid = isPaid
-                    });
-                }
-            }
+                    Text = GetEventText(w),
+                    IsPaid = !HasDebt(w)
+                }).ToList();
 
             Days.Add(new SchedulerDay
             {
                 Date = day,
                 IsCurrentMonth = day.Month == SelectedMonth.Month,
-                Events = events
+                Events = dayEvents
             });
         }
 
         OnPropertyChanged(nameof(Rows));
+    }
+    private string GetEventText(Workday w)
+    {
+        string action = w.Action?.Name ?? "Rwanie";
+        if (w.Plant?.Name != null)
+            return $"{action} - {w.Plant.Name}";
+        else
+            return action;
+    }
+
+    private bool HasDebt(Workday w)
+    {
+        return w.WorkdaysCollecting.Any(c => c.RemainingToPay > 0) ||
+               w.WorkdaysHourly.Any(h => h.RemainingToPay > 0);
     }
 }
