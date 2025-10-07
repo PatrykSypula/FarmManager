@@ -29,9 +29,10 @@
         <DataGrid HorizontalAlignment="Stretch" Grid.Row="0" FontSize="20" Grid.RowSpan="3" VerticalAlignment="Top" x:Name="DataGridCardStack" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" CanUserAddRows="False" IsReadOnly="True" AutoGenerateColumns="False" ItemsSource="{Binding Workdays}">
             <DataGrid.RowStyle>
                 <Style TargetType="DataGridRow">
+                    <Setter Property="Background" Value="LightGreen"/>
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding IsActive}" Value="False">
-                            <Setter Property="Background" Value="#FFFFE5E5"/>
+                        <DataTrigger Binding="{Binding IsPaid}" Value="False">
+                            <Setter Property="Background" Value="Yellow"/>
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>

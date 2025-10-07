@@ -30,7 +30,15 @@ public class WorkdaysViewModel(IWorkdayService workdayService) : BaseViewModel
     public async Task InitializeAsync(DateOnly date)
     {
         Model.Date = date;
-        Workdays = new ObservableCollection<Workday>(await workdayService.GetWorkdays(Model.Date));
+        var workdays = await workdayService.GetWorkdays(Model.Date);
+        foreach(var workday in workdays)
+        {
+            if(!HasDebt(workday))
+            {
+                workday.IsPaid = true;
+            }
+        }
+        Workdays = new ObservableCollection<Workday>(workdays);
         foreach(var workday in Workdays)
         {
             if(workday.WorkdayType == WorkdayType.HarvestCollecting || workday.WorkdayType == WorkdayType.HarvestHourly)
@@ -196,5 +204,10 @@ public class WorkdaysViewModel(IWorkdayService workdayService) : BaseViewModel
             {
             workday.Action = new Model.Model.Action { Name = "Rwanie" };
         }
+    }
+    private bool HasDebt(Workday w)
+    {
+        return w.WorkdaysCollecting.Any(c => c.RemainingToPay > 0) ||
+               w.WorkdaysHourly.Any(h => h.RemainingToPay > 0);
     }
 }

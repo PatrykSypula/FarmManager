@@ -13,7 +13,7 @@ public class WorkdayHarvestHourlyValidator : AbstractValidator<Workday>
             .NotNull().WithMessage("Należy wybrać roślinę.")
             .GreaterThan(0).WithMessage("Należy wybrać roślinę.");
         RuleFor(x => x.ActionId).Null().WithMessage("Nie można wybrać akcji dla dnia zbiorowego.");
-        RuleFor(x => x.Harvest.HourlyQuantity).GreaterThan(0).WithMessage("Zbiór musi być większy od 0.");
+        RuleFor(x => x.Harvest.HourlyQuantity).GreaterThan(0).WithMessage("Zbiór musi być większy od 0.").When(x => x.Harvest != null);
         RuleForEach(x => x.WorkdaysHourly)
             .Cascade(CascadeMode.Stop)
             .SetValidator(new WorkdayHourlyValidator());

@@ -148,19 +148,19 @@ public class WorkdayHarvestCollectingEditViewModel(IWorkdayService workdayServic
             if (window.WorkdayCollecting.IsDeleted)
             {
                 var toRemove1 = Model.Workday.WorkdaysCollecting
-                    .FirstOrDefault(wc => wc.Employee.Id == edited.Employee.Id);
+                    .FirstOrDefault(wc => wc.EmployeeId == edited.EmployeeId);
                 if (toRemove1 != null)
                     Model.Workday.WorkdaysCollecting.Remove(toRemove1);
 
                 var toRemove2 = Model.WorkdaysCollecting
-                    .FirstOrDefault(wc => wc.Employee.Id == edited.Employee.Id);
+                    .FirstOrDefault(wc => wc.EmployeeId == edited.EmployeeId);
                 if (toRemove2 != null)
                     Model.WorkdaysCollecting.Remove(toRemove2);
             }
             else
             {
                 var index1 = Model.Workday.WorkdaysCollecting
-                    .ToList().FindIndex(wc => wc.Employee.Id == edited.Employee.Id);
+                    .ToList().FindIndex(wc => wc.EmployeeId == edited.EmployeeId);
                 if (index1 >= 0)
                 {
                     Model.Workday.WorkdaysCollecting.Remove(Model.Workday.WorkdaysCollecting.ElementAt(index1));
@@ -168,7 +168,7 @@ public class WorkdayHarvestCollectingEditViewModel(IWorkdayService workdayServic
                 }
 
                 var index2 = Model.WorkdaysCollecting
-                    .ToList().FindIndex(wc => wc.Employee.Id == edited.Employee.Id);
+                    .ToList().FindIndex(wc => wc.EmployeeId == edited.EmployeeId);
                 if (index2 >= 0)
                 {
                     Model.WorkdaysCollecting[index2] = edited;

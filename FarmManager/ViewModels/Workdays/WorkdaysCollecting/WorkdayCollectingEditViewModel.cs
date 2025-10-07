@@ -69,6 +69,7 @@ public class WorkdayCollectingEditViewModel : BaseViewModel
         OnPropertyChanged(nameof(Employee));
         OnPropertyChanged(nameof(Quantity));
         OnPropertyChanged(nameof(Price));
+        OnPropertyChanged(nameof(RemainingToPay));
     }
 
     #endregion

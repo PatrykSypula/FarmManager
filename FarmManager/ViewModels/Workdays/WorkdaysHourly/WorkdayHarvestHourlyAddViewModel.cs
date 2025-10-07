@@ -83,7 +83,7 @@ public class WorkdayHarvestHourlyAddViewModel(IWorkdayService workdayService, IU
     public RelayCommand OpenWorkdayHourlyAddAll => new RelayCommand(execute => OpenWorkdayHourlyAddAllAsync());
     private void OpenWorkdayHourlyAddAllAsync()
     {
-        var window = new WorkdayHourlyAddAllWindow(Model.Workday.WorkdaysHourly.Select(wc => wc.Employee.Id).ToList());
+        var window = new WorkdayHourlyAddAllWindow(Model.Workday.WorkdaysHourly.Select(wc => wc.EmployeeId).ToList());
         if (window.ShowDialog() == true && window.WorkdaysHourly != null)
         {
             foreach (var wc in window.WorkdaysHourly)
@@ -99,7 +99,7 @@ public class WorkdayHarvestHourlyAddViewModel(IWorkdayService workdayService, IU
     public RelayCommand OpenWorkdayHourlyAddOne => new RelayCommand(execute => OpenWorkdayHourlyAddOneAsync());
     private void OpenWorkdayHourlyAddOneAsync()
     {
-        var window = new WorkdayHourlyAddOneWindow(Model.Workday.WorkdaysHourly.Select(wc => wc.Employee.Id).ToList());
+        var window = new WorkdayHourlyAddOneWindow(Model.Workday.WorkdaysHourly.Select(wc => wc.EmployeeId).ToList());
         if (window.ShowDialog() == true && window.WorkdayHourly != null)
         {
             window.WorkdayHourly.RemainingToPay = window.WorkdayHourly.Price * window.WorkdayHourly.Hours;
@@ -111,7 +111,7 @@ public class WorkdayHarvestHourlyAddViewModel(IWorkdayService workdayService, IU
     public RelayCommand OpenWorkdayHourlyEdit => new RelayCommand(execute => OpenWorkdayHourlyEditAsync());
     private void OpenWorkdayHourlyEditAsync()
     {
-        var window = new WorkdayHourlyEditWindow(SelectedWorkdayHourly, Model.Workday.WorkdaysHourly.Select(wc => wc.Employee.Id).ToList());
+        var window = new WorkdayHourlyEditWindow(SelectedWorkdayHourly, Model.Workday.WorkdaysHourly.Select(wc => wc.EmployeeId).ToList());
 
         if (window.ShowDialog() == true && window.WorkdayHourly != null)
         {
@@ -120,19 +120,19 @@ public class WorkdayHarvestHourlyAddViewModel(IWorkdayService workdayService, IU
             if (window.WorkdayHourly.IsDeleted)
             {
                 var toRemove1 = Model.Workday.WorkdaysHourly
-                    .FirstOrDefault(wc => wc.Employee.Id == edited.Employee.Id);
+                    .FirstOrDefault(wc => wc.EmployeeId == edited.EmployeeId);
                 if (toRemove1 != null)
                     Model.Workday.WorkdaysHourly.Remove(toRemove1);
 
                 var toRemove2 = Model.WorkdaysHourly
-                    .FirstOrDefault(wc => wc.Employee.Id == edited.Employee.Id);
+                    .FirstOrDefault(wc => wc.EmployeeId == edited.EmployeeId);
                 if (toRemove2 != null)
                     Model.WorkdaysHourly.Remove(toRemove2);
             }
             else
             {
                 var index1 = Model.Workday.WorkdaysHourly
-                    .ToList().FindIndex(wc => wc.Employee.Id == edited.Employee.Id);
+                    .ToList().FindIndex(wc => wc.EmployeeId == edited.EmployeeId);
                 if (index1 >= 0)
                 {
                     Model.Workday.WorkdaysHourly.Remove(Model.Workday.WorkdaysHourly.ElementAt(index1));
@@ -140,7 +140,7 @@ public class WorkdayHarvestHourlyAddViewModel(IWorkdayService workdayService, IU
                 }
 
                 var index2 = Model.WorkdaysHourly
-                    .ToList().FindIndex(wc => wc.Employee.Id == edited.Employee.Id);
+                    .ToList().FindIndex(wc => wc.EmployeeId == edited.EmployeeId);
                 if (index2 >= 0)
                 {
                     Model.WorkdaysHourly[index2] = edited;
@@ -170,6 +170,7 @@ public class WorkdayHarvestHourlyAddViewModel(IWorkdayService workdayService, IU
 
     private async Task AddWorkdayAsync()
     {
+        Model.Workday.Harvest = Model.Harvest;
         WorkdayHarvestHourlyValidator validator = new WorkdayHarvestHourlyValidator();
         Model.Workday.Description = string.IsNullOrEmpty(Model.Workday.Description) ? null : Model.Workday.Description;
         var result = validator.Validate(Model.Workday);

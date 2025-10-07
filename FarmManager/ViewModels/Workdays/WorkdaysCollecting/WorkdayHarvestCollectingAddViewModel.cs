@@ -95,7 +95,7 @@ public class WorkdayHarvestCollectingAddViewModel(IWorkdayService workdayService
     public RelayCommand OpenWorkdayCollectingAddAll => new RelayCommand(execute => OpenWorkdayCollectingAddAllAsync());
     private void OpenWorkdayCollectingAddAllAsync()
     {
-        var window = new WorkdayCollectingAddAllWindow(Model.Workday.WorkdaysCollecting.Select(wc => wc.Employee.Id).ToList());
+        var window = new WorkdayCollectingAddAllWindow(Model.Workday.WorkdaysCollecting.Select(wc => wc.EmployeeId).ToList());
         if (window.ShowDialog() == true && window.WorkdaysCollecting != null)
         {
             foreach (var wc in window.WorkdaysCollecting)
@@ -112,7 +112,7 @@ public class WorkdayHarvestCollectingAddViewModel(IWorkdayService workdayService
     public RelayCommand OpenWorkdayCollectingAddOne => new RelayCommand(execute => OpenWorkdayCollectingAddOneAsync());
     private void OpenWorkdayCollectingAddOneAsync()
     {
-        var window = new WorkdayCollectingAddOneWindow(Model.Workday.WorkdaysCollecting.Select(wc => wc.Employee.Id).ToList());
+        var window = new WorkdayCollectingAddOneWindow(Model.Workday.WorkdaysCollecting.Select(wc => wc.EmployeeId).ToList());
         if (window.ShowDialog() == true && window.WorkdayCollecting != null)
         {
             window.WorkdayCollecting.RemainingToPay = window.WorkdayCollecting.Quantity * window.WorkdayCollecting.Price;
@@ -125,7 +125,7 @@ public class WorkdayHarvestCollectingAddViewModel(IWorkdayService workdayService
     public RelayCommand OpenWorkdayCollectingEdit => new RelayCommand(execute => OpenWorkdayCollectingEditAsync());
     private void OpenWorkdayCollectingEditAsync()
     {
-        var window = new WorkdayCollectingEditWindow(SelectedWorkdayCollecting, Model.Workday.WorkdaysCollecting.Select(wc => wc.Employee.Id).ToList());
+        var window = new WorkdayCollectingEditWindow(SelectedWorkdayCollecting, Model.Workday.WorkdaysCollecting.Select(wc => wc.EmployeeId).ToList());
 
         if (window.ShowDialog() == true && window.WorkdayCollecting != null)
         {
@@ -134,19 +134,19 @@ public class WorkdayHarvestCollectingAddViewModel(IWorkdayService workdayService
             if (window.WorkdayCollecting.IsDeleted)
             {
                 var toRemove1 = Model.Workday.WorkdaysCollecting
-                    .FirstOrDefault(wc => wc.Employee.Id == edited.Employee.Id);
+                    .FirstOrDefault(wc => wc.EmployeeId == edited.EmployeeId);
                 if (toRemove1 != null)
                     Model.Workday.WorkdaysCollecting.Remove(toRemove1);
 
                 var toRemove2 = Model.WorkdaysCollecting
-                    .FirstOrDefault(wc => wc.Employee.Id == edited.Employee.Id);
+                    .FirstOrDefault(wc => wc.EmployeeId == edited.EmployeeId);
                 if (toRemove2 != null)
                     Model.WorkdaysCollecting.Remove(toRemove2);
             }
             else
             {
                 var index1 = Model.Workday.WorkdaysCollecting
-                    .ToList().FindIndex(wc => wc.Employee.Id == edited.Employee.Id);
+                    .ToList().FindIndex(wc => wc.EmployeeId == edited.EmployeeId);
                 if (index1 >= 0)
                 {
                     Model.Workday.WorkdaysCollecting.Remove(Model.Workday.WorkdaysCollecting.ElementAt(index1));
@@ -154,7 +154,7 @@ public class WorkdayHarvestCollectingAddViewModel(IWorkdayService workdayService
                 }
 
                 var index2 = Model.WorkdaysCollecting
-                    .ToList().FindIndex(wc => wc.Employee.Id == edited.Employee.Id);
+                    .ToList().FindIndex(wc => wc.EmployeeId == edited.EmployeeId);
                 if (index2 >= 0)
                 {
                     Model.WorkdaysCollecting[index2] = edited;

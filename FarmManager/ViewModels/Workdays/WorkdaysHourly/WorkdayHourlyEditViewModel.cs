@@ -69,6 +69,7 @@ public class WorkdayHourlyEditViewModel : BaseViewModel
         OnPropertyChanged(nameof(Employee));
         OnPropertyChanged(nameof(Hours));
         OnPropertyChanged(nameof(Price));
+        OnPropertyChanged(nameof(RemainingToPay));
     }
 
     #endregion

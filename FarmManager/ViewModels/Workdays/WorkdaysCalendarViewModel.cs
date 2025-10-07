@@ -32,11 +32,18 @@ public class WorkdaysCalendarViewModel(IWorkdayService workdayService) : BaseVie
     }
 
     public RelayCommand DayClick => new RelayCommand(execute => DayClickOpenWorkDay(execute));
-    private async void DayClickOpenWorkDay(object execute)
+    private void DayClickOpenWorkDay(object execute)
     {
         if (execute is DateTime dateTime)
         {
-            new WorkdaysWindow(DateOnly.FromDateTime(dateTime)).ShowDialog();
+            var window = new WorkdaysWindow(DateOnly.FromDateTime(dateTime));
+
+            window.Closed += (sender, args) =>
+            {
+                BuildCalendar();
+            };
+
+            window.ShowDialog();
         }
     }
 

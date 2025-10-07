@@ -14,8 +14,9 @@ public class WorkdayService(FarmManagerContext context) : IWorkdayService
         return await context.Workdays
             .Include(w => w.Plant)
             .Include(w => w.Action)
+            .Include(w => w.WorkdaysCollecting)
+            .Include(w => w.WorkdaysHourly)
             .Where(w => w.Date == date)
-            .OrderByDescending(d => d.Id)
             .AsNoTracking()
             .ToListAsync();
     }
