@@ -66,7 +66,7 @@ public class BuyService(IFarmManagerContext context) : IBuyService
                 {
                     adjustments.Add(new SprayingBuyQuantity()
                     {
-                        Buy = buy[i].Id,
+                        BuyId = buy[i].Id,
                         Quantity = quantityChange
                     });
 
@@ -76,7 +76,7 @@ public class BuyService(IFarmManagerContext context) : IBuyService
                 {
                     adjustments.Add(new SprayingBuyQuantity()
                     {
-                        Buy = buy[i].Id,
+                        BuyId = buy[i].Id,
                         Quantity = buy[i].RemainingQuantity
                     });
                     quantityChange -= buy[i].RemainingQuantity;
@@ -94,7 +94,7 @@ public class BuyService(IFarmManagerContext context) : IBuyService
     {
         foreach (var item in buyQuantities)
         {
-            var buy = await context.Buys.Where(b => b.Id == item.Buy).FirstOrDefaultAsync()
+            var buy = await context.Buys.Where(b => b.Id == item.BuyId).FirstOrDefaultAsync()
                 ?? throw new NotFoundException("Nie mozna znaleźć zakupu.");
             buy.RemainingQuantity += item.Quantity;
         }

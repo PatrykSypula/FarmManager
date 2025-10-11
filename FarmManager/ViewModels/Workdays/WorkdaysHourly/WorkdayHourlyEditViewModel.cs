@@ -103,8 +103,17 @@ public class WorkdayHourlyEditViewModel : BaseViewModel
         var result = new CustomMessageBoxYesNo("Czy na pewno chcesz usunąć pracę tego pracownika?").ShowDialog();
         if (result == true)
         {
-            Model.WorkdayHourly.IsDeleted = true;
-            RequestClose?.Invoke(Model.WorkdayHourly);
+            WorkdayHourlyDeleteValidator validator = new WorkdayHourlyDeleteValidator();
+            var resultValidation = validator.Validate(Model.WorkdayHourly);
+            if (!resultValidation.IsValid)
+            {
+                new CustomMessageBoxOk(resultValidation).ShowDialog();
+            }
+            else
+            {
+                Model.WorkdayHourly.IsDeleted = true;
+                RequestClose?.Invoke(Model.WorkdayHourly);
+            }
         }
     }
 

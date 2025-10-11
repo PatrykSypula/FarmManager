@@ -103,8 +103,17 @@ public class WorkdayCollectingEditViewModel : BaseViewModel
         var result = new CustomMessageBoxYesNo("Czy na pewno chcesz usunąć pracę tego pracownika?").ShowDialog();
         if (result == true)
         {
-            Model.WorkdayCollecting.IsDeleted = true;
-            RequestClose?.Invoke(Model.WorkdayCollecting);
+            WorkdayCollectingDeleteValidator validator = new WorkdayCollectingDeleteValidator();
+            var resultValidation = validator.Validate(Model.WorkdayCollecting);
+            if (!resultValidation.IsValid)
+            {
+                new CustomMessageBoxOk(resultValidation).ShowDialog();
+            }
+            else
+            {
+                Model.WorkdayCollecting.IsDeleted = true;
+                RequestClose?.Invoke(Model.WorkdayCollecting);
+            }
         }
     }
 

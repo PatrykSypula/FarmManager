@@ -73,6 +73,15 @@
     <Compile Update="Views\Fertilizers\FertilizersWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\Payments\PaymentAddWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Payments\PaymentEditWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Payments\PaymentsWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Plants\PlantAddWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -95,6 +104,15 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Seasons\SeasonsWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Sells\SellAddWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Sells\SellEditWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Sells\SellsWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Sprayings\SprayingAddWindow.xaml.cs">

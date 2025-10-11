@@ -7,8 +7,10 @@ using FarmManager.App.ViewModels.Diseases;
 using FarmManager.App.ViewModels.EmployeeCosts;
 using FarmManager.App.ViewModels.Employees;
 using FarmManager.App.ViewModels.Fertilizers;
+using FarmManager.App.ViewModels.Payments;
 using FarmManager.App.ViewModels.Plants;
 using FarmManager.App.ViewModels.Seasons;
+using FarmManager.App.ViewModels.Sells;
 using FarmManager.App.ViewModels.Sprayings;
 using FarmManager.App.ViewModels.Varieties;
 using FarmManager.App.ViewModels.Vendors;
@@ -168,6 +170,22 @@ public class ViewModelLocator
         MyApp.ServiceProvider.GetRequiredService<ActionAddViewModel>();
     public ActionEditViewModel ActionEditViewModel => 
         MyApp.ServiceProvider.GetRequiredService<ActionEditViewModel>();
+
+    //Sells
+    public SellsViewModel SellsViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<SellsViewModel>();
+    public SellAddViewModel SellAddViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<SellAddViewModel>();
+    public SellEditViewModel SellEditViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<SellEditViewModel>();
+
+    //Payments
+    public PaymentsViewModel PaymentsViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<PaymentsViewModel>();
+    public PaymentAddViewModel PaymentAddViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<PaymentAddViewModel>();
+    public PaymentEditViewModel PaymentEditViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<PaymentEditViewModel>();
 
 
 }

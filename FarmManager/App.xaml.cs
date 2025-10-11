@@ -10,8 +10,10 @@ using FarmManager.App.ViewModels.Diseases;
 using FarmManager.App.ViewModels.EmployeeCosts;
 using FarmManager.App.ViewModels.Employees;
 using FarmManager.App.ViewModels.Fertilizers;
+using FarmManager.App.ViewModels.Payments;
 using FarmManager.App.ViewModels.Plants;
 using FarmManager.App.ViewModels.Seasons;
+using FarmManager.App.ViewModels.Sells;
 using FarmManager.App.ViewModels.Sprayings;
 using FarmManager.App.ViewModels.Varieties;
 using FarmManager.App.ViewModels.Vendors;
@@ -26,8 +28,10 @@ using FarmManager.App.Views.Diseases;
 using FarmManager.App.Views.EmployeeCosts;
 using FarmManager.App.Views.Employees;
 using FarmManager.App.Views.Fertilizers;
+using FarmManager.App.Views.Payments;
 using FarmManager.App.Views.Plants;
 using FarmManager.App.Views.Seasons;
+using FarmManager.App.Views.Sells;
 using FarmManager.App.Views.Sprayings;
 using FarmManager.App.Views.Varieties;
 using FarmManager.App.Views.Vendors;
@@ -150,6 +154,16 @@ public partial class MyApp : Application
                 services.AddTransient<ActionAddWindow>();
                 services.AddTransient<ActionEditWindow>();
 
+                //Sells
+                services.AddTransient<SellsWindow>();
+                services.AddTransient<SellAddWindow>();
+                services.AddTransient<SellEditWindow>();
+
+                //Payments
+                services.AddTransient<PaymentsWindow>();
+                services.AddTransient<PaymentAddWindow>();
+                services.AddTransient<PaymentEditWindow>();
+
                 #endregion
 
 
@@ -244,6 +258,16 @@ public partial class MyApp : Application
                 services.AddTransient<ActionAddViewModel>();
                 services.AddTransient<ActionEditViewModel>();
 
+                //Sells
+                services.AddTransient<SellsViewModel>();
+                services.AddTransient<SellAddViewModel>();
+                services.AddTransient<SellEditViewModel>();
+
+                //Payments
+                services.AddTransient<PaymentsViewModel>();
+                services.AddTransient<PaymentAddViewModel>();
+                services.AddTransient<PaymentEditViewModel>();
+
 
                 #endregion
 
@@ -266,6 +290,8 @@ public partial class MyApp : Application
                 services.AddScoped<IWorkdayService, WorkdayService>();
                 services.AddScoped<IHarvestService, HarvestService>();
                 services.AddScoped<IActionService, ActionService>();
+                services.AddScoped<ISellService, SellService>();
+                services.AddScoped<IPaymentService, PaymentService>();
 
                 //Service Prodiver
                 ServiceProvider = services.BuildServiceProvider();
