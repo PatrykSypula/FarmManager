@@ -75,7 +75,7 @@ namespace FarmManager.Model.Migrations
                     LastName = table.Column<string>(type: "text", nullable: false),
                     IdNumber = table.Column<string>(type: "text", nullable: true),
                     IsRentable = table.Column<bool>(type: "boolean", nullable: false),
-                    BaseRent = table.Column<double>(type: "double precision", nullable: true),
+                    BaseRent = table.Column<decimal>(type: "numeric", nullable: true),
                     PhoneNumber = table.Column<string>(type: "text", nullable: true),
                     Email = table.Column<string>(type: "text", nullable: true),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
@@ -110,9 +110,12 @@ namespace FarmManager.Model.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    CollectingQuantity = table.Column<double>(type: "double precision", nullable: false),
-                    CollectingQuantityAdditional = table.Column<double>(type: "double precision", nullable: false),
-                    HourlyQuantity = table.Column<double>(type: "double precision", nullable: false),
+                    CollectingQuantity = table.Column<decimal>(type: "numeric", nullable: false),
+                    CollectingQuantityAdditional = table.Column<decimal>(type: "numeric", nullable: false),
+                    HourlyQuantity = table.Column<decimal>(type: "numeric", nullable: false),
+                    RemainingCollectingQuantity = table.Column<decimal>(type: "numeric", nullable: false),
+                    RemainingQuantityAdditional = table.Column<decimal>(type: "numeric", nullable: false),
+                    RemainingHourlyQuantity = table.Column<decimal>(type: "numeric", nullable: false),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
                     IsActive = table.Column<bool>(type: "boolean", nullable: false),
                     Created = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false)
@@ -159,13 +162,38 @@ namespace FarmManager.Model.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Sells",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    DepositId = table.Column<int>(type: "integer", nullable: false),
+                    Price = table.Column<decimal>(type: "numeric", nullable: false),
+                    Quantity = table.Column<int>(type: "integer", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
+                    IsActive = table.Column<bool>(type: "boolean", nullable: false),
+                    Created = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Sells", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Sells_Deposits_DepositId",
+                        column: x => x.DepositId,
+                        principalTable: "Deposits",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "EmployeeCosts",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     EmployeeId = table.Column<int>(type: "integer", nullable: false),
-                    Quantity = table.Column<double>(type: "double precision", nullable: false),
+                    Quantity = table.Column<decimal>(type: "numeric", nullable: false),
+                    IsPaid = table.Column<bool>(type: "boolean", nullable: false),
                     Date = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: true),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
@@ -184,32 +212,24 @@ namespace FarmManager.Model.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Sells",
+                name: "Payments",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    DepositId = table.Column<int>(type: "integer", nullable: false),
-                    HarvestId = table.Column<int>(type: "integer", nullable: false),
-                    Price = table.Column<decimal>(type: "numeric", nullable: false),
-                    Quantity = table.Column<int>(type: "integer", nullable: false),
+                    EmployeeId = table.Column<int>(type: "integer", nullable: false),
+                    Quantity = table.Column<decimal>(type: "numeric", nullable: false),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
                     IsActive = table.Column<bool>(type: "boolean", nullable: false),
                     Created = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Sells", x => x.Id);
+                    table.PrimaryKey("PK_Payments", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Sells_Deposits_DepositId",
-                        column: x => x.DepositId,
-                        principalTable: "Deposits",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Sells_Harvests_HarvestId",
-                        column: x => x.HarvestId,
-                        principalTable: "Harvests",
+                        name: "FK_Payments_Employees_EmployeeId",
+                        column: x => x.EmployeeId,
+                        principalTable: "Employees",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -221,7 +241,7 @@ namespace FarmManager.Model.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     VarietyId = table.Column<int>(type: "integer", nullable: false),
-                    Quantity = table.Column<double>(type: "double precision", nullable: false),
+                    Quantity = table.Column<decimal>(type: "numeric", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: true),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
@@ -245,9 +265,9 @@ namespace FarmManager.Model.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Price = table.Column<double>(type: "double precision", nullable: false),
-                    Quantity = table.Column<double>(type: "double precision", nullable: false),
-                    RemainingQuantity = table.Column<double>(type: "double precision", nullable: false),
+                    Price = table.Column<decimal>(type: "numeric", nullable: false),
+                    Quantity = table.Column<decimal>(type: "numeric", nullable: false),
+                    RemainingQuantity = table.Column<decimal>(type: "numeric", nullable: false),
                     VendorId = table.Column<int>(type: "integer", nullable: false),
                     FertilizerId = table.Column<int>(type: "integer", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
@@ -280,8 +300,8 @@ namespace FarmManager.Model.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     SellId = table.Column<int>(type: "integer", nullable: false),
-                    Plant = table.Column<int>(type: "integer", nullable: false),
-                    Quantity = table.Column<double>(type: "double precision", nullable: false),
+                    HarvestId = table.Column<int>(type: "integer", nullable: false),
+                    Quantity = table.Column<decimal>(type: "numeric", nullable: false),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
                     IsActive = table.Column<bool>(type: "boolean", nullable: false),
                     Created = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false)
@@ -293,6 +313,31 @@ namespace FarmManager.Model.Migrations
                         name: "FK_SellHarvestQuantitys_Sells_SellId",
                         column: x => x.SellId,
                         principalTable: "Sells",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PaymentWorkdayQuantitys",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    PaymentId = table.Column<int>(type: "integer", nullable: false),
+                    WorkdayCollectingId = table.Column<int>(type: "integer", nullable: true),
+                    WorkdayHourlyId = table.Column<int>(type: "integer", nullable: true),
+                    Quantity = table.Column<decimal>(type: "numeric", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
+                    IsActive = table.Column<bool>(type: "boolean", nullable: false),
+                    Created = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PaymentWorkdayQuantitys", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_PaymentWorkdayQuantitys_Payments_PaymentId",
+                        column: x => x.PaymentId,
+                        principalTable: "Payments",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -331,7 +376,7 @@ namespace FarmManager.Model.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     PlantId = table.Column<int>(type: "integer", nullable: false),
                     FertilizerId = table.Column<int>(type: "integer", nullable: false),
-                    Quantity = table.Column<double>(type: "double precision", nullable: false),
+                    Quantity = table.Column<decimal>(type: "numeric", nullable: false),
                     Date = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: true),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
@@ -398,8 +443,8 @@ namespace FarmManager.Model.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     SprayingId = table.Column<int>(type: "integer", nullable: false),
-                    Buy = table.Column<int>(type: "integer", nullable: false),
-                    Quantity = table.Column<double>(type: "double precision", nullable: false),
+                    BuyId = table.Column<int>(type: "integer", nullable: false),
+                    Quantity = table.Column<decimal>(type: "numeric", nullable: false),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
                     IsActive = table.Column<bool>(type: "boolean", nullable: false),
                     Created = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false)
@@ -422,9 +467,9 @@ namespace FarmManager.Model.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     EmployeeId = table.Column<int>(type: "integer", nullable: false),
-                    Quantity = table.Column<double>(type: "double precision", nullable: false),
-                    Price = table.Column<double>(type: "double precision", nullable: false),
-                    RemainingToPay = table.Column<double>(type: "double precision", nullable: false),
+                    Quantity = table.Column<decimal>(type: "numeric", nullable: false),
+                    Price = table.Column<decimal>(type: "numeric", nullable: false),
+                    RemainingToPay = table.Column<decimal>(type: "numeric", nullable: false),
                     WorkdayId = table.Column<int>(type: "integer", nullable: false),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
                     IsActive = table.Column<bool>(type: "boolean", nullable: false),
@@ -454,9 +499,9 @@ namespace FarmManager.Model.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     EmployeeId = table.Column<int>(type: "integer", nullable: false),
-                    Hours = table.Column<double>(type: "double precision", nullable: false),
-                    Price = table.Column<double>(type: "double precision", nullable: false),
-                    RemainingToPay = table.Column<double>(type: "double precision", nullable: false),
+                    Hours = table.Column<decimal>(type: "numeric", nullable: false),
+                    Price = table.Column<decimal>(type: "numeric", nullable: false),
+                    RemainingToPay = table.Column<decimal>(type: "numeric", nullable: false),
                     WorkdayId = table.Column<int>(type: "integer", nullable: false),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
                     IsActive = table.Column<bool>(type: "boolean", nullable: false),
@@ -495,6 +540,16 @@ namespace FarmManager.Model.Migrations
                 column: "EmployeeId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Payments_EmployeeId",
+                table: "Payments",
+                column: "EmployeeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PaymentWorkdayQuantitys_PaymentId",
+                table: "PaymentWorkdayQuantitys",
+                column: "PaymentId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Plants_VarietyId",
                 table: "Plants",
                 column: "VarietyId");
@@ -513,11 +568,6 @@ namespace FarmManager.Model.Migrations
                 name: "IX_Sells_DepositId",
                 table: "Sells",
                 column: "DepositId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Sells_HarvestId",
-                table: "Sells",
-                column: "HarvestId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SprayingBuyQuantitys_SprayingId",
@@ -584,6 +634,9 @@ namespace FarmManager.Model.Migrations
                 name: "EmployeeCosts");
 
             migrationBuilder.DropTable(
+                name: "PaymentWorkdayQuantitys");
+
+            migrationBuilder.DropTable(
                 name: "Seasons");
 
             migrationBuilder.DropTable(
@@ -602,16 +655,19 @@ namespace FarmManager.Model.Migrations
                 name: "Vendors");
 
             migrationBuilder.DropTable(
+                name: "Payments");
+
+            migrationBuilder.DropTable(
                 name: "Sells");
 
             migrationBuilder.DropTable(
                 name: "Sprayings");
 
             migrationBuilder.DropTable(
-                name: "Employees");
+                name: "Workdays");
 
             migrationBuilder.DropTable(
-                name: "Workdays");
+                name: "Employees");
 
             migrationBuilder.DropTable(
                 name: "Deposits");

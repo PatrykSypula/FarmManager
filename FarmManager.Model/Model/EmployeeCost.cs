@@ -6,7 +6,7 @@ public class EmployeeCost : BaseEntity
 {
     public int EmployeeId { get; set; }
     public Employee Employee { get; set; } = null!;
-    public double Quantity { get; set; }
+    public decimal Quantity { get; set; }
     public bool IsPaid { get; set; } = false;
     public DateTimeOffset Date { get; set; }
     public string? Description { get; set; }

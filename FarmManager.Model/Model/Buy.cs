@@ -4,9 +4,9 @@ namespace FarmManager.Model.Model;
 
 public class Buy : BaseEntity, IDescribable
 {
-    public double Price { get; set; }
-    public double Quantity { get; set; }
-    public double RemainingQuantity { get; set; }
+    public decimal Price { get; set; }
+    public decimal Quantity { get; set; }
+    public decimal RemainingQuantity { get; set; }
     public int VendorId { get; set; }
     public Vendor Vendor { get; set; } = null!;
     public int FertilizerId { get; set; }

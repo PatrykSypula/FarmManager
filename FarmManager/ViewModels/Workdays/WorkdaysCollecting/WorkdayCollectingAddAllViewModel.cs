@@ -15,7 +15,7 @@ public class WorkdayCollectingAddAllViewModel(IEmployeeService employeeService, 
     public event Action<ICollection<WorkdayCollecting>>? RequestClose;
     public WorkdayCollectingAddAllModel Model = new WorkdayCollectingAddAllModel();
 
-    public double Price
+    public decimal Price
     {
         get
         {
@@ -34,7 +34,7 @@ public class WorkdayCollectingAddAllViewModel(IEmployeeService employeeService, 
         var price = FileHelper.Read(filename);
         if (!String.IsNullOrEmpty(price))
         {
-            Model.Price = double.Parse(price);
+            Model.Price = decimal.Parse(price);
             OnPropertyChanged(nameof(Price));
         }
     }

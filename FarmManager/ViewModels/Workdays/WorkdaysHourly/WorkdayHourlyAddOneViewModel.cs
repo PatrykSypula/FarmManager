@@ -29,7 +29,7 @@ public class WorkdayHourlyAddOneViewModel : BaseViewModel
         }
     }
 
-    public double Hours
+    public decimal Hours
     {
         get { return Model.WorkdayHourly.Hours; }
         set
@@ -39,7 +39,7 @@ public class WorkdayHourlyAddOneViewModel : BaseViewModel
             OnPropertyChanged();
         }
     }
-    public double Price
+    public decimal Price
     {
         get { return Model.WorkdayHourly.Price; }
         set

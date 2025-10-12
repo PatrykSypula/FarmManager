@@ -6,11 +6,11 @@ namespace FarmManager.Model.Model;
 public class Harvest : BaseEntity
 {
     public Workday Workday { get; set; } = null!;
-    public double CollectingQuantity { get; set; } 
-    public double CollectingQuantityAdditional { get; set; }
-    public double HourlyQuantity { get; set; }
-    public double RemainingCollectingQuantity { get; set; }
-    public double RemainingQuantityAdditional { get; set; }
-    public double RemainingHourlyQuantity { get; set; }
+    public decimal CollectingQuantity { get; set; } 
+    public decimal CollectingQuantityAdditional { get; set; }
+    public decimal HourlyQuantity { get; set; }
+    public decimal RemainingCollectingQuantity { get; set; }
+    public decimal RemainingQuantityAdditional { get; set; }
+    public decimal RemainingHourlyQuantity { get; set; }
 
 }

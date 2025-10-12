@@ -29,7 +29,7 @@ public class EmployeeCostEditViewModel(IEmployeeCostService employeeCostService,
             OnPropertyChanged();
         }
     }
-    public double Quantity
+    public decimal Quantity
     {
         get { return Model.EmployeeCost.Quantity; }
         set

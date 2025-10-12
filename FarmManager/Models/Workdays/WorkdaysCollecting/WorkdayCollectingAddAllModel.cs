@@ -6,5 +6,5 @@ public class WorkdayCollectingAddAllModel
 {
     public ICollection<WorkdayCollecting> WorkdaysCollecting { get; set; } = [];
     public ICollection<Employee> Employees { get; set; } = [];
-    public double Price { get; set; }
+    public decimal Price { get; set; }
 }

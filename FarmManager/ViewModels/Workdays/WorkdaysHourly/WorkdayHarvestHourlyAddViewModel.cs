@@ -50,7 +50,7 @@ public class WorkdayHarvestHourlyAddViewModel(IWorkdayService workdayService, IU
             OnPropertyChanged();
         }
     }
-    public double HourlyQuantity
+    public decimal HourlyQuantity
     {
         get { return Model.Harvest.HourlyQuantity; }
         set

@@ -1,25 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using System.Windows;
+using FarmManager.App.ViewModels.Payments;
+using FarmManager.App.ViewModels.Sprayings;
+using FarmManager.Model.Model;
 
 namespace FarmManager.App.Views.Payments;
-/// <summary>
-/// Interaction logic for PaymentAddWindow.xaml
-/// </summary>
+
 public partial class PaymentAddWindow : Window
 {
+    public Payment? Payment { get; private set; }
     public PaymentAddWindow()
     {
         InitializeComponent();
+        if (DataContext is PaymentAddViewModel vm)
+        {
+            vm.RequestClose += payment =>
+            {
+                Payment = payment;
+                DialogResult = true;
+            };
+        }
     }
 }

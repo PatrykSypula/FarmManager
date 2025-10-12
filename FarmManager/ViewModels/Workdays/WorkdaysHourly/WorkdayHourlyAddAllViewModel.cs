@@ -17,7 +17,7 @@ public class WorkdayHourlyAddAllViewModel(IEmployeeService employeeService) : Ba
     public event Action<ICollection<WorkdayHourly>>? RequestClose;
     public WorkdayHourlyAddAllModel Model = new WorkdayHourlyAddAllModel();
 
-    public double Price
+    public decimal Price
     {
         get
         {
@@ -29,7 +29,7 @@ public class WorkdayHourlyAddAllViewModel(IEmployeeService employeeService) : Ba
             OnPropertyChanged();
         }
     }
-    public double Hours
+    public decimal Hours
     {
         get
         {
@@ -48,13 +48,13 @@ public class WorkdayHourlyAddAllViewModel(IEmployeeService employeeService) : Ba
         var price = FileHelper.Read(_filePrice);
         if (!String.IsNullOrEmpty(price))
         {
-            Model.Price = double.Parse(price);
+            Model.Price = decimal.Parse(price);
             OnPropertyChanged(nameof(Price));
         }
         var hours = FileHelper.Read(_fileHours);
         if (!String.IsNullOrEmpty(hours))
         {
-            Model.Hours = double.Parse(hours);
+            Model.Hours = decimal.Parse(hours);
             OnPropertyChanged(nameof(Hours));
         }
     }

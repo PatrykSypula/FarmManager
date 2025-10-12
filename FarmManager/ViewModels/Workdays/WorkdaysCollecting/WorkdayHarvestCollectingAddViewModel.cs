@@ -50,7 +50,7 @@ public class WorkdayHarvestCollectingAddViewModel(IWorkdayService workdayService
             OnPropertyChanged();
         }
     }
-    public double CollectingQuantity
+    public decimal CollectingQuantity
     {
         get { return Model.Harvest.CollectingQuantity; }
         set
@@ -60,7 +60,7 @@ public class WorkdayHarvestCollectingAddViewModel(IWorkdayService workdayService
             OnPropertyChanged();
         }
     }
-    public double CollectingQuantityAdditional
+    public decimal CollectingQuantityAdditional
     {
         get { return Model.Harvest.CollectingQuantityAdditional; }
         set
@@ -213,7 +213,7 @@ public class WorkdayHarvestCollectingAddViewModel(IWorkdayService workdayService
 
     private void CalculateCollectingQuantity()
     {
-        double total = 0;
+        decimal total = 0;
         foreach (var wc in Model.Workday.WorkdaysCollecting)
         {
             total += wc.Quantity;

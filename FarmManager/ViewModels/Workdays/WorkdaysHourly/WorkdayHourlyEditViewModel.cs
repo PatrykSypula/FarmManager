@@ -28,7 +28,7 @@ public class WorkdayHourlyEditViewModel : BaseViewModel
         }
     }
 
-    public double Hours
+    public decimal Hours
     {
         get { return Model.WorkdayHourly.Hours; }
         set
@@ -39,7 +39,7 @@ public class WorkdayHourlyEditViewModel : BaseViewModel
             UpdateRemainingToPay();
         }
     }
-    public double Price
+    public decimal Price
     {
         get { return Model.WorkdayHourly.Price; }
         set
@@ -50,7 +50,7 @@ public class WorkdayHourlyEditViewModel : BaseViewModel
             UpdateRemainingToPay();
         }
     }
-    public double RemainingToPay
+    public decimal RemainingToPay
     {
         get { return Model.WorkdayHourly.RemainingToPay; }
         set

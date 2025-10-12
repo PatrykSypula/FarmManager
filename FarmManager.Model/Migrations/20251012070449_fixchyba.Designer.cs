@@ -3,6 +3,7 @@ using System;
 using FarmManager.Model.DatabaseContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FarmManager.Model.Migrations
 {
     [DbContext(typeof(FarmManagerContext))]
-    partial class FarmManagerContextModelSnapshot : ModelSnapshot
+    [Migration("20251012070449_fixchyba")]
+    partial class fixchyba
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -330,13 +333,6 @@ namespace FarmManager.Model.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
-                    b.Property<decimal>("EmployeeCost")
-                        .HasColumnType("numeric");
-
-                    b.PrimitiveCollection<int[]>("EmployeeCosts")
-                        .IsRequired()
-                        .HasColumnType("integer[]");
-
                     b.Property<int>("EmployeeId")
                         .HasColumnType("integer");
 
@@ -345,9 +341,6 @@ namespace FarmManager.Model.Migrations
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
-
-                    b.Property<decimal>("PaymentQuantity")
-                        .HasColumnType("numeric");
 
                     b.Property<decimal>("Quantity")
                         .HasColumnType("numeric");

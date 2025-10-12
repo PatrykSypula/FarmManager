@@ -9,7 +9,7 @@ using FarmManager.Services.Interfaces;
 
 namespace FarmManager.App.ViewModels.Sprayings;
 
-public class SprayingAddViewModel(ISprayingService sprayingService, IFertilizerService fertilizerService, IBuyService buyService, IUnitOfWork unitOfWork) : BaseViewModel
+public class SprayingAddViewModel(ISprayingService sprayingService, IBuyService buyService, IFertilizerService fertilizerService, IUnitOfWork unitOfWork) : BaseViewModel
 {
     #region Properties
 
@@ -51,7 +51,7 @@ public class SprayingAddViewModel(ISprayingService sprayingService, IFertilizerS
             OnPropertyChanged();
         }
     }
-    public double Quantity
+    public decimal Quantity
     {
         get
         {
@@ -91,19 +91,17 @@ public class SprayingAddViewModel(ISprayingService sprayingService, IFertilizerS
         }
         else
         {
-            SprayingRegisterValidator fertilizerValidator = new SprayingRegisterValidator(Model.Spraying.Quantity);
-            var valid = fertilizerValidator.Validate(Model.Fertilizer);
-            if (!valid.IsValid)
-            {
-                new CustomMessageBoxOk(valid).ShowDialog();
-            }
-            else
+            var availableQuantity = await fertilizerService.GetAvailableQuantity(Model.Fertilizer.Id);
+            if (availableQuantity >= Model.Spraying.Quantity)
             {
                 Model.Spraying.BuyQuantity = await buyService.AdjustRemainingQuantity(Model.Spraying.Quantity, Model.Fertilizer.Id);
-                //await fertilizerService.AddQuantity(Model.Fertilizer.Id, -Model.Spraying.Quantity);
                 await sprayingService.Add(Model.Spraying);
                 await unitOfWork.SaveChangesAsync();
                 RequestClose?.Invoke(Model.Spraying);
+            }
+            else
+            {
+                new CustomMessageBoxOk("Nie ma tyle nawozów w magazynie.").ShowDialog();
             }
         }
     }

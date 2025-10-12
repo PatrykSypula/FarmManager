@@ -52,7 +52,7 @@ public class BuyService(IFarmManagerContext context) : IBuyService
         entity.IsDeleted = true;
     }
 
-    public async Task<ICollection<SprayingBuyQuantity>> AdjustRemainingQuantity(double quantityChange, int fertilizerId)
+    public async Task<ICollection<SprayingBuyQuantity>> AdjustRemainingQuantity(decimal quantityChange, int fertilizerId)
     {
         var buy = await context.Buys
             .Where(b => b.IsActive && b.RemainingQuantity > 0 && b.FertilizerId == fertilizerId)
@@ -67,17 +67,22 @@ public class BuyService(IFarmManagerContext context) : IBuyService
                     adjustments.Add(new SprayingBuyQuantity()
                     {
                         BuyId = buy[i].Id,
-                        Quantity = quantityChange
+                        Quantity = quantityChange,
+                        TotalPrice = quantityChange * buy[i].Price / buy[i].Quantity
+
                     });
 
                     buy[i].RemainingQuantity -= quantityChange;
+                    quantityChange = 0;
                 }
                 else
                 {
                     adjustments.Add(new SprayingBuyQuantity()
                     {
                         BuyId = buy[i].Id,
-                        Quantity = buy[i].RemainingQuantity
+                        Quantity = buy[i].RemainingQuantity,
+                        TotalPrice = buy[i].RemainingQuantity * buy[i].Price / buy[i].Quantity
+
                     });
                     quantityChange -= buy[i].RemainingQuantity;
                     buy[i].RemainingQuantity = 0;

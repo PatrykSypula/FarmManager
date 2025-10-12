@@ -67,7 +67,7 @@ public class EmployeeAddViewModel(IEmployeeService employeeService, IUnitOfWork 
         }
     }
 
-    public double? BaseRent
+    public decimal? BaseRent
     {
         get
         {

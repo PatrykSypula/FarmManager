@@ -36,7 +36,7 @@ public class BuyAddViewModel(IBuyService buyService, IFertilizerService fertiliz
             OnPropertyChanged();
         }
     }
-    public double Price
+    public decimal Price
     {
         get { return Model.Buy.Price; }
         set
@@ -45,7 +45,7 @@ public class BuyAddViewModel(IBuyService buyService, IFertilizerService fertiliz
             OnPropertyChanged();
         }
     }
-    public double Quantity
+    public decimal Quantity
     {
         get { return Model.Buy.Quantity; }
         set

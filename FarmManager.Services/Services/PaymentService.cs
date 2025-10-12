@@ -44,4 +44,106 @@ public class PaymentService(IFarmManagerContext context) : IPaymentService
             throw new NotFoundException("Nie mozna znaleźć wypłaty.");
         entity.IsDeleted = true;
     }
+
+    public async Task<decimal> GetUnpaidEmployeeQuantity(int employeeId)
+    {
+        var workdaysCollecting = await context.WorkdayCollecting
+            .Where(x => x.EmployeeId == employeeId && x.RemainingToPay != 0)
+            .ToListAsync();
+        var workdaysHourly = await context.WorkdayHourly
+            .Where(x => x.EmployeeId == employeeId && x.RemainingToPay != 0)
+            .ToListAsync();
+
+        return workdaysCollecting.Sum(d => d.RemainingToPay) + workdaysHourly.Sum(d => d.RemainingToPay);
+    }
+
+
+
+    public async Task<ICollection<PaymentWorkdayQuantity>> PayAllWorkdays(int employeeId)
+    {
+        var workdaysCollecting = await context.WorkdayCollecting
+            .Where(x => x.EmployeeId == employeeId && x.RemainingToPay != 0)
+            .ToListAsync();
+
+        var workdaysHourly = await context.WorkdayHourly
+            .Where(x => x.EmployeeId == employeeId && x.RemainingToPay != 0)
+            .ToListAsync();
+
+        ICollection<PaymentWorkdayQuantity> adjustments = [];
+        for (var i = 0; i < workdaysCollecting.Count; i++)
+        {
+            adjustments.Add(new PaymentWorkdayQuantity()
+            {
+                WorkdayCollectingId = workdaysCollecting[i].Id,
+                Quantity = workdaysCollecting[i].RemainingToPay,
+            });
+            workdaysCollecting[i].RemainingToPay = 0;
+        }
+
+        for (var i = 0; i < workdaysHourly.Count; i++)
+        {
+            adjustments.Add(new PaymentWorkdayQuantity()
+            {
+                WorkdayHourlyId = workdaysHourly[i].Id,
+                Quantity = workdaysHourly[i].RemainingToPay,
+            });
+            workdaysHourly[i].RemainingToPay = 0;
+        }
+        return adjustments;
+    }
+    public async Task RevertPayment(ICollection<PaymentWorkdayQuantity> paymentWorkdayQuantities)
+    {
+        foreach (var item in paymentWorkdayQuantities)
+        {
+            if(item.WorkdayCollectingId != null)
+            {
+                var workdayCollecting = await context.WorkdayCollecting.Where(w => w.Id == item.WorkdayCollectingId).FirstOrDefaultAsync()
+                ?? throw new NotFoundException("Nie mozna znaleźć dniówki zbiorczej.");
+                workdayCollecting.RemainingToPay += item.Quantity;
+                continue;
+            }
+            if(item.WorkdayHourlyId != null)
+            {
+                var workdayHourly = await context.WorkdayHourly.Where(w => w.Id == item.WorkdayHourlyId).FirstOrDefaultAsync()
+                ?? throw new NotFoundException("Nie mozna znaleźć dniówki godzinowej.");
+                workdayHourly.RemainingToPay += item.Quantity;
+                continue;
+            }
+        }
+    }
+
+    public async Task<decimal> GetEmployeeCost(int employeeId)
+    {
+        var employeeCosts = await context.EmployeeCosts
+            .Where(x => x.EmployeeId == employeeId && x.IsPaid == false)
+            .ToListAsync();
+
+        return employeeCosts.Sum(d => d.Quantity);
+    }
+
+    public async Task<ICollection<int>> GetEmployeeCostIds(int employeeId)
+    {
+        return await context.EmployeeCosts
+            .Where(x => x.EmployeeId == employeeId && x.IsPaid == false)
+            .Select(x => x.Id)
+            .ToListAsync();
+    }
+    public async Task PayEmployeeCosts(ICollection<int> employeeCosts)
+    {
+        foreach (var id in employeeCosts)
+        {
+            var employeeCost = await context.EmployeeCosts.Where(e => e.Id == id).FirstOrDefaultAsync()
+                ?? throw new NotFoundException("Nie mozna znaleźć kosztu pracownika.");
+            employeeCost.IsPaid = true;
+        }
+    }
+    public async Task RevertPayEmployeeCosts(ICollection<int> employeeCosts)
+    {
+        foreach (var id in employeeCosts)
+        {
+            var employeeCost = await context.EmployeeCosts.Where(e => e.Id == id).FirstOrDefaultAsync()
+                ?? throw new NotFoundException("Nie mozna znaleźć kosztu pracownika.");
+            employeeCost.IsPaid = false;
+        }
+    }
 }

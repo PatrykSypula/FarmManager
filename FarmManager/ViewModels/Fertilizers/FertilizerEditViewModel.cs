@@ -41,18 +41,18 @@ public class FertilizerEditViewModel(IFertilizerService fertilizerService, IUnit
         }
     }
 
-    //public double Quantity
-    //{
-    //    get
-    //    {
-    //        return Model.Fertilizer.Quantity;
-    //    }
-    //    set
-    //    {
-    //        Model.Fertilizer.Quantity = value;
-    //        OnPropertyChanged();
-    //    }
-    //}
+    public decimal? Quantity
+    {
+        get
+        {
+            return Model.Fertilizer.Quantity;
+        }
+        set
+        {
+            Model.Fertilizer.Quantity = value;
+            OnPropertyChanged();
+        }
+    }
 
     public bool IsActive
     {
@@ -70,9 +70,10 @@ public class FertilizerEditViewModel(IFertilizerService fertilizerService, IUnit
     public async Task InitializeAsync(int id)
     {
         Model.Fertilizer = await fertilizerService.Get(id);
+        Model.Fertilizer.Quantity = await fertilizerService.GetAvailableQuantity(id);
         OnPropertyChanged(nameof(Name));
         OnPropertyChanged(nameof(Description));
-        //OnPropertyChanged(nameof(Quantity));
+        OnPropertyChanged(nameof(Quantity));
         OnPropertyChanged(nameof(IsActive));
     }
 

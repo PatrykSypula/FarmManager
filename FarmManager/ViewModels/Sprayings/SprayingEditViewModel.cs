@@ -1,5 +1,4 @@
 ﻿using FarmManager.App.Helpers;
-using FarmManager.App.Helpers.Validators;
 using FarmManager.App.Models.Sprayings;
 using FarmManager.App.Views;
 using FarmManager.App.Views.ChooseEntity;
@@ -52,7 +51,7 @@ public class SprayingEditViewModel(ISprayingService sprayingService, IFertilizer
             OnPropertyChanged();
         }
     }
-    public double Quantity
+    public decimal Quantity
     {
         get
         {
@@ -98,7 +97,6 @@ public class SprayingEditViewModel(ISprayingService sprayingService, IFertilizer
         if (result == true)
         {
             await buyService.RevertRemainingQuantity(Model.Spraying.BuyQuantity);
-            //await fertilizerService.AddQuantity(Model.Fertilizer.Id, Model.Spraying.Quantity);
             await sprayingService.Delete(Model.Spraying.Id);
             Model.Spraying.IsDeleted = true;
             await unitOfWork.SaveChangesAsync();
@@ -109,19 +107,7 @@ public class SprayingEditViewModel(ISprayingService sprayingService, IFertilizer
     public RelayCommand Update => new RelayCommand(async execute => await UpdateSprayingAsync());
     private async Task UpdateSprayingAsync()
     {
-        new CustomMessageBoxOk("Edycja zakupu jest obecnie niedostępna ze względu na złożoność związaną z zużywaniem zakupionego produktu.\nWszekie poprawiki należy rozwiązywać dodawaniem kolejnych zakupów lub ich usuwaniem.").ShowDialog();
-        //SprayingValidator validator = new SprayingValidator();
-        //Model.Spraying.Description = string.IsNullOrEmpty(Model.Spraying.Description) ? null : Model.Spraying.Description;
-        //var result = validator.Validate(Model.Spraying);
-        //if (!result.IsValid)
-        //{
-        //    new CustomMessageBoxOk(result).ShowDialog();
-        //}
-        //else
-        //{
-        //    await sprayingService.Update(Model.Spraying);
-        //    RequestClose?.Invoke(Model.Spraying);
-        //}
+        new CustomMessageBoxOk("Edycja zakupu jest obecnie niedostępna ze względu na złożoność związaną z zużywaniem zakupionego produktu.\nWszekie poprawki należy rozwiązywać dodawaniem kolejnych zakupów lub ich usuwaniem.").ShowDialog();
     }
 
     public RelayCommand OpenPlant => new RelayCommand(execute => OpenSelectPlantAsync());

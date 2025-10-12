@@ -29,7 +29,7 @@ public class WorkdayCollectingAddOneViewModel : BaseViewModel
         }
     }
 
-    public double Quantity
+    public decimal Quantity
     {
         get { return Model.WorkdayCollecting.Quantity; }
         set
@@ -39,7 +39,7 @@ public class WorkdayCollectingAddOneViewModel : BaseViewModel
             OnPropertyChanged();
         }
     }
-    public double Price
+    public decimal Price
     {
         get { return Model.WorkdayCollecting.Price; }
         set

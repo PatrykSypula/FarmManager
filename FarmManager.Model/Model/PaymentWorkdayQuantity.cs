@@ -6,6 +6,7 @@ public class PaymentWorkdayQuantity : BaseEntity
 {
     public int PaymentId { get; set; }
     public Payment Payment { get; set; } = null!;
-    public int WorkdayId { get; set; }
-    public double Quantity { get; set; }
+    public int? WorkdayCollectingId { get; set; }
+    public int? WorkdayHourlyId { get; set; }
+    public decimal Quantity { get; set; }
 }

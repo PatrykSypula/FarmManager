@@ -7,7 +7,7 @@
                 xmlns:app="clr-namespace:FarmManager.App.Helpers"
         Language="pl-PL"
         mc:Ignorable="d"
-        Title="Wybór rośliny" Height="720" Width="775"
+        Title="Wybór rośliny" Height="720" Width="900"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
@@ -39,6 +39,7 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Imię" Width="*" Binding="{Binding Employee.FirstName}"/>
                 <DataGridTextColumn Header="Nazwisko" Width="*" Binding="{Binding Employee.LastName}"/>
+                <DataGridTextColumn Header="Pożyczka" Width="*" Binding="{Binding Quantity}"/>
                 <DataGridTextColumn Header="Data" Width="*" Binding="{Binding Date}"/>
             </DataGrid.Columns>
             <DataGrid.InputBindings>
