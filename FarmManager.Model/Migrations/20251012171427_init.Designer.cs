@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FarmManager.Model.Migrations
 {
     [DbContext(typeof(FarmManagerContext))]
-    [Migration("20251011123823_init")]
+    [Migration("20251012171427_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -330,6 +330,16 @@ namespace FarmManager.Model.Migrations
                     b.Property<DateTimeOffset>("Created")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<decimal>("EmployeeCost")
+                        .HasColumnType("numeric");
+
+                    b.PrimitiveCollection<int[]>("EmployeeCosts")
+                        .IsRequired()
+                        .HasColumnType("integer[]");
+
                     b.Property<int>("EmployeeId")
                         .HasColumnType("integer");
 
@@ -338,6 +348,9 @@ namespace FarmManager.Model.Migrations
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
+
+                    b.Property<decimal>("PaymentQuantity")
+                        .HasColumnType("numeric");
 
                     b.Property<decimal>("Quantity")
                         .HasColumnType("numeric");
@@ -473,8 +486,14 @@ namespace FarmManager.Model.Migrations
                     b.Property<DateTimeOffset>("Created")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<DateTimeOffset>("Date")
+                        .HasColumnType("timestamp with time zone");
+
                     b.Property<int>("DepositId")
                         .HasColumnType("integer");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("boolean");
@@ -482,15 +501,20 @@ namespace FarmManager.Model.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
+                    b.Property<int>("PlantId")
+                        .HasColumnType("integer");
+
                     b.Property<decimal>("Price")
                         .HasColumnType("numeric");
 
-                    b.Property<int>("Quantity")
-                        .HasColumnType("integer");
+                    b.Property<decimal>("Quantity")
+                        .HasColumnType("numeric");
 
                     b.HasKey("Id");
 
                     b.HasIndex("DepositId");
+
+                    b.HasIndex("PlantId");
 
                     b.ToTable("Sells");
                 });
@@ -503,20 +527,26 @@ namespace FarmManager.Model.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<decimal?>("CollectingQuantity")
+                        .HasColumnType("numeric");
+
+                    b.Property<decimal?>("CollectingQuantityAdditional")
+                        .HasColumnType("numeric");
+
                     b.Property<DateTimeOffset>("Created")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<int>("HarvestId")
                         .HasColumnType("integer");
 
+                    b.Property<decimal?>("HourlyQuantity")
+                        .HasColumnType("numeric");
+
                     b.Property<bool>("IsActive")
                         .HasColumnType("boolean");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
-
-                    b.Property<decimal>("Quantity")
-                        .HasColumnType("numeric");
 
                     b.Property<int>("SellId")
                         .HasColumnType("integer");
@@ -594,6 +624,9 @@ namespace FarmManager.Model.Migrations
 
                     b.Property<int>("SprayingId")
                         .HasColumnType("integer");
+
+                    b.Property<decimal>("TotalPrice")
+                        .HasColumnType("numeric");
 
                     b.HasKey("Id");
 
@@ -877,7 +910,15 @@ namespace FarmManager.Model.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("FarmManager.Model.Model.Plant", "Plant")
+                        .WithMany()
+                        .HasForeignKey("PlantId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Deposit");
+
+                    b.Navigation("Plant");
                 });
 
             modelBuilder.Entity("FarmManager.Model.Model.SellHarvestQuantity", b =>

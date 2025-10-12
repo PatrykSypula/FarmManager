@@ -89,6 +89,11 @@ public class SellAddViewModel(ISellService sellService, IUnitOfWork unitOfWork) 
             OnPropertyChanged();
         }
     }
+    public async Task InitializeAsync()
+    {
+        Model.Sell.Date = DateTimeOffset.UtcNow;
+        OnPropertyChanged(nameof(Date));
+    }
 
     #endregion
 

@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using FarmManager.App.ViewModels.Seasons;
 using FarmManager.App.ViewModels.Sells;
 using FarmManager.Model.Model;
 
@@ -10,6 +11,7 @@ public partial class SellAddWindow : Window
     public SellAddWindow()
     {
         InitializeComponent();
+        Loaded += async (_, __) => await ((SellAddViewModel)DataContext).InitializeAsync();
         if (DataContext is SellAddViewModel vm)
         {
             vm.RequestClose += sell =>

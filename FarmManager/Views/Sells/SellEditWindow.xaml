@@ -18,7 +18,7 @@
         FontFamily="{DynamicResource MaterialDesignFont}"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
-        DataContext="{Binding SellAddViewModel, Source={StaticResource Locator}}">
+        DataContext="{Binding SellEditViewModel, Source={StaticResource Locator}}">
     <Window.Resources>
         <app:DateTimeOffsetToDateTimeConverter x:Key="DtoToDtConverter"/>
     </Window.Resources>

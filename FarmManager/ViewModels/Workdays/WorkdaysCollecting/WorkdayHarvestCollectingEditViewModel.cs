@@ -221,9 +221,9 @@ public class WorkdayHarvestCollectingEditViewModel(IWorkdayService workdayServic
     public RelayCommand Update => new RelayCommand(async execute => await UpdateWorkdayAsync());
     private async Task UpdateWorkdayAsync()
     {
-        if (Model.Harvest.RemainingCollectingQuantity == Model.Harvest.CollectingQuantity &&
-            Model.Harvest.RemainingQuantityAdditional == Model.Harvest.RemainingQuantityAdditional &&
-            Model.Harvest.RemainingHourlyQuantity == Model.Harvest.RemainingHourlyQuantity)
+        if (Model.Harvest.CollectingQuantity == Model.Harvest.RemainingCollectingQuantity &&
+           Model.Harvest.CollectingQuantityAdditional == Model.Harvest.RemainingQuantityAdditional &&
+           Model.Harvest.HourlyQuantity == Model.Harvest.RemainingHourlyQuantity)
         {
             WorkdayHarvestCollectingValidator validator = new WorkdayHarvestCollectingValidator();
             Model.Workday.Description = string.IsNullOrEmpty(Model.Workday.Description) ? null : Model.Workday.Description;
@@ -255,7 +255,7 @@ public class WorkdayHarvestCollectingEditViewModel(IWorkdayService workdayServic
         }
         else
         {
-            new CustomMessageBoxOk("Nie można edytować tego dnia, ponieważ zostały już zbiory zostału już rozliczone.").ShowDialog();
+            new CustomMessageBoxOk("Nie można edytować tego dnia, ponieważ zbiory zostały już rozliczone.").ShowDialog();
         }
     }
 
