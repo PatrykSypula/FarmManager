@@ -87,12 +87,12 @@ public class WorkdayHarvestCollectingEditViewModel(IWorkdayService workdayServic
     public async Task InitializeAsync(int id)
     {
         Model.Workday = await workdayService.GetWorkday(id);
-        if(Model.Workday.HarvestId != null)
+        if (Model.Workday.HarvestId != null)
         {
             Model.Harvest = await harvestService.Get(Model.Workday.HarvestId.Value);
         }
         Model.WorkdaysCollecting = new ObservableCollection<WorkdayCollecting>(await workdayService.GetWorkdaysCollecting(id));
-        if(Model.Workday.PlantId != null)
+        if (Model.Workday.PlantId != null)
         {
             Model.Plant = await plantService.Get(Model.Workday.PlantId.Value);
         }
@@ -221,29 +221,41 @@ public class WorkdayHarvestCollectingEditViewModel(IWorkdayService workdayServic
     public RelayCommand Update => new RelayCommand(async execute => await UpdateWorkdayAsync());
     private async Task UpdateWorkdayAsync()
     {
-        WorkdayHarvestCollectingValidator validator = new WorkdayHarvestCollectingValidator();
-        Model.Workday.Description = string.IsNullOrEmpty(Model.Workday.Description) ? null : Model.Workday.Description;
-        var result = validator.Validate(Model.Workday);
-        if (!result.IsValid)
+        if (Model.Harvest.RemainingCollectingQuantity == Model.Harvest.CollectingQuantity &&
+            Model.Harvest.RemainingQuantityAdditional == Model.Harvest.RemainingQuantityAdditional &&
+            Model.Harvest.RemainingHourlyQuantity == Model.Harvest.RemainingHourlyQuantity)
         {
-            new CustomMessageBoxOk(result).ShowDialog();
+            WorkdayHarvestCollectingValidator validator = new WorkdayHarvestCollectingValidator();
+            Model.Workday.Description = string.IsNullOrEmpty(Model.Workday.Description) ? null : Model.Workday.Description;
+            var result = validator.Validate(Model.Workday);
+            if (!result.IsValid)
+            {
+                new CustomMessageBoxOk(result).ShowDialog();
+            }
+            else
+            {
+
+                foreach (var wc in Model.Workday.WorkdaysCollecting)
+                {
+                    wc.Employee = null;
+                    wc.Workday = null;
+                }
+                Model.Workday.Action = null;
+                Model.Workday.Harvest = null;
+                Model.Workday.Plant = null;
+                Model.Harvest.RemainingCollectingQuantity = CollectingQuantity;
+                Model.Harvest.RemainingQuantityAdditional = CollectingQuantityAdditional;
+                await harvestService.Update(Model.Harvest);
+                await workdayService.Update(Model.Workday);
+                await unitOfWork.SaveChangesAsync();
+                await workdayService.Detach(Model.Workday);
+                Model.Workday.Plant = Model.Plant;
+                RequestClose?.Invoke(Model.Workday);
+            }
         }
         else
         {
-            foreach (var wc in Model.Workday.WorkdaysCollecting)
-            {
-                wc.Employee = null;
-                wc.Workday = null;
-            }
-            Model.Workday.Action = null;
-            Model.Workday.Harvest = null;
-            Model.Workday.Plant = null;
-            await harvestService.Update(Model.Harvest);
-            await workdayService.Update(Model.Workday);
-            await unitOfWork.SaveChangesAsync();
-            await workdayService.Detach(Model.Workday);
-            Model.Workday.Plant = Model.Plant;
-            RequestClose?.Invoke(Model.Workday);
+            new CustomMessageBoxOk("Nie można edytować tego dnia, ponieważ zostały już zbiory zostału już rozliczone.").ShowDialog();
         }
     }
 

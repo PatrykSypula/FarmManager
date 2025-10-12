@@ -187,6 +187,7 @@ public class WorkdayHarvestHourlyAddViewModel(IWorkdayService workdayService, IU
             }
             Model.Workday.Action = null;
             Model.Workday.Plant = null;
+            Model.Harvest.RemainingHourlyQuantity = Model.Harvest.HourlyQuantity;
             Model.Workday.Harvest = Model.Harvest;
             await workdayService.Add(Model.Workday);
             await unitOfWork.SaveChangesAsync();

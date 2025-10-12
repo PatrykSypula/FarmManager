@@ -1,25 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using System.Windows;
+using FarmManager.App.ViewModels.Sells;
+using FarmManager.Model.Model;
 
 namespace FarmManager.App.Views.Sells;
-/// <summary>
-/// Interaction logic for SellEditWindow.xaml
-/// </summary>
+
 public partial class SellEditWindow : Window
 {
-    public SellEditWindow()
+    public Sell? Sell { get; private set; }
+    public SellEditWindow(int id)
     {
         InitializeComponent();
+        Loaded += async (_, __) => await ((SellEditViewModel)DataContext).InitializeAsync(id);
+        if (DataContext is SellEditViewModel vm)
+        {
+            vm.RequestClose += sell =>
+            {
+                Sell = sell;
+                DialogResult = true;
+            };
+        }
     }
 }

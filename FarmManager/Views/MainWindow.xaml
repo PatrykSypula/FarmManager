@@ -24,6 +24,7 @@
             <MenuItem Header="Praca" FontSize="20">
                 <MenuItem Header="Dni" Command="{Binding Workdays}" FontSize="20" />
                 <MenuItem Header="Wypłaty" Command="{Binding Payments}" FontSize="20" />
+                <MenuItem Header="Sprzedaż" Command="{Binding Sells}" FontSize="20" />
             </MenuItem>
             <MenuItem Header="Zaawansowane" FontSize="20">
                 <MenuItem Header="Rośliny" Command="{Binding Plants}" FontSize="20" />

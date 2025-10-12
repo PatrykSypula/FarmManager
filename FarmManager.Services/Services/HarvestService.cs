@@ -40,6 +40,9 @@ public class HarvestService(FarmManagerContext context) : IHarvestService
         existingEntity.CollectingQuantity = entity.CollectingQuantity;
         existingEntity.CollectingQuantityAdditional = entity.CollectingQuantityAdditional;
         existingEntity.HourlyQuantity = entity.HourlyQuantity;
+        existingEntity.RemainingHourlyQuantity = entity.RemainingHourlyQuantity;
+        existingEntity.RemainingCollectingQuantity = entity.RemainingCollectingQuantity;
+        existingEntity.RemainingQuantityAdditional = entity.RemainingQuantityAdditional;
     }
     public async Task Delete(int id)
     {

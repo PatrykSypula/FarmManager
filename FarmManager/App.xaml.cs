@@ -74,6 +74,7 @@ public partial class MyApp : Application
                 services.AddTransient<ChooseVendorWindow>();
                 services.AddTransient<ChooseEmployeeWindow>();
                 services.AddTransient<ChooseActionWindow>();
+                services.AddTransient<ChooseDepositWindow>();
 
                 //Deposits
                 services.AddTransient<DepositsWindow>();
@@ -179,6 +180,7 @@ public partial class MyApp : Application
                 services.AddTransient<ChooseVarietyViewModel>();
                 services.AddTransient<ChooseEmployeeViewModel>();
                 services.AddTransient<ChooseActionViewModel>();
+                services.AddTransient<ChooseDepositViewModel>();
 
                 //Deposits
                 services.AddTransient<DepositsViewModel>();

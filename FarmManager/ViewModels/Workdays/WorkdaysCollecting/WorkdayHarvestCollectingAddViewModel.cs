@@ -195,6 +195,8 @@ public class WorkdayHarvestCollectingAddViewModel(IWorkdayService workdayService
         }
         else
         {
+            Model.Harvest.RemainingCollectingQuantity = CollectingQuantity;
+            Model.Harvest.RemainingQuantityAdditional = CollectingQuantityAdditional;
             Model.Workday.Harvest = Model.Harvest;
             Model.Workday.Action = null;
             Model.Workday.Plant = null;

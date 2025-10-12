@@ -8,4 +8,7 @@ public interface ISellService
     Task<Sell> Get(int id);
     Task Add(Sell entity);
     Task Delete(int id);
+    Task<ICollection<SellHarvestQuantity>> AdjustRemainingQuantity(decimal quantityChange, int plantId);
+    Task RevertRemainingQuantity(ICollection<SellHarvestQuantity> harvestQuantities);
+    Task<decimal> GetAvailableQuantity(int plantId);
 }

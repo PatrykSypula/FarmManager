@@ -10,6 +10,7 @@ using FarmManager.App.Views.Fertilizers;
 using FarmManager.App.Views.Payments;
 using FarmManager.App.Views.Plants;
 using FarmManager.App.Views.Seasons;
+using FarmManager.App.Views.Sells;
 using FarmManager.App.Views.Sprayings;
 using FarmManager.App.Views.Varieties;
 using FarmManager.App.Views.Vendors;
@@ -114,5 +115,11 @@ public class MainWindowViewModel : BaseViewModel
     private void OpenPaymentsWindow()
     {
         new PaymentsWindow().ShowDialog();
+    }
+
+    public RelayCommand Sells => new RelayCommand(execute => OpenSellsWindow());
+    private void OpenSellsWindow()
+    {
+        new SellsWindow().ShowDialog();
     }
 }

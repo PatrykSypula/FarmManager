@@ -194,29 +194,40 @@ public class WorkdayHarvestHourlyEditViewModel(IWorkdayService workdayService, I
     public RelayCommand Update => new RelayCommand(async execute => await UpdateWorkdayAsync());
     private async Task UpdateWorkdayAsync()
     {
-        WorkdayHarvestHourlyValidator validator = new WorkdayHarvestHourlyValidator();
-        Model.Workday.Description = string.IsNullOrEmpty(Model.Workday.Description) ? null : Model.Workday.Description;
-        var result = validator.Validate(Model.Workday);
-        if (!result.IsValid)
+        if(Model.Harvest.RemainingCollectingQuantity == Model.Harvest.CollectingQuantity &&
+            Model.Harvest.RemainingQuantityAdditional == Model.Harvest.RemainingQuantityAdditional &&
+            Model.Harvest.RemainingHourlyQuantity == Model.Harvest.RemainingHourlyQuantity)
         {
-            new CustomMessageBoxOk(result).ShowDialog();
+            WorkdayHarvestHourlyValidator validator = new WorkdayHarvestHourlyValidator();
+            Model.Workday.Description = string.IsNullOrEmpty(Model.Workday.Description) ? null : Model.Workday.Description;
+            var result = validator.Validate(Model.Workday);
+            if (!result.IsValid)
+            {
+                new CustomMessageBoxOk(result).ShowDialog();
+            }
+            else
+            {
+                foreach (var wh in Model.Workday.WorkdaysHourly)
+                {
+                    wh.Employee = null;
+                    wh.Workday = null;
+                }
+                Model.Workday.Action = null;
+                Model.Workday.Harvest = null;
+                Model.Workday.Plant = null;
+                Model.Harvest.RemainingHourlyQuantity = Model.Harvest.HourlyQuantity;
+                await harvestService.Update(Model.Harvest);
+                await workdayService.Update(Model.Workday);
+                await unitOfWork.SaveChangesAsync();
+                await workdayService.Detach(Model.Workday);
+                Model.Workday.Plant = Model.Plant;
+                RequestClose?.Invoke(Model.Workday);
+            }
         }
         else
         {
-            foreach (var wh in Model.Workday.WorkdaysHourly)
-            {
-                wh.Employee = null;
-                wh.Workday = null;
-            }
-            Model.Workday.Action = null;
-            Model.Workday.Harvest = null;
-            Model.Workday.Plant = null;
-            await harvestService.Update(Model.Harvest);
-            await workdayService.Update(Model.Workday);
-            await unitOfWork.SaveChangesAsync();
-            await workdayService.Detach(Model.Workday);
-            Model.Workday.Plant = Model.Plant;
-            RequestClose?.Invoke(Model.Workday);
+            new CustomMessageBoxOk("Nie można edytować tego dnia, ponieważ zostały już zbiory zostału już rozliczone.").ShowDialog();
         }
+
     }
 }
