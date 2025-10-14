@@ -15,7 +15,7 @@ public class SprayingEditViewModel(ISprayingService sprayingService, IFertilizer
     public event Action<Spraying>? RequestClose;
     public SprayingEditModel Model = new SprayingEditModel();
 
-    public string? Plant
+    public string Plant
     {
         get
         {
@@ -28,9 +28,9 @@ public class SprayingEditViewModel(ISprayingService sprayingService, IFertilizer
             OnPropertyChanged();
         }
     }
-    public string? Fertilizer
+    public string Fertilizer
     {
-        get { return Model.Fertilizer?.Name; }
+        get { return Model.Fertilizer.Name; }
         set
         {
             if (Model.Fertilizer != null)
@@ -38,16 +38,12 @@ public class SprayingEditViewModel(ISprayingService sprayingService, IFertilizer
             OnPropertyChanged();
         }
     }
-    public string? Date
+    public DateOnly Date
     {
-        get => Model.Spraying.Date.ToLocalTime().ToString("dd.MM.yyyy");
+        get => Model.Spraying.Date;
         set
         {
-            if (!string.IsNullOrWhiteSpace(value) &&
-                DateTimeOffset.TryParse(value, out var parsedDate))
-            {
-                Model.Spraying.Date = new DateTimeOffset(parsedDate.Date, DateTimeOffset.Now.Offset);
-            }
+            Model.Spraying.Date = value;
             OnPropertyChanged();
         }
     }

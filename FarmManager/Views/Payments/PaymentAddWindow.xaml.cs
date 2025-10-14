@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using FarmManager.App.ViewModels.Buys;
 using FarmManager.App.ViewModels.Payments;
 using FarmManager.App.ViewModels.Sprayings;
 using FarmManager.Model.Model;
@@ -11,6 +12,7 @@ public partial class PaymentAddWindow : Window
     public PaymentAddWindow()
     {
         InitializeComponent();
+        Loaded += async (_, __) => await ((PaymentAddViewModel)DataContext).InitializeAsync();
         if (DataContext is PaymentAddViewModel vm)
         {
             vm.RequestClose += payment =>

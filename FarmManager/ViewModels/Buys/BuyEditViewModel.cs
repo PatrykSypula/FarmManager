@@ -64,6 +64,18 @@ public class BuyEditViewModel(IBuyService buyService, IVendorService vendorServi
             OnPropertyChanged();
         }
     }
+    public DateOnly Date
+    {
+        get
+        {
+            return Model.Buy.Date;
+        }
+        set
+        {
+            Model.Buy.Date = value;
+            OnPropertyChanged();
+        }
+    }
     public string? Description
     {
         get
@@ -86,6 +98,7 @@ public class BuyEditViewModel(IBuyService buyService, IVendorService vendorServi
         OnPropertyChanged(nameof(Vendor));
         OnPropertyChanged(nameof(Price));
         OnPropertyChanged(nameof(Quantity));
+        OnPropertyChanged(nameof(Date));
         OnPropertyChanged(nameof(RemainingQuantity));
         OnPropertyChanged(nameof(Description));
     }

@@ -7,7 +7,7 @@
                 mc:Ignorable="d"
         Language="pl-PL"
         xmlns:app="clr-namespace:FarmManager.App.Helpers"
-        Title="Dodawanie dnia pracy" Height="720" Width="1105"
+        Title="Edycja dnia pracy - zbiór na godziny" Height="720" Width="1105"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"

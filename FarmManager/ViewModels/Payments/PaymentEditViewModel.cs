@@ -63,6 +63,18 @@ public class PaymentEditViewModel(IPaymentService paymentService, IEmployeeServi
             OnPropertyChanged();
         }
     }
+    public DateOnly Date
+    {
+        get
+        {
+            return Model.Payment.Date;
+        }
+        set
+        {
+            Model.Payment.Date = value;
+            OnPropertyChanged();
+        }
+    }
     public string? Description
     {
         get
@@ -85,6 +97,7 @@ public class PaymentEditViewModel(IPaymentService paymentService, IEmployeeServi
         OnPropertyChanged(nameof(Description));
         OnPropertyChanged(nameof(EmployeeCost));
         OnPropertyChanged(nameof(PaymentQuantity));
+        OnPropertyChanged(nameof(Date));
         OnPropertyChanged(nameof(RentCost));
     }
 

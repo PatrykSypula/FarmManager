@@ -8,7 +8,7 @@
         xmlns:app="clr-namespace:FarmManager.App.Helpers"
         mc:Ignorable="d"
         Language="pl-PL"
-        Title="Wybór pracownika" Height="720" Width="775"
+        Title="Wybór pracownika" Height="720" Width="900"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"

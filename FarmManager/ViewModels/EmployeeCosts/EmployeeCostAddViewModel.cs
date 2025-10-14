@@ -39,7 +39,7 @@ public class EmployeeCostAddViewModel(IEmployeeCostService employeeCostService, 
             OnPropertyChanged();
         }
     }
-    public DateTimeOffset Date
+    public DateOnly Date
     {
         get
         {
@@ -65,7 +65,7 @@ public class EmployeeCostAddViewModel(IEmployeeCostService employeeCostService, 
     }
     public async Task InitializeAsync()
     {
-        Model.EmployeeCost.Date = DateTimeOffset.UtcNow;
+        Model.EmployeeCost.Date = DateOnly.FromDateTime(DateTime.Now);
         OnPropertyChanged(nameof(Date));
     }
 

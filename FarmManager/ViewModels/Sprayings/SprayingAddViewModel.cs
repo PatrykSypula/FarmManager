@@ -39,7 +39,7 @@ public class SprayingAddViewModel(ISprayingService sprayingService, IBuyService 
             OnPropertyChanged();
         }
     }
-    public DateTimeOffset Date
+    public DateOnly Date
     {
         get
         {
@@ -74,6 +74,11 @@ public class SprayingAddViewModel(ISprayingService sprayingService, IBuyService 
             Model.Spraying.Description = value;
             OnPropertyChanged();
         }
+    }
+    public async Task InitializeAsync()
+    {
+        Model.Spraying.Date = DateOnly.FromDateTime(DateTime.Now);
+        OnPropertyChanged(nameof(Date));
     }
 
     #endregion

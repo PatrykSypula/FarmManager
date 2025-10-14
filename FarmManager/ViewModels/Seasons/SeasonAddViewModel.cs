@@ -50,7 +50,7 @@ public class SeasonAddViewModel(ISeasonService seasonService, IUnitOfWork unitOf
             OnPropertyChanged();
         }
     }
-    public DateTimeOffset StartDate
+    public DateOnly StartDate
     {
         get
         {
@@ -62,7 +62,7 @@ public class SeasonAddViewModel(ISeasonService seasonService, IUnitOfWork unitOf
             OnPropertyChanged();
         }
     }
-    public DateTimeOffset EndDate
+    public DateOnly EndDate
     {
         get
         {
@@ -70,14 +70,14 @@ public class SeasonAddViewModel(ISeasonService seasonService, IUnitOfWork unitOf
         }
         set
         {
-            Model.Season.EndDate = value.AddDays(1).AddTicks(-1);
+            Model.Season.EndDate = value;
             OnPropertyChanged();
         }
     }
     public async Task InitializeAsync()
     {
-        Model.Season.StartDate = DateTimeOffset.UtcNow;
-        Model.Season.EndDate = DateTimeOffset.UtcNow;
+        Model.Season.StartDate = DateOnly.FromDateTime(DateTime.Now);
+        Model.Season.EndDate = DateOnly.FromDateTime(DateTime.Now);
 
         OnPropertyChanged(nameof(StartDate));
         OnPropertyChanged(nameof(EndDate));

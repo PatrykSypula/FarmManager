@@ -51,7 +51,7 @@ public class SeasonEditViewModel(ISeasonService seasonService, IPlantService pla
             OnPropertyChanged();
         }
     }
-    public DateTimeOffset StartDate
+    public DateOnly StartDate
     {
         get
         {
@@ -63,7 +63,7 @@ public class SeasonEditViewModel(ISeasonService seasonService, IPlantService pla
             OnPropertyChanged();
         }
     }
-    public DateTimeOffset EndDate
+    public DateOnly EndDate
     {
         get
         {
@@ -71,19 +71,7 @@ public class SeasonEditViewModel(ISeasonService seasonService, IPlantService pla
         }
         set
         {
-            Model.Season.EndDate = value.AddDays(1).AddTicks(-1);
-            OnPropertyChanged();
-        }
-    }
-    public bool IsActive
-    {
-        get
-        {
-            return Model.Season.IsActive;
-        }
-        set
-        {
-            Model.Season.IsActive = value;
+            Model.Season.EndDate = value;
             OnPropertyChanged();
         }
     }
@@ -97,7 +85,6 @@ public class SeasonEditViewModel(ISeasonService seasonService, IPlantService pla
         OnPropertyChanged(nameof(StartDate));
         OnPropertyChanged(nameof(EndDate));
         OnPropertyChanged(nameof(Description));
-        OnPropertyChanged(nameof(IsActive));
     }
 
     #endregion

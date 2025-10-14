@@ -3,19 +3,19 @@ using System.Windows.Data;
 
 namespace FarmManager.App.Helpers;
 
-public class DateTimeOffsetToDateTimeConverter : IValueConverter
+public class DateOnlyToDateTimeConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        if (value is DateTimeOffset dto)
-            return dto.DateTime; // or dto.LocalDateTime
+        if (value is DateOnly dateOnly)
+            return new DateTime(dateOnly.Year, dateOnly.Month, dateOnly.Day);
         return null;
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        if (value is DateTime dt)
-            return new DateTimeOffset(dt, TimeSpan.Zero); // UTC
-        return DateTimeOffset.MinValue;
+        if (value is DateTime dateTime)
+            return DateOnly.FromDateTime(dateTime);
+        return DateOnly.MinValue;
     }
 }

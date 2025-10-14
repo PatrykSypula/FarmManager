@@ -1,12 +1,9 @@
 ﻿using System.Windows;
-using FarmManager.App.Models.Workdays.WorkdaysCollecting;
-using FarmManager.App.Models.Workdays.WorkdaysHourly;
 using FarmManager.App.ViewModels;
 using FarmManager.App.ViewModels.Actions;
 using FarmManager.App.ViewModels.Buys;
 using FarmManager.App.ViewModels.ChooseEntity;
 using FarmManager.App.ViewModels.Deposits;
-using FarmManager.App.ViewModels.Diseases;
 using FarmManager.App.ViewModels.EmployeeCosts;
 using FarmManager.App.ViewModels.Employees;
 using FarmManager.App.ViewModels.Fertilizers;
@@ -15,7 +12,6 @@ using FarmManager.App.ViewModels.Plants;
 using FarmManager.App.ViewModels.Seasons;
 using FarmManager.App.ViewModels.Sells;
 using FarmManager.App.ViewModels.Sprayings;
-using FarmManager.App.ViewModels.Varieties;
 using FarmManager.App.ViewModels.Vendors;
 using FarmManager.App.ViewModels.Workdays;
 using FarmManager.App.ViewModels.Workdays.WorkdaysCollecting;
@@ -24,7 +20,6 @@ using FarmManager.App.Views.Actions;
 using FarmManager.App.Views.Buys;
 using FarmManager.App.Views.ChooseEntity;
 using FarmManager.App.Views.Deposits;
-using FarmManager.App.Views.Diseases;
 using FarmManager.App.Views.EmployeeCosts;
 using FarmManager.App.Views.Employees;
 using FarmManager.App.Views.Fertilizers;
@@ -33,7 +28,6 @@ using FarmManager.App.Views.Plants;
 using FarmManager.App.Views.Seasons;
 using FarmManager.App.Views.Sells;
 using FarmManager.App.Views.Sprayings;
-using FarmManager.App.Views.Varieties;
 using FarmManager.App.Views.Vendors;
 using FarmManager.App.Views.Workdays;
 using FarmManager.App.Views.Workdays.WorkdaysCollecting;
@@ -68,7 +62,6 @@ public partial class MyApp : Application
                 services.AddSingleton<MainWindow>();
 
                 //Choose Entity
-                services.AddTransient<ChooseVarietyWindow>();
                 services.AddTransient<ChoosePlantWindow>();
                 services.AddTransient<ChooseFertilizerWindow>();
                 services.AddTransient<ChooseVendorWindow>();
@@ -81,11 +74,6 @@ public partial class MyApp : Application
                 services.AddTransient<DepositAddWindow>();
                 services.AddTransient<DepositEditWindow>();
 
-                //Diseases
-                services.AddTransient<DiseasesWindow>();
-                services.AddTransient<DiseaseAddWindow>();
-                services.AddTransient<DiseaseEditWindow>();
-
                 //Employees
                 services.AddTransient<EmployeesWindow>();
                 services.AddTransient<EmployeeAddWindow>();
@@ -95,11 +83,6 @@ public partial class MyApp : Application
                 services.AddTransient<FertilizersWindow>();
                 services.AddTransient<FertilizerAddWindow>();
                 services.AddTransient<FertilizerEditWindow>();
-
-                //Varieties
-                services.AddTransient<VarietiesWindow>();
-                services.AddTransient<VarietyAddWindow>();
-                services.AddTransient<VarietyEditWindow>();
 
                 //Vendors
                 services.AddTransient<VendorsWindow>();
@@ -135,7 +118,6 @@ public partial class MyApp : Application
                 //Workdays
                 services.AddTransient<WorkdaysCalendarWindow>();
                 services.AddTransient<WorkdaysWindow>();
-                services.AddTransient<WorkdayAddWindow>();
                 services.AddTransient<WorkdayCollectingAddOneWindow>();
                 services.AddTransient<WorkdayCollectingAddAllWindow>();
                 services.AddTransient<WorkdayCollectingEditWindow>();
@@ -177,7 +159,6 @@ public partial class MyApp : Application
                 services.AddTransient<ChooseFertilizerViewModel>();
                 services.AddTransient<ChooseVendorViewModel>();
                 services.AddTransient<ChoosePlantViewModel>();
-                services.AddTransient<ChooseVarietyViewModel>();
                 services.AddTransient<ChooseEmployeeViewModel>();
                 services.AddTransient<ChooseActionViewModel>();
                 services.AddTransient<ChooseDepositViewModel>();
@@ -186,11 +167,6 @@ public partial class MyApp : Application
                 services.AddTransient<DepositsViewModel>();
                 services.AddTransient<DepositAddViewModel>();
                 services.AddTransient<DepositEditViewModel>();
-
-                //Diseases
-                services.AddTransient<DiseasesViewModel>();
-                services.AddTransient<DiseaseAddViewModel>();
-                services.AddTransient<DiseaseEditViewModel>();
 
                 //Employees
                 services.AddTransient<EmployeesViewModel>();
@@ -201,11 +177,6 @@ public partial class MyApp : Application
                 services.AddTransient<FertilizersViewModel>();
                 services.AddTransient<FertilizerAddViewModel>();
                 services.AddTransient<FertilizerEditViewModel>();
-
-                //Varieties
-                services.AddTransient<VarietiesViewModel>();
-                services.AddTransient<VarietyAddViewModel>();
-                services.AddTransient<VarietyEditViewModel>();
 
                 //Vendors
                 services.AddTransient<VendorsViewModel>();
@@ -240,7 +211,6 @@ public partial class MyApp : Application
                 //Workdays
                 services.AddTransient<WorkdaysCalendarViewModel>();
                 services.AddTransient<WorkdaysViewModel>();
-                services.AddTransient<WorkdayAddViewModel>();
                 services.AddTransient<WorkdayCollectingAddOneViewModel>();
                 services.AddTransient<WorkdayCollectingAddAllViewModel>();
                 services.AddTransient<WorkdayCollectingEditViewModel>();
@@ -279,10 +249,8 @@ public partial class MyApp : Application
                 services.AddScoped<IFarmManagerContext>(provider => provider.GetRequiredService<FarmManagerContext>());
                 services.AddScoped<IUnitOfWork, UnitOfWork>();
                 services.AddScoped<IDepositService, DepositService>();
-                services.AddScoped<IDiseaseService, DiseaseService>();
                 services.AddScoped<IEmployeeService, EmployeeService>();
                 services.AddScoped<IFertilizerService, FertilizerService>();
-                services.AddScoped<IVarietyService, VarietyService>();
                 services.AddScoped<IVendorService, VendorService>();
                 services.AddScoped<IPlantService, PlantService>();
                 services.AddScoped<ISeasonService, SeasonService>();

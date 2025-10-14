@@ -18,6 +18,7 @@ public class SellService(IFarmManagerContext context) : ISellService
 
         return await query
             .Include(s => s.Deposit)
+            .Include(x => x.Plant)
             .Include(s => s.HarvestQuantity)
             .OrderByDescending(d => d.IsActive)
             .ThenBy(d => d.Id)

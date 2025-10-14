@@ -29,16 +29,6 @@ public class PlantAddViewModel(IPlantService plantServive, IUnitOfWork unitOfWor
             OnPropertyChanged();
         }
     }
-    public string? Variety
-    {
-        get { return Model.Variety?.Name; }
-        set
-        {
-            if (Model.Variety != null)
-                Model.Variety.Name = value ?? string.Empty;
-            OnPropertyChanged();
-        }
-    }
     public string? Description
     {
         get
@@ -71,18 +61,6 @@ public class PlantAddViewModel(IPlantService plantServive, IUnitOfWork unitOfWor
             await unitOfWork.SaveChangesAsync();
             RequestClose?.Invoke(Model.Plant);
 
-        }
-    }
-
-    public RelayCommand OpenVariety => new RelayCommand(execute => OpenSelectVarietyAsync());
-    private void OpenSelectVarietyAsync()
-    {
-        var window = new ChooseVarietyWindow();
-        if (window.ShowDialog() == true && window.Variety != null)
-        {
-            Model.Variety = window.Variety;
-            Model.Plant.VarietyId = window.Variety.Id;
-            OnPropertyChanged(nameof(Variety));
         }
     }
 }

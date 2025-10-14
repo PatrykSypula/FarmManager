@@ -88,9 +88,6 @@
     <Compile Update="Views\Plants\PlantAddWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\ChooseEntity\ChooseVarietyWindow.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="Views\Plants\PlantEditWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -127,15 +124,6 @@
     <Compile Update="Views\Sprayings\SprayingsWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Varieties\VarietiesWindow.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Views\Varieties\VarietyAddWindow.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Views\Varieties\VarietyEditWindow.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="Views\Vendors\VendorAddWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -143,9 +131,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Vendors\VendorsWindow.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Views\Workdays\WorkdayAddWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Workdays\WorkdaysCollecting\WorkdayCollectingAddAllWindow.xaml.cs">

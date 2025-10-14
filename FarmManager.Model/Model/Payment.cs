@@ -13,4 +13,5 @@ public class Payment : BaseEntity
     public ICollection<PaymentWorkdayQuantity> WorkdayQuantity { get; set; } = [];
     public ICollection<int> EmployeeCosts { get; set; } = []; 
     public string? Description { get; set; }
+    public DateOnly Date { get; set; }
 }

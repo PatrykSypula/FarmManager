@@ -8,6 +8,6 @@ public class EmployeeCost : BaseEntity
     public Employee Employee { get; set; } = null!;
     public decimal Quantity { get; set; }
     public bool IsPaid { get; set; } = false;
-    public DateTimeOffset Date { get; set; }
+    public DateOnly Date { get; set; }
     public string? Description { get; set; }
 }

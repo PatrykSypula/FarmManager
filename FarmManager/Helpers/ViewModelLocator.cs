@@ -3,7 +3,6 @@ using FarmManager.App.ViewModels.Actions;
 using FarmManager.App.ViewModels.Buys;
 using FarmManager.App.ViewModels.ChooseEntity;
 using FarmManager.App.ViewModels.Deposits;
-using FarmManager.App.ViewModels.Diseases;
 using FarmManager.App.ViewModels.EmployeeCosts;
 using FarmManager.App.ViewModels.Employees;
 using FarmManager.App.ViewModels.Fertilizers;
@@ -12,7 +11,6 @@ using FarmManager.App.ViewModels.Plants;
 using FarmManager.App.ViewModels.Seasons;
 using FarmManager.App.ViewModels.Sells;
 using FarmManager.App.ViewModels.Sprayings;
-using FarmManager.App.ViewModels.Varieties;
 using FarmManager.App.ViewModels.Vendors;
 using FarmManager.App.ViewModels.Workdays;
 using FarmManager.App.ViewModels.Workdays.WorkdaysCollecting;
@@ -27,8 +25,6 @@ public class ViewModelLocator
         MyApp.ServiceProvider.GetRequiredService<MainWindowViewModel>();
 
     //Choose Entity
-    public ChooseVarietyViewModel ChooseVarietyViewModel =>
-        MyApp.ServiceProvider.GetRequiredService<ChooseVarietyViewModel>();
     public ChooseVendorViewModel ChooseVendorViewModel =>
         MyApp.ServiceProvider.GetRequiredService<ChooseVendorViewModel>();
     public ChooseFertilizerViewModel ChooseFertilizerViewModel =>
@@ -50,13 +46,6 @@ public class ViewModelLocator
     public DepositEditViewModel DepositEditViewModel =>
         MyApp.ServiceProvider.GetRequiredService<DepositEditViewModel>();
 
-    // Diseases
-    public DiseasesViewModel DiseasesViewModel =>
-        MyApp.ServiceProvider.GetRequiredService<DiseasesViewModel>();
-    public DiseaseAddViewModel DiseaseAddViewModel =>
-        MyApp.ServiceProvider.GetRequiredService<DiseaseAddViewModel>();
-    public DiseaseEditViewModel DiseaseEditViewModel =>
-        MyApp.ServiceProvider.GetRequiredService<DiseaseEditViewModel>();
 
     // Employees
     public EmployeesViewModel EmployeesViewModel =>
@@ -74,13 +63,6 @@ public class ViewModelLocator
     public FertilizerEditViewModel FertilizerEditViewModel =>
         MyApp.ServiceProvider.GetRequiredService<FertilizerEditViewModel>();
 
-    // Varieties
-    public VarietiesViewModel VarietiesViewModel =>
-        MyApp.ServiceProvider.GetRequiredService<VarietiesViewModel>();
-    public VarietyAddViewModel VarietyAddViewModel =>
-        MyApp.ServiceProvider.GetRequiredService<VarietyAddViewModel>();
-    public VarietyEditViewModel VarietyEditViewModel =>
-        MyApp.ServiceProvider.GetRequiredService<VarietyEditViewModel>();
 
     // Vendors
     public VendorsViewModel VendorsViewModel =>
@@ -136,8 +118,6 @@ public class ViewModelLocator
         MyApp.ServiceProvider.GetRequiredService<WorkdaysCalendarViewModel>();
     public WorkdaysViewModel WorkdaysViewModel =>
         MyApp.ServiceProvider.GetRequiredService<WorkdaysViewModel>();
-    public WorkdayAddViewModel WorkdayAddViewModel =>
-        MyApp.ServiceProvider.GetRequiredService<WorkdayAddViewModel>();
     public WorkdayCollectingAddOneViewModel WorkdayCollectingAddOneViewModel =>
         MyApp.ServiceProvider.GetRequiredService<WorkdayCollectingAddOneViewModel>();
     public WorkdayCollectingAddAllViewModel WorkdayCollectingAddAllViewModel =>

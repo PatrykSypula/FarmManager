@@ -10,7 +10,6 @@ public class FarmManagerContext(DbContextOptions<FarmManagerContext> options) : 
     public DbSet<Action> Actions { get; set; }
     public DbSet<Buy> Buys { get; set; }
     public DbSet<Deposit> Deposits { get; set; }
-    public DbSet<Disease> Diseases { get; set; }
     public DbSet<Employee> Employees { get; set; }
     public DbSet<EmployeeCost> EmployeeCosts { get; set; }
     public DbSet<Fertilizer> Fertilizers { get; set; }
@@ -23,7 +22,6 @@ public class FarmManagerContext(DbContextOptions<FarmManagerContext> options) : 
     public DbSet<SellHarvestQuantity> SellHarvestQuantitys { get; set; }
     public DbSet<Spraying> Sprayings { get; set; }
     public DbSet<SprayingBuyQuantity> SprayingBuyQuantitys { get; set; }
-    public DbSet<Variety> Varieties { get; set; }
     public DbSet<Vendor> Vendors { get; set; }
     public DbSet<Workday> Workdays { get; set; }
     public DbSet<WorkdayCollecting> WorkdayCollecting { get; set; }

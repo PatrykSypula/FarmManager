@@ -54,6 +54,18 @@ public class BuyAddViewModel(IBuyService buyService, IFertilizerService fertiliz
             OnPropertyChanged();
         }
     }
+    public DateOnly Date
+    {
+        get
+        {
+            return Model.Buy.Date;
+        }
+        set
+        {
+            Model.Buy.Date = value;
+            OnPropertyChanged();
+        }
+    }
     public string? Description
     {
         get
@@ -65,6 +77,11 @@ public class BuyAddViewModel(IBuyService buyService, IFertilizerService fertiliz
             Model.Fertilizer.Description = value;
             OnPropertyChanged();
         }
+    }
+    public async Task InitializeAsync()
+    {
+        Model.Buy.Date = DateOnly.FromDateTime(DateTime.Now);
+        OnPropertyChanged(nameof(Date));
     }
 
     #endregion

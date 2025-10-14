@@ -1,13 +1,9 @@
 ﻿using System.Collections.ObjectModel;
 using FarmManager.App.Helpers;
 using FarmManager.App.Models.Actions;
-using FarmManager.App.Models.Diseases;
 using FarmManager.App.Views.Actions;
-using FarmManager.App.Views.Diseases;
-using FarmManager.Model.Model;
 using FarmManager.Model.UnitOfWork;
 using FarmManager.Services.Interfaces;
-using FarmManager.Services.Services;
 using Action = FarmManager.Model.Model.Action;
 
 namespace FarmManager.App.ViewModels.Actions;

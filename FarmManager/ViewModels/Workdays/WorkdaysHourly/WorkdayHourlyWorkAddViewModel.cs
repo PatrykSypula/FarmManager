@@ -209,4 +209,12 @@ public class WorkdayHourlyWorkAddViewModel(IWorkdayService workdayService, IUnit
             RequestClose?.Invoke(Model.Workday);
         }
     }
+
+    public RelayCommand RemovePlant => new RelayCommand(async execute => await RemovePlantAsync());
+    private async Task RemovePlantAsync()
+    {
+        Model.Plant = new Plant();
+        Model.Workday.PlantId = null;
+        OnPropertyChanged(nameof(Plant));
+    }
 }

@@ -41,7 +41,7 @@ public class SellAddViewModel(ISellService sellService, IUnitOfWork unitOfWork) 
             OnPropertyChanged();
         }
     }
-    public DateTimeOffset Date
+    public DateOnly Date
     {
         get
         {
@@ -91,7 +91,7 @@ public class SellAddViewModel(ISellService sellService, IUnitOfWork unitOfWork) 
     }
     public async Task InitializeAsync()
     {
-        Model.Sell.Date = DateTimeOffset.UtcNow;
+        Model.Sell.Date = DateOnly.FromDateTime(DateTime.Now);
         OnPropertyChanged(nameof(Date));
     }
 

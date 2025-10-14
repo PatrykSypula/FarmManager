@@ -10,7 +10,7 @@ public class Spraying : BaseEntity
     public int FertilizerId { get; set; }
     public Fertilizer Fertilizer { get; set; } = null!;
     public decimal Quantity { get; set; }
-    public DateTimeOffset Date { get; set; } = DateTimeOffset.UtcNow;
+    public DateOnly Date { get; set; }
     public string? Description { get; set; }
     public ICollection<SprayingBuyQuantity> BuyQuantity { get; set; } = [];
 }

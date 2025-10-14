@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Language="pl-PL"
         xmlns:app="clr-namespace:FarmManager.App.Helpers"
-        Title="Dodawanie sprzedawcy" Height="720" Width="1280"
+        Title="Wybór dnia pracy" Height="720" Width="1280"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"

@@ -13,4 +13,5 @@ public class Buy : BaseEntity, IDescribable
     public Fertilizer Fertilizer { get; set; } = null!;
     public string Name { get; set; } = string.Empty;
     public string? Description { get; set; }
+    public DateOnly Date { get; set; }
 }

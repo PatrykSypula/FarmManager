@@ -11,7 +11,5 @@ internal class PlantValidator : AbstractValidator<Plant>
             .MaximumLength(50).WithMessage("Nazwa nie moze mieć wiecej niż 50 znaków.");
         RuleFor(p => p.Description)
             .MaximumLength(100).WithMessage("Opis nie może mieć więcej niż 100 znaków.");
-        RuleFor(p => p.VarietyId)
-            .GreaterThan(0).WithMessage("Należy wybrać odmianę.");
     }
 }

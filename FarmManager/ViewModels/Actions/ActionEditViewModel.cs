@@ -1,7 +1,6 @@
 ﻿using FarmManager.App.Helpers;
 using FarmManager.App.Helpers.Validators;
 using FarmManager.App.Models.Actions;
-using FarmManager.App.Models.Diseases;
 using FarmManager.App.Views;
 using FarmManager.Model.Model;
 using FarmManager.Model.UnitOfWork;

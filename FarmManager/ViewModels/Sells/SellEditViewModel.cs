@@ -39,7 +39,7 @@ public class SellEditViewModel(ISellService sellService, IDepositService deposit
             OnPropertyChanged();
         }
     }
-    public DateTimeOffset Date
+    public DateOnly Date
     {
         get
         {

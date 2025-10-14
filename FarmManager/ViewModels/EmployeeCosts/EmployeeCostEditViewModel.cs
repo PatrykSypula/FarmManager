@@ -39,7 +39,7 @@ public class EmployeeCostEditViewModel(IEmployeeCostService employeeCostService,
             OnPropertyChanged();
         }
     }
-    public DateTimeOffset Date
+    public DateOnly Date
     {
         get
         {

@@ -7,7 +7,7 @@
         xmlns:app="clr-namespace:FarmManager.App.Helpers"
         mc:Ignorable="d"
         Language="pl-PL"
-        Title="Edycja pryskania" Height="830" Width="775"
+        Title="Podgląd pryskania" Height="830" Width="775"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
@@ -19,6 +19,9 @@
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         DataContext="{Binding SprayingEditViewModel, Source={StaticResource Locator}}">
+    <Window.Resources>
+        <app:DateOnlyToDateTimeConverter x:Key="DtoToDtConverter"/>
+    </Window.Resources>
     <Grid>
         <Button Margin="30,30,0,0" Width="Auto" Height="40" Content="Nazwa rośliny" IsEnabled="False" VerticalAlignment="Top" Opacity="1" Background="White" HorizontalAlignment="Left" BorderThickness="2" materialDesign:ButtonAssist.CornerRadius="10" FontSize="20" Foreground="Black"/>
         <Button Margin="30,80,0,0" Width="700" Height="60" IsEnabled="False" VerticalAlignment="Top" Opacity="1" Grid.RowSpan="3" Background="White" HorizontalAlignment="Left" BorderThickness="2" materialDesign:ButtonAssist.CornerRadius="10" FontSize="30" Foreground="Black"/>
@@ -34,7 +37,7 @@
 
         <Button Margin="30,390,0,0" Width="Auto" Height="40" Content="Data" IsEnabled="False" VerticalAlignment="Top" Opacity="1" Background="White" HorizontalAlignment="Left" BorderThickness="2" materialDesign:ButtonAssist.CornerRadius="10" FontSize="20" Foreground="Black"/>
         <Button Margin="30,440,0,0" Width="700" Height="60" IsEnabled="False" VerticalAlignment="Top" Opacity="1" Grid.RowSpan="3" Background="White" HorizontalAlignment="Left" BorderThickness="2" materialDesign:ButtonAssist.CornerRadius="10" FontSize="30" Foreground="Black"/>
-        <TextBox Margin="40,440,0,0" Width="680" Height="60" IsTabStop="False" Text="{Binding Date, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontWeight="Medium" app:SelectAllOnFocus.Enable="True" VerticalAlignment="Top" Grid.RowSpan="3" Background="Transparent" HorizontalAlignment="Left" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" BorderThickness="0" FontSize="30" Foreground="Black" />
+        <TextBox Margin="40,440,0,0" Width="680" Height="60" IsTabStop="False" IsReadOnly="True" Text="{Binding Date, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontWeight="Medium" app:SelectAllOnFocus.Enable="True" VerticalAlignment="Top" Grid.RowSpan="3" Background="Transparent" HorizontalAlignment="Left" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" BorderThickness="0" FontSize="30" Foreground="Black" />
 
         <Button Margin="30,510,0,0" Width="Auto" Height="40" Content="Opis" IsEnabled="False" VerticalAlignment="Top" Opacity="1" Background="White" HorizontalAlignment="Left" BorderThickness="2" materialDesign:ButtonAssist.CornerRadius="10" FontSize="20" Foreground="Black"/>
         <Button Margin="30,560,0,0" Width="700" Height="120" IsEnabled="False" VerticalAlignment="Top" Opacity="1" Grid.RowSpan="3" Background="White" HorizontalAlignment="Left" BorderThickness="2" materialDesign:ButtonAssist.CornerRadius="10" FontSize="30" Foreground="Black"/>

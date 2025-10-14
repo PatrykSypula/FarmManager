@@ -6,6 +6,7 @@ using FarmManager.App.Views.ChooseEntity;
 using FarmManager.Model.Model;
 using FarmManager.Model.UnitOfWork;
 using FarmManager.Services.Interfaces;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace FarmManager.App.ViewModels.Payments;
 public class PaymentAddViewModel(IPaymentService paymentService, IUnitOfWork unitOfWork) : BaseViewModel
@@ -64,6 +65,18 @@ public class PaymentAddViewModel(IPaymentService paymentService, IUnitOfWork uni
             OnPropertyChanged();
         }
     }
+    public DateOnly Date
+    {
+        get
+        {
+            return Model.Payment.Date;
+        }
+        set
+        {
+            Model.Payment.Date = value;
+            OnPropertyChanged();
+        }
+    }
     public string? Description
     {
         get
@@ -75,6 +88,11 @@ public class PaymentAddViewModel(IPaymentService paymentService, IUnitOfWork uni
             Model.Payment.Description = value;
             OnPropertyChanged();
         }
+    }
+    public async Task InitializeAsync()
+    {
+        Model.Payment.Date = DateOnly.FromDateTime(DateTime.Now);
+        OnPropertyChanged(nameof(Date));
     }
 
     #endregion

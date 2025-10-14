@@ -1,7 +1,6 @@
 ﻿using FarmManager.Model.DatabaseContext;
 using FarmManager.Model.Exceptions;
 using FarmManager.Model.Model;
-using FarmManager.Model.UnitOfWork;
 using FarmManager.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -38,7 +37,6 @@ public class PlantService(IFarmManagerContext context) : IPlantService
             throw new NotFoundException("Nie mozna znaleźć rośliny.");
         existingEntity.Name = entity.Name;
         existingEntity.Description = entity.Description;
-        existingEntity.VarietyId = entity.VarietyId;
         existingEntity.IsActive = entity.IsActive;
     }
     public async Task Delete(int id)

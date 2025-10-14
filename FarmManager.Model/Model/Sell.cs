@@ -10,7 +10,7 @@ public class Sell : BaseEntity
     public Plant Plant { get; set; } = null!;
     public decimal Price { get; set; }
     public decimal Quantity { get; set; }
-    public DateTimeOffset Date { get; set; }
+    public DateOnly Date { get; set; }
     public string? Description { get; set; }
     public ICollection<SellHarvestQuantity> HarvestQuantity { get; set; } = [];
 }

@@ -7,7 +7,7 @@
         xmlns:app="clr-namespace:FarmManager.App.Helpers"
         mc:Ignorable="d"
         Language="pl-PL"
-        Title="Wybór pryskania" Height="720" Width="500"
+        Title="Wybór pryskania" Height="720" Width="900"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"

@@ -20,7 +20,7 @@
         WindowStartupLocation="CenterScreen"
         DataContext="{Binding SprayingAddViewModel, Source={StaticResource Locator}}">
     <Window.Resources>
-        <app:DateTimeOffsetToDateTimeConverter x:Key="DtoToDtConverter"/>
+        <app:DateOnlyToDateTimeConverter x:Key="DtoToDtConverter"/>
     </Window.Resources>
     <Grid>
         <Button Margin="30,30,0,0" Width="Auto" Height="40" Content="Nazwa rośliny" IsEnabled="False" VerticalAlignment="Top" Opacity="1" Background="White" HorizontalAlignment="Left" BorderThickness="2" materialDesign:ButtonAssist.CornerRadius="10" FontSize="20" Foreground="Black"/>
