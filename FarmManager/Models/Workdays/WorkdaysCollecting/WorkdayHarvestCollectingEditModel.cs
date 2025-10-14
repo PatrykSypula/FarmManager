@@ -12,4 +12,5 @@ public class WorkdayHarvestCollectingEditModel
     public Harvest Harvest { get; set; } = new Harvest();
     public Plant Plant { get; set; } = new Plant();
     public Action Action { get; set; } = new Action();
+    public Harvest PreviousHarvest { get; set; } = new Harvest();
 }

@@ -135,6 +135,10 @@ public class WorkdaysViewModel(IWorkdayService workdayService) : BaseViewModel
         if (window.ShowDialog() == true && window.Workday != null)
         {
             var workday = window.Workday;
+            if (!HasDebt(workday))
+            {
+                workday.IsPaid = true;
+            }
             AddAction(window.Workday);
             var index = Workdays.ToList().FindIndex(d => d.Id == workday.Id);
 
@@ -159,6 +163,10 @@ public class WorkdaysViewModel(IWorkdayService workdayService) : BaseViewModel
         if (window.ShowDialog() == true && window.Workday != null)
         {
             var workday = window.Workday;
+            if (!HasDebt(workday))
+            {
+                workday.IsPaid = true;
+            }
             AddAction(window.Workday);
             var index = Workdays.ToList().FindIndex(d => d.Id == workday.Id);
             if (index >= 0)
@@ -182,6 +190,10 @@ public class WorkdaysViewModel(IWorkdayService workdayService) : BaseViewModel
         if (window.ShowDialog() == true && window.Workday != null)
         {
             var workday = window.Workday;
+            if (!HasDebt(workday))
+            {
+                workday.IsPaid = true;
+            }
             var index = Workdays.ToList().FindIndex(d => d.Id == workday.Id);
             if (index >= 0)
             {

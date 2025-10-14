@@ -15,4 +15,5 @@ public interface IPaymentService
     Task RevertPayEmployeeCosts(ICollection<int> employeeCosts);
     Task<ICollection<PaymentWorkdayQuantity>> PayAllWorkdays(int employeeId);
     Task RevertPayment(ICollection<PaymentWorkdayQuantity> paymentWorkdayQuantities);
+    Task<decimal> GetRentTotal(int employeeId);
 }

@@ -55,6 +55,15 @@ public class PaymentAddViewModel(IPaymentService paymentService, IUnitOfWork uni
             OnPropertyChanged();
         }
     }
+    public decimal RentCost
+    {
+        get { return Model.Payment.RentCost; }
+        set
+        {
+            Model.Payment.RentCost = value;
+            OnPropertyChanged();
+        }
+    }
     public string? Description
     {
         get
@@ -103,10 +112,12 @@ public class PaymentAddViewModel(IPaymentService paymentService, IUnitOfWork uni
             Model.Payment.Quantity = await paymentService.GetUnpaidEmployeeQuantity(window.Employee.Id);
             Model.Payment.EmployeeCost = await paymentService.GetEmployeeCost(window.Employee.Id);
             Model.Payment.PaymentQuantity = Model.Payment.Quantity - Model.Payment.EmployeeCost;
+            Model.Payment.RentCost = await paymentService.GetRentTotal(window.Employee.Id);
             OnPropertyChanged(nameof(Quantity));
             OnPropertyChanged(nameof(EmployeeCost));
             OnPropertyChanged(nameof(PaymentQuantity));
             OnPropertyChanged(nameof(Employee));
+            OnPropertyChanged(nameof(RentCost));
         }
     }
 }

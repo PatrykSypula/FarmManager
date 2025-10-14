@@ -54,6 +54,15 @@ public class PaymentEditViewModel(IPaymentService paymentService, IEmployeeServi
             OnPropertyChanged();
         }
     }
+    public decimal RentCost
+    {
+        get { return Model.Payment.RentCost; }
+        set
+        {
+            Model.Payment.RentCost = value;
+            OnPropertyChanged();
+        }
+    }
     public string? Description
     {
         get
@@ -76,6 +85,7 @@ public class PaymentEditViewModel(IPaymentService paymentService, IEmployeeServi
         OnPropertyChanged(nameof(Description));
         OnPropertyChanged(nameof(EmployeeCost));
         OnPropertyChanged(nameof(PaymentQuantity));
+        OnPropertyChanged(nameof(RentCost));
     }
 
     #endregion

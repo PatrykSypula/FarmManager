@@ -90,6 +90,7 @@ public class WorkdayHarvestCollectingEditViewModel(IWorkdayService workdayServic
         if (Model.Workday.HarvestId != null)
         {
             Model.Harvest = await harvestService.Get(Model.Workday.HarvestId.Value);
+            Model.PreviousHarvest = await harvestService.Get(Model.Workday.HarvestId.Value);
         }
         Model.WorkdaysCollecting = new ObservableCollection<WorkdayCollecting>(await workdayService.GetWorkdaysCollecting(id));
         if (Model.Workday.PlantId != null)
@@ -221,9 +222,9 @@ public class WorkdayHarvestCollectingEditViewModel(IWorkdayService workdayServic
     public RelayCommand Update => new RelayCommand(async execute => await UpdateWorkdayAsync());
     private async Task UpdateWorkdayAsync()
     {
-        if (Model.Harvest.CollectingQuantity == Model.Harvest.RemainingCollectingQuantity &&
-           Model.Harvest.CollectingQuantityAdditional == Model.Harvest.RemainingQuantityAdditional &&
-           Model.Harvest.HourlyQuantity == Model.Harvest.RemainingHourlyQuantity)
+        if (Model.PreviousHarvest.CollectingQuantity == Model.PreviousHarvest.RemainingCollectingQuantity &&
+           Model.PreviousHarvest.CollectingQuantityAdditional == Model.PreviousHarvest.RemainingQuantityAdditional &&
+           Model.PreviousHarvest.HourlyQuantity == Model.PreviousHarvest.RemainingHourlyQuantity)
         {
             WorkdayHarvestCollectingValidator validator = new WorkdayHarvestCollectingValidator();
             Model.Workday.Description = string.IsNullOrEmpty(Model.Workday.Description) ? null : Model.Workday.Description;

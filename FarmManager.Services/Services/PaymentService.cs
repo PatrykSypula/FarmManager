@@ -146,4 +146,31 @@ public class PaymentService(IFarmManagerContext context) : IPaymentService
             employeeCost.IsPaid = false;
         }
     }
+
+    public async Task<decimal> GetRentTotal(int employeeId)
+    {
+        var employee = await context.Employees
+            .FirstOrDefaultAsync(e => e.Id == employeeId)
+            ?? throw new NotFoundException("Nie mozna znaleźć pracownika.");
+
+        if (employee.IsRentable && employee.BaseRent != null)
+        {
+            var workdayIds = await context.Workdays
+            .Where(w => w.IsActive &&
+                (w.WorkdaysCollecting.Any(c => c.EmployeeId == employeeId) ||
+                 w.WorkdaysHourly.Any(h => h.EmployeeId == employeeId)))
+            .Select(w => w.Date)
+            .Distinct()
+            .ToListAsync();
+
+            int uniqueWorkdayCount = workdayIds.Count;
+
+            decimal rentPerDay = employee.BaseRent.Value;
+            return uniqueWorkdayCount * rentPerDay;
+        }
+        else
+        {
+            return 0;
+        }
+    }
 }
