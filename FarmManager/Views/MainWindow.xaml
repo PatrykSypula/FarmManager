@@ -7,7 +7,7 @@
         xmlns:vm="clr-namespace:FarmManager.App.ViewModels"
         Language="pl-PL"
         mc:Ignorable="d"
-        Title="RolnikPro" Height="430" Width="710"
+        Title="RolnikPro" Height="430" Width="720"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"

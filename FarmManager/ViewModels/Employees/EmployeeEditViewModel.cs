@@ -41,15 +41,15 @@ public class EmployeeEditViewModel(IEmployeeService employeeService, IUnitOfWork
         }
     }
 
-    public string? IdNumber
+    public string? Nickname
     {
         get
         {
-            return Model.Employee.IdNumber;
+            return Model.Employee.Nickname;
         }
         set
         {
-            Model.Employee.IdNumber = value;
+            Model.Employee.Nickname = value;
             OnPropertyChanged();
         }
     }
@@ -124,7 +124,7 @@ public class EmployeeEditViewModel(IEmployeeService employeeService, IUnitOfWork
         Model.Employee = await employeeService.Get(id);
         OnPropertyChanged(nameof(FirstName));
         OnPropertyChanged(nameof(LastName));
-        OnPropertyChanged(nameof(IdNumber));
+        OnPropertyChanged(nameof(Nickname));
         OnPropertyChanged(nameof(IsRentable));
         OnPropertyChanged(nameof(BaseRent));
         OnPropertyChanged(nameof(PhoneNumber));
@@ -151,10 +151,10 @@ public class EmployeeEditViewModel(IEmployeeService employeeService, IUnitOfWork
     private async Task UpdateEmployeeAsync()
     {
         EmployeeValidator validator = new EmployeeValidator();
-        Model.Employee.IdNumber = string.IsNullOrEmpty(Model.Employee.IdNumber) ? null : Model.Employee.IdNumber;
+        Model.Employee.Nickname = string.IsNullOrEmpty(Model.Employee.Nickname) ? null : Model.Employee.Nickname;
         Model.Employee.BaseRent = Model.Employee.BaseRent == 0 ? null : Model.Employee.BaseRent;
         Model.Employee.PhoneNumber = string.IsNullOrEmpty(Model.Employee.PhoneNumber) ? null : Model.Employee.PhoneNumber;
-        Model.Employee.Email = string.IsNullOrEmpty(Model.Employee.Email) ? null : Model.Employee.Email;
+        Model.Employee.Description = string.IsNullOrEmpty(Model.Employee.Description) ? null : Model.Employee.Description;
         var result = validator.Validate(Model.Employee);
         if (!result.IsValid)
         {
