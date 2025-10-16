@@ -1,25 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using System.Windows;
+using FarmManager.App.ViewModels.Workdays;
 
 namespace FarmManager.App.Views.Workdays;
-/// <summary>
-/// Interaction logic for WorkdaysWindow.xaml
-/// </summary>
+
 public partial class WorkdaysWindow : Window
 {
-    public WorkdaysWindow()
+    public WorkdaysWindow(DateOnly date)
     {
         InitializeComponent();
+        Loaded += async (_, __) => await ((WorkdaysViewModel)DataContext).InitializeAsync(date);
     }
 }

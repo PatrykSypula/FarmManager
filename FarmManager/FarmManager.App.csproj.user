@@ -7,7 +7,22 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Views\Actions\ActionAddWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Actions\ActionEditWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Actions\ActionsWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Buys\BuyAddWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ChooseEntity\ChooseActionWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ChooseEntity\ChooseDepositWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\ChooseEntity\ChooseEmployeeWindow.xaml.cs">
@@ -61,16 +76,28 @@
     <Compile Update="Views\Fertilizers\FertilizersWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Plants\PlantAddWindow.xaml.cs">
+    <Compile Update="Views\Payments\PaymentAddWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\ChooseEntity\ChooseVarietyWindow.xaml.cs">
+    <Compile Update="Views\Payments\PaymentEditWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Payments\PaymentsWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Plants\PlantAddWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Plants\PlantEditWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Plants\PlantsWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Reports\ReportsWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Reports\ReportWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Seasons\SeasonAddWindow.xaml.cs">
@@ -85,6 +112,15 @@
     <Compile Update="Views\Seasons\SeasonsWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\Sells\SellAddWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Sells\SellEditWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Sells\SellsWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Sprayings\SprayingAddWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -92,15 +128,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Sprayings\SprayingsWindow.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Views\Varieties\VarietiesWindow.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Views\Varieties\VarietyAddWindow.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Views\Varieties\VarietyEditWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Vendors\VendorAddWindow.xaml.cs">
@@ -112,34 +139,49 @@
     <Compile Update="Views\Vendors\VendorsWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Workdays\AddWorkdayWindow.xaml.cs">
+    <Compile Update="Views\Workdays\WorkdaysCollecting\WorkdayCollectingAddAllWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Workdays\EditWorkdayWindow.xaml.cs">
+    <Compile Update="Views\Workdays\WorkdaysCollecting\WorkdayCollectingAddOneWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Workdays\WorkdayCollecting\AddWorkdayCollectingAddAllWindow.xaml.cs">
+    <Compile Update="Views\Workdays\WorkdaysCollecting\WorkdayCollectingEditWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Workdays\WorkdayCollecting\AddWorkdayCollectingAddOneWindow.xaml.cs">
+    <Compile Update="Views\Workdays\WorkdaysCollecting\WorkdayHarvestCollectingAddWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Workdays\WorkdayCollecting\AddWorkdayCollectingEditWindow.xaml.cs">
+    <Compile Update="Views\Workdays\WorkdaysCollecting\WorkdayHarvestCollectingEditWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Workdays\WorkdayHourly\AddWorkdayHourlyAddAllWindow.xaml.cs">
+    <Compile Update="Views\Workdays\WorkdaysHourly\WorkdayHarvestHourlyAddWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Workdays\WorkdayHourly\AddWorkdayHourlyAddOneWindow.xaml.cs">
+    <Compile Update="Views\Workdays\WorkdaysHourly\WorkdayHarvestHourlyEditWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Workdays\WorkdayHourly\AddWorkdayHourlyEditWindow.xaml.cs">
+    <Compile Update="Views\Workdays\WorkdaysHourly\WorkdayHourlyAddAllWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Workdays\WorkdaysHourly\WorkdayHourlyAddOneWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Workdays\WorkdaysHourly\WorkdayHourlyEditWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Workdays\WorkdaysCalendarWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Workdays\WorkdaysHourly\WorkdayHourlyWorkAddWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Workdays\WorkdaysHourly\WorkdayHourlyWorkEditWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Workdays\WorkdaysSelectTypeWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Workdays\WorkdaysWindow.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Views\Workdays\WorkdayWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

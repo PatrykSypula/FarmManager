@@ -37,7 +37,7 @@ public class BuyEditViewModel(IBuyService buyService, IVendorService vendorServi
             OnPropertyChanged();
         }
     }
-    public double Price
+    public decimal Price
     {
         get { return Model.Buy.Price; }
         set
@@ -46,7 +46,7 @@ public class BuyEditViewModel(IBuyService buyService, IVendorService vendorServi
             OnPropertyChanged();
         }
     }
-    public double Quantity
+    public decimal Quantity
     {
         get { return Model.Buy.Quantity; }
         set
@@ -55,12 +55,24 @@ public class BuyEditViewModel(IBuyService buyService, IVendorService vendorServi
             OnPropertyChanged();
         }
     }
-    public double RemainingQuantity
+    public decimal RemainingQuantity
     {
         get { return Model.Buy.RemainingQuantity; }
         set
         {
             Model.Buy.RemainingQuantity = value;
+            OnPropertyChanged();
+        }
+    }
+    public DateOnly Date
+    {
+        get
+        {
+            return Model.Buy.Date;
+        }
+        set
+        {
+            Model.Buy.Date = value;
             OnPropertyChanged();
         }
     }
@@ -86,6 +98,7 @@ public class BuyEditViewModel(IBuyService buyService, IVendorService vendorServi
         OnPropertyChanged(nameof(Vendor));
         OnPropertyChanged(nameof(Price));
         OnPropertyChanged(nameof(Quantity));
+        OnPropertyChanged(nameof(Date));
         OnPropertyChanged(nameof(RemainingQuantity));
         OnPropertyChanged(nameof(Description));
     }
@@ -108,7 +121,7 @@ public class BuyEditViewModel(IBuyService buyService, IVendorService vendorServi
             {
                 await buyService.Delete(Model.Buy.Id);
                 Model.Buy.IsDeleted = true;
-                await fertilizerService.AddQuantity(Model.Fertilizer.Id, -Model.Buy.RemainingQuantity);
+                //await fertilizerService.AddQuantity(Model.Fertilizer.Id, -Model.Buy.RemainingQuantity);
                 await unitOfWork.SaveChangesAsync();
                 RequestClose?.Invoke(Model.Buy);
             }

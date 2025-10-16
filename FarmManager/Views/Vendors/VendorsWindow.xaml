@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:FarmManager.App.Views.Vendors"
         xmlns:app="clr-namespace:FarmManager.App.Helpers"
         mc:Ignorable="d"
-        Title="Wybór sprzedawcy" Height="720" Width="775"
+        Language="pl-PL"
+        Title="Wybór sprzedawcy" Height="720" Width="900"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
@@ -36,9 +37,9 @@
                 </Style>
             </DataGrid.RowStyle>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Nazwa" Width="2*" Binding="{Binding Name}"/>
-                <DataGridTextColumn Header="Numer telefonu" Width="2*" Binding="{Binding PhoneNumber}"/>
-                <DataGridTextColumn Header="Email" Width="3*" Binding="{Binding Email}"/>
+                <DataGridTextColumn Header="Nazwa" Width="*" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Numer telefonu" Width="*" Binding="{Binding PhoneNumber}"/>
+                <DataGridTextColumn Header="Email" Width="*" Binding="{Binding Email}"/>
             </DataGrid.Columns>
             <DataGrid.InputBindings>
                 <MouseBinding Gesture="LeftDoubleClick" Command="{Binding Edit}"/>

@@ -1,15 +1,17 @@
 ﻿using FarmManager.App.Helpers;
 using FarmManager.App.Models;
+using FarmManager.App.Views.Actions;
 using FarmManager.App.Views.Buys;
 using FarmManager.App.Views.Deposits;
-using FarmManager.App.Views.Diseases;
 using FarmManager.App.Views.EmployeeCosts;
 using FarmManager.App.Views.Employees;
 using FarmManager.App.Views.Fertilizers;
+using FarmManager.App.Views.Payments;
 using FarmManager.App.Views.Plants;
+using FarmManager.App.Views.Reports;
 using FarmManager.App.Views.Seasons;
+using FarmManager.App.Views.Sells;
 using FarmManager.App.Views.Sprayings;
-using FarmManager.App.Views.Varieties;
 using FarmManager.App.Views.Vendors;
 using FarmManager.App.Views.Workdays;
 
@@ -36,12 +38,6 @@ public class MainWindowViewModel : BaseViewModel
         new DepositsWindow().ShowDialog();
     }
 
-    public RelayCommand Diseases => new RelayCommand(execute => OpenDiseasesWindow());
-    private void OpenDiseasesWindow()
-    {
-        new DiseasesWindow().ShowDialog();
-    }
-
     public RelayCommand Employees => new RelayCommand(execute => OpenEmployeesWindow());
     private void OpenEmployeesWindow()
     {
@@ -52,12 +48,6 @@ public class MainWindowViewModel : BaseViewModel
     private void OpenFertilizersWindow()
     {
         new FertilizersWindow().ShowDialog();
-    }
-
-    public RelayCommand Varieties => new RelayCommand(execute => OpenVarietiesWindow());
-    private void OpenVarietiesWindow()
-    {
-        new VarietiesWindow().ShowDialog();
     }
 
     public RelayCommand Vendors => new RelayCommand(execute => OpenVendorsWindow());
@@ -99,6 +89,30 @@ public class MainWindowViewModel : BaseViewModel
     public RelayCommand Workdays => new RelayCommand(execute => OpenWorkdaysWindow());
     private void OpenWorkdaysWindow()
     {
-        new WorkdaysWindow().ShowDialog();
+        new WorkdaysCalendarWindow().ShowDialog();
+    }
+
+    public RelayCommand Actions => new RelayCommand(execute => OpenActionsWindow());
+    private void OpenActionsWindow()
+    {
+        new ActionsWindow().ShowDialog();
+    }
+
+    public RelayCommand Payments => new RelayCommand(execute => OpenPaymentsWindow());
+    private void OpenPaymentsWindow()
+    {
+        new PaymentsWindow().ShowDialog();
+    }
+
+    public RelayCommand Sells => new RelayCommand(execute => OpenSellsWindow());
+    private void OpenSellsWindow()
+    {
+        new SellsWindow().ShowDialog();
+    }
+
+    public RelayCommand Reports => new RelayCommand(execute => OpenReportsWindow());
+    private void OpenReportsWindow()
+    {
+        new ReportsWindow().ShowDialog();
     }
 }

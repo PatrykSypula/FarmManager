@@ -10,7 +10,7 @@ using FarmManager.Services.Interfaces;
 
 namespace FarmManager.App.ViewModels.Plants;
 
-public class PlantEditViewModel(IPlantService plantServive, IVarietyService varietyService, IUnitOfWork unitOfWork) : BaseViewModel
+public class PlantEditViewModel(IPlantService plantServive, IUnitOfWork unitOfWork) : BaseViewModel
 {
     #region Properties
 
@@ -41,16 +41,6 @@ public class PlantEditViewModel(IPlantService plantServive, IVarietyService vari
             OnPropertyChanged();
         }
     }
-    public string? Variety
-    {
-        get { return Model.Variety?.Name; }
-        set
-        {
-            if (Model.Variety != null)
-                Model.Variety.Name = value ?? string.Empty;
-            OnPropertyChanged();
-        }
-    }
     public bool IsActive
     {
         get
@@ -63,15 +53,27 @@ public class PlantEditViewModel(IPlantService plantServive, IVarietyService vari
             OnPropertyChanged();
         }
     }
+    public decimal? Quantity
+    {
+        get
+        {
+            return Model.Plant.Quantity;
+        }
+        set
+        {
+            Model.Plant.Quantity = value;
+            OnPropertyChanged();
+        }
+    }
 
     public async Task InitializeAsync(int id)
     {
         Model.Plant = await plantServive.Get(id);
-        Model.Variety = await varietyService.Get(Model.Plant.VarietyId);
+        Model.Plant.Quantity = await plantServive.GetQuantity(id);
         OnPropertyChanged(nameof(Name));
-        OnPropertyChanged(nameof(Variety));
         OnPropertyChanged(nameof(Description));
         OnPropertyChanged(nameof(IsActive));
+        OnPropertyChanged(nameof(Quantity));
     }
 
     #endregion
@@ -104,18 +106,6 @@ public class PlantEditViewModel(IPlantService plantServive, IVarietyService vari
             await plantServive.Update(Model.Plant);
             await unitOfWork.SaveChangesAsync();
             RequestClose?.Invoke(Model.Plant);
-        }
-    }
-
-    public RelayCommand OpenVariety => new RelayCommand(execute => OpenSelectVarietyAsync());
-    private void OpenSelectVarietyAsync()
-    {
-        var window = new ChooseVarietyWindow();
-        if (window.ShowDialog() == true && window.Variety != null)
-        {
-            Model.Variety = window.Variety;
-            Model.Plant.VarietyId = window.Variety.Id;
-            OnPropertyChanged(nameof(Variety));
         }
     }
 }

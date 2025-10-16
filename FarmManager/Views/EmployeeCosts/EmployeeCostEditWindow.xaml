@@ -7,7 +7,7 @@
         Language="pl-PL"
         xmlns:app="clr-namespace:FarmManager.App.Helpers"
         mc:Ignorable="d"
-        Title="Dodawanie pryskania" Height="710" Width="775"
+        Title="Edycja pożyczki" Height="720" Width="775"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
@@ -20,7 +20,7 @@
         WindowStartupLocation="CenterScreen"
         DataContext="{Binding EmployeeCostEditViewModel, Source={StaticResource Locator}}">
     <Window.Resources>
-        <app:DateTimeOffsetToDateTimeConverter x:Key="DtoToDtConverter"/>
+        <app:DateOnlyToDateTimeConverter x:Key="DtoToDtConverter"/>
     </Window.Resources>
     <Grid>
         <Button Margin="30,30,0,0" Width="Auto" Height="40" Content="Imię pracownika" IsEnabled="False" VerticalAlignment="Top" Opacity="1" Background="White" HorizontalAlignment="Left" BorderThickness="2" materialDesign:ButtonAssist.CornerRadius="10" FontSize="20" Foreground="Black"/>
@@ -29,7 +29,7 @@
 
         <Button Margin="30,150,0,0" Width="Auto" Height="40" Content="Ilość pieniędzy" Opacity="1" IsEnabled="False" VerticalAlignment="Top" Background="White" HorizontalAlignment="Left" BorderThickness="2" materialDesign:ButtonAssist.CornerRadius="10" FontSize="20" Foreground="Black"/>
         <Button Margin="30,200,0,0" Width="700" Height="60" IsEnabled="False" Opacity="1" VerticalAlignment="Top" Background="White" HorizontalAlignment="Left" BorderThickness="2" materialDesign:ButtonAssist.CornerRadius="10" FontSize="30" Foreground="Black"/>
-        <TextBox Margin="40,200,0,0" Width="680" Height="60" Text="{Binding Quantity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N2}" FontWeight="Medium" app:SelectAllOnFocus.Enable="True" VerticalAlignment="Top" Background="Transparent" HorizontalAlignment="Left" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" BorderThickness="0" FontSize="30" Foreground="Black"/>
+        <TextBox Margin="40,200,0,0" Width="680" Height="60" Text="{Binding Quantity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N2}" app:NumericTextBoxBehaviorHelper.IsNumericOnly="True" FontWeight="Medium" app:SelectAllOnFocus.Enable="True" VerticalAlignment="Top" Background="Transparent" HorizontalAlignment="Left" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" BorderThickness="0" FontSize="30" Foreground="Black"/>
 
         <Button Margin="30,270,0,0" Width="Auto" Height="40" Content="Data" IsEnabled="False" VerticalAlignment="Top" Opacity="1" Background="White" HorizontalAlignment="Left" BorderThickness="2" materialDesign:ButtonAssist.CornerRadius="10" FontSize="20" Foreground="Black"/>
         <Button Margin="30,320,0,0" Width="700" Height="60" IsEnabled="False" VerticalAlignment="Top" Opacity="1" Grid.RowSpan="3" Background="White" HorizontalAlignment="Left" BorderThickness="2" materialDesign:ButtonAssist.CornerRadius="10" FontSize="30" Foreground="Black"/>

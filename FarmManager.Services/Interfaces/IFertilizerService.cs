@@ -8,5 +8,5 @@ public interface IFertilizerService
     Task Add(Fertilizer entity);
     Task Update(Fertilizer entity);
     Task Delete(int id);
-    Task AddQuantity(int id, double quantity);
+    Task<decimal> GetAvailableQuantity(int fertilizerId);
 }

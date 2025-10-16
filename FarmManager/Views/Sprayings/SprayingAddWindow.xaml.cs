@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using FarmManager.App.ViewModels.Sells;
 using FarmManager.App.ViewModels.Sprayings;
 using FarmManager.Model.Model;
 
@@ -10,6 +11,7 @@ public partial class SprayingAddWindow : Window
     public SprayingAddWindow()
     {
         InitializeComponent();
+        Loaded += async (_, __) => await ((SprayingAddViewModel)DataContext).InitializeAsync();
         if (DataContext is SprayingAddViewModel vm)
         {
             vm.RequestClose += spraying =>

@@ -6,6 +6,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>ApplicationIcon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -28,18 +29,6 @@
   <ItemGroup>
     <ProjectReference Include="..\FarmManager.Model\FarmManager.Model.csproj" />
     <ProjectReference Include="..\FarmManager.Services\FarmManager.Services.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="Views\Diseases\DiseaseAddWindow.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Views\Diseases\DiseaseEditWindow.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Views\Diseases\DiseasesWindow.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
   </ItemGroup>
 
 </Project>

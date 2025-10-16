@@ -1,0 +1,226 @@
+﻿using System.Collections.ObjectModel;
+using FarmManager.App.Helpers;
+using FarmManager.App.Helpers.Validators;
+using FarmManager.App.Models.Workdays.WorkdaysCollecting;
+using FarmManager.App.Views;
+using FarmManager.App.Views.ChooseEntity;
+using FarmManager.App.Views.Workdays.WorkdaysCollecting;
+using FarmManager.Model.Model;
+using FarmManager.Model.UnitOfWork;
+using FarmManager.Services.Interfaces;
+
+namespace FarmManager.App.ViewModels.Workdays.WorkdaysCollecting;
+
+public class WorkdayHarvestCollectingAddViewModel(IWorkdayService workdayService, IUnitOfWork unitOfWork) : BaseViewModel
+{
+    #region Properties
+
+    public event Action<Workday>? RequestClose;
+    public WorkdayHarvestCollectingAddModel Model = new WorkdayHarvestCollectingAddModel();
+
+    public ObservableCollection<WorkdayCollecting> WorkdaysCollecting
+    {
+        get { return Model.WorkdaysCollecting; }
+        set
+        {
+            Model.WorkdaysCollecting = value;
+            OnPropertyChanged();
+        }
+    }
+    public WorkdayCollecting SelectedWorkdayCollecting
+    {
+        get { return Model.SelectedWorkdayCollecting; }
+        set
+        {
+            Model.SelectedWorkdayCollecting = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public string? Plant
+    {
+        get
+        {
+            return Model.Plant.Name;
+        }
+        set
+        {
+            if (Model.Plant != null)
+                Model.Plant.Name = value ?? string.Empty;
+            OnPropertyChanged();
+        }
+    }
+    public decimal CollectingQuantity
+    {
+        get { return Model.Harvest.CollectingQuantity; }
+        set
+        {
+            Model.Harvest.CollectingQuantity = value;
+
+            OnPropertyChanged();
+        }
+    }
+    public decimal CollectingQuantityAdditional
+    {
+        get { return Model.Harvest.CollectingQuantityAdditional; }
+        set
+        {
+            Model.Harvest.CollectingQuantityAdditional = value;
+
+            OnPropertyChanged();
+        }
+    }
+    public string? Description
+    {
+        get
+        {
+            return Model.Workday.Description;
+        }
+        set
+        {
+            Model.Workday.Description = value;
+            OnPropertyChanged();
+        }
+    }
+    public async Task InitializeAsync(DateOnly date, WorkdayType workdayType)
+    {
+        Model.Workday.Date = date;
+        Model.Workday.WorkdayType = workdayType;
+    }
+
+    #endregion
+
+    #region WorkdayCollecting
+
+    public RelayCommand OpenWorkdayCollectingAddAll => new RelayCommand(execute => OpenWorkdayCollectingAddAllAsync());
+    private void OpenWorkdayCollectingAddAllAsync()
+    {
+        var window = new WorkdayCollectingAddAllWindow(Model.Workday.WorkdaysCollecting.Select(wc => wc.EmployeeId).ToList());
+        if (window.ShowDialog() == true && window.WorkdaysCollecting != null)
+        {
+            foreach (var wc in window.WorkdaysCollecting)
+            {
+                wc.RemainingToPay = wc.Quantity * wc.Price;
+                Model.Workday.WorkdaysCollecting.Add(wc);
+                Model.WorkdaysCollecting.Add(wc);
+            }
+            OnPropertyChanged(nameof(WorkdaysCollecting));
+            CalculateCollectingQuantity();
+        }
+    }
+
+    public RelayCommand OpenWorkdayCollectingAddOne => new RelayCommand(execute => OpenWorkdayCollectingAddOneAsync());
+    private void OpenWorkdayCollectingAddOneAsync()
+    {
+        var window = new WorkdayCollectingAddOneWindow(Model.Workday.WorkdaysCollecting.Select(wc => wc.EmployeeId).ToList());
+        if (window.ShowDialog() == true && window.WorkdayCollecting != null)
+        {
+            window.WorkdayCollecting.RemainingToPay = window.WorkdayCollecting.Quantity * window.WorkdayCollecting.Price;
+            Model.Workday.WorkdaysCollecting.Add(window.WorkdayCollecting);
+            Model.WorkdaysCollecting.Add(window.WorkdayCollecting);
+            OnPropertyChanged(nameof(WorkdaysCollecting));
+            CalculateCollectingQuantity();
+        }
+    }
+    public RelayCommand OpenWorkdayCollectingEdit => new RelayCommand(execute => OpenWorkdayCollectingEditAsync());
+    private void OpenWorkdayCollectingEditAsync()
+    {
+        var window = new WorkdayCollectingEditWindow(SelectedWorkdayCollecting, Model.Workday.WorkdaysCollecting.Select(wc => wc.EmployeeId).ToList());
+
+        if (window.ShowDialog() == true && window.WorkdayCollecting != null)
+        {
+            var edited = window.WorkdayCollecting;
+            edited.RemainingToPay = edited.Quantity * edited.Price;
+            if (window.WorkdayCollecting.IsDeleted)
+            {
+                var toRemove1 = Model.Workday.WorkdaysCollecting
+                    .FirstOrDefault(wc => wc.EmployeeId == edited.EmployeeId);
+                if (toRemove1 != null)
+                    Model.Workday.WorkdaysCollecting.Remove(toRemove1);
+
+                var toRemove2 = Model.WorkdaysCollecting
+                    .FirstOrDefault(wc => wc.EmployeeId == edited.EmployeeId);
+                if (toRemove2 != null)
+                    Model.WorkdaysCollecting.Remove(toRemove2);
+            }
+            else
+            {
+                var index1 = Model.Workday.WorkdaysCollecting
+                    .ToList().FindIndex(wc => wc.EmployeeId == edited.EmployeeId);
+                if (index1 >= 0)
+                {
+                    Model.Workday.WorkdaysCollecting.Remove(Model.Workday.WorkdaysCollecting.ElementAt(index1));
+                    Model.Workday.WorkdaysCollecting.Add(edited);
+                }
+
+                var index2 = Model.WorkdaysCollecting
+                    .ToList().FindIndex(wc => wc.EmployeeId == edited.EmployeeId);
+                if (index2 >= 0)
+                {
+                    Model.WorkdaysCollecting[index2] = edited;
+                }
+            }
+
+            Model.WorkdaysCollecting = new ObservableCollection<WorkdayCollecting>(Model.WorkdaysCollecting);
+            OnPropertyChanged(nameof(WorkdaysCollecting));
+            CalculateCollectingQuantity();
+        }
+
+    }
+
+    #endregion
+
+    public RelayCommand OpenPlant => new RelayCommand(execute => OpenSelectPlantAsync());
+    private void OpenSelectPlantAsync()
+    {
+        var window = new ChoosePlantWindow();
+        if (window.ShowDialog() == true && window.Plant != null)
+        {
+            Model.Plant = window.Plant;
+            Model.Workday.PlantId = window.Plant.Id;
+            OnPropertyChanged(nameof(Plant));
+        }
+    }
+
+    public RelayCommand Add => new RelayCommand(async execute => await AddWorkdayAsync());
+
+    private async Task AddWorkdayAsync()
+    {
+        WorkdayHarvestCollectingValidator validator = new WorkdayHarvestCollectingValidator();
+        Model.Workday.Description = string.IsNullOrEmpty(Model.Workday.Description) ? null : Model.Workday.Description;
+        var result = validator.Validate(Model.Workday);
+        if (!result.IsValid)
+        {
+            new CustomMessageBoxOk(result).ShowDialog();
+        }
+        else
+        {
+            Model.Harvest.RemainingCollectingQuantity = CollectingQuantity;
+            Model.Harvest.RemainingQuantityAdditional = CollectingQuantityAdditional;
+            Model.Workday.Harvest = Model.Harvest;
+            Model.Workday.Action = null;
+            Model.Workday.Plant = null;
+            foreach (var wc in Model.Workday.WorkdaysCollecting)
+            {
+                wc.Employee = null;
+                wc.Workday = null;
+            }
+            await workdayService.Add(Model.Workday);
+            await unitOfWork.SaveChangesAsync();
+            await workdayService.Detach(Model.Workday);
+            Model.Workday.Plant = Model.Plant;
+            RequestClose?.Invoke(Model.Workday);
+        }
+    }
+
+    private void CalculateCollectingQuantity()
+    {
+        decimal total = 0;
+        foreach (var wc in Model.Workday.WorkdaysCollecting)
+        {
+            total += wc.Quantity;
+        }
+        CollectingQuantity = total;
+        OnPropertyChanged(nameof(CollectingQuantity));
+    }
+}

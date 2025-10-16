@@ -48,10 +48,11 @@ public class FertilizerService(IFarmManagerContext context) : IFertilizerService
         entity.IsDeleted = true;
     }
 
-    public async Task AddQuantity(int id, double quantity)
+    public async Task<decimal> GetAvailableQuantity(int fertilizerId)
     {
-        var entity = await context.Fertilizers.FirstOrDefaultAsync(d => d.Id == id) ??
-            throw new NotFoundException("Nie mozna znaleźć nawozu.");
-        entity.Quantity += quantity;
+        var list = await context.Buys
+            .Where(d => d.FertilizerId == fertilizerId && d.RemainingQuantity > 0)
+            .ToListAsync();
+        return list.Sum(d => d.RemainingQuantity);
     }
 }

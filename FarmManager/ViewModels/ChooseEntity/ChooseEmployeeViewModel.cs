@@ -30,6 +30,11 @@ public class ChooseEmployeeViewModel(IEmployeeService employeeService) : BaseVie
         Employees = new ObservableCollection<Employee>(await employeeService.GetAll());
     }
 
+    public async Task InitializeAsync(IEnumerable<int> ints)
+    {
+        Employees = new ObservableCollection<Employee>(await employeeService.GetActiveForWorkday(ints));
+    }
+
     public Employee SelectedItem
     {
         get { return Model.SelectedItem; }

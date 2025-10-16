@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:FarmManager.App.Views.Buys"
         xmlns:app="clr-namespace:FarmManager.App.Helpers"
         mc:Ignorable="d"
-        Title="Wybór zakupu" Height="720" Width="500"
+        Language="pl-PL"
+        Title="Wybór zakupu" Height="720" Width="900"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
@@ -38,6 +39,7 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Nawóz" Width="*" Binding="{Binding Fertilizer.Name}"/>
                 <DataGridTextColumn Header="Ilość" Width="*" Binding="{Binding Quantity}"/>
+                <DataGridTextColumn Header="Data" Width="*" Binding="{Binding Date}"/>
             </DataGrid.Columns>
             <DataGrid.InputBindings>
                 <MouseBinding Gesture="LeftDoubleClick" Command="{Binding Edit}"/>

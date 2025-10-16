@@ -7,7 +7,8 @@
         xmlns:vm="clr-namespace:FarmManager.App.ViewModels.Employees"
         xmlns:app="clr-namespace:FarmManager.App.Helpers"
         mc:Ignorable="d"
-        Title="Wybór pracownika" Height="720" Width="775"
+        Language="pl-PL"
+        Title="Wybór pracownika" Height="720" Width="900"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
@@ -39,7 +40,7 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Imię" Width="*" Binding="{Binding FirstName}"/>
                 <DataGridTextColumn Header="Nazwisko" Width="*" Binding="{Binding LastName}"/>
-                <DataGridTextColumn Header="Numer telefonu" Width="*" Binding="{Binding PhoneNumber}"/>
+                <DataGridTextColumn Header="Ksywka" Width="*" Binding="{Binding Nickname}"/>
             </DataGrid.Columns>
             <DataGrid.InputBindings>
                 <MouseBinding Gesture="LeftDoubleClick" Command="{Binding Edit}"/>

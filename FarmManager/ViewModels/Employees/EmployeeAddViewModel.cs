@@ -41,15 +41,15 @@ public class EmployeeAddViewModel(IEmployeeService employeeService, IUnitOfWork 
         }
     }
 
-    public string? IdNumber
+    public string? Nickname
     {
         get
         {
-            return Model.Employee.IdNumber;
+            return Model.Employee.Nickname;
         }
         set
         {
-            Model.Employee.IdNumber = value;
+            Model.Employee.Nickname = value;
             OnPropertyChanged();
         }
     }
@@ -67,7 +67,7 @@ public class EmployeeAddViewModel(IEmployeeService employeeService, IUnitOfWork 
         }
     }
 
-    public double? BaseRent
+    public decimal? BaseRent
     {
         get
         {
@@ -93,15 +93,15 @@ public class EmployeeAddViewModel(IEmployeeService employeeService, IUnitOfWork 
         }
     }
 
-    public string? Email
+    public string? Description
     {
         get
         {
-            return Model.Employee.Email;
+            return Model.Employee.Description;
         }
         set
         {
-            Model.Employee.Email = value;
+            Model.Employee.Description = value;
             OnPropertyChanged();
         }
     }
@@ -126,10 +126,10 @@ public class EmployeeAddViewModel(IEmployeeService employeeService, IUnitOfWork 
     private async Task AddEmployeeAsync()
     {
         EmployeeValidator validator = new EmployeeValidator();
-        Model.Employee.IdNumber = string.IsNullOrEmpty(Model.Employee.IdNumber) ? null : Model.Employee.IdNumber;
+        Model.Employee.Nickname = string.IsNullOrEmpty(Model.Employee.Nickname) ? null : Model.Employee.Nickname;
         Model.Employee.BaseRent = Model.Employee.BaseRent == 0 ? null : Model.Employee.BaseRent;
         Model.Employee.PhoneNumber = string.IsNullOrEmpty(Model.Employee.PhoneNumber) ? null : Model.Employee.PhoneNumber;
-        Model.Employee.Email = string.IsNullOrEmpty(Model.Employee.Email) ? null : Model.Employee.Email;
+        Model.Employee.Description = string.IsNullOrEmpty(Model.Employee.Description) ? null : Model.Employee.Description;
         var result = validator.Validate(Model.Employee);
         if (!result.IsValid)
         {

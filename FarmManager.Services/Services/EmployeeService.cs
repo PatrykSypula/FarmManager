@@ -1,7 +1,6 @@
 ﻿using FarmManager.Model.DatabaseContext;
 using FarmManager.Model.Exceptions;
 using FarmManager.Model.Model;
-using FarmManager.Model.UnitOfWork;
 using FarmManager.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -38,11 +37,11 @@ public class EmployeeService(IFarmManagerContext context) : IEmployeeService
             throw new NotFoundException("Nie mozna znaleźć pracownika");
         existingEntity.FirstName = entity.FirstName;
         existingEntity.LastName = entity.LastName;
-        existingEntity.IdNumber = entity.IdNumber;
+        existingEntity.Description = entity.Description;
         existingEntity.IsRentable = entity.IsRentable;
         existingEntity.BaseRent = entity.BaseRent;
         existingEntity.PhoneNumber = entity.PhoneNumber;
-        existingEntity.Email = entity.Email;
+        existingEntity.Nickname = entity.Nickname;
         existingEntity.IsActive = entity.IsActive;
     }
     public async Task Delete(int id)
@@ -51,7 +50,12 @@ public class EmployeeService(IFarmManagerContext context) : IEmployeeService
             throw new NotFoundException("Nie mozna znaleźć pracownika");
         entity.IsDeleted = true;
     }
-    
-    
-    
+
+    public async Task<ICollection<Employee>> GetActiveForWorkday(IEnumerable<int> ids)
+    {
+        return await context.Employees
+            .Where(d => !ids.Contains(d.Id) && d.IsActive)
+            .AsNoTracking()
+            .ToListAsync();
+    }
 }

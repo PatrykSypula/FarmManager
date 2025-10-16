@@ -1,7 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using FarmManager.App.Helpers;
 using FarmManager.App.Models.Fertilizers;
-using FarmManager.App.Views.Diseases;
 using FarmManager.App.Views.Fertilizers;
 using FarmManager.Model.Model;
 using FarmManager.Services.Interfaces;

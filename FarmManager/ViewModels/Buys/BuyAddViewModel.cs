@@ -36,7 +36,7 @@ public class BuyAddViewModel(IBuyService buyService, IFertilizerService fertiliz
             OnPropertyChanged();
         }
     }
-    public double Price
+    public decimal Price
     {
         get { return Model.Buy.Price; }
         set
@@ -45,12 +45,24 @@ public class BuyAddViewModel(IBuyService buyService, IFertilizerService fertiliz
             OnPropertyChanged();
         }
     }
-    public double Quantity
+    public decimal Quantity
     {
         get { return Model.Buy.Quantity; }
         set
         {
             Model.Buy.Quantity = value;
+            OnPropertyChanged();
+        }
+    }
+    public DateOnly Date
+    {
+        get
+        {
+            return Model.Buy.Date;
+        }
+        set
+        {
+            Model.Buy.Date = value;
             OnPropertyChanged();
         }
     }
@@ -65,6 +77,11 @@ public class BuyAddViewModel(IBuyService buyService, IFertilizerService fertiliz
             Model.Fertilizer.Description = value;
             OnPropertyChanged();
         }
+    }
+    public async Task InitializeAsync()
+    {
+        Model.Buy.Date = DateOnly.FromDateTime(DateTime.Now);
+        OnPropertyChanged(nameof(Date));
     }
 
     #endregion
@@ -84,7 +101,7 @@ public class BuyAddViewModel(IBuyService buyService, IFertilizerService fertiliz
         {
             Model.Buy.RemainingQuantity = Model.Buy.Quantity;
             await buyService.Add(Model.Buy);
-            await fertilizerService.AddQuantity(Model.Fertilizer.Id, Model.Buy.Quantity);
+            //await fertilizerService.AddQuantity(Model.Fertilizer.Id, Model.Buy.Quantity);
             await unitOfWork.SaveChangesAsync();
             RequestClose?.Invoke(Model.Buy);
         }

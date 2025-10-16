@@ -41,21 +41,18 @@ public class SprayingService(IFarmManagerContext context) : ISprayingService
         context.Sprayings.Update(entity);
     }
 
-
-    //Unused
-    public async Task Update(Spraying entity)
-    {
-        var existingEntity = await context.Sprayings.FirstOrDefaultAsync(d => d.Id == entity.Id) ??
-            throw new NotFoundException("Nie mozna znaleźć pryskania.");
-        existingEntity.PlantId = entity.PlantId;
-        existingEntity.FertilizerId = entity.FertilizerId;
-        existingEntity.Quantity = entity.Quantity;
-        existingEntity.Date = entity.Date;
-    }
     public async Task Delete(int id)
     {
         var entity = await context.Sprayings.FirstOrDefaultAsync(d => d.Id == id) ??
             throw new NotFoundException("Nie mozna znaleźć pryskania.");
         entity.IsDeleted = true;
+    }
+    public async Task<ICollection<Spraying>> GetSprayingsInMonth(int year, int month)
+    {
+        return await context.Sprayings
+            .Include(w => w.Plant)
+            .Where(w => w.Date.Year == year && w.Date.Month == month)
+            .AsNoTracking()
+            .ToListAsync();
     }
 }

@@ -1,37 +1,39 @@
 ﻿using System.Windows;
-using FarmManager.App.Models.Workdays.WorkdayCollecting;
-using FarmManager.App.Models.Workdays.WorkdayHourly;
 using FarmManager.App.ViewModels;
+using FarmManager.App.ViewModels.Actions;
 using FarmManager.App.ViewModels.Buys;
 using FarmManager.App.ViewModels.ChooseEntity;
 using FarmManager.App.ViewModels.Deposits;
-using FarmManager.App.ViewModels.Diseases;
 using FarmManager.App.ViewModels.EmployeeCosts;
 using FarmManager.App.ViewModels.Employees;
 using FarmManager.App.ViewModels.Fertilizers;
+using FarmManager.App.ViewModels.Payments;
 using FarmManager.App.ViewModels.Plants;
+using FarmManager.App.ViewModels.Reports;
 using FarmManager.App.ViewModels.Seasons;
+using FarmManager.App.ViewModels.Sells;
 using FarmManager.App.ViewModels.Sprayings;
-using FarmManager.App.ViewModels.Varieties;
 using FarmManager.App.ViewModels.Vendors;
 using FarmManager.App.ViewModels.Workdays;
-using FarmManager.App.ViewModels.Workdays.WorkdayCollecting;
-using FarmManager.App.ViewModels.Workdays.WorkdayHourly;
+using FarmManager.App.ViewModels.Workdays.WorkdaysCollecting;
+using FarmManager.App.ViewModels.Workdays.WorkdaysHourly;
+using FarmManager.App.Views.Actions;
 using FarmManager.App.Views.Buys;
 using FarmManager.App.Views.ChooseEntity;
 using FarmManager.App.Views.Deposits;
-using FarmManager.App.Views.Diseases;
 using FarmManager.App.Views.EmployeeCosts;
 using FarmManager.App.Views.Employees;
 using FarmManager.App.Views.Fertilizers;
+using FarmManager.App.Views.Payments;
 using FarmManager.App.Views.Plants;
+using FarmManager.App.Views.Reports;
 using FarmManager.App.Views.Seasons;
+using FarmManager.App.Views.Sells;
 using FarmManager.App.Views.Sprayings;
-using FarmManager.App.Views.Varieties;
 using FarmManager.App.Views.Vendors;
 using FarmManager.App.Views.Workdays;
-using FarmManager.App.Views.Workdays.WorkdayCollecting;
-using FarmManager.App.Views.Workdays.WorkdayHourly;
+using FarmManager.App.Views.Workdays.WorkdaysCollecting;
+using FarmManager.App.Views.Workdays.WorkdaysHourly;
 using FarmManager.Model.DatabaseContext;
 using FarmManager.Model.UnitOfWork;
 using FarmManager.Services.Interfaces;
@@ -54,7 +56,7 @@ public partial class MyApp : Application
             {
                 // Database
                 services.AddDbContext<FarmManagerContext>(options =>
-                    options.UseNpgsql("Host=localhost;Port=5433;Database=FarmManager;Username=postgres;Password=admin"));
+                    options.UseNpgsql(ConnectionStringFlatHelper.ReadConnectionString("connectionString")));
 
                 #region Windows
 
@@ -62,21 +64,17 @@ public partial class MyApp : Application
                 services.AddSingleton<MainWindow>();
 
                 //Choose Entity
-                services.AddTransient<ChooseVarietyWindow>();
                 services.AddTransient<ChoosePlantWindow>();
                 services.AddTransient<ChooseFertilizerWindow>();
                 services.AddTransient<ChooseVendorWindow>();
                 services.AddTransient<ChooseEmployeeWindow>();
+                services.AddTransient<ChooseActionWindow>();
+                services.AddTransient<ChooseDepositWindow>();
 
                 //Deposits
                 services.AddTransient<DepositsWindow>();
                 services.AddTransient<DepositAddWindow>();
                 services.AddTransient<DepositEditWindow>();
-
-                //Diseases
-                services.AddTransient<DiseasesWindow>();
-                services.AddTransient<DiseaseAddWindow>();
-                services.AddTransient<DiseaseEditWindow>();
 
                 //Employees
                 services.AddTransient<EmployeesWindow>();
@@ -87,11 +85,6 @@ public partial class MyApp : Application
                 services.AddTransient<FertilizersWindow>();
                 services.AddTransient<FertilizerAddWindow>();
                 services.AddTransient<FertilizerEditWindow>();
-
-                //Varieties
-                services.AddTransient<VarietiesWindow>();
-                services.AddTransient<VarietyAddWindow>();
-                services.AddTransient<VarietyEditWindow>();
 
                 //Vendors
                 services.AddTransient<VendorsWindow>();
@@ -125,16 +118,40 @@ public partial class MyApp : Application
                 services.AddTransient<EmployeeCostEditWindow>();
 
                 //Workdays
+                services.AddTransient<WorkdaysCalendarWindow>();
                 services.AddTransient<WorkdaysWindow>();
-                services.AddTransient<WorkdayWindow>();
-                services.AddTransient<AddWorkdayWindow>();
-                services.AddTransient<EditWorkdayWindow>();
-                services.AddTransient<AddWorkdayCollectingAddOneWindow>();
-                services.AddTransient<AddWorkdayCollectingAddAllWindow>();
-                services.AddTransient<AddWorkdayCollectingEditWindow>();
-                services.AddTransient<AddWorkdayHourlyAddAllWindow>();
-                services.AddTransient<AddWorkdayHourlyAddOneWindow>();
-                services.AddTransient<AddWorkdayHourlyEditWindow>();
+                services.AddTransient<WorkdayCollectingAddOneWindow>();
+                services.AddTransient<WorkdayCollectingAddAllWindow>();
+                services.AddTransient<WorkdayCollectingEditWindow>();
+                services.AddTransient<WorkdayHourlyAddAllWindow>();
+                services.AddTransient<WorkdayHourlyAddOneWindow>();
+                services.AddTransient<WorkdayHourlyEditWindow>();
+                services.AddTransient<WorkdaysSelectTypeWindow>();
+                services.AddTransient<WorkdayHarvestCollectingEditWindow>();
+                services.AddTransient<WorkdayHarvestCollectingAddWindow>();
+                services.AddTransient<WorkdayHarvestHourlyEditWindow>();
+                services.AddTransient<WorkdayHarvestHourlyAddWindow>();
+                services.AddTransient<WorkdayHourlyWorkEditWindow>();
+                services.AddTransient<WorkdayHourlyWorkAddWindow>();
+
+                //Actions
+                services.AddTransient<ActionsWindow>();
+                services.AddTransient<ActionAddWindow>();
+                services.AddTransient<ActionEditWindow>();
+
+                //Sells
+                services.AddTransient<SellsWindow>();
+                services.AddTransient<SellAddWindow>();
+                services.AddTransient<SellEditWindow>();
+
+                //Payments
+                services.AddTransient<PaymentsWindow>();
+                services.AddTransient<PaymentAddWindow>();
+                services.AddTransient<PaymentEditWindow>();
+
+                //Reports
+                services.AddTransient<ReportsWindow>();
+                services.AddTransient<ReportWindow>();
 
                 #endregion
 
@@ -148,18 +165,14 @@ public partial class MyApp : Application
                 services.AddTransient<ChooseFertilizerViewModel>();
                 services.AddTransient<ChooseVendorViewModel>();
                 services.AddTransient<ChoosePlantViewModel>();
-                services.AddTransient<ChooseVarietyViewModel>();
                 services.AddTransient<ChooseEmployeeViewModel>();
+                services.AddTransient<ChooseActionViewModel>();
+                services.AddTransient<ChooseDepositViewModel>();
 
                 //Deposits
                 services.AddTransient<DepositsViewModel>();
                 services.AddTransient<DepositAddViewModel>();
                 services.AddTransient<DepositEditViewModel>();
-
-                //Diseases
-                services.AddTransient<DiseasesViewModel>();
-                services.AddTransient<DiseaseAddViewModel>();
-                services.AddTransient<DiseaseEditViewModel>();
 
                 //Employees
                 services.AddTransient<EmployeesViewModel>();
@@ -170,11 +183,6 @@ public partial class MyApp : Application
                 services.AddTransient<FertilizersViewModel>();
                 services.AddTransient<FertilizerAddViewModel>();
                 services.AddTransient<FertilizerEditViewModel>();
-
-                //Varieties
-                services.AddTransient<VarietiesViewModel>();
-                services.AddTransient<VarietyAddViewModel>();
-                services.AddTransient<VarietyEditViewModel>();
 
                 //Vendors
                 services.AddTransient<VendorsViewModel>();
@@ -207,16 +215,40 @@ public partial class MyApp : Application
                 services.AddTransient<EmployeeCostEditViewModel>();
 
                 //Workdays
+                services.AddTransient<WorkdaysCalendarViewModel>();
                 services.AddTransient<WorkdaysViewModel>();
-                services.AddTransient<WorkdayViewModel>();
-                services.AddTransient<AddWorkdayViewModel>();
-                services.AddTransient<EditWorkdayViewModel>();
-                services.AddTransient<AddWorkdayCollectingAddOneViewModel>();
-                services.AddTransient<AddWorkdayCollectingAddAllViewModel>();
-                services.AddTransient<AddWorkdayCollectingEditViewModel>();
-                services.AddTransient<AddWorkdayHourlyAddAllViewModel>();
-                services.AddTransient<AddWorkdayHourlyAddOneViewModel>();
-                services.AddTransient<AddWorkdayHourlyEditViewModel>();
+                services.AddTransient<WorkdayCollectingAddOneViewModel>();
+                services.AddTransient<WorkdayCollectingAddAllViewModel>();
+                services.AddTransient<WorkdayCollectingEditViewModel>();
+                services.AddTransient<WorkdayHourlyAddAllViewModel>();
+                services.AddTransient<WorkdayHourlyAddOneViewModel>();
+                services.AddTransient<WorkdayHourlyEditViewModel>();
+                services.AddTransient<WorkdaysSelectTypeViewModel>();
+                services.AddTransient<WorkdayHarvestCollectingEditViewModel>();
+                services.AddTransient<WorkdayHarvestCollectingAddViewModel>();
+                services.AddTransient<WorkdayHarvestHourlyEditViewModel>();
+                services.AddTransient<WorkdayHarvestHourlyAddViewModel>();
+                services.AddTransient<WorkdayHourlyWorkEditViewModel>();
+                services.AddTransient<WorkdayHourlyWorkAddViewModel>();
+
+                //Actions
+                services.AddTransient<ActionsViewModel>();
+                services.AddTransient<ActionAddViewModel>();
+                services.AddTransient<ActionEditViewModel>();
+
+                //Sells
+                services.AddTransient<SellsViewModel>();
+                services.AddTransient<SellAddViewModel>();
+                services.AddTransient<SellEditViewModel>();
+
+                //Payments
+                services.AddTransient<PaymentsViewModel>();
+                services.AddTransient<PaymentAddViewModel>();
+                services.AddTransient<PaymentEditViewModel>();
+
+                //Reports
+                services.AddTransient<ReportsViewModel>();
+                services.AddTransient<ReportViewModel>();
 
 
                 #endregion
@@ -227,10 +259,8 @@ public partial class MyApp : Application
                 services.AddScoped<IFarmManagerContext>(provider => provider.GetRequiredService<FarmManagerContext>());
                 services.AddScoped<IUnitOfWork, UnitOfWork>();
                 services.AddScoped<IDepositService, DepositService>();
-                services.AddScoped<IDiseaseService, DiseaseService>();
                 services.AddScoped<IEmployeeService, EmployeeService>();
                 services.AddScoped<IFertilizerService, FertilizerService>();
-                services.AddScoped<IVarietyService, VarietyService>();
                 services.AddScoped<IVendorService, VendorService>();
                 services.AddScoped<IPlantService, PlantService>();
                 services.AddScoped<ISeasonService, SeasonService>();
@@ -238,6 +268,11 @@ public partial class MyApp : Application
                 services.AddScoped<ISprayingService, SprayingService>();
                 services.AddScoped<IEmployeeCostService, EmployeeCostService>();
                 services.AddScoped<IWorkdayService, WorkdayService>();
+                services.AddScoped<IHarvestService, HarvestService>();
+                services.AddScoped<IActionService, ActionService>();
+                services.AddScoped<ISellService, SellService>();
+                services.AddScoped<IPaymentService, PaymentService>();
+                services.AddScoped<IReportService, ReportService>();
 
                 //Service Prodiver
                 ServiceProvider = services.BuildServiceProvider();

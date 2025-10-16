@@ -7,10 +7,24 @@ namespace FarmManager.App.Views.ChooseEntity;
 public partial class ChooseEmployeeWindow : Window
 {
     public Employee? Employee { get; private set; }
+    public IEnumerable<int>? EmployeeIds { get; set; }
     public ChooseEmployeeWindow()
     {
         InitializeComponent();
         Loaded += async (_, __) => await ((ChooseEmployeeViewModel)DataContext).InitializeAsync();
+        if (DataContext is ChooseEmployeeViewModel vm)
+        {
+            vm.RequestClose += employee =>
+            {
+                Employee = employee;
+                DialogResult = true;
+            };
+        }
+    }
+    public ChooseEmployeeWindow(IEnumerable<int> employeeIds)
+    {
+        InitializeComponent();
+        Loaded += async (_, __) => await ((ChooseEmployeeViewModel)DataContext).InitializeAsync(employeeIds);
         if (DataContext is ChooseEmployeeViewModel vm)
         {
             vm.RequestClose += employee =>
