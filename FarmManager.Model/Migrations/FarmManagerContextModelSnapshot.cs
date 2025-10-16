@@ -399,9 +399,6 @@ namespace FarmManager.Model.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<decimal>("Quantity")
-                        .HasColumnType("numeric");
-
                     b.HasKey("Id");
 
                     b.ToTable("Plants");

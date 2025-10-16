@@ -45,4 +45,16 @@ public class PlantService(IFarmManagerContext context) : IPlantService
             throw new NotFoundException("Nie mozna znaleźć rośliny.");
         entity.IsDeleted = true;
     }
+    public async Task<decimal> GetQuantity(int plantId)
+    {
+        var harvests = await context.Harvests
+            .Where(h => h.Workday.PlantId == plantId && !h.IsDeleted)
+            .ToListAsync();
+
+        return harvests.Sum(h =>
+            h.RemainingCollectingQuantity +
+            h.RemainingQuantityAdditional +
+            h.RemainingHourlyQuantity
+        );
+    }
 }

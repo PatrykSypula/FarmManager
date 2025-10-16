@@ -53,13 +53,27 @@ public class PlantEditViewModel(IPlantService plantServive, IUnitOfWork unitOfWo
             OnPropertyChanged();
         }
     }
+    public decimal? Quantity
+    {
+        get
+        {
+            return Model.Plant.Quantity;
+        }
+        set
+        {
+            Model.Plant.Quantity = value;
+            OnPropertyChanged();
+        }
+    }
 
     public async Task InitializeAsync(int id)
     {
         Model.Plant = await plantServive.Get(id);
+        Model.Plant.Quantity = await plantServive.GetQuantity(id);
         OnPropertyChanged(nameof(Name));
         OnPropertyChanged(nameof(Description));
         OnPropertyChanged(nameof(IsActive));
+        OnPropertyChanged(nameof(Quantity));
     }
 
     #endregion

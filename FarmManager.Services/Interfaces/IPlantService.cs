@@ -9,4 +9,5 @@ public interface IPlantService
     Task Add(Plant entity);
     Task Update(Plant entity);
     Task Delete(int id);
+    Task<decimal> GetQuantity(int plantId);
 }

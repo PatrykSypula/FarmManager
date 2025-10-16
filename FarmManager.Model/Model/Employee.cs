@@ -8,7 +8,8 @@ public class Employee : BaseEntity
     public string LastName { get; set; } = string.Empty;
     public string? Nickname { get; set; } = string.Empty;
     public bool IsRentable { get; set; } = false;
-    public decimal? BaseRent { get; set; }
+    private decimal? _baseRent;
+    public decimal? BaseRent{ get => _baseRent; set => _baseRent = value is null ? null : Math.Round(value.Value, 2); }
     public string? PhoneNumber { get; set; }
     public string? Description { get; set; }
 }

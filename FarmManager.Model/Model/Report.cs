@@ -6,9 +6,39 @@ public class Report
     public string PlantName { get; set; } = string.Empty;
     public DateOnly StartDate { get; set; }
     public DateOnly EndDate { get; set; }
-    public decimal EmployeeEarnings { get; set; }
-    public decimal Rent { get; set; }
-    public decimal Income { get; set; }
-    public decimal SprayingCost { get; set; }
-    public decimal CountedIncome { get; set; }
+    private decimal _employeeEarnings;
+    public decimal EmployeeEarnings
+    {
+        get => _employeeEarnings;
+        set => _employeeEarnings = Math.Round(value, 2);
+    }
+
+    private decimal _rent;
+    public decimal Rent
+    {
+        get => _rent;
+        set => _rent = Math.Round(value, 2);
+    }
+
+    private decimal _income;
+    public decimal Income
+    {
+        get => _income;
+        set => _income = Math.Round(value, 2);
+    }
+
+    private decimal _sprayingCost;
+    public decimal SprayingCost
+    {
+        get => _sprayingCost;
+        set => _sprayingCost = Math.Round(value, 2);
+    }
+
+    private decimal _countedIncome;
+    public decimal CountedIncome
+    {
+        get => _countedIncome;
+        set => _countedIncome = Math.Round(value, 2);
+    }
+
 }
