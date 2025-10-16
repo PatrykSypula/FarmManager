@@ -8,4 +8,5 @@ public interface ISprayingService
     Task<Spraying> Get(int id);
     Task Add(Spraying entity);
     Task Delete(int id);
+    Task<ICollection<Spraying>> GetSprayingsInMonth(int year, int month);
 }

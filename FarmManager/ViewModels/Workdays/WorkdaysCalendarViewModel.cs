@@ -11,7 +11,7 @@ using Microsoft.Windows.Themes;
 
 namespace FarmManager.App.ViewModels.Workdays;
 
-public class WorkdaysCalendarViewModel(IWorkdayService workdayService) : BaseViewModel
+public class WorkdaysCalendarViewModel(IWorkdayService workdayService, ISprayingService sprayingService) : BaseViewModel
 {
     public ObservableCollection<SchedulerDay> Days { get; } = new();
     public string CurrentMonthName => char.ToUpper(SelectedMonth.ToString("MMMM yyyy")[0]) + SelectedMonth.ToString("MMMM yyyy").Substring(1);
@@ -64,11 +64,12 @@ public class WorkdaysCalendarViewModel(IWorkdayService workdayService) : BaseVie
         Days.Clear();
 
         var workdays = await workdayService.GetWorkdaysInMonth(SelectedMonth.Year, SelectedMonth.Month);
+        var sprayings = await sprayingService.GetSprayingsInMonth(SelectedMonth.Year, SelectedMonth.Month);
 
         var firstOfMonth = new DateTime(SelectedMonth.Year, SelectedMonth.Month, 1);
         var daysInMonth = DateTime.DaysInMonth(SelectedMonth.Year, SelectedMonth.Month);
 
-        int offset = ((int)firstOfMonth.DayOfWeek + 6) % 7; // Monday-first
+        int offset = ((int)firstOfMonth.DayOfWeek + 6) % 7;
         var startDate = firstOfMonth.AddDays(-offset);
         int totalDays = offset + daysInMonth;
         Rows = (int)Math.Ceiling(totalDays / 7.0);
@@ -76,12 +77,23 @@ public class WorkdaysCalendarViewModel(IWorkdayService workdayService) : BaseVie
         for (int i = 0; i < Rows * 7; i++)
         {
             var day = startDate.AddDays(i);
-            var dayEvents = workdays.Where(w => w.Date == DateOnly.FromDateTime(day))
+
+            var dayEvents = sprayings
+                .Where(s => s.Date == DateOnly.FromDateTime(day))
+                .Select(s => new SchedulerEvent
+                {
+                    Text = $"Pryskanie - {s.Plant?.Name}",
+                    IsPaid = true
+                })
+                .ToList();
+
+            dayEvents.AddRange(workdays
+                .Where(w => w.Date == DateOnly.FromDateTime(day))
                 .Select(w => new SchedulerEvent
                 {
                     Text = GetEventText(w),
                     IsPaid = !HasDebt(w)
-                }).ToList();
+                }));
 
             Days.Add(new SchedulerDay
             {
@@ -93,6 +105,7 @@ public class WorkdaysCalendarViewModel(IWorkdayService workdayService) : BaseVie
 
         OnPropertyChanged(nameof(Rows));
     }
+
     private string GetEventText(Workday w)
     {
         string action = w.Action?.Name ?? "Rwanie";

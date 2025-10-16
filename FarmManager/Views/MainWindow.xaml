@@ -7,7 +7,7 @@
         xmlns:vm="clr-namespace:FarmManager.App.ViewModels"
         Language="pl-PL"
         mc:Ignorable="d"
-        Title="RolnikPro" Height="430" Width="720"
+        Title="RolnikPro" Height="430" Width="730"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
@@ -34,16 +34,16 @@
                 <MenuItem Header="Rośliny" Command="{Binding Plants}" FontSize="20" />
                 <MenuItem Header="Kupcy" Command="{Binding Deposits}" FontSize="20" />
             </MenuItem>
-            <MenuItem Header="Nawozy i prykania" FontSize="20">
+            <MenuItem Header="Nawozy i pryskania" FontSize="20">
                 <MenuItem Header="Pryskania" Command="{Binding Sprayings}" FontSize="20" />
                 <MenuItem Header="Zakup nawozów" Command="{Binding Buys}" FontSize="20" />
                 <MenuItem Header="Nawozy" Command="{Binding Fertilizers}" FontSize="20" />
                 <MenuItem Header="Sprzedawcy" Command="{Binding Vendors}" FontSize="20" />
             </MenuItem>
-            <MenuItem Header="Raporty" Command="{Binding Deposits}" FontSize="20" />
+            <MenuItem Header="Raporty" Command="{Binding Reports}" FontSize="20" />
         </Menu>
-        <Button IsEnabled="False" Opacity="1" Content="RolnikPro" Background="White" HorizontalAlignment="Left" Margin="50,100,0,0" VerticalAlignment="Top" BorderThickness="2" materialDesign:ButtonAssist.CornerRadius="10" Width="610" Height="40" FontSize="20" Foreground="Black"/>
-        <Button IsEnabled="False" Opacity="1" Height="180" Width="610" Background="White" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="50,150,0,0" BorderThickness="2" materialDesign:ButtonAssist.CornerRadius="10" FontSize="30" Foreground="Black"/>
+        <Button IsEnabled="False" Opacity="1" Content="RolnikPro" Background="White" HorizontalAlignment="Left" Margin="50,100,0,0" VerticalAlignment="Top" BorderThickness="2" materialDesign:ButtonAssist.CornerRadius="10" Width="620" Height="40" FontSize="20" Foreground="Black"/>
+        <Button IsEnabled="False" Opacity="1" Height="180" Width="620" Background="White" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="50,150,0,0" BorderThickness="2" materialDesign:ButtonAssist.CornerRadius="10" FontSize="30" Foreground="Black"/>
         <TextBox FontWeight="Medium" IsReadOnly="True" TextWrapping="Wrap" Grid.RowSpan="3" Height="180" Text="Zobacz, jak Twoja praca przekłada się na realne wyniki. Śledź plony i porównuj je z kosztami produkcji. Podejmuj decyzje oparte na faktach, nie domysłach." Width="590" Background="Transparent" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalAlignment="Top" VerticalContentAlignment="Center" Margin="60,150,0,0" BorderThickness="0" FontSize="28" Foreground="Black"/>
     </Grid>
 </Window>

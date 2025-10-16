@@ -56,11 +56,11 @@ namespace FarmManager.Model.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     FirstName = table.Column<string>(type: "text", nullable: false),
                     LastName = table.Column<string>(type: "text", nullable: false),
-                    IdNumber = table.Column<string>(type: "text", nullable: true),
+                    Nickname = table.Column<string>(type: "text", nullable: true),
                     IsRentable = table.Column<bool>(type: "boolean", nullable: false),
                     BaseRent = table.Column<decimal>(type: "numeric", nullable: true),
                     PhoneNumber = table.Column<string>(type: "text", nullable: true),
-                    Email = table.Column<string>(type: "text", nullable: true),
+                    Description = table.Column<string>(type: "text", nullable: true),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
                     IsActive = table.Column<bool>(type: "boolean", nullable: false),
                     Created = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)

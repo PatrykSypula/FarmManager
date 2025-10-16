@@ -9,6 +9,7 @@ using FarmManager.App.ViewModels.Employees;
 using FarmManager.App.ViewModels.Fertilizers;
 using FarmManager.App.ViewModels.Payments;
 using FarmManager.App.ViewModels.Plants;
+using FarmManager.App.ViewModels.Reports;
 using FarmManager.App.ViewModels.Seasons;
 using FarmManager.App.ViewModels.Sells;
 using FarmManager.App.ViewModels.Sprayings;
@@ -25,6 +26,7 @@ using FarmManager.App.Views.Employees;
 using FarmManager.App.Views.Fertilizers;
 using FarmManager.App.Views.Payments;
 using FarmManager.App.Views.Plants;
+using FarmManager.App.Views.Reports;
 using FarmManager.App.Views.Seasons;
 using FarmManager.App.Views.Sells;
 using FarmManager.App.Views.Sprayings;
@@ -54,7 +56,7 @@ public partial class MyApp : Application
             {
                 // Database
                 services.AddDbContext<FarmManagerContext>(options =>
-                    options.UseNpgsql("Host=localhost;Port=5433;Database=FarmManager;Username=postgres;Password=admin"));
+                    options.UseNpgsql(ConnectionStringFlatHelper.ReadConnectionString("connectionString")));
 
                 #region Windows
 
@@ -146,6 +148,10 @@ public partial class MyApp : Application
                 services.AddTransient<PaymentsWindow>();
                 services.AddTransient<PaymentAddWindow>();
                 services.AddTransient<PaymentEditWindow>();
+
+                //Reports
+                services.AddTransient<ReportsWindow>();
+                services.AddTransient<ReportWindow>();
 
                 #endregion
 
@@ -240,6 +246,10 @@ public partial class MyApp : Application
                 services.AddTransient<PaymentAddViewModel>();
                 services.AddTransient<PaymentEditViewModel>();
 
+                //Reports
+                services.AddTransient<ReportsViewModel>();
+                services.AddTransient<ReportViewModel>();
+
 
                 #endregion
 
@@ -262,6 +272,7 @@ public partial class MyApp : Application
                 services.AddScoped<IActionService, ActionService>();
                 services.AddScoped<ISellService, SellService>();
                 services.AddScoped<IPaymentService, PaymentService>();
+                services.AddScoped<IReportService, ReportService>();
 
                 //Service Prodiver
                 ServiceProvider = services.BuildServiceProvider();

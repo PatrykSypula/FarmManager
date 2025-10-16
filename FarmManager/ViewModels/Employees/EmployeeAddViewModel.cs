@@ -93,15 +93,15 @@ public class EmployeeAddViewModel(IEmployeeService employeeService, IUnitOfWork 
         }
     }
 
-    public string? Email
+    public string? Description
     {
         get
         {
-            return Model.Employee.Email;
+            return Model.Employee.Description;
         }
         set
         {
-            Model.Employee.Email = value;
+            Model.Employee.Description = value;
             OnPropertyChanged();
         }
     }

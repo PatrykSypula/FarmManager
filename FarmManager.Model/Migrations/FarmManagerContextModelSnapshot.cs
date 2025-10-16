@@ -151,14 +151,11 @@ namespace FarmManager.Model.Migrations
                     b.Property<DateTime>("Created")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("Email")
+                    b.Property<string>("Description")
                         .HasColumnType("text");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("IdNumber")
                         .HasColumnType("text");
 
                     b.Property<bool>("IsActive")
@@ -172,6 +169,9 @@ namespace FarmManager.Model.Migrations
 
                     b.Property<string>("LastName")
                         .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Nickname")
                         .HasColumnType("text");
 
                     b.Property<string>("PhoneNumber")

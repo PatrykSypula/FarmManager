@@ -93,15 +93,15 @@ public class EmployeeEditViewModel(IEmployeeService employeeService, IUnitOfWork
         }
     }
 
-    public string? Email
+    public string? Description
     {
         get
         {
-            return Model.Employee.Email;
+            return Model.Employee.Description;
         }
         set
         {
-            Model.Employee.Email = value;
+            Model.Employee.Description = value;
             OnPropertyChanged();
         }
     }
@@ -128,7 +128,7 @@ public class EmployeeEditViewModel(IEmployeeService employeeService, IUnitOfWork
         OnPropertyChanged(nameof(IsRentable));
         OnPropertyChanged(nameof(BaseRent));
         OnPropertyChanged(nameof(PhoneNumber));
-        OnPropertyChanged(nameof(Email));
+        OnPropertyChanged(nameof(Description));
         OnPropertyChanged(nameof(IsActive));
     }
 

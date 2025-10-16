@@ -37,11 +37,11 @@ public class EmployeeService(IFarmManagerContext context) : IEmployeeService
             throw new NotFoundException("Nie mozna znaleźć pracownika");
         existingEntity.FirstName = entity.FirstName;
         existingEntity.LastName = entity.LastName;
-        existingEntity.IdNumber = entity.IdNumber;
+        existingEntity.Description = entity.Description;
         existingEntity.IsRentable = entity.IsRentable;
         existingEntity.BaseRent = entity.BaseRent;
         existingEntity.PhoneNumber = entity.PhoneNumber;
-        existingEntity.Email = entity.Email;
+        existingEntity.Nickname = entity.Nickname;
         existingEntity.IsActive = entity.IsActive;
     }
     public async Task Delete(int id)

@@ -47,4 +47,12 @@ public class SprayingService(IFarmManagerContext context) : ISprayingService
             throw new NotFoundException("Nie mozna znaleźć pryskania.");
         entity.IsDeleted = true;
     }
+    public async Task<ICollection<Spraying>> GetSprayingsInMonth(int year, int month)
+    {
+        return await context.Sprayings
+            .Include(w => w.Plant)
+            .Where(w => w.Date.Year == year && w.Date.Month == month)
+            .AsNoTracking()
+            .ToListAsync();
+    }
 }

@@ -94,6 +94,12 @@
     <Compile Update="Views\Plants\PlantsWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\Reports\ReportsWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Reports\ReportWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Seasons\SeasonAddWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

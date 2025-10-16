@@ -8,6 +8,7 @@ using FarmManager.App.ViewModels.Employees;
 using FarmManager.App.ViewModels.Fertilizers;
 using FarmManager.App.ViewModels.Payments;
 using FarmManager.App.ViewModels.Plants;
+using FarmManager.App.ViewModels.Reports;
 using FarmManager.App.ViewModels.Seasons;
 using FarmManager.App.ViewModels.Sells;
 using FarmManager.App.ViewModels.Sprayings;
@@ -169,5 +170,10 @@ public class ViewModelLocator
     public PaymentEditViewModel PaymentEditViewModel =>
         MyApp.ServiceProvider.GetRequiredService<PaymentEditViewModel>();
 
+    //Reports
+    public ReportsViewModel ReportsViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<ReportsViewModel>();
+    public ReportViewModel ReportViewModel =>
+        MyApp.ServiceProvider.GetRequiredService<ReportViewModel>();
 
 }
