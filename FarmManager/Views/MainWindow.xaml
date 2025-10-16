@@ -23,20 +23,23 @@
         <Menu>
             <MenuItem Header="Praca i pracownicy" FontSize="20">
                 <MenuItem Header="Praca" Command="{Binding Workdays}" FontSize="20" />
-                <MenuItem Header="Pracownicy" Command="{Binding Employees}" FontSize="20" />
                 <MenuItem Header="Pożyczki pracowników" Command="{Binding EmployeeCosts}" FontSize="20" />
                 <MenuItem Header="Wypłaty" Command="{Binding Payments}" FontSize="20" />
+                <Separator />
+                <MenuItem Header="Pracownicy" Command="{Binding Employees}" FontSize="20" />
                 <MenuItem Header="Czynności polowe" Command="{Binding Actions}" FontSize="20" />
             </MenuItem>
             <MenuItem Header="Rośliny i sprzedaż" FontSize="20">
                 <MenuItem Header="Sprzedaż" Command="{Binding Sells}" FontSize="20" />
                 <MenuItem Header="Sezony" Command="{Binding Seasons}" FontSize="20" />
+                <Separator />
                 <MenuItem Header="Rośliny" Command="{Binding Plants}" FontSize="20" />
                 <MenuItem Header="Kupcy" Command="{Binding Deposits}" FontSize="20" />
             </MenuItem>
             <MenuItem Header="Nawozy i pryskania" FontSize="20">
                 <MenuItem Header="Pryskania" Command="{Binding Sprayings}" FontSize="20" />
                 <MenuItem Header="Zakup nawozów" Command="{Binding Buys}" FontSize="20" />
+                <Separator />
                 <MenuItem Header="Nawozy" Command="{Binding Fertilizers}" FontSize="20" />
                 <MenuItem Header="Sprzedawcy" Command="{Binding Vendors}" FontSize="20" />
             </MenuItem>
