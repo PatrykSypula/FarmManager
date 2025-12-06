@@ -10,3 +10,7 @@
 /FarmManager.Services/obj
 /FarmManager.Services/bin/Debug/net8.0-windows
 /FarmManager.Model/bin/Debug/net8.0-windows
+/FarmManager/bin/Release/net8.0-windows
+/FarmManager/Properties/PublishProfiles
+/FarmManager.Model/bin/Release/net8.0-windows
+/FarmManager.Services/bin/Release/net8.0-windows
