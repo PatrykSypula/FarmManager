@@ -10,7 +10,7 @@ public class ConnectionStringFlatHelper
         }
         catch
         {
-            return "Host=localhost;Port=5433;Database=FarmManager;Username=postgres;Password=admin";
+            return "Host=localhost;Port=5432;Database=FarmManager;Username=postgres;Password=admin";
         }
     }
 }
