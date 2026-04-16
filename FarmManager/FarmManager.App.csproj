@@ -29,6 +29,9 @@
   <ItemGroup>
     <ProjectReference Include="..\FarmManager.Model\FarmManager.Model.csproj" />
     <ProjectReference Include="..\FarmManager.Services\FarmManager.Services.csproj" />
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

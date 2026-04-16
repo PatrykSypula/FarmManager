@@ -39,6 +39,7 @@ using FarmManager.Model.UnitOfWork;
 using FarmManager.Services.Interfaces;
 using FarmManager.Services.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -56,7 +57,7 @@ public partial class MyApp : Application
             {
                 // Database
                 services.AddDbContext<FarmManagerContext>(options =>
-                    options.UseNpgsql(ConnectionStringFlatHelper.ReadConnectionString("connectionString")));
+                    options.UseNpgsql(context.Configuration.GetConnectionString("FarmManagerDatabase")));
 
                 #region Windows
 

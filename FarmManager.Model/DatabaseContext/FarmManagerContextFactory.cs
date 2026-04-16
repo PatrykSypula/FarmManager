@@ -8,7 +8,7 @@ public class FarmManagerContextFactory : IDesignTimeDbContextFactory<FarmManager
     public FarmManagerContext CreateDbContext(string[] args)
     {
         var optionsBuilder = new DbContextOptionsBuilder<FarmManagerContext>();
-        optionsBuilder.UseNpgsql(ConnectionStringFlatHelper.ReadConnectionString("connectionString"));
+        optionsBuilder.UseNpgsql("Host=localhost;Port=5433;Database=FarmManager;Username=postgres;Password=admin");
 
         return new FarmManagerContext(optionsBuilder.Options);
     }
