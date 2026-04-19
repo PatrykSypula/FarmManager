@@ -23,19 +23,39 @@
         <app:DateOnlyToDateTimeConverter x:Key="DtoToDtConverter"/>
     </Window.Resources>
     <Grid>
-        <Button Margin="30,30,0,0" Width="Auto" Height="40" Content="Nazwa sezonu" IsEnabled="False" VerticalAlignment="Top" Opacity="1" Background="White" HorizontalAlignment="Left" BorderThickness="2" materialDesign:ButtonAssist.CornerRadius="10" FontSize="20" Foreground="Black"/>
+        <Button Margin="30,30,0,0" Width="Auto" Height="40" IsEnabled="False" VerticalAlignment="Top" Opacity="1" Background="White" HorizontalAlignment="Left" BorderThickness="2" materialDesign:ButtonAssist.CornerRadius="10" FontSize="20" Foreground="Black">
+            <TextBlock>
+            <Run Text="Nazwa sezonu"/>
+            <Run Text="*" Foreground="Red"/>
+            </TextBlock>
+        </Button>
         <Button Margin="30,80,0,0" Width="700" Height="60" IsEnabled="False" VerticalAlignment="Top" Opacity="1" Grid.RowSpan="3" Background="White" HorizontalAlignment="Left" BorderThickness="2" materialDesign:ButtonAssist.CornerRadius="10" FontSize="30" Foreground="Black"/>
         <TextBox Margin="40,80,0,0" Width="680" Height="60" Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontWeight="Medium" app:SelectAllOnFocus.Enable="True" MaxLength="50" TextWrapping="Wrap" VerticalAlignment="Top" Grid.RowSpan="3" Background="Transparent" HorizontalAlignment="Left" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" BorderThickness="0" FontSize="30" Foreground="Black"/>
 
-        <Button Margin="30,150,0,0" Width="Auto" Height="40" Content="Nazwa rośliny" IsEnabled="False" VerticalAlignment="Top" Opacity="1" Background="White" HorizontalAlignment="Left" BorderThickness="2" materialDesign:ButtonAssist.CornerRadius="10" FontSize="20" Foreground="Black"/>
+        <Button Margin="30,150,0,0" Width="Auto" Height="40" IsEnabled="False" VerticalAlignment="Top" Opacity="1" Background="White" HorizontalAlignment="Left" BorderThickness="2" materialDesign:ButtonAssist.CornerRadius="10" FontSize="20" Foreground="Black">
+            <TextBlock>
+            <Run Text="Nazwa rośliny"/>
+            <Run Text="*" Foreground="Red"/>
+            </TextBlock>
+        </Button>
         <Button Margin="30,200,0,0" Width="700" Height="60" IsEnabled="False" VerticalAlignment="Top" Opacity="1" Grid.RowSpan="3" Background="White" HorizontalAlignment="Left" BorderThickness="2" materialDesign:ButtonAssist.CornerRadius="10" FontSize="30" Foreground="Black"/>
         <TextBox Margin="40,200,0,0" Width="680" IsReadOnly="True" IsTabStop="True" app:FocusCommandBehavior.Command="{Binding OpenPlant}" Height="60" Text="{Binding Plant, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontWeight="Medium" app:SelectAllOnFocus.Enable="True" TextWrapping="Wrap" VerticalAlignment="Top" Grid.RowSpan="3" Background="Transparent" HorizontalAlignment="Left" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" BorderThickness="0" FontSize="30" Foreground="Black"/>
 
-        <Button Margin="30,270,0,0" Width="Auto" Height="40" Content="Data rozpoczęnia" IsEnabled="False" VerticalAlignment="Top" Opacity="1" Background="White" HorizontalAlignment="Left" BorderThickness="2" materialDesign:ButtonAssist.CornerRadius="10" FontSize="20" Foreground="Black"/>
+        <Button Margin="30,270,0,0" Width="Auto" Height="40" IsEnabled="False" VerticalAlignment="Top" Opacity="1" Background="White" HorizontalAlignment="Left" BorderThickness="2" materialDesign:ButtonAssist.CornerRadius="10" FontSize="20" Foreground="Black">
+            <TextBlock>
+            <Run Text="Data rozpoczęnia"/>
+            <Run Text="*" Foreground="Red"/>
+            </TextBlock>
+        </Button>
         <Button Margin="30,320,0,0" Width="345" Height="60" IsEnabled="False" VerticalAlignment="Top" Opacity="1" Grid.RowSpan="3" Background="White" HorizontalAlignment="Left" BorderThickness="2" materialDesign:ButtonAssist.CornerRadius="10" FontSize="30" Foreground="Black"/>
         <DatePicker Margin="40,320,0,0" Width="325" Height="60" SelectedDate="{Binding StartDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource DtoToDtConverter}}" FontWeight="Medium" app:SelectAllOnFocus.Enable="True" VerticalAlignment="Top" Grid.RowSpan="3" Background="Transparent" HorizontalAlignment="Left" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" BorderThickness="0" FontSize="30" Foreground="Black" FirstDayOfWeek="Monday" />
 
-        <Button Margin="380,270,0,0" Width="Auto" Height="40" Content="Data zakończenia" IsEnabled="False" VerticalAlignment="Top" Opacity="1" Background="White" HorizontalAlignment="Left" BorderThickness="2" materialDesign:ButtonAssist.CornerRadius="10" FontSize="20" Foreground="Black"/>
+        <Button Margin="380,270,0,0" Width="Auto" Height="40" IsEnabled="False" VerticalAlignment="Top" Opacity="1" Background="White" HorizontalAlignment="Left" BorderThickness="2" materialDesign:ButtonAssist.CornerRadius="10" FontSize="20" Foreground="Black">
+            <TextBlock>
+            <Run Text="Data zakończenia"/>
+            <Run Text="*" Foreground="Red"/>
+            </TextBlock>
+        </Button>
         <Button Margin="380,320,0,0" Width="345" Height="60" IsEnabled="False" VerticalAlignment="Top" Opacity="1" Grid.RowSpan="3" Background="White" HorizontalAlignment="Left" BorderThickness="2" materialDesign:ButtonAssist.CornerRadius="10" FontSize="30" Foreground="Black"/>
         <DatePicker Margin="390,320,0,0" Width="325" Height="60" SelectedDate="{Binding EndDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource DtoToDtConverter}}" FontWeight="Medium" app:SelectAllOnFocus.Enable="True" VerticalAlignment="Top" Grid.RowSpan="3" Background="Transparent" HorizontalAlignment="Left" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" BorderThickness="0" FontSize="30" Foreground="Black" FirstDayOfWeek="Monday" />
 

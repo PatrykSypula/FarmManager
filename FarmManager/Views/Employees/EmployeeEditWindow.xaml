@@ -21,11 +21,21 @@
         WindowStartupLocation="CenterScreen"
         DataContext="{Binding EmployeeEditViewModel, Source={StaticResource Locator}}">
     <Grid>
-        <Button Margin="30,30,0,0" Width="Auto" Height="40" Content="Imię" Opacity="1" IsEnabled="False" VerticalAlignment="Top" Background="White" HorizontalAlignment="Left" BorderThickness="2" materialDesign:ButtonAssist.CornerRadius="10" FontSize="20" Foreground="Black"/>
+        <Button Margin="30,30,0,0" Width="Auto" Height="40" Opacity="1" IsEnabled="False" VerticalAlignment="Top" Background="White" HorizontalAlignment="Left" BorderThickness="2" materialDesign:ButtonAssist.CornerRadius="10" FontSize="20" Foreground="Black">
+            <TextBlock>
+            <Run Text="Imię"/>
+            <Run Text="*" Foreground="Red"/>
+            </TextBlock>
+        </Button>
         <Button Margin="30,80,0,0" Width="500" Height="60" IsEnabled="False" Opacity="1" VerticalAlignment="Top" Background="White" HorizontalAlignment="Left" BorderThickness="2" materialDesign:ButtonAssist.CornerRadius="10" FontSize="30" Foreground="Black"/>
         <TextBox Margin="40,80,0,0" Width="480" Height="60" Text="{Binding FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontWeight="Medium" app:SelectAllOnFocus.Enable="True" MaxLength="50" VerticalAlignment="Top" Background="Transparent" HorizontalAlignment="Left" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" BorderThickness="0" FontSize="30" Foreground="Black"/>
 
-        <Button Margin="30,150,0,0" Width="Auto" Height="40" Content="Nazwisko" Opacity="1" IsEnabled="False" VerticalAlignment="Top" Background="White" HorizontalAlignment="Left" BorderThickness="2" materialDesign:ButtonAssist.CornerRadius="10" FontSize="20" Foreground="Black"/>
+        <Button Margin="30,150,0,0" Width="Auto" Height="40" Opacity="1" IsEnabled="False" VerticalAlignment="Top" Background="White" HorizontalAlignment="Left" BorderThickness="2" materialDesign:ButtonAssist.CornerRadius="10" FontSize="20" Foreground="Black">
+            <TextBlock>
+            <Run Text="Nazwisko"/>
+            <Run Text="*" Foreground="Red"/>
+            </TextBlock>
+        </Button>
         <Button Margin="30,200,0,0" Width="500" Height="60" IsEnabled="False" Opacity="1" VerticalAlignment="Top" Background="White" HorizontalAlignment="Left" BorderThickness="2" materialDesign:ButtonAssist.CornerRadius="10" FontSize="30" Foreground="Black"/>
         <TextBox Margin="40,200,0,0" Width="480" Height="60" Text="{Binding LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontWeight="Medium" app:SelectAllOnFocus.Enable="True" MaxLength="50" VerticalAlignment="Top" Background="Transparent" HorizontalAlignment="Left" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" BorderThickness="0" FontSize="30" Foreground="Black"/>
 
