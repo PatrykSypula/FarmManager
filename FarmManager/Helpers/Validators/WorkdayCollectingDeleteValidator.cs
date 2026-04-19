@@ -9,6 +9,6 @@ public class WorkdayCollectingDeleteValidator : AbstractValidator<WorkdayCollect
     {
         RuleFor(x => x)
             .Must(c => c.RemainingToPay == c.Quantity * c.Price)
-            .WithMessage("Nie można usunąć pracy pracownika która została już opłacona.");
+            .WithMessage("Nie można usunąć pracy pracownika, która została już opłacona.");
     }
 }

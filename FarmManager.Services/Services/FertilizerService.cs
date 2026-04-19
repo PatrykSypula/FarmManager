@@ -26,7 +26,7 @@ public class FertilizerService(IFarmManagerContext context) : IFertilizerService
     public async Task<Fertilizer> Get(int id)
     {
         return await context.Fertilizers.AsNoTracking().Where(d => d.Id == id).FirstOrDefaultAsync()
-            ?? throw new NotFoundException("Nie mozna znaleźć nawozu.");
+            ?? throw new NotFoundException("Nie można znaleźć nawozu.");
     }
     public async Task Add(Fertilizer entity)
     {
@@ -36,7 +36,7 @@ public class FertilizerService(IFarmManagerContext context) : IFertilizerService
     public async Task Update(Fertilizer entity)
     {
         var existingEntity = await context.Fertilizers.FirstOrDefaultAsync(d => d.Id == entity.Id) ??
-            throw new NotFoundException("Nie mozna znaleźć nawozu.");
+            throw new NotFoundException("Nie można znaleźć nawozu.");
         existingEntity.Name = entity.Name;
         existingEntity.Description = entity.Description;
         existingEntity.IsActive = entity.IsActive;
@@ -44,7 +44,7 @@ public class FertilizerService(IFarmManagerContext context) : IFertilizerService
     public async Task Delete(int id)
     {
         var entity = await context.Fertilizers.FirstOrDefaultAsync(d => d.Id == id) ??
-            throw new NotFoundException("Nie mozna znaleźć nawozu.");
+            throw new NotFoundException("Nie można znaleźć nawozu.");
         entity.IsDeleted = true;
     }
 

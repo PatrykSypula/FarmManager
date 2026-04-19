@@ -27,7 +27,7 @@ public class EmployeeCostService(IFarmManagerContext context) : IEmployeeCostSer
     public async Task<EmployeeCost> Get(int id)
     {
         return await context.EmployeeCosts.AsNoTracking().Include(d => d.Employee).Where(d => d.Id == id).FirstOrDefaultAsync()
-            ?? throw new NotFoundException("Nie mozna znaleźć pożyczki pracownika.");
+            ?? throw new NotFoundException("Nie można znaleźć pożyczki pracownika.");
     }
     public async Task Add(EmployeeCost entity)
     {
@@ -37,7 +37,7 @@ public class EmployeeCostService(IFarmManagerContext context) : IEmployeeCostSer
     public async Task Update(EmployeeCost entity)
     {
         var existingEntity = await context.EmployeeCosts.FirstOrDefaultAsync(d => d.Id == entity.Id) ??
-            throw new NotFoundException("Nie mozna znaleźć pożyczki pracownika.");
+            throw new NotFoundException("Nie można znaleźć pożyczki pracownika.");
         existingEntity.EmployeeId = entity.EmployeeId;
         existingEntity.Quantity = entity.Quantity;
         existingEntity.Date = entity.Date;
@@ -45,7 +45,7 @@ public class EmployeeCostService(IFarmManagerContext context) : IEmployeeCostSer
     public async Task Delete(int id)
     {
         var entity = await context.EmployeeCosts.FirstOrDefaultAsync(d => d.Id == id) ??
-            throw new NotFoundException("Nie mozna znaleźć pożyczki pracownika.");
+            throw new NotFoundException("Nie można znaleźć pożyczki pracownika.");
         entity.IsDeleted = true;
     }
 }

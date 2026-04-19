@@ -34,7 +34,7 @@ public class SprayingService(IFarmManagerContext context) : ISprayingService
             .Include(s => s.Fertilizer)
             .Include(s => s.BuyQuantity)
             .Where(d => d.Id == id).FirstOrDefaultAsync()
-            ?? throw new NotFoundException("Nie mozna znaleźć pryskania.");
+            ?? throw new NotFoundException("Nie można znaleźć pryskania.");
     }
     public async Task Add(Spraying entity)
     {
@@ -44,7 +44,7 @@ public class SprayingService(IFarmManagerContext context) : ISprayingService
     public async Task Delete(int id)
     {
         var entity = await context.Sprayings.FirstOrDefaultAsync(d => d.Id == id) ??
-            throw new NotFoundException("Nie mozna znaleźć pryskania.");
+            throw new NotFoundException("Nie można znaleźć pryskania.");
         entity.IsDeleted = true;
     }
     public async Task<ICollection<Spraying>> GetSprayingsInMonth(int year, int month)

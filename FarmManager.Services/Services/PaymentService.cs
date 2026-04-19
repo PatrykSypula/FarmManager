@@ -31,7 +31,7 @@ public class PaymentService(IFarmManagerContext context) : IPaymentService
             .Include(s => s.Employee)
             .Include(s => s.WorkdayQuantity)
             .Where(d => d.Id == id).FirstOrDefaultAsync()
-            ?? throw new NotFoundException("Nie mozna znaleźć wypłaty.");
+            ?? throw new NotFoundException("Nie można znaleźć wypłaty.");
     }
     public async Task Add(Payment entity)
     {
@@ -41,7 +41,7 @@ public class PaymentService(IFarmManagerContext context) : IPaymentService
     public async Task Delete(int id)
     {
         var entity = await context.Payments.FirstOrDefaultAsync(d => d.Id == id) ??
-            throw new NotFoundException("Nie mozna znaleźć wypłaty.");
+            throw new NotFoundException("Nie można znaleźć wypłaty.");
         entity.IsDeleted = true;
     }
 
@@ -98,14 +98,14 @@ public class PaymentService(IFarmManagerContext context) : IPaymentService
             if(item.WorkdayCollectingId != null)
             {
                 var workdayCollecting = await context.WorkdayCollecting.Where(w => w.Id == item.WorkdayCollectingId).FirstOrDefaultAsync()
-                ?? throw new NotFoundException("Nie mozna znaleźć dniówki zbiorczej.");
+                ?? throw new NotFoundException("Nie można znaleźć dniówki zbiorczej.");
                 workdayCollecting.RemainingToPay += item.Quantity;
                 continue;
             }
             if(item.WorkdayHourlyId != null)
             {
                 var workdayHourly = await context.WorkdayHourly.Where(w => w.Id == item.WorkdayHourlyId).FirstOrDefaultAsync()
-                ?? throw new NotFoundException("Nie mozna znaleźć dniówki godzinowej.");
+                ?? throw new NotFoundException("Nie można znaleźć dniówki godzinowej.");
                 workdayHourly.RemainingToPay += item.Quantity;
                 continue;
             }
@@ -133,7 +133,7 @@ public class PaymentService(IFarmManagerContext context) : IPaymentService
         foreach (var id in employeeCosts)
         {
             var employeeCost = await context.EmployeeCosts.Where(e => e.Id == id).FirstOrDefaultAsync()
-                ?? throw new NotFoundException("Nie mozna znaleźć kosztu pracownika.");
+                ?? throw new NotFoundException("Nie można znaleźć kosztu pracownika.");
             employeeCost.IsPaid = true;
         }
     }
@@ -142,7 +142,7 @@ public class PaymentService(IFarmManagerContext context) : IPaymentService
         foreach (var id in employeeCosts)
         {
             var employeeCost = await context.EmployeeCosts.Where(e => e.Id == id).FirstOrDefaultAsync()
-                ?? throw new NotFoundException("Nie mozna znaleźć kosztu pracownika.");
+                ?? throw new NotFoundException("Nie można znaleźć kosztu pracownika.");
             employeeCost.IsPaid = false;
         }
     }
@@ -151,7 +151,7 @@ public class PaymentService(IFarmManagerContext context) : IPaymentService
     {
         var employee = await context.Employees
             .FirstOrDefaultAsync(e => e.Id == employeeId)
-            ?? throw new NotFoundException("Nie mozna znaleźć pracownika.");
+            ?? throw new NotFoundException("Nie można znaleźć pracownika.");
 
         if (employee.IsRentable && employee.BaseRent != null)
         {

@@ -25,7 +25,7 @@ public class HarvestService(FarmManagerContext context) : IHarvestService
     public async Task<Harvest> Get(int id)
     {
         return await context.Harvests.AsNoTracking().Where(d => d.Id == id).FirstOrDefaultAsync()
-            ?? throw new NotFoundException("Nie mozna znaleźć zbioru.");
+            ?? throw new NotFoundException("Nie można znaleźć zbioru.");
     }
     public async Task<int> Add(Harvest entity)
     {
@@ -36,7 +36,7 @@ public class HarvestService(FarmManagerContext context) : IHarvestService
     public async Task Update(Harvest entity)
     {
         var existingEntity = await context.Harvests.FirstOrDefaultAsync(d => d.Id == entity.Id) ??
-            throw new NotFoundException("Nie mozna znaleźć zbioru.");
+            throw new NotFoundException("Nie można znaleźć zbioru.");
         existingEntity.CollectingQuantity = entity.CollectingQuantity;
         existingEntity.CollectingQuantityAdditional = entity.CollectingQuantityAdditional;
         existingEntity.HourlyQuantity = entity.HourlyQuantity;
@@ -47,7 +47,7 @@ public class HarvestService(FarmManagerContext context) : IHarvestService
     public async Task Delete(int id)
     {
         var entity = await context.Harvests.FirstOrDefaultAsync(d => d.Id == id) ??
-            throw new NotFoundException("Nie mozna znaleźć zbioru.");
+            throw new NotFoundException("Nie można znaleźć zbioru.");
         entity.IsDeleted = true;
     }
 }

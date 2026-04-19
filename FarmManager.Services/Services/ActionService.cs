@@ -25,7 +25,7 @@ public class ActionService(IFarmManagerContext context) : IActionService
     public async Task<Action> Get(int id)
     {
         return await context.Actions.AsNoTracking().Where(d => d.Id == id).FirstOrDefaultAsync()
-            ?? throw new NotFoundException("Nie mozna znaleźć czynności.");
+            ?? throw new NotFoundException("Nie można znaleźć czynności.");
     }
     public async Task Add(Action entity)
     {
@@ -34,7 +34,7 @@ public class ActionService(IFarmManagerContext context) : IActionService
     public async Task Update(Action entity)
     {
         var existingEntity = await context.Actions.FirstOrDefaultAsync(d => d.Id == entity.Id) ??
-            throw new NotFoundException("Nie mozna znaleźć czynności");
+            throw new NotFoundException("Nie można znaleźć czynności");
         existingEntity.Name = entity.Name;
         existingEntity.Description = entity.Description;
         existingEntity.IsActive = entity.IsActive;
@@ -42,7 +42,7 @@ public class ActionService(IFarmManagerContext context) : IActionService
     public async Task Delete(int id)
     {
         var entity = await context.Actions.FirstOrDefaultAsync(d => d.Id == id) ??
-            throw new NotFoundException("Nie mozna znaleźć czynności");
+            throw new NotFoundException("Nie można znaleźć czynności");
         entity.IsDeleted = true;
     }
 }

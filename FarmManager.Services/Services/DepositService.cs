@@ -26,7 +26,7 @@ public class DepositService(IFarmManagerContext context) : IDepositService
     public async Task<Deposit> Get(int id)
     {
         return await context.Deposits.AsNoTracking().Where(d => d.Id == id).FirstOrDefaultAsync()
-            ?? throw new NotFoundException("Nie mozna znaleźć depozytu.");
+            ?? throw new NotFoundException("Nie można znaleźć kupca.");
     }
     public async Task Add(Deposit entity)
     {
@@ -36,7 +36,7 @@ public class DepositService(IFarmManagerContext context) : IDepositService
     public async Task Update(Deposit entity)
     {
         var existingEntity = await context.Deposits.FirstOrDefaultAsync(d => d.Id == entity.Id) ??
-            throw new NotFoundException("Nie mozna znaleźć depozytu.");
+            throw new NotFoundException("Nie można znaleźć kupca.");
         existingEntity.Name = entity.Name;
         existingEntity.PhoneNumber = entity.PhoneNumber;
         existingEntity.Email = entity.Email;
@@ -46,7 +46,7 @@ public class DepositService(IFarmManagerContext context) : IDepositService
     public async Task Delete(int id)
     {
         var entity = await context.Deposits.FirstOrDefaultAsync(d => d.Id == id) ??
-            throw new NotFoundException("Nie mozna znaleźć depozytu.");
+            throw new NotFoundException("Nie można znaleźć kupca.");
         entity.IsDeleted = true;
     }
 }

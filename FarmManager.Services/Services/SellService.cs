@@ -33,7 +33,7 @@ public class SellService(IFarmManagerContext context) : ISellService
             .Include(s => s.Plant)
             .Include(s => s.HarvestQuantity)
             .Where(d => d.Id == id).FirstOrDefaultAsync()
-            ?? throw new NotFoundException("Nie mozna znaleźć sprzedaży.");
+            ?? throw new NotFoundException("Nie można znaleźć sprzedaży.");
     }
     public async Task Add(Sell entity)
     {
@@ -43,7 +43,7 @@ public class SellService(IFarmManagerContext context) : ISellService
     public async Task Delete(int id)
     {
         var entity = await context.Sells.FirstOrDefaultAsync(d => d.Id == id) ??
-            throw new NotFoundException("Nie mozna znaleźć sprzedaży.");
+            throw new NotFoundException("Nie można znaleźć sprzedaży.");
         entity.IsDeleted = true;
     }
     public async Task<ICollection<SellHarvestQuantity>> AdjustRemainingQuantity(decimal quantityChange, int plantId)
@@ -143,7 +143,7 @@ public class SellService(IFarmManagerContext context) : ISellService
         foreach (var item in harvestQuantities)
         {
             var harvest = await context.Harvests.Where(b => b.Id == item.HarvestId).FirstOrDefaultAsync()
-                ?? throw new NotFoundException("Nie mozna znaleźć zbioru.");
+                ?? throw new NotFoundException("Nie można znaleźć zbioru.");
             if(item.HourlyQuantity != null)
             {
                 harvest.RemainingHourlyQuantity += item.HourlyQuantity ?? 00m;

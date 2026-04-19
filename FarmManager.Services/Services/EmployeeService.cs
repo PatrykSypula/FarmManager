@@ -25,7 +25,7 @@ public class EmployeeService(IFarmManagerContext context) : IEmployeeService
     public async Task<Employee> Get(int id)
     {
         return await context.Employees.AsNoTracking().Where(d => d.Id == id).FirstOrDefaultAsync()
-            ?? throw new NotFoundException("Nie mozna znaleźć pracownika.");
+            ?? throw new NotFoundException("Nie można znaleźć pracownika.");
     }
     public async Task Add(Employee entity)
     {
@@ -34,7 +34,7 @@ public class EmployeeService(IFarmManagerContext context) : IEmployeeService
     public async Task Update(Employee entity)
     {
         var existingEntity = await context.Employees.FirstOrDefaultAsync(d => d.Id == entity.Id) ??
-            throw new NotFoundException("Nie mozna znaleźć pracownika");
+            throw new NotFoundException("Nie można znaleźć pracownika");
         existingEntity.FirstName = entity.FirstName;
         existingEntity.LastName = entity.LastName;
         existingEntity.Description = entity.Description;
@@ -47,7 +47,7 @@ public class EmployeeService(IFarmManagerContext context) : IEmployeeService
     public async Task Delete(int id)
     {
         var entity = await context.Employees.FirstOrDefaultAsync(d => d.Id == id) ??
-            throw new NotFoundException("Nie mozna znaleźć pracownika");
+            throw new NotFoundException("Nie można znaleźć pracownika");
         entity.IsDeleted = true;
     }
 

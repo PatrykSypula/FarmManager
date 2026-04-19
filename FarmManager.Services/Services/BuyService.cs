@@ -27,7 +27,7 @@ public class BuyService(IFarmManagerContext context) : IBuyService
     public async Task<Buy> Get(int id)
     {
         return await context.Buys.AsNoTracking().Where(d => d.Id == id).FirstOrDefaultAsync()
-            ?? throw new NotFoundException("Nie mozna znaleźć zakupu.");
+            ?? throw new NotFoundException("Nie można znaleźć zakupu.");
     }
     public async Task Add(Buy entity)
     {
@@ -37,7 +37,7 @@ public class BuyService(IFarmManagerContext context) : IBuyService
     public async Task Update(Buy entity)
     {
         var existingEntity = await context.Buys.FirstOrDefaultAsync(d => d.Id == entity.Id) ??
-            throw new NotFoundException("Nie mozna znaleźć zakupu.");
+            throw new NotFoundException("Nie można znaleźć zakupu.");
         existingEntity.Name = entity.Name;
         existingEntity.Description = entity.Description;
         existingEntity.Price = entity.Price;
@@ -48,7 +48,7 @@ public class BuyService(IFarmManagerContext context) : IBuyService
     public async Task Delete(int id)
     {
         var entity = await context.Buys.FirstOrDefaultAsync(d => d.Id == id) ??
-            throw new NotFoundException("Nie mozna znaleźć zakupu.");
+            throw new NotFoundException("Nie można znaleźć zakupu.");
         entity.IsDeleted = true;
     }
 
@@ -100,7 +100,7 @@ public class BuyService(IFarmManagerContext context) : IBuyService
         foreach (var item in buyQuantities)
         {
             var buy = await context.Buys.Where(b => b.Id == item.BuyId).FirstOrDefaultAsync()
-                ?? throw new NotFoundException("Nie mozna znaleźć zakupu.");
+                ?? throw new NotFoundException("Nie można znaleźć zakupu.");
             buy.RemainingQuantity += item.Quantity;
         }
     }

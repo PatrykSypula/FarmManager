@@ -40,7 +40,7 @@ public class WorkdayService(FarmManagerContext context) : IWorkdayService
     public async Task Update(Workday entity)
     {
         var existingEntity = await context.Workdays.FirstOrDefaultAsync(d => d.Id == entity.Id) ??
-            throw new NotFoundException("Nie mozna znaleźć choroby");
+            throw new NotFoundException("Nie można znaleźć dnia pracy.");
         existingEntity.Description = entity.Description;
         existingEntity.WorkdaysHourly = entity.WorkdaysHourly;
         existingEntity.WorkdaysCollecting = entity.WorkdaysCollecting;

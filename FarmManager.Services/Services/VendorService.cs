@@ -26,7 +26,7 @@ public class VendorService(IFarmManagerContext context) : IVendorService
     public async Task<Vendor> Get(int id)
     {
         return await context.Vendors.AsNoTracking().Where(d => d.Id == id).FirstOrDefaultAsync()
-            ?? throw new NotFoundException("Nie mozna znaleźć sprzedawcy.");
+            ?? throw new NotFoundException("Nie można znaleźć sprzedawcy.");
     }
     public async Task Add(Vendor entity)
     {
@@ -36,7 +36,7 @@ public class VendorService(IFarmManagerContext context) : IVendorService
     public async Task Update(Vendor entity)
     {
         var existingEntity = await context.Vendors.FirstOrDefaultAsync(d => d.Id == entity.Id) ??
-            throw new NotFoundException("Nie mozna znaleźć sprzedawcy.");
+            throw new NotFoundException("Nie można znaleźć sprzedawcy.");
         existingEntity.Name = entity.Name;
         existingEntity.PhoneNumber = entity.PhoneNumber;
         existingEntity.Email = entity.Email;
@@ -46,7 +46,7 @@ public class VendorService(IFarmManagerContext context) : IVendorService
     public async Task Delete(int id)
     {
         var entity = await context.Vendors.FirstOrDefaultAsync(d => d.Id == id) ??
-            throw new NotFoundException("Nie mozna znaleźć sprzedawcy.");
+            throw new NotFoundException("Nie można znaleźć sprzedawcy.");
         entity.IsDeleted = true;
     }
 }

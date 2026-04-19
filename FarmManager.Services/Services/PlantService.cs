@@ -24,7 +24,7 @@ public class PlantService(IFarmManagerContext context) : IPlantService
     public async Task<Plant> Get(int id)
     {
         return await context.Plants.AsNoTracking().Where(d => d.Id == id).FirstOrDefaultAsync()
-            ?? throw new NotFoundException("Nie mozna znaleźć rośliny.");
+            ?? throw new NotFoundException("Nie można znaleźć rośliny.");
     }
     public async Task Add(Plant entity)
     {
@@ -34,7 +34,7 @@ public class PlantService(IFarmManagerContext context) : IPlantService
     public async Task Update(Plant entity)
     {
         var existingEntity = await context.Plants.FirstOrDefaultAsync(d => d.Id == entity.Id) ??
-            throw new NotFoundException("Nie mozna znaleźć rośliny.");
+            throw new NotFoundException("Nie można znaleźć rośliny.");
         existingEntity.Name = entity.Name;
         existingEntity.Description = entity.Description;
         existingEntity.IsActive = entity.IsActive;
@@ -42,7 +42,7 @@ public class PlantService(IFarmManagerContext context) : IPlantService
     public async Task Delete(int id)
     {
         var entity = await context.Plants.FirstOrDefaultAsync(d => d.Id == id) ??
-            throw new NotFoundException("Nie mozna znaleźć rośliny.");
+            throw new NotFoundException("Nie można znaleźć rośliny.");
         entity.IsDeleted = true;
     }
     public async Task<decimal> GetQuantity(int plantId)

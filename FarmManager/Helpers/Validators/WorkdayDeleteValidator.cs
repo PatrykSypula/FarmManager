@@ -13,7 +13,7 @@ public class WorkdayDeleteValidator : AbstractValidator<Workday>
                 h.RemainingQuantityAdditional == h.CollectingQuantityAdditional &&
                 h.RemainingHourlyQuantity == h.HourlyQuantity
             ))
-            .WithMessage("Nie można usunąć dnia pracy, ponieważ niektóre zbiory zostały już sprzedane.");
+            .WithMessage("Nie można usunąć dnia pracy, ponieważ zbiory zostały już sprzedane.");
 
         RuleFor(workday => workday.WorkdaysCollecting)
             .Cascade(CascadeMode.Stop)

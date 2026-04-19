@@ -7,6 +7,6 @@ public class BuyDeleteValidator : AbstractValidator<Buy>
 {
     public BuyDeleteValidator()
     {
-        RuleFor(buy => buy.RemainingQuantity).Equal(buy => buy.Quantity).WithMessage("Nie można usunąć zakupu który został już użyty.\nNależy najpierw usunąć pryskania.");
+        RuleFor(buy => buy.RemainingQuantity).Equal(buy => buy.Quantity).WithMessage("Nie można usunąć zakupionego produktu ponieważ został już użyty.\nNależy najpierw usunąć pryskanie, które go użyło.");
     }
 }

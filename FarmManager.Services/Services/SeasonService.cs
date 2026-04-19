@@ -26,7 +26,7 @@ public class SeasonService(IFarmManagerContext context) : ISeasonService
     public async Task<Season> Get(int id)
     {
         return await context.Seasons.AsNoTracking().Where(d => d.Id == id).FirstOrDefaultAsync()
-            ?? throw new NotFoundException("Nie mozna znaleźć sezonu.");
+            ?? throw new NotFoundException("Nie można znaleźć sezonu.");
     }
     public async Task Add(Season entity)
     {
@@ -36,7 +36,7 @@ public class SeasonService(IFarmManagerContext context) : ISeasonService
     public async Task Update(Season entity)
     {
         var existingEntity = await context.Seasons.FirstOrDefaultAsync(d => d.Id == entity.Id) ??
-            throw new NotFoundException("Nie mozna znaleźć sezonu.");
+            throw new NotFoundException("Nie można znaleźć sezonu.");
         existingEntity.Name = entity.Name;
         existingEntity.Description = entity.Description;
         existingEntity.StartDate = entity.StartDate;
@@ -47,7 +47,7 @@ public class SeasonService(IFarmManagerContext context) : ISeasonService
     public async Task Delete(int id)
     {
         var entity = await context.Seasons.FirstOrDefaultAsync(d => d.Id == id) ??
-            throw new NotFoundException("Nie mozna znaleźć sezonu.");
+            throw new NotFoundException("Nie można znaleźć sezonu.");
         entity.IsDeleted = true;
     }
 }
