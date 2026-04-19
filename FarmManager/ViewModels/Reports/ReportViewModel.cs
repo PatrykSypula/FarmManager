@@ -36,27 +36,15 @@ public class ReportViewModel(IReportService reportService) : BaseViewModel
         }
     }
 
-    public DateOnly StartDate
+    public string Duration
     {
         get
         {
-            return Model.Report.StartDate;
+            return Model.Report.Duration;
         }
         set
         {
-            Model.Report.StartDate = value;
-            OnPropertyChanged();
-        }
-    }
-    public DateOnly EndDate
-    {
-        get
-        {
-            return Model.Report.EndDate;
-        }
-        set
-        {
-            Model.Report.EndDate = value;
+            Model.Report.Duration = value;
             OnPropertyChanged();
         }
     }
@@ -108,6 +96,31 @@ public class ReportViewModel(IReportService reportService) : BaseViewModel
             OnPropertyChanged();
         }
     }
+    public decimal Investment
+    {
+        get
+        {
+            return Model.Report.Investment;
+        }
+        set
+        {
+            Model.Report.Investment = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public decimal CountedInvestment
+    {
+        get
+        {
+            return Model.Report.CountedInvestment;
+        }
+        set
+        {
+            Model.Report.CountedInvestment = value;
+            OnPropertyChanged();
+        }
+    }
     public decimal CountedIncome
     {
         get
@@ -126,12 +139,13 @@ public class ReportViewModel(IReportService reportService) : BaseViewModel
         Model.Report = await reportService.GenerateReport(id);
         OnPropertyChanged(nameof(SeasonName));
         OnPropertyChanged(nameof(PlantName));
-        OnPropertyChanged(nameof(StartDate));
-        OnPropertyChanged(nameof(EndDate));
+        OnPropertyChanged(nameof(Duration));
         OnPropertyChanged(nameof(EmployeeEarnings));
         OnPropertyChanged(nameof(Rent));
         OnPropertyChanged(nameof(Income));
         OnPropertyChanged(nameof(SprayingCost));
+        OnPropertyChanged(nameof(Investment));
+        OnPropertyChanged(nameof(CountedInvestment));
         OnPropertyChanged(nameof(CountedIncome));
     }
 

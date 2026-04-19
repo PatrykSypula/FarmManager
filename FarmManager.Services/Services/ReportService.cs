@@ -70,16 +70,23 @@ public class ReportService(IFarmManagerContext context) : IReportService
             totalRent += uniqueWorkdays * rentPerDay;
         }
 
+        var investments = await context.Investments
+            .Where(i => i.Date >= season.StartDate && i.Date <= season.EndDate && i.PlantId == season.PlantId)
+            .ToListAsync();
+
+        var investmentCost = investments.Sum(s => s.Price);
+
         return new Report
         {
             SeasonName = season.Name,
             PlantName = season.Plant.Name,
-            StartDate = season.StartDate,
-            EndDate = season.EndDate,
+            Duration = season.StartDate.ToString() + " - " + season.EndDate.ToString(),
             EmployeeEarnings = employeeEarnings,
             Rent = totalRent,
             SprayingCost = sprayingCost,
+            Investment = investmentCost,
             Income = income,
+            CountedInvestment = income - (employeeEarnings + totalRent + sprayingCost + investmentCost),
             CountedIncome = income - (employeeEarnings + totalRent + sprayingCost)
         };
     }

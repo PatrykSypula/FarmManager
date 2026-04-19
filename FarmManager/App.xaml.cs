@@ -7,6 +7,7 @@ using FarmManager.App.ViewModels.Deposits;
 using FarmManager.App.ViewModels.EmployeeCosts;
 using FarmManager.App.ViewModels.Employees;
 using FarmManager.App.ViewModels.Fertilizers;
+using FarmManager.App.ViewModels.Investments;
 using FarmManager.App.ViewModels.Payments;
 using FarmManager.App.ViewModels.Plants;
 using FarmManager.App.ViewModels.Reports;
@@ -24,6 +25,7 @@ using FarmManager.App.Views.Deposits;
 using FarmManager.App.Views.EmployeeCosts;
 using FarmManager.App.Views.Employees;
 using FarmManager.App.Views.Fertilizers;
+using FarmManager.App.Views.Investments;
 using FarmManager.App.Views.Payments;
 using FarmManager.App.Views.Plants;
 using FarmManager.App.Views.Reports;
@@ -154,6 +156,12 @@ public partial class MyApp : Application
                 services.AddTransient<ReportsWindow>();
                 services.AddTransient<ReportWindow>();
 
+                //Investments
+                services.AddTransient<InvestmentsWindow>();
+                services.AddTransient<InvestmentAddWindow>();
+                services.AddTransient<InvestmentEditWindow>();
+
+
                 #endregion
 
 
@@ -251,6 +259,11 @@ public partial class MyApp : Application
                 services.AddTransient<ReportsViewModel>();
                 services.AddTransient<ReportViewModel>();
 
+                //Investments
+                services.AddTransient<InvestmentsViewModel>();
+                services.AddTransient<InvestmentAddViewModel>();
+                services.AddTransient<InvestmentEditViewModel>();
+
 
                 #endregion
 
@@ -274,6 +287,7 @@ public partial class MyApp : Application
                 services.AddScoped<ISellService, SellService>();
                 services.AddScoped<IPaymentService, PaymentService>();
                 services.AddScoped<IReportService, ReportService>();
+                services.AddScoped<IInvestmentService, InvestmentService>();
 
                 //Service Prodiver
                 ServiceProvider = services.BuildServiceProvider();

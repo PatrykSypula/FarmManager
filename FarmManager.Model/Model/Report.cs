@@ -4,8 +4,7 @@ public class Report
 {
     public string SeasonName { get; set; } = string.Empty;
     public string PlantName { get; set; } = string.Empty;
-    public DateOnly StartDate { get; set; }
-    public DateOnly EndDate { get; set; }
+    public string Duration { get; set; } = string.Empty;
     private decimal _employeeEarnings;
     public decimal EmployeeEarnings
     {
@@ -32,6 +31,20 @@ public class Report
     {
         get => _sprayingCost;
         set => _sprayingCost = Math.Round(value, 2);
+    }
+
+    private decimal _investment;
+    public decimal Investment
+    {
+        get => _investment;
+        set => _investment = Math.Round(value, 2);
+    }
+
+    private decimal _countedInvestment;
+    public decimal CountedInvestment
+    {
+        get => _countedInvestment;
+        set => _countedInvestment = Math.Round(value, 2);
     }
 
     private decimal _countedIncome;

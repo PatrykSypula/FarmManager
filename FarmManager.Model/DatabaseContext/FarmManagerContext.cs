@@ -14,6 +14,7 @@ public class FarmManagerContext(DbContextOptions<FarmManagerContext> options) : 
     public DbSet<EmployeeCost> EmployeeCosts { get; set; }
     public DbSet<Fertilizer> Fertilizers { get; set; }
     public DbSet<Harvest> Harvests { get; set; }
+    public DbSet<Investment> Investments { get; set; }
     public DbSet<Payment> Payments { get; set; }
     public DbSet<PaymentWorkdayQuantity> PaymentWorkdayQuantitys { get; set; }
     public DbSet<Plant> Plants { get; set; }

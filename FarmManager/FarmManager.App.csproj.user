@@ -78,6 +78,15 @@
     <Compile Update="Views\Fertilizers\FertilizersWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\Investments\InvestmentAddWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Investments\InvestmentEditWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Investments\InvestmentsWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Payments\PaymentAddWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

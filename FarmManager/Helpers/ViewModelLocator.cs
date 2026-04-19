@@ -6,6 +6,7 @@ using FarmManager.App.ViewModels.Deposits;
 using FarmManager.App.ViewModels.EmployeeCosts;
 using FarmManager.App.ViewModels.Employees;
 using FarmManager.App.ViewModels.Fertilizers;
+using FarmManager.App.ViewModels.Investments;
 using FarmManager.App.ViewModels.Payments;
 using FarmManager.App.ViewModels.Plants;
 using FarmManager.App.ViewModels.Reports;
@@ -175,5 +176,13 @@ public class ViewModelLocator
         MyApp.ServiceProvider.GetRequiredService<ReportsViewModel>();
     public ReportViewModel ReportViewModel =>
         MyApp.ServiceProvider.GetRequiredService<ReportViewModel>();
+
+    //Investments
+        public InvestmentsViewModel InvestmentsViewModel =>
+            MyApp.ServiceProvider.GetRequiredService<InvestmentsViewModel>();
+        public InvestmentAddViewModel InvestmentAddViewModel =>
+            MyApp.ServiceProvider.GetRequiredService<InvestmentAddViewModel>();
+        public InvestmentEditViewModel InvestmentEditViewModel =>
+            MyApp.ServiceProvider.GetRequiredService<InvestmentEditViewModel>();
 
 }

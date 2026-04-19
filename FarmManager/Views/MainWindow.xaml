@@ -32,6 +32,7 @@
             <MenuItem Header="Rośliny i sprzedaż" FontSize="20">
                 <MenuItem Header="Sprzedaż" Command="{Binding Sells}" FontSize="20" />
                 <MenuItem Header="Sezony" Command="{Binding Seasons}" FontSize="20" />
+                <MenuItem Header="Inwestycje" Command="{Binding Investments}" FontSize="20" />
                 <Separator />
                 <MenuItem Header="Rośliny" Command="{Binding Plants}" FontSize="20" />
                 <MenuItem Header="Kupcy" Command="{Binding Deposits}" FontSize="20" />

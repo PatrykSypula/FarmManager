@@ -66,6 +66,11 @@ public class PlantService(IFarmManagerContext context) : IPlantService
             return new DeletionResult() { DidDelete = false, Message = "Nie można usunąć rośliny, ponieważ jest ona powiązana z istniejącym sezonem. Rozważ zaznaczenie jej jako nieaktywnej." };
         }
 
+        var investment = await context.Investments.FirstOrDefaultAsync(d => d.PlantId == id);
+        if (investment != null) {
+            return new DeletionResult() { DidDelete = false, Message = "Nie można usunąć rośliny, ponieważ jest ona powiązana z istniejącą inwestycją. Rozważ zaznaczenie jej jako nieaktywnej." };
+        }
+
         return new DeletionResult() { DidDelete = true, Message = "Roślina została pomyślnie usunięta." };
     }
     public async Task<decimal> GetQuantity(int plantId)

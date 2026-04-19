@@ -200,6 +200,32 @@ namespace FarmManager.Model.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Investments",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    PlantId = table.Column<int>(type: "integer", nullable: false),
+                    Price = table.Column<decimal>(type: "numeric", nullable: false),
+                    Date = table.Column<DateOnly>(type: "date", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
+                    IsActive = table.Column<bool>(type: "boolean", nullable: false),
+                    Created = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Investments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Investments_Plants_PlantId",
+                        column: x => x.PlantId,
+                        principalTable: "Plants",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Seasons",
                 columns: table => new
                 {
@@ -517,6 +543,11 @@ namespace FarmManager.Model.Migrations
                 column: "EmployeeId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Investments_PlantId",
+                table: "Investments",
+                column: "PlantId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Payments_EmployeeId",
                 table: "Payments",
                 column: "EmployeeId");
@@ -606,6 +637,9 @@ namespace FarmManager.Model.Migrations
 
             migrationBuilder.DropTable(
                 name: "EmployeeCosts");
+
+            migrationBuilder.DropTable(
+                name: "Investments");
 
             migrationBuilder.DropTable(
                 name: "PaymentWorkdayQuantitys");

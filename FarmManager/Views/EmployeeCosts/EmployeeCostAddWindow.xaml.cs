@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using FarmManager.App.ViewModels.EmployeeCosts;
-using FarmManager.App.ViewModels.Seasons;
 using FarmManager.Model.Model;
 
 namespace FarmManager.App.Views.EmployeeCosts;
