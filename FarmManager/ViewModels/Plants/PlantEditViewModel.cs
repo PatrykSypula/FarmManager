@@ -84,10 +84,17 @@ public class PlantEditViewModel(IPlantService plantServive, IUnitOfWork unitOfWo
         var result = new CustomMessageBoxYesNo("Czy na pewno chcesz usunąć tą roślinę?").ShowDialog();
         if (result == true)
         {
-            await plantServive.Delete(Model.Plant.Id);
-            Model.Plant.IsDeleted = true;
-            await unitOfWork.SaveChangesAsync();
-            RequestClose?.Invoke(Model.Plant);
+            var deletionResult = await plantServive.Delete(Model.Plant.Id);
+            if (deletionResult.DidDelete)
+            {
+                Model.Plant.IsDeleted = true;
+                await unitOfWork.SaveChangesAsync();
+                RequestClose?.Invoke(Model.Plant);
+            }
+            else
+            {
+                new CustomMessageBoxOk(deletionResult.Message).ShowDialog();
+            }
         }
     }
 

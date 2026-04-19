@@ -140,10 +140,17 @@ public class EmployeeEditViewModel(IEmployeeService employeeService, IUnitOfWork
         var result = new CustomMessageBoxYesNo("Czy na pewno chcesz usunąć tego pracownika?").ShowDialog();
         if (result == true)
         {
-            await employeeService.Delete(Model.Employee.Id);
-            Model.Employee.IsDeleted = true;
-            await unitOfWork.SaveChangesAsync();
-            RequestClose?.Invoke(Model.Employee);
+            var deletionResult = await employeeService.Delete(Model.Employee.Id);
+            if (deletionResult.DidDelete)
+            {
+                Model.Employee.IsDeleted = true;
+                await unitOfWork.SaveChangesAsync();
+                RequestClose?.Invoke(Model.Employee);
+            }
+            else
+            {
+                new CustomMessageBoxOk(deletionResult.Message).ShowDialog();
+            }
         }
     }
 

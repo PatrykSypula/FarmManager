@@ -1,4 +1,5 @@
-﻿using FarmManager.Model.Model;
+﻿using FarmManager.Model.Exceptions;
+using FarmManager.Model.Model;
 
 namespace FarmManager.Services.Interfaces;
 
@@ -8,5 +9,5 @@ public interface IVendorService
     Task<Vendor> Get(int id);
     Task Add(Vendor entity);
     Task Update(Vendor entity);
-    Task Delete(int id);
+    Task<DeletionResult> Delete(int id);
 }

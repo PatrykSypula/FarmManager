@@ -1,6 +1,7 @@
 ﻿using FarmManager.App.Helpers;
 using FarmManager.App.Models.Deposits;
 using FarmManager.App.Views;
+using FarmManager.Model.Exceptions;
 using FarmManager.Model.Model;
 using FarmManager.Model.UnitOfWork;
 using FarmManager.Services.Interfaces;
@@ -95,10 +96,17 @@ public class DepositEditViewModel(IDepositService depositService, IUnitOfWork un
         var result = new CustomMessageBoxYesNo("Czy na pewno chcesz usunąć ten depozyt?").ShowDialog();
         if (result == true)
         {
-            await depositService.Delete(Model.Deposit.Id);
-            Model.Deposit.IsDeleted = true;
-            await unitOfWork.SaveChangesAsync();
-            RequestClose?.Invoke(Model.Deposit);
+            var deletionResult = await depositService.Delete(Model.Deposit.Id);
+            if (deletionResult.DidDelete)
+            {
+                Model.Deposit.IsDeleted = true;
+                await unitOfWork.SaveChangesAsync();
+                RequestClose?.Invoke(Model.Deposit);
+            }
+            else
+            {
+                new CustomMessageBoxOk(deletionResult.Message).ShowDialog();
+            }
         }
     }
 

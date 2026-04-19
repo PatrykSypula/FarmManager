@@ -43,10 +43,19 @@ public class VendorService(IFarmManagerContext context) : IVendorService
         existingEntity.Description = entity.Description;
         existingEntity.IsActive = entity.IsActive;
     }
-    public async Task Delete(int id)
+    public async Task<DeletionResult> Delete(int id)
     {
         var entity = await context.Vendors.FirstOrDefaultAsync(d => d.Id == id) ??
             throw new NotFoundException("Nie można znaleźć sprzedawcy.");
+
+        var buy = await context.Buys.FirstOrDefaultAsync(d => d.VendorId == id);
+        if (buy != null)
+        {
+            return new DeletionResult() { DidDelete = false, Message = "Nie można usunąć sprzedawcy, ponieważ jest powiązany z zakupami. Rozważ zaznaczenie go jako nieaktywnego." };
+        }
+
         entity.IsDeleted = true;
+
+        return new DeletionResult() { DidDelete = true, Message = "Sprzedawca został pomyślnie usunięty." };
     }
 }

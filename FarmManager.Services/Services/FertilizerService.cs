@@ -41,11 +41,26 @@ public class FertilizerService(IFarmManagerContext context) : IFertilizerService
         existingEntity.Description = entity.Description;
         existingEntity.IsActive = entity.IsActive;
     }
-    public async Task Delete(int id)
+    public async Task<DeletionResult> Delete(int id)
     {
         var entity = await context.Fertilizers.FirstOrDefaultAsync(d => d.Id == id) ??
             throw new NotFoundException("Nie można znaleźć nawozu.");
+
+        var buy = await context.Buys.FirstOrDefaultAsync(d => d.FertilizerId == id);
+        if (buy != null)
+        {
+            return new DeletionResult() { DidDelete = false, Message = "Nie można usunąć nawozu, ponieważ jest powiązany z zakupami. Rozważ zaznaczenie go jako nieaktywnego." };
+        }
+
+        var spraying = await context.Sprayings.FirstOrDefaultAsync(d => d.FertilizerId == id);
+        if (spraying != null)
+        {
+            return new DeletionResult() { DidDelete = false, Message = "Nie można usunąć nawozu, ponieważ jest powiązany z pryskaniami. Rozważ zaznaczenie go jako nieaktywnego." };
+        }
+
         entity.IsDeleted = true;
+
+        return new DeletionResult() { DidDelete = true, Message = "Nawóz został pomyślnie usunięty." };  
     }
 
     public async Task<decimal> GetAvailableQuantity(int fertilizerId)

@@ -85,10 +85,17 @@ public class FertilizerEditViewModel(IFertilizerService fertilizerService, IUnit
         var result = new CustomMessageBoxYesNo("Czy na pewno chcesz usunąć ten nawóz?").ShowDialog();
         if (result == true)
         {
-            await fertilizerService.Delete(Model.Fertilizer.Id);
-            Model.Fertilizer.IsDeleted = true;
-            await unitOfWork.SaveChangesAsync();
-            RequestClose?.Invoke(Model.Fertilizer);
+            var deletionResult = await fertilizerService.Delete(Model.Fertilizer.Id);
+            if (deletionResult.DidDelete)
+            {
+                Model.Fertilizer.IsDeleted = true;
+                await unitOfWork.SaveChangesAsync();
+                RequestClose?.Invoke(Model.Fertilizer);
+            }
+            else
+            {
+                new CustomMessageBoxOk(deletionResult.Message).ShowDialog();
+            }
         }
     }
 

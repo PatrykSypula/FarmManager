@@ -121,32 +121,16 @@ public class BuyEditViewModel(IBuyService buyService, IVendorService vendorServi
             {
                 await buyService.Delete(Model.Buy.Id);
                 Model.Buy.IsDeleted = true;
-                //await fertilizerService.AddQuantity(Model.Fertilizer.Id, -Model.Buy.RemainingQuantity);
                 await unitOfWork.SaveChangesAsync();
                 RequestClose?.Invoke(Model.Buy);
             }
         }
     }
 
-    // The logic behind updating a buy is complex due to the need to adjust fertilizer quantity based on changes.
-    // Possibly to uncomment that to implement at least editing description.
-
     public RelayCommand Update => new RelayCommand(async execute => await UpdateBuyAsync());
     private async Task UpdateBuyAsync()
     {
-        new CustomMessageBoxOk("Edycja zakupu jest obecnie niedostępna ze względu na złożoność związaną z zużywaniem zakupionego produktu.\nWszekie poprawiki należy rozwiązywać dodawaniem kolejnych zakupów lub ich usuwaniem.").ShowDialog();
-        //BuyValidator validator = new BuyValidator();
-        //Model.Buy.Description = string.IsNullOrEmpty(Model.Buy.Description) ? null : Model.Buy.Description;
-        //var result = validator.Validate(Model.Buy);
-        //if (!result.IsValid)
-        //{
-        //    new CustomMessageBoxOk(result).ShowDialog();
-        //}
-        //else
-        //{
-        //    await buyService.Update(Model.Buy);
-        //    RequestClose?.Invoke(Model.Buy);
-        //}
+        new CustomMessageBoxOk("Edycja zakupu jest obecnie niedostępna ze względu na złożoność związaną z zużywaniem zakupionego produktu.\nWszekie poprawki należy rozwiązywać dodawaniem kolejnych zakupów lub ich usuwaniem.").ShowDialog();
     }
 
     public RelayCommand OpenFertilizer => new RelayCommand(execute => OpenSelectFertilizerAsync());

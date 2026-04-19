@@ -44,11 +44,37 @@ public class EmployeeService(IFarmManagerContext context) : IEmployeeService
         existingEntity.Nickname = entity.Nickname;
         existingEntity.IsActive = entity.IsActive;
     }
-    public async Task Delete(int id)
+    public async Task<DeletionResult> Delete(int id)
     {
         var entity = await context.Employees.FirstOrDefaultAsync(d => d.Id == id) ??
             throw new NotFoundException("Nie można znaleźć pracownika");
         entity.IsDeleted = true;
+
+        var employeeCost = await context.EmployeeCosts.Where(ec => ec.EmployeeId == id).FirstOrDefaultAsync();
+        if (employeeCost != null)
+        {
+            return new DeletionResult() { DidDelete = false, Message = "Nie można usunąć pracownika, ponieważ jest on powiązany z pożyczkami. Rozważ zaznaczenie go jako nieaktywnego." };
+        }
+
+        var payment = await context.Payments.Where(p => p.EmployeeId == id).FirstOrDefaultAsync();
+        if (payment != null)
+        {
+            return new DeletionResult() { DidDelete = false, Message = "Nie można usunąć pracownika, ponieważ jest on powiązany z wypłatami. Rozważ zaznaczenie go jako nieaktywnego." };
+        }
+
+        var workdayCollecting = await context.WorkdayCollecting.Where(wc => wc.EmployeeId == id).FirstOrDefaultAsync();
+        if (workdayCollecting != null)
+        {
+            return new DeletionResult() { DidDelete = false, Message = "Nie można usunąć pracownika, ponieważ jest on powiązany z dniami pracy. Rozważ zaznaczenie go jako nieaktywnego." };
+        }
+
+        var workdayHourly = await context.WorkdayHourly.Where(wh => wh.EmployeeId == id).FirstOrDefaultAsync();
+        if (workdayHourly != null)
+        {
+            return new DeletionResult() { DidDelete = false, Message = "Nie można usunąć pracownika, ponieważ jest on powiązany z dniami pracy. Rozważ zaznaczenie go jako nieaktywnego." };
+        }
+
+        return new DeletionResult() { DidDelete = true, Message = "Pracownik został pomyślnie usunięty." };
     }
 
     public async Task<ICollection<Employee>> GetActiveForWorkday(IEnumerable<int> ids)

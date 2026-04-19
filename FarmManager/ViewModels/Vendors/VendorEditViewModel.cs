@@ -97,10 +97,17 @@ public class VendorEditViewModel(IVendorService vendorService, IUnitOfWork unitO
         var result = new CustomMessageBoxYesNo("Czy na pewno chcesz usunąć tego sprzedawcę?").ShowDialog();
         if (result == true)
         {
-            await vendorService.Delete(Model.Vendor.Id);
-            Model.Vendor.IsDeleted = true;
-            await unitOfWork.SaveChangesAsync();
-            RequestClose?.Invoke(Model.Vendor);
+            var deletionResult = await vendorService.Delete(Model.Vendor.Id);
+            if (deletionResult.DidDelete)
+            {
+                Model.Vendor.IsDeleted = true;
+                await unitOfWork.SaveChangesAsync();
+                RequestClose?.Invoke(Model.Vendor);
+            }
+            else
+            {
+                new CustomMessageBoxOk(deletionResult.Message).ShowDialog();
+            }
         }
     }
 

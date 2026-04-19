@@ -43,10 +43,18 @@ public class DepositService(IFarmManagerContext context) : IDepositService
         existingEntity.Description = entity.Description;
         existingEntity.IsActive = entity.IsActive;
     }
-    public async Task Delete(int id)
+    public async Task<DeletionResult> Delete(int id)
     {
         var entity = await context.Deposits.FirstOrDefaultAsync(d => d.Id == id) ??
             throw new NotFoundException("Nie można znaleźć kupca.");
+
+        var sell = await context.Sells.FirstOrDefaultAsync(d => d.DepositId == id);
+        if (sell != null)
+        {
+            return new DeletionResult() { DidDelete = false, Message = "Nie można usunąć kupca, ponieważ jest powiązany z sprzedażami. Rozważ zaznaczenie go jako nieaktywnego." };
+        }
+
         entity.IsDeleted = true;
+        return new DeletionResult() { DidDelete = true, Message = "Kupiec został pomyślnie usunięty." };
     }
 }

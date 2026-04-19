@@ -39,10 +39,18 @@ public class ActionService(IFarmManagerContext context) : IActionService
         existingEntity.Description = entity.Description;
         existingEntity.IsActive = entity.IsActive;
     }
-    public async Task Delete(int id)
+    public async Task<DeletionResult> Delete(int id)
     {
         var entity = await context.Actions.FirstOrDefaultAsync(d => d.Id == id) ??
             throw new NotFoundException("Nie można znaleźć czynności");
+
+        var workday = await context.Workdays.FirstOrDefaultAsync(d => d.ActionId == id);
+        if (workday != null)
+        {
+            return new DeletionResult() { DidDelete = false, Message = "Nie można usunąć czynności, ponieważ jest powiązana z dniem roboczym. Rozważ zaznaczenie jej jako nieaktywnej." };
+        }
+
         entity.IsDeleted = true;
+        return new DeletionResult() { DidDelete = true, Message = "Czynność została pomyślnie usunięta." };
     }
 }

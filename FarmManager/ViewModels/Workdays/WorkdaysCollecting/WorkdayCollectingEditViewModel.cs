@@ -18,7 +18,9 @@ public class WorkdayCollectingEditViewModel : BaseViewModel
     {
         get
         {
-            return Model.Employee.FirstName + " " + Model.Employee.LastName;
+            return string.IsNullOrWhiteSpace(Model.Employee.Nickname)
+                ? $"{Model.Employee.FirstName} {Model.Employee.LastName}"
+                : $"{Model.Employee.FirstName} {Model.Employee.Nickname} {Model.Employee.LastName}";
         }
         set
         {

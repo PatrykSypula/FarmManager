@@ -1,4 +1,5 @@
-﻿using FarmManager.Model.Model;
+﻿using FarmManager.Model.Exceptions;
+using FarmManager.Model.Model;
 
 namespace FarmManager.Services.Interfaces;
 public interface IFertilizerService
@@ -7,6 +8,6 @@ public interface IFertilizerService
     Task<Fertilizer> Get(int id);
     Task Add(Fertilizer entity);
     Task Update(Fertilizer entity);
-    Task Delete(int id);
+    Task<DeletionResult> Delete(int id);
     Task<decimal> GetAvailableQuantity(int fertilizerId);
 }

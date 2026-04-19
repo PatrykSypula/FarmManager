@@ -70,10 +70,17 @@ public class ActionEditViewModel(IActionService actionService, IUnitOfWork unitO
         var result = new CustomMessageBoxYesNo("Czy na pewno chcesz usunąć tę czynność?").ShowDialog();
         if (result == true)
         {
-            await actionService.Delete(Model.Action.Id);
-            Model.Action.IsDeleted = true;
-            await unitOfWork.SaveChangesAsync();
-            RequestClose?.Invoke(Model.Action);
+            var deletionResult = await actionService.Delete(Model.Action.Id);
+            if (deletionResult.DidDelete)
+            {
+                Model.Action.IsDeleted = true;
+                await unitOfWork.SaveChangesAsync();
+                RequestClose?.Invoke(Model.Action);
+            }
+            else
+            {
+                new CustomMessageBoxOk(deletionResult.Message).ShowDialog();
+            }
         }
     }
 
