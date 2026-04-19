@@ -125,7 +125,7 @@ public class WorkdayHarvestCollectingAddViewModel(IWorkdayService workdayService
     public RelayCommand OpenWorkdayCollectingEdit => new RelayCommand(execute => OpenWorkdayCollectingEditAsync());
     private void OpenWorkdayCollectingEditAsync()
     {
-        var window = new WorkdayCollectingEditWindow(SelectedWorkdayCollecting, Model.Workday.WorkdaysCollecting.Select(wc => wc.EmployeeId).ToList());
+        var window = new WorkdayCollectingEditWindow(SelectedWorkdayCollecting, Model.Workday.WorkdaysCollecting.Select(wc => wc.EmployeeId).ToList(), true);
 
         if (window.ShowDialog() == true && window.WorkdayCollecting != null)
         {

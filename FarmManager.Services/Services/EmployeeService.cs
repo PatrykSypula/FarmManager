@@ -48,7 +48,6 @@ public class EmployeeService(IFarmManagerContext context) : IEmployeeService
     {
         var entity = await context.Employees.FirstOrDefaultAsync(d => d.Id == id) ??
             throw new NotFoundException("Nie można znaleźć pracownika");
-        entity.IsDeleted = true;
 
         var employeeCost = await context.EmployeeCosts.Where(ec => ec.EmployeeId == id).FirstOrDefaultAsync();
         if (employeeCost != null)
@@ -74,6 +73,7 @@ public class EmployeeService(IFarmManagerContext context) : IEmployeeService
             return new DeletionResult() { DidDelete = false, Message = "Nie można usunąć pracownika, ponieważ jest on powiązany z dniami pracy. Rozważ zaznaczenie go jako nieaktywnego." };
         }
 
+        entity.IsDeleted = true;
         return new DeletionResult() { DidDelete = true, Message = "Pracownik został pomyślnie usunięty." };
     }
 

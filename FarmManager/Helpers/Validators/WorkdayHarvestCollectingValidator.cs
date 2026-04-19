@@ -16,8 +16,5 @@ public class WorkdayHarvestCollectingValidator : AbstractValidator<Workday>
         RuleForEach(x => x.WorkdaysCollecting)
             .Cascade(CascadeMode.Stop)
             .SetValidator(new WorkdayCollectingValidator());
-        RuleFor(x => x)
-            .Must(x => x.WorkdaysCollecting.Any())
-            .WithMessage("Dzień musi miec conajmniej jednego pracownika.");
     }
 }

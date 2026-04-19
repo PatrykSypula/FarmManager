@@ -55,7 +55,6 @@ public class VendorService(IFarmManagerContext context) : IVendorService
         }
 
         entity.IsDeleted = true;
-
         return new DeletionResult() { DidDelete = true, Message = "Sprzedawca został pomyślnie usunięty." };
     }
 }

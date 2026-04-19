@@ -43,7 +43,6 @@ public class PlantService(IFarmManagerContext context) : IPlantService
     {
         var entity = await context.Plants.FirstOrDefaultAsync(d => d.Id == id) ??
             throw new NotFoundException("Nie można znaleźć rośliny.");
-        entity.IsDeleted = true;
 
         var sell = await context.Sells.FirstOrDefaultAsync(d => d.PlantId == id);
         if (sell != null)
@@ -71,6 +70,7 @@ public class PlantService(IFarmManagerContext context) : IPlantService
             return new DeletionResult() { DidDelete = false, Message = "Nie można usunąć rośliny, ponieważ jest ona powiązana z istniejącą inwestycją. Rozważ zaznaczenie jej jako nieaktywnej." };
         }
 
+        entity.IsDeleted = true;
         return new DeletionResult() { DidDelete = true, Message = "Roślina została pomyślnie usunięta." };
     }
     public async Task<decimal> GetQuantity(int plantId)

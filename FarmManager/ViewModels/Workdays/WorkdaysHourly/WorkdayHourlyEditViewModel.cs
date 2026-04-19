@@ -138,7 +138,7 @@ public class WorkdayHourlyEditViewModel : BaseViewModel
     }
     private void UpdateRemainingToPay()
     {
-        if(Model.IsEditable)
+        if(Model.IsEditablePayment)
         {
             RemainingToPay = Price * Hours;
             OnPropertyChanged(nameof(RemainingToPay));
