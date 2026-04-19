@@ -43,7 +43,7 @@
 
         <Button Margin="30,270,0,0" Width="Auto" Height="40" Opacity="1" IsEnabled="False" VerticalAlignment="Top" Background="White" HorizontalAlignment="Left" BorderThickness="2" materialDesign:ButtonAssist.CornerRadius="10" FontSize="20" Foreground="Black">
             <TextBlock>
-            <Run Text="Cena całościowa"/>
+            <Run Text="Cena całościowa - zł"/>
             <Run Text="*" Foreground="Red"/>
             </TextBlock>
         </Button>
@@ -52,7 +52,7 @@
 
         <Button Margin="30,390,0,0" Width="Auto" Height="40" Opacity="1" IsEnabled="False" VerticalAlignment="Top" Background="White" HorizontalAlignment="Left" BorderThickness="2" materialDesign:ButtonAssist.CornerRadius="10" FontSize="20" Foreground="Black">
             <TextBlock>
-            <Run Text="Ilość"/>
+            <Run Text="Ilość - kg"/>
             <Run Text="*" Foreground="Red"/>
             </TextBlock>
         </Button>
@@ -72,7 +72,7 @@
         <Button Margin="560,200,0,0" Width="500" Height="180" IsEnabled="False" VerticalAlignment="Top" Opacity="1" Grid.RowSpan="3" Background="White" HorizontalAlignment="Left" BorderThickness="2" materialDesign:ButtonAssist.CornerRadius="10" FontSize="30" Foreground="Black"/>
         <TextBox Margin="570,200,0,0" Width="480" IsReadOnly="True" Height="180" Text="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontWeight="Medium" app:SelectAllOnFocus.Enable="True" MaxLength="100" TextWrapping="Wrap" VerticalAlignment="Top" Grid.RowSpan="3" Background="Transparent" HorizontalAlignment="Left" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" BorderThickness="0" FontSize="30" Foreground="Black"/>
 
-        <Button Margin="560,390,0,0" Width="Auto" Height="40" Content="Pozostała ilość" IsEnabled="False" VerticalAlignment="Top" Opacity="1" Background="White" HorizontalAlignment="Left" BorderThickness="2" materialDesign:ButtonAssist.CornerRadius="10" FontSize="20" Foreground="Black"/>
+        <Button Margin="560,390,0,0" Width="Auto" Height="40" Content="Pozostała ilość - kg" IsEnabled="False" VerticalAlignment="Top" Opacity="1" Background="White" HorizontalAlignment="Left" BorderThickness="2" materialDesign:ButtonAssist.CornerRadius="10" FontSize="20" Foreground="Black"/>
         <Button Margin="560,440,0,0" Width="500" Height="60" IsEnabled="False" VerticalAlignment="Top" Opacity="1" Grid.RowSpan="3" Background="White" HorizontalAlignment="Left" BorderThickness="2" materialDesign:ButtonAssist.CornerRadius="10" FontSize="30" Foreground="Black"/>
         <TextBox Margin="570,440,0,0" Width="480" Height="60" IsReadOnly="True" IsTabStop="False" Text="{Binding RemainingQuantity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontWeight="Medium" app:SelectAllOnFocus.Enable="True" TextWrapping="Wrap" VerticalAlignment="Top" Grid.RowSpan="3" Background="Transparent" HorizontalAlignment="Left" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" BorderThickness="0" FontSize="30" Foreground="Black"/>
 

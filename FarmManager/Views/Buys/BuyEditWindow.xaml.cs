@@ -20,4 +20,9 @@ public partial class BuyEditWindow : Window
             };
         }
     }
+
+    private void Button_Click(object sender, RoutedEventArgs e)
+    {
+
+    }
 }

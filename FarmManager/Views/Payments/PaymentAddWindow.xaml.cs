@@ -22,4 +22,9 @@ public partial class PaymentAddWindow : Window
             };
         }
     }
+
+    private void Button_Click(object sender, RoutedEventArgs e)
+    {
+
+    }
 }
