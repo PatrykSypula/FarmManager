@@ -13,4 +13,5 @@ public class WorkdayHarvestCollectingEditModel
     public Plant Plant { get; set; } = new Plant();
     public Action Action { get; set; } = new Action();
     public Harvest PreviousHarvest { get; set; } = new Harvest();
+    public bool IsEditable { get; set; } = true;
 }

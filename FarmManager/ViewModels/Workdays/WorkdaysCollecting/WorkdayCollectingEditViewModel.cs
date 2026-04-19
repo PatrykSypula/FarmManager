@@ -62,12 +62,13 @@ public class WorkdayCollectingEditViewModel : BaseViewModel
             OnPropertyChanged();
         }
     }
-    public async Task InitializeAsync(WorkdayCollecting workdayCollecting, ICollection<int> ids)
+    public async Task InitializeAsync(WorkdayCollecting workdayCollecting, ICollection<int> ids, bool isEditable)
     {
         Model.WorkdayCollecting = workdayCollecting;
         Model.Employee = workdayCollecting.Employee;
         Model.EmployeeIds = ids;
-        Model.IsEditable = Model.WorkdayCollecting.RemainingToPay == Model.WorkdayCollecting.Quantity * Model.WorkdayCollecting.Price;
+        Model.IsEditablePayment = Model.WorkdayCollecting.RemainingToPay == Model.WorkdayCollecting.Quantity * Model.WorkdayCollecting.Price;
+        Model.IsEditableHarvest = isEditable;
         OnPropertyChanged(nameof(Employee));
         OnPropertyChanged(nameof(Quantity));
         OnPropertyChanged(nameof(Price));
@@ -79,9 +80,13 @@ public class WorkdayCollectingEditViewModel : BaseViewModel
     public RelayCommand Update => new RelayCommand(async execute => await UpdateWorkdayCollectingAsync());
     private async Task UpdateWorkdayCollectingAsync()
     {
-        if (!Model.IsEditable)
+        if (!Model.IsEditablePayment)
         {
-            new CustomMessageBoxOk("Nie można edytować pracy która została już zapłacona.").ShowDialog();
+            new CustomMessageBoxOk("Nie można edytować pracy, która została już zapłacona.").ShowDialog();
+        }
+        else if (!Model.IsEditableHarvest)
+        {
+            new CustomMessageBoxOk("Nie można edytować pracy. Zbiór został już opłacony").ShowDialog();
         }
         else
         {

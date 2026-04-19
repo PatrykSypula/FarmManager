@@ -7,5 +7,6 @@ public class WorkdayHourlyEditModel
     public WorkdayHourly WorkdayHourly { get; set; } = new WorkdayHourly();
     public Employee Employee { get; set; } = new Employee();
     public IEnumerable<int> EmployeeIds { get; set; }
-    public bool IsEditable { get; set; } = true;
+    public bool IsEditablePayment { get; set; } = true;
+    public bool IsEditableHarvest { get; set; } = true;
 }

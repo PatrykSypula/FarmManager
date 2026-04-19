@@ -7,5 +7,6 @@ public class WorkdayCollectingEditModel
     public WorkdayCollecting WorkdayCollecting { get; set; } = new WorkdayCollecting();
     public Employee Employee { get; set; } = new Employee();
     public IEnumerable<int> EmployeeIds { get; set; }
-    public bool IsEditable { get; set; } = true;
+    public bool IsEditablePayment { get; set; } = true;
+    public bool IsEditableHarvest { get; set; } = true;
 }

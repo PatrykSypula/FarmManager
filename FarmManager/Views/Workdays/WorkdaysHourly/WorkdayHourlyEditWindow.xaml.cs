@@ -8,11 +8,11 @@ namespace FarmManager.App.Views.Workdays.WorkdaysHourly;
 public partial class WorkdayHourlyEditWindow : Window
 {
     public WorkdayHourly WorkdayHourly { get; private set; }
-    public WorkdayHourlyEditWindow(WorkdayHourly workdayHourly, ICollection<int> employeeIds)
+    public WorkdayHourlyEditWindow(WorkdayHourly workdayHourly, ICollection<int> employeeIds, bool isEditable)
     {
         InitializeComponent();
         employeeIds.Remove(workdayHourly.EmployeeId);
-        Loaded += async (_, __) => await ((WorkdayHourlyEditViewModel)DataContext).InitializeAsync(workdayHourly, employeeIds);
+        Loaded += async (_, __) => await ((WorkdayHourlyEditViewModel)DataContext).InitializeAsync(workdayHourly, employeeIds, isEditable);
         if (DataContext is WorkdayHourlyEditViewModel vm)
         {
             vm.RequestClose += workdayHourly =>

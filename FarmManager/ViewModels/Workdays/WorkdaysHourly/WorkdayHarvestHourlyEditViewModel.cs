@@ -89,6 +89,9 @@ public class WorkdayHarvestHourlyEditViewModel(IWorkdayService workdayService, I
         OnPropertyChanged(nameof(WorkdaysHourly));
         OnPropertyChanged(nameof(Description));
         OnPropertyChanged(nameof(HourlyQuantity));
+        Model.IsEditable = Model.PreviousHarvest.CollectingQuantity == Model.PreviousHarvest.RemainingCollectingQuantity &&
+            Model.PreviousHarvest.CollectingQuantityAdditional == Model.PreviousHarvest.RemainingQuantityAdditional &&
+            Model.PreviousHarvest.HourlyQuantity == Model.PreviousHarvest.RemainingHourlyQuantity;
     }
 
     #endregion
@@ -124,7 +127,7 @@ public class WorkdayHarvestHourlyEditViewModel(IWorkdayService workdayService, I
     public RelayCommand OpenWorkdayHourlyEdit => new RelayCommand(execute => OpenWorkdayHourlyEditAsync());
     private void OpenWorkdayHourlyEditAsync()
     {
-        var window = new WorkdayHourlyEditWindow(SelectedWorkdayHourly, Model.Workday.WorkdaysHourly.Select(wc => wc.EmployeeId).ToList());
+        var window = new WorkdayHourlyEditWindow(SelectedWorkdayHourly, Model.Workday.WorkdaysHourly.Select(wc => wc.EmployeeId).ToList(), Model.IsEditable);
 
         if (window.ShowDialog() == true && window.WorkdayHourly != null)
         {
@@ -205,9 +208,7 @@ public class WorkdayHarvestHourlyEditViewModel(IWorkdayService workdayService, I
     public RelayCommand Update => new RelayCommand(async execute => await UpdateWorkdayAsync());
     private async Task UpdateWorkdayAsync()
     {
-        if(Model.PreviousHarvest.CollectingQuantity == Model.PreviousHarvest.RemainingCollectingQuantity &&
-            Model.PreviousHarvest.CollectingQuantityAdditional == Model.PreviousHarvest.RemainingQuantityAdditional &&
-            Model.PreviousHarvest.HourlyQuantity == Model.PreviousHarvest.RemainingHourlyQuantity)
+        if(Model.IsEditable)
         {
             WorkdayHarvestHourlyValidator validator = new WorkdayHarvestHourlyValidator();
             Model.Workday.Description = string.IsNullOrEmpty(Model.Workday.Description) ? null : Model.Workday.Description;

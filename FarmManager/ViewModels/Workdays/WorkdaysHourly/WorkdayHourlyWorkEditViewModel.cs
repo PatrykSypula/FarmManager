@@ -127,7 +127,7 @@ public class WorkdayHourlyWorkEditViewModel(IWorkdayService workdayService, IPla
     public RelayCommand OpenWorkdayHourlyEdit => new RelayCommand(execute => OpenWorkdayHourlyEditAsync());
     private void OpenWorkdayHourlyEditAsync()
     {
-        var window = new WorkdayHourlyEditWindow(SelectedWorkdayHourly, Model.Workday.WorkdaysHourly.Select(wc => wc.EmployeeId).ToList());
+        var window = new WorkdayHourlyEditWindow(SelectedWorkdayHourly, Model.Workday.WorkdaysHourly.Select(wc => wc.EmployeeId).ToList(), true);
 
         if (window.ShowDialog() == true && window.WorkdayHourly != null)
         {
