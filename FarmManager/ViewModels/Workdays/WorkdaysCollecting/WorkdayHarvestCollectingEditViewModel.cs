@@ -256,7 +256,7 @@ public class WorkdayHarvestCollectingEditViewModel(IWorkdayService workdayServic
         }
         else
         {
-            new CustomMessageBoxOk("Nie można edytować tego dnia, ponieważ zbiory zostały już rozliczone.").ShowDialog();
+            new CustomMessageBoxOk("Nie można edytować tego dnia, ponieważ zbiory zostały już sprzedane.").ShowDialog();
         }
     }
 

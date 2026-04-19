@@ -184,11 +184,21 @@ public class WorkdayHarvestHourlyEditViewModel(IWorkdayService workdayService, I
         var result = new CustomMessageBoxYesNo("Czy na pewno chcesz usunąć ten dzień?").ShowDialog();
         if (result == true)
         {
-            await harvestService.Delete(Model.Harvest.Id);
-            await workdayService.Delete(Model.Workday.Id);
-            Model.Workday.IsDeleted = true;
-            await unitOfWork.SaveChangesAsync();
-            RequestClose?.Invoke(Model.Workday);
+            WorkdayDeleteValidator validator = new WorkdayDeleteValidator();
+            Model.Workday.Description = string.IsNullOrEmpty(Model.Workday.Description) ? null : Model.Workday.Description;
+            var resultValidation = validator.Validate(Model.Workday);
+            if (!resultValidation.IsValid)
+            {
+                new CustomMessageBoxOk(resultValidation).ShowDialog();
+            }
+            else
+            {
+                await harvestService.Delete(Model.Harvest.Id);
+                await workdayService.Delete(Model.Workday.Id);
+                Model.Workday.IsDeleted = true;
+                await unitOfWork.SaveChangesAsync();
+                RequestClose?.Invoke(Model.Workday);
+            }
         }
     }
 
@@ -227,7 +237,7 @@ public class WorkdayHarvestHourlyEditViewModel(IWorkdayService workdayService, I
         }
         else
         {
-            new CustomMessageBoxOk("Nie można edytować tego dnia, ponieważ zbiory zostały już rozliczone.").ShowDialog();
+            new CustomMessageBoxOk("Nie można edytować tego dnia, ponieważ zbiory zostały już sprzedane.").ShowDialog();
         }
 
     }

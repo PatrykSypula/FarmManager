@@ -23,7 +23,7 @@ public class WorkdayService(FarmManagerContext context) : IWorkdayService
 
     public async Task<Workday> GetWorkday(int id)
     {
-        return await context.Workdays.Include(x => x.WorkdaysCollecting).Include(x => x.WorkdaysHourly).AsNoTracking().Where(d => d.Id == id).FirstOrDefaultAsync();
+        return await context.Workdays.Include(x => x.WorkdaysCollecting).Include(x => x.WorkdaysHourly).Include(x => x.Harvest).AsNoTracking().Where(d => d.Id == id).FirstOrDefaultAsync();
     }
     public async Task<ICollection<WorkdayCollecting>> GetWorkdaysCollecting(int id)
     {
