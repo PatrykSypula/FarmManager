@@ -206,7 +206,7 @@ namespace FarmManager.Model.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "text", nullable: false),
-                    PlantId = table.Column<int>(type: "integer", nullable: false),
+                    PlantId = table.Column<int>(type: "integer", nullable: true),
                     Price = table.Column<decimal>(type: "numeric", nullable: false),
                     Date = table.Column<DateOnly>(type: "date", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: true),
@@ -221,8 +221,7 @@ namespace FarmManager.Model.Migrations
                         name: "FK_Investments_Plants_PlantId",
                         column: x => x.PlantId,
                         principalTable: "Plants",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(

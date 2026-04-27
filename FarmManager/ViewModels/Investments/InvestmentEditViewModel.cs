@@ -79,7 +79,10 @@ public class InvestmentEditViewModel(IInvestmentService investmentService, IPlan
     public async Task InitializeAsync(int id)
     {
         Model.Investment = await investmentService.Get(id);
-        Model.Plant = await plantService.Get(Model.Investment.PlantId);
+        if(Model.Investment.PlantId != null)
+        {
+            Model.Plant = await plantService.Get(Model.Investment.PlantId.Value);
+        }
         OnPropertyChanged(nameof(Name));
         OnPropertyChanged(nameof(Plant));
         OnPropertyChanged(nameof(Price));
@@ -130,5 +133,13 @@ public class InvestmentEditViewModel(IInvestmentService investmentService, IPlan
             Model.Investment.PlantId = window.Plant.Id;
             OnPropertyChanged(nameof(Plant));
         }
+    }
+
+    public RelayCommand RemovePlant => new RelayCommand(async execute => await RemovePlantAsync());
+    private async Task RemovePlantAsync()
+    {
+        Model.Plant = new Plant();
+        Model.Investment.PlantId = null;
+        OnPropertyChanged(nameof(Plant));
     }
 }

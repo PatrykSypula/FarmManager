@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FarmManager.Model.Migrations
 {
     [DbContext(typeof(FarmManagerContext))]
-    [Migration("20260419125339_init")]
+    [Migration("20260427160056_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -320,7 +320,7 @@ namespace FarmManager.Model.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("PlantId")
+                    b.Property<int?>("PlantId")
                         .HasColumnType("integer");
 
                     b.Property<decimal>("Price")
@@ -845,9 +845,7 @@ namespace FarmManager.Model.Migrations
                 {
                     b.HasOne("FarmManager.Model.Model.Plant", "Plant")
                         .WithMany()
-                        .HasForeignKey("PlantId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("PlantId");
 
                     b.Navigation("Plant");
                 });

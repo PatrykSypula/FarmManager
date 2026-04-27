@@ -112,5 +112,13 @@ public class InvestmentAddViewModel(IInvestmentService investmentService, IUnitO
             OnPropertyChanged(nameof(Plant));
         }
     }
+
+    public RelayCommand RemovePlant => new RelayCommand(async execute => await RemovePlantAsync());
+    private async Task RemovePlantAsync()
+    {
+        Model.Plant = new Plant();
+        Model.Investment.PlantId = null;
+        OnPropertyChanged(nameof(Plant));
+    }
 }
 
