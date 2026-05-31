@@ -16,12 +16,9 @@ public static class ModelBuilderExtensions
         foreach (var entityType in acceptableItems)
         {
             var entityParam = Expression.Parameter(entityType.ClrType, "e");
-
-            // replacing parameter with actual type
             var filterBody = ReplacingExpressionVisitor.Replace(filter.Parameters[0], entityParam, filter.Body);
-
             var filterLambda = entityType.GetQueryFilter();
-            // Other filter already present, combine them
+
             if (filterLambda != null)
             {
                 filterBody = ReplacingExpressionVisitor.Replace(entityParam, filterLambda.Parameters[0], filterBody);
