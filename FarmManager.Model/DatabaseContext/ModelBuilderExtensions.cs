@@ -9,28 +9,28 @@ public static class ModelBuilderExtensions
     public static void ApplyQueryFilter<TBaseEntity>(this ModelBuilder builder,
         Expression<Func<TBaseEntity, bool>> filter)
     {
-        var acceptableItems = builder.Model.GetEntityTypes()
+        var entities = builder.Model.GetEntityTypes()
             .Where(et => typeof(TBaseEntity).IsAssignableFrom(et.ClrType))
             .ToList();
 
-        foreach (var entityType in acceptableItems)
+        foreach (var entity in entities)
         {
-            var entityParam = Expression.Parameter(entityType.ClrType, "e");
-            var filterBody = ReplacingExpressionVisitor.Replace(filter.Parameters[0], entityParam, filter.Body);
-            var filterLambda = entityType.GetQueryFilter();
+            var parameter = Expression.Parameter(entity.ClrType, "e");
+            var body = ReplacingExpressionVisitor.Replace(filter.Parameters[0], parameter, filter.Body);
+            var lambda = entity.GetQueryFilter();
 
-            if (filterLambda != null)
+            if (lambda != null)
             {
-                filterBody = ReplacingExpressionVisitor.Replace(entityParam, filterLambda.Parameters[0], filterBody);
-                filterBody = Expression.AndAlso(filterLambda.Body, filterBody);
-                filterLambda = Expression.Lambda(filterBody, filterLambda.Parameters);
+                body = ReplacingExpressionVisitor.Replace(parameter, lambda.Parameters[0], body);
+                body = Expression.AndAlso(lambda.Body, body);
+                lambda = Expression.Lambda(body, lambda.Parameters);
             }
             else
             {
-                filterLambda = Expression.Lambda(filterBody, entityParam);
+                lambda = Expression.Lambda(body, parameter);
             }
 
-            entityType.SetQueryFilter(filterLambda);
+            entity.SetQueryFilter(lambda);
         }
     }
 }
